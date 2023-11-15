@@ -49,6 +49,9 @@
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
         </div>
+      <div>
+        <button>Shopping</button> 
+      </div>
 
       </div>
     </nav>
