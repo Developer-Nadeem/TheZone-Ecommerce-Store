@@ -10,6 +10,38 @@ div {
 
 /*hero*/
 
+.img-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.sub-image {
+    position: absolute;
+    top: 0;
+    right: 0; /* Adjust this to position the image accordingly */
+    width: auto; /* Adjust the width as needed */
+    height: 25%; /* Adjust the height as needed */
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .text-container {
+    flex: 1;
+    color: white;
+  }
+  
+  .image-container {
+    flex-shrink: 0; /* Prevent the image from shrinking */
+  }
+  
+  .sub-image {
+    width: 100%; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+  }
 
 .txt {
     position: absolute;
@@ -20,14 +52,45 @@ div {
 
 }
 
+#aboutsection {
+    position: relative;
+}
+/* aboutus-text and aboutus-text2 are used to position the text in the about us page appropriately */
+#aboutus-text {
+    position: absolute;
+    top: 140%;
+    left: 42%;
+    font-weight: bold;
+}
+
+#aboutus-text2 {
+    position: absolute;
+    top: 170%;
+    left: 42%;
+    font-weight: bold;
+}
+
 #hero-text {
     font-size: 3vw;
     font-weight: bold;
 }
 
+
 #hero-subtext {
     margin-top: 2vw;
     font-size: 2vw;
+}
+
+
+.subsection{
+    position: relative;
+}
+#hero-subtext-right {
+    position: absolute;
+    margin-top: 2vw;
+    font-size: 2vw;
+    text-align: right;
+    color: blue; 
 }
 
 #hero-btn {
@@ -35,12 +98,25 @@ div {
     width: fit-content;
     padding: 0.6vw;
     box-sizing: border-box;
-    border-radius: 20px;
+    border-radius: 5px;
     color: black;
     text-decoration: none;
     font-weight: 600;
     margin-top: 2vw;
-    font-size: 1.4vw;
+    font-size: 1.8vw;
+}
+
+.big-button {
+    background-color: white;
+    width: fit-content;
+    padding: 1.2vw; /* Adjust padding to make the button bigger */
+    box-sizing: border-box;
+}
+
+/* added hover effect eligible for us on all hero buttons */
+#hero-btn:hover {
+    background-color: black;
+    color: white;
 }
 
 .menubox{
