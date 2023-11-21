@@ -49,6 +49,13 @@
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
         </div>
+      <!-- adding in shopping cart button/icon then this will redirect page to basket and view all items
+    will have the following: increase and decrease quanitity, remove item, continue shopping, proceed to checkout, personal details
+  choose to login or continue as a guest. -->
+      
+        <div>
+        <button>Shopping</button> 
+      </div>
 
       </div>
     </nav>
