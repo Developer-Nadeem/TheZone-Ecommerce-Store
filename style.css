@@ -4,6 +4,7 @@ div {
 
 /*logo*/
 
+
 .logo {
     width: 12vw;
 }
@@ -101,7 +102,7 @@ div {
     border-radius: 5px;
     color: black;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: bold;
     margin-top: 2vw;
     font-size: 1.8vw;
 }
@@ -111,6 +112,7 @@ div {
     width: fit-content;
     padding: 1.2vw; /* Adjust padding to make the button bigger */
     box-sizing: border-box;
+    font-weight: bold;
 }
 
 /* added hover effect eligible for us on all hero buttons */

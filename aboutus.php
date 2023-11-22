@@ -82,7 +82,7 @@
     <section>
 
       <div class="container-fluid aboutsection">
-        <img class="img-fluid" src="..\TheZone\images\young-black-spanish-male-friends-standing-front-blue-metal-gate.jpg"
+        <img class="img-fluid" src="..\TheZone\images\cool-man-with-hoodie.jpg"
           alt="heropage">
         <div style="color: white;">
           <h1 id="aboutus-text"><br>The Zone isn't just about clothes.<br> It's a lifestyle.</h1>
