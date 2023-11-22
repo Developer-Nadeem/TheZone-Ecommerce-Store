@@ -48,14 +48,15 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
+           <div>
+        <button>Shopping</button> 
+      </div>
         </div>
       <!-- adding in shopping cart button/icon then this will redirect page to basket and view all items
     will have the following: increase and decrease quanitity, remove item, continue shopping, proceed to checkout, personal details
-  choose to login or continue as a guest. -->
+  choose to login or continue as a guest. Also, Create a drop down menu when hovering over cart to view products or go to checkout and enter personal details. -->
       
-        <div>
-        <button>Shopping</button> 
-      </div>
+       
 
       </div>
     </nav>
