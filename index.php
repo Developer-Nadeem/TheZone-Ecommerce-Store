@@ -35,12 +35,12 @@
                 Products
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Mens</a></li>
-                <li><a class="dropdown-item" href="#">Womens</a></li>
+                <li><a class="dropdown-item" href="products.php">Mens</a></li>
+                <li><a class="dropdown-item" href="products.php">Womens</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Kids</a></li>
+                <li><a class="dropdown-item" href="products.php">Kids</a></li>
               </ul>
             </li>
 
