@@ -1,6 +1,4 @@
-*{
-    overflow-x: hidden;
-}
+
 
 div {
     padding: 0 !important;
@@ -141,7 +139,7 @@ div {
     border-radius: 20px;
     color: black;
     text-decoration: none;
-    font-eight: 600;
+    font-weight: 600;
     margin-top: 2vw;
     font-size: 1.4vw;
 

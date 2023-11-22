@@ -324,15 +324,8 @@
     </section>
 
     <!-- social media -->
-
-    <section>
-      <div class="social">
-      <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-<div class="elfsight-app-6bac2b4d-54be-4dcd-ba8f-253d2a9fd62f" data-elfsight-app-lazy></div>
-    </section>
-
-
-
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <div class="elfsight-app-6bac2b4d-54be-4dcd-ba8f-253d2a9fd62f" data-elfsight-app-lazy></div>
 
   </main>
 
