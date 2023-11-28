@@ -35,12 +35,12 @@
                 Products
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="products.php">Mens</a></li>
-                <li><a class="dropdown-item" href="products.php">Womens</a></li>
+                <li><a class="dropdown-item" href="#">Mens</a></li>
+                <li><a class="dropdown-item" href="#">Womens</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="products.php">Kids</a></li>
+                <li><a class="dropdown-item" href="#">Kids</a></li>
               </ul>
             </li>
 
@@ -49,15 +49,15 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
-          <div>
-            <button>Shopping</button>
-          </div>
+           <div>
+        <button>Shopping</button> 
+      </div>
         </div>
-        <!-- adding in shopping cart button/icon then this will redirect page to basket and view all items
+      <!-- adding in shopping cart button/icon then this will redirect page to basket and view all items
     will have the following: increase and decrease quanitity, remove item, continue shopping, proceed to checkout, personal details
   choose to login or continue as a guest. Also, Create a drop down menu when hovering over cart to view products or go to checkout and enter personal details. -->
-
-
+      
+       
 
       </div>
     </nav>
@@ -96,6 +96,40 @@
 
     <!--Best sellers -->
 
+    <!-- <section>
+      <div class="container my-5 best-sellers">
+        <div class="row">
+          <div class="col productbox">
+            <div class="product "><img class="img-fluid" src="..\TheZone\images\product4.webp" alt="prduct"></div>
+          </div>
+          <div class="col productbox">
+            <div class="product "><img class="img-fluid" src="..\TheZone\images\product5.webp" alt="prduct"></div>
+          </div>
+          <div class="col productbox">
+            <div class="product "><img class="img-fluid" src="..\TheZone\images\product6.webp" alt="prduct"></div>
+          </div>
+          <div class="col productbox">
+            <div class="product "><img class="img-fluid" src="..\TheZone\images\product.webp" alt="prduct"></div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col productbox">
+            <div class="product "><img class="img-fluid" src="..\TheZone\images\product1.webp" alt="prduct"></div>
+          </div>
+          <div class="col productbox">
+            <div class="product "><img class="img-fluid" src="..\TheZone\images\product2.webp" alt="prduct"></div>
+          </div>
+          <div class="col productbox">
+            <div class="product"><img class="img-fluid" src="..\TheZone\images\product3.webp" alt="prduct"></div>
+          </div>
+          <div class="col productbox">
+            <div class="product "><img class="img-fluid" src="..\TheZone\images\product.webp" alt="prduct"></div>
+          </div>
+
+        </div>
+      </div>
+    </section> -->
     <section class="best-selling">
       <div class="container-fluid">
         <header class="title">Best-selling</header>
@@ -298,11 +332,12 @@
     </section>
 
     <!-- social media -->
-    <div data-mc-src="2f196cbc-dc26-47d4-81cf-fd207352760c#instagram"></div>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <div class="elfsight-app-6bac2b4d-54be-4dcd-ba8f-253d2a9fd62f" data-elfsight-app-lazy></div>
 
-    <script src="https://cdn2.woxo.tech/a.js#64346c2a36a38e7b470f83cd" async data-usrc>
-    </script>
   </main>
+
+
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
