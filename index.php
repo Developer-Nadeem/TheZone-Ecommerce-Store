@@ -245,7 +245,7 @@
 
     <section class="best-selling">
       <div class="container-fluid">
-        <header class="title">COMMING SOON</header>
+        <header class="title">COMING SOON</header>
         <div class="row item-boxes">
           <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
             <div class="card" style="width: 18rem;">
