@@ -79,16 +79,15 @@ div {
     font-weight: bold;
 }
 
-
 #hero-subtext {
     margin-top: 2vw;
     font-size: 2vw;
 }
 
-
 .subsection{
     position: relative;
 }
+
 #hero-subtext-right {
     position: absolute;
     margin-top: 2vw;
@@ -225,3 +224,94 @@ div {
 /*social*/
 
 
+
+/* Login Page Styles Start Here */
+login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.login-form {
+    max-width: 1000px;
+    width: 400px;
+    background-color: rgb(36, 36, 36);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: white;
+    font-weight: bold;
+}
+
+.login-form input {
+    width: calc(100% - 16px);
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.password-container {
+    position: relative;
+}
+
+.show-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+}
+
+.show-password:hover {
+    text-decoration: underline;
+}
+
+.login-form input[type="submit"] {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: black;
+    color: white;
+}
+
+
+/* Styles for the create account line */
+.login-form .links {
+    color: white;
+    font-size: 14px;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.login-form .links a {
+    color: white;
+    text-decoration: none;
+}
+
+.login-form .links a:hover {
+    text-decoration: underline;
+}

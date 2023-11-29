@@ -24,10 +24,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+              <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="aboutus.php">About Us</a>
+              <a class="nav-link active" aria-current="page" href="aboutus.php">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php">Login</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -35,12 +38,12 @@
                 Products
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Mens</a></li>
-                <li><a class="dropdown-item" href="#">Womens</a></li>
+                <li><a class="dropdown-item" href="products.php">Mens</a></li>
+                <li><a class="dropdown-item" href="products.php">Womens</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Kids</a></li>
+                <li><a class="dropdown-item" href="products.php">Kids</a></li>
               </ul>
             </li>
 
