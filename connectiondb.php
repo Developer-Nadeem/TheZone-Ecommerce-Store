@@ -1,8 +1,8 @@
 <?php
 try{
-  $dbname = '';
-  $dbhost = '';
-  $username = '';
+  $dbname = 'thezonedb';
+  $dbhost = 'localhost';
+  $username = 'root';
   $password = '';
   $db = new PDO("mysql:host=$dbhost;dbname=$dbname", $username, $password);
 
