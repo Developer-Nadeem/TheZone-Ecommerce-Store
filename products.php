@@ -57,7 +57,32 @@
     <!-- Navbar End -->
 
     <main>
-    
+    <div class="container mt-4">
+            <div class="row">
+                <?php
+                  // Include the connection file
+                  include 'connectiondb.php';
+
+                  // Fetch products from the database
+                  $query = "SELECT * FROM products";
+                  $stmt = $db->query($query);
+
+                  // Loop through the results and display each product
+                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<div class="col-md-4 mb-4">';
+                    echo '<div class="card">';
+                    echo '<img src="..\TheZone\images\\' . $row['imageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $row['ProductName'] . '</h5>';
+                    echo '<p class="card-text">' . $row['Description'] . '</p>';
+                    echo '<p class="card-text">Price: £' . $row['Price'] . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                  }
+                ?>
+            </div>
+        </div>
 
     </main>
 
