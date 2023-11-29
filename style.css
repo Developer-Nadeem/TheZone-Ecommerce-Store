@@ -79,16 +79,15 @@ div {
     font-weight: bold;
 }
 
-
 #hero-subtext {
     margin-top: 2vw;
     font-size: 2vw;
 }
 
-
 .subsection{
     position: relative;
 }
+
 #hero-subtext-right {
     position: absolute;
     margin-top: 2vw;
