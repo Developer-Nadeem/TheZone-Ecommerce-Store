@@ -226,7 +226,7 @@ div {
 
 
 
-/* login page styles here */
+/* Login Page Styles Start Here */
 login-container {
     display: flex;
     justify-content: center;
@@ -244,7 +244,7 @@ login-container {
 .login-form {
     max-width: 1000px;
     width: 400px;
-    background-color: black;
+    background-color: rgb(36, 36, 36);
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);

@@ -9,6 +9,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      body {
+        background-image: url('images/login_page_background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
 </head>
 
 <body>
@@ -28,6 +35,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="aboutus.php">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php">Login</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -67,6 +77,7 @@
 
     <div class="page-container">
         <div class="login-container">
+
             <form class="login-form" id="loginForm" action="loggingIn.php" method="post">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
