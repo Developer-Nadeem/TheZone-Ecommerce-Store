@@ -1,4 +1,5 @@
 <?php
+// This part is what allows it to connect to the database to store the data
 function connectToDatabase() {
     try {
         $dbname = 'thezonedb'; 
