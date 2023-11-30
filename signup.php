@@ -14,14 +14,14 @@ function connectToDatabase() {
     }
 }
 
-// Function to create a new user when signing up
+// function to create a new user when signing up
 function createUser($new_email, $new_password) {
     $conn = connectToDatabase();
 
-    // Hash the password before storing it in the database
+    // this hashes the password before storing it in the database
     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-    // Insert the data into the database using prepared statements
+    // this inserts the data into the database which uses the prepare statement
     $sql = "INSERT INTO users (Email, PasswordHash) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signup'])) {
     $new_email = $_POST['signupEmail'];
     $new_password = $_POST['signupPassword'];
 
-    // Perform validation before creating a new user (e.g., check if email is unique)
+    // this checks if the account can be created
     if (createUser($new_email, $new_password)) {
         $signupMessage = 'Account created successfully!';
     } else {
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signup'])) {
             background-size: cover;
         }
 
-        /* Style for the success message */
+        /* style for the message that shows if you have logged in successfully*/
         .success-message {
             display: none;
             background-color: #4CAF50;
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signup'])) {
     <main>
         <div class="page-container">
             <div class="login-container">
-                <!-- Display success message if it exists -->
+                <!-- this displays the success message -->
                 <?php if (!empty($signupMessage)): ?>
                     <div class="success-message"><?= $signupMessage ?></div>
                 <?php endif; ?>

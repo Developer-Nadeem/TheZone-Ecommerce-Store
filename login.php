@@ -1,7 +1,7 @@
 <?php
 function connectToDatabase() {
     try {
-        $dbname = 'thezonedb'; // Update with your actual database name
+        $dbname = 'thezonedb'; 
         $dbhost = 'localhost';
         $username = 'root';
         $password = '';
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 .header-container {
     position: absolute;
     top: 0;
-    width: 100%; /* Ensure the header spans the entire width */
+    width: 100%; /* this makes sure the header reaches the entire width */
 }
 
 .wrapper {
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     padding: 30px;
     border-radius: 5px;
     box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
-    margin-top: 20px; /* Adjust the margin as needed */
+    margin-top: 20px;
 }   
     </style>
 </head>
