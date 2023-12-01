@@ -63,38 +63,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
       
     body {
-    background-image: url('images/login_page_background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-}
+        background-image: url('images/login_page_background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
 
-.header-container {
-    position: absolute;
-    top: 0;
-    width: 100%; /* this makes sure the header reaches the entire width */
-}
+    .header-container {
+        position: absolute;
+        top: 0;
+        width: 100%; /* this makes sure the header reaches the entire width */
+    }
 
-.wrapper {
-    overflow: hidden;
-    max-width: 390px;
-    background: #fff;
-    padding: 30px;
-    border-radius: 5px;
-    box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
-    margin-top: 20px;
-}   
+    .wrapper {
+        overflow: hidden;
+        max-width: 390px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+        margin-top: 20px;
+    }   
     </style>
 </head>
 
 <body>
 <!--Navbar Start-->
-    <header>
+    <header class="header-container">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><img class="img-fluid logo" src="../TheZone/images/logo-tp.png"
@@ -106,12 +106,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                            <a class="nav-link" aria-current="page" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="aboutus.php">About Us</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link active" href="login.php">Login</a>
                         </li>
                         <li class="nav-item dropdown">
