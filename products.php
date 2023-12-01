@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TheZone - Products</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="..\TheZone\style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
@@ -60,38 +60,38 @@
     <!-- Navbar End -->
 
     <main>
-    <div class="container mt-4">
-            <div class="row">
-                <?php
-                  // Include the connection file
-                  include 'connectiondb.php';
+      <div class="container mt-6">
+        <div class="row">
+          <?php
+          // gets the db
+          include("connectiondb.php");
 
-                  // Fetch products from the database
-                  $query = "SELECT * FROM products";
-                  $stmt = $db->query($query);
+          //gets all from products
+          $stmt = $db->query("SELECT * FROM products");
 
-                  // Loop through the results and display each product
-                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo '<div class="col-md-4 mb-4">';
-                    echo '<div class="card">';
-                    echo '<img src="..\TheZone\images\\' . $row['imageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
-                    echo '<div class="card-body">';
-                    echo '<h5 class="card-title">' . $row['ProductName'] . '</h5>';
-                    echo '<p class="card-text">' . $row['Description'] . '</p>';
-                    echo '<p class="card-text">Price: £' . $row['Price'] . '</p>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                  }
-                ?>
-            </div>
+          //loops through all the db's rows and display the products
+          while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            echo'<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"">';
+              echo'<div class="card" style="width: 18rem">';
+                echo'<img src="..\TheZone\images\\'.$row['imageUrl'].'" class="card-img-top" alt="'.$row['ProductName'].'">';
+                echo'<div class="card-body">';
+                  echo'<p class="card-text">'.$row['ProductName'].'</p>';
+                  echo'<p class="card-text"><Strong>£'.$row['Price'].'</Strong></p>';
+                echo'</div>';
+              echo'</div>';
+            echo'</div>';
+          }
+
+          ?>
         </div>
+      </div>
 
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
