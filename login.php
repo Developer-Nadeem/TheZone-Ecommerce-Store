@@ -82,13 +82,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     .wrapper {
         overflow: hidden;
-        max-width: 390px;
+        max-width: 400px;
+        width: 120%;
         background: #fff;
+        background-color: rgb(36, 36, 36);
         padding: 30px;
         border-radius: 5px;
         box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
         margin-top: 20px;
+        justify-content: center;
     }   
+
+    .title-text {
+    width: 100%; /* Adjust the width as needed */
+    text-align: center; /* Center the titles */
+    }
+    .title {
+        display: inline-block; /* Ensure titles are on the same line */
+    }
+
+    .title.login {
+        width: 50%; /* Adjust the width for the "Login/Signup" title */
+    }
+
+    .title.signup {
+        width: 50%; /* Adjust the width for the "Signup" title */
+    }
     </style>
 </head>
 
@@ -148,10 +167,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
 
     <main>
+
         <div class="wrapper">
             <div class="title-text">
                 <div class="title login">Login/Signup</div>
-                <div class="title signup">Signup Form</div>
+                <div class="title signup">Signup</div>
             </div>
             <div class="form-container">
                 <div class="slide-controls">
@@ -162,6 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="slider-tab"></div>
                 </div>
                 <div class="form-inner">
+
                     <form action="#" class="login">
                         <div class="field">
                             <input type="text" placeholder="Email Address" required>
@@ -176,6 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="signup-link">Dont have an account? <a href="">Signup now</a></div>
                     </form>
+
                     <form action="#" class="signup">
                         <div class="field">
                             <input type="text" placeholder="Email Address" required>
@@ -191,9 +213,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="submit" value="Signup" name="signup">
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
+
     </main>
 
     <script>
