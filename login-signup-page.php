@@ -105,7 +105,9 @@
             <div class="field">
               <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm password" required>
             </div>
-            <span class="show-password-signup" onclick="signupTogglePassword()">Show</span>
+            <div>
+              <span class="show-password-signup" onclick="signupTogglePassword()">Show</span>
+            </div>
             <div class="field btn">
               <div class="btn-layer"></div>
               <input type="submit" value="Signup" name="signup">
