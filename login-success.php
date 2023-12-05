@@ -1,17 +1,20 @@
 <?php
-session_start();
+  session_start();
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <!-- Same head for a consistent format -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Products</title>
-  <link rel="stylesheet" href="..\TheZone\style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Logged In!</title>
+    <link rel="stylesheet" href="..\TheZone\style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -65,36 +68,16 @@ session_start();
   <!--Navbar End-->
 
   <main>
-    <div class="container mt-6">
-      <div class="row">
-        <?php
-        // gets the db
-        require("connectiondb.php");
-
-        //gets all from products
-        $stmt = $db->query("SELECT * FROM inventory");
-
-        //loops through all the db's rows and display the products
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-          echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"">';
-          echo '<div class="card" style="width: 18rem">';
-          echo '<img src="..\TheZone\images\\' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
-          echo '<div class="card-body">';
-          echo '<p class="card-text">' . $row['ProductName'] . '</p>';
-          echo '<p class="card-text"><Strong>£' . $row['Price'] . '</Strong></p>';
-          echo '</div>';
-          echo '</div>';
-          echo '</div>';
-        }
-
-        ?>
-      </div>
-    </div>
-
+    <h1>Login Successful</h1>
+    <p>You are now logged in. <a href="index.php">Click here to start shopping</a></p>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous">
   </script>
+
 </body>
 
 </html>

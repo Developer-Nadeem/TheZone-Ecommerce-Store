@@ -1,13 +1,31 @@
+<?php
+session_start();
+
+  echo '<script>console.log('.$_COOKIE['shopping_cart'].')</script>';
+
+
+  if (isset($_POST['add-to-cart'])) {
+    $productId = $_POST['product-id'];
+
+    $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
+
+    array_push($shoppingCart, $productId);
+
+    setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+
+    echo $_COOKIE['shopping_cart'];
+  }
+?>
 <!doctype html>
 <html lang="en">
 
 <head>
+  <!-- Same head for a consistent format -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TheZone</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="..\TheZone\style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -16,9 +34,8 @@
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img class="img-fluid logo" src="../TheZone/images/logo-tp.png" alt="Logo"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="index.php"><img class="img-fluid logo" src="../TheZone/images/logo-tp.png" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -29,39 +46,33 @@
             <li class="nav-item">
               <a class="nav-link" href="aboutus.php">About Us</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.php">Login</a>
-            </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Products
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Mens</a></li>
-                <li><a class="dropdown-item" href="#">Womens</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Kids</a></li>
+                <li><a class="dropdown-item" href="products.php">Mens</a></li>
+                <li><a class="dropdown-item" href="products.php">Womens</a></li>
               </ul>
             </li>
-
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
-           <div>
-        <button>Shopping</button> 
-      </div>
-        </div>
-      <!-- adding in shopping cart button/icon then this will redirect page to basket and view all items
-    will have the following: increase and decrease quanitity, remove item, continue shopping, proceed to checkout, personal details
-  choose to login or continue as a guest. Also, Create a drop down menu when hovering over cart to view products or go to checkout and enter personal details. -->
-      
-       
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <?php
+              if (isset($_SESSION['email'])) {
+                echo '<li><a href="logout.php" class="btn btn-outline-dark navbar-btn">Log Out</a></li>';
+              } else {
+                echo '<li><a href="login-signup-page.php"class="btn btn-outline-dark">Login/Signup</a></li>';
+              }
+              ?>
+            </li>
+          </ul>
 
+        </div>
       </div>
     </nav>
   </header>
@@ -73,8 +84,7 @@
     <!-- Hero page -->
     <section>
       <div class="container-fluid hero">
-        <img class="img-fluid hero-img" src="..\TheZone\images\young-woman-sitting-leaning-standing-man2.jpg"
-          alt="heropage">
+        <img class="img-fluid hero-img" src="..\TheZone\images\young-woman-sitting-leaning-standing-man2.jpg" alt="heropage">
         <div class="txt">
           <h1 id="hero-text">The classics, elevated.</h1>
           <h4 id="hero-subtext">Seasonless style designed with<br>ultimate comfort in mind.</h4>
@@ -87,12 +97,9 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Mens.jpg" alt="Mens"><a
-              class="labels" href="#">Mens</a></div>
-          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Womens.jpg" alt="Womens"><a
-              class="labels" href="#">Womens</a></div>
-          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Kid.jpg" alt="kids"><a
-              class="labels" href="#">Kids</a></div>
+          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Mens.jpg" alt="Mens"><a class="labels" href="#">Mens</a></div>
+          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Womens.jpg" alt="Womens"><a class="labels" href="#">Womens</a></div>
+          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Kid.jpg" alt="kids"><a class="labels" href="#">Kids</a></div>
         </div>
       </div>
     </section>
@@ -149,7 +156,13 @@
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
-              </div>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product1">
+                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
+            </div>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
@@ -164,6 +177,12 @@
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product2">
+                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -179,6 +198,12 @@
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product3">
+                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -194,6 +219,12 @@
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -269,9 +300,7 @@
     <!-- banner -->
     <section>
       <div class="container-fluid banner">
-        <img class="img-fluid"
-          src="..\TheZone\images\portrait-young-woman-dressed-hoodie-ripped-jeans-leaning-wall-while-sitting-skateboard-bridge-footway2.jpg"
-          alt="banner">
+        <img class="img-fluid" src="..\TheZone\images\portrait-young-woman-dressed-hoodie-ripped-jeans-leaning-wall-while-sitting-skateboard-bridge-footway2.jpg" alt="banner">
         <div class="banner-txt">
           <h2>Ethics meet style.</h2>
           <h4>Effortless, elevated, easy-to-wear.</h4>
@@ -341,11 +370,49 @@
   </main>
 
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
+  <!-- Footer Start -->
+  <footer class="footer bg-dark text-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h5>About Us</h5>
+        <p>Our Company is a leading provider of high-quality clothing. We strive to define street style for
+          the upcoming generation.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h5>Contact Information</h5>
+        <p>
+          Address: Aston Street, The Zone<br>
+          Phone: +44 123456789<br>
+          Email: contactus@thezone.co.uk
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h5>Follow Us</h5>
+        <p>Stay connected with us on social media:</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-facebook"></i></a></li>
+          <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-twitter"></i></a></li>
+          <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-linkedin"></i></a></li>
+          <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <p class="text-center">
+          &copy; 2023 The Zone. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+  <!-- Footer End -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>

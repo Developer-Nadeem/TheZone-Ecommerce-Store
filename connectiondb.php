@@ -1,6 +1,6 @@
 <?php
 try{
-  $dbname = 'thezonedb';
+  $dbname = 'thezone_db';
   $dbhost = 'localhost';
   $username = 'root';
   $password = '';
