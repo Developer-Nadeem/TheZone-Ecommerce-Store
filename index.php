@@ -1,6 +1,20 @@
 <?php
 session_start();
 
+  echo '<script>console.log('.$_COOKIE['shopping_cart'].')</script>';
+
+
+  if (isset($_POST['add-to-cart'])) {
+    $productId = $_POST['product-id'];
+
+    $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
+
+    array_push($shoppingCart, $productId);
+
+    setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+
+    echo $_COOKIE['shopping_cart'];
+  }
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,7 +34,7 @@ session_start();
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img class="img-fluid logo" src="../TheZone/images/logo-tp.png" alt="Logo"></a>
+        <a class="navbar-brand" href="index.php"><img class="img-fluid logo" src="../TheZone/images/logo-tp.png" alt="Logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -142,7 +156,13 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
-              </div>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product1">
+                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
+            </div>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
@@ -157,6 +177,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product2">
+                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -172,6 +198,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product3">
+                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -187,6 +219,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -273,7 +311,7 @@ session_start();
 
     <section class="best-selling">
       <div class="container-fluid">
-        <header class="title">COMMING SOON</header>
+        <header class="title">COMING SOON</header>
         <div class="row item-boxes">
           <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
             <div class="card" style="width: 18rem;">
@@ -330,8 +368,6 @@ session_start();
     <div class="elfsight-app-6bac2b4d-54be-4dcd-ba8f-253d2a9fd62f" data-elfsight-app-lazy></div>
 
   </main>
-
-
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
