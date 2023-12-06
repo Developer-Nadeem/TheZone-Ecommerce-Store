@@ -63,6 +63,7 @@ session_start();
 
   <!-- Footer Start -->
   <footer class="footer bg-dark text-white">
+  <br><br>
   <div class="container">
     <div class="row">
       <div class="col-md-4">
@@ -81,12 +82,13 @@ session_start();
       </div>
       <div class="col-md-4">
         <h5>Follow Us</h5>
-        <p>Stay connected with us on social media:</p>
+        <p>Stay connected with us on Instagram:</p>
         <ul class="list-inline">
-          <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-facebook"></i></a></li>
-          <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-twitter"></i></a></li>
-          <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-linkedin"></i></a></li>
-          <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-instagram"></i></a></li>
+          <li class="list-inline-item">
+            <a href="https://www.instagram.com/thezzoneecom/" class="text-white" style="font-size: 30px;">
+              <i class="fa fa-instagram"></i>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
