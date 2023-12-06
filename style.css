@@ -256,6 +256,7 @@ div {
 
   .login-signup-page .form-wrapper {
     overflow: hidden;
+    
     max-width: 600px;
     background: rgb(230, 230, 230);
     padding: 30px;
@@ -337,6 +338,7 @@ div {
   .login-signup-page .form-container .form-inner {
     display: flex;
     width: 200%;
+    text-align: center;
   }
 
   .login-signup-page .form-container .form-inner form {
@@ -346,8 +348,10 @@ div {
 
   .login-signup-page .form-inner form .field {
     height: 50px;
-    width: 100%;
+    width: 90%;
     margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .login-signup-page .form-inner form .field input {
@@ -431,3 +435,19 @@ div {
     font-weight: bold;
     cursor: pointer;
   }
+
+  /* css styles for the footer */
+  .footer {
+    margin-top: 30px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  .footer p {
+    margin: 0;
+  }
+
+
+  /* test commit */
