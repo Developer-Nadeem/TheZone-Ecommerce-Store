@@ -27,7 +27,7 @@ session_start();
 
 <body>
   <!--Navbar Start-->
-  <?php include('..\TheZone\\navbar.php')?>
+  <?php include('..\TheZone\navbar.php')?>
   <!--Navbar End-->
 
 
@@ -279,8 +279,12 @@ session_start();
     </section>
 
     <!-- social media -->
-    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-    <div class="elfsight-app-6bac2b4d-54be-4dcd-ba8f-253d2a9fd62f" data-elfsight-app-lazy></div>
+    <div data-mc-src="f7f1f169-7190-4a0c-826d-bcec4e85bfba#instagram"></div>
+        
+        <script 
+          src="https://cdn2.woxo.tech/a.js#64346c2a36a38e7b470f83cd" 
+          async data-usrc>
+        </script>
 
   </main>
 
