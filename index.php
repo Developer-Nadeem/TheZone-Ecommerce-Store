@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-  echo '<script>console.log('.$_COOKIE['shopping_cart'].')</script>';
-
-
   if (isset($_POST['add-to-cart'])) {
     $productId = $_POST['product-id'];
 
@@ -13,7 +9,7 @@ session_start();
 
     setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 
-    echo $_COOKIE['shopping_cart'];
+    echo $_COOKIE['shopping_cart']; //For testing purposes until shopping cart page made
   }
 ?>
 <!doctype html>
@@ -56,11 +52,11 @@ session_start();
               </ul>
             </li>
           </ul>
+          <ul class="navbar-nav">
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
-          <ul class="navbar-nav">
             <li class="nav-item">
               <?php
               if (isset($_SESSION['email'])) {
