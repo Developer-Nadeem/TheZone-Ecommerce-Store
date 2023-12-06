@@ -1,3 +1,8 @@
+<?php 
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +31,8 @@
     $numOfRows = $stmt->rowCount() == 0;
     if ($numOfRows) {
       echo '<h2 class = "text-center text-danger">No results match your search</h2>';
+      echo '<p class = text-center"> Sorry, looks like there were no results for "'.$search_data_value. '"';
+
     }
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
