@@ -27,6 +27,7 @@
     <h1>Login Successful</h1>
     <p>You are now logged in. <a href="index.php">Click here to start shopping</a></p>
   </main>
+  
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

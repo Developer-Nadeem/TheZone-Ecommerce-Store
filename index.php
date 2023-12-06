@@ -55,42 +55,6 @@ session_start();
       </div>
     </section>
 
-    <!--Best sellers -->
-
-    <!-- <section>
-      <div class="container my-5 best-sellers">
-        <div class="row">
-          <div class="col productbox">
-            <div class="product "><img class="img-fluid" src="..\TheZone\images\product4.webp" alt="prduct"></div>
-          </div>
-          <div class="col productbox">
-            <div class="product "><img class="img-fluid" src="..\TheZone\images\product5.webp" alt="prduct"></div>
-          </div>
-          <div class="col productbox">
-            <div class="product "><img class="img-fluid" src="..\TheZone\images\product6.webp" alt="prduct"></div>
-          </div>
-          <div class="col productbox">
-            <div class="product "><img class="img-fluid" src="..\TheZone\images\product.webp" alt="prduct"></div>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col productbox">
-            <div class="product "><img class="img-fluid" src="..\TheZone\images\product1.webp" alt="prduct"></div>
-          </div>
-          <div class="col productbox">
-            <div class="product "><img class="img-fluid" src="..\TheZone\images\product2.webp" alt="prduct"></div>
-          </div>
-          <div class="col productbox">
-            <div class="product"><img class="img-fluid" src="..\TheZone\images\product3.webp" alt="prduct"></div>
-          </div>
-          <div class="col productbox">
-            <div class="product "><img class="img-fluid" src="..\TheZone\images\product.webp" alt="prduct"></div>
-          </div>
-
-        </div>
-      </div>
-    </section> -->
     <section class="best-selling">
       <div class="container-fluid">
         <header class="title">Best-selling</header>
@@ -324,46 +288,7 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
   <!-- Footer Start -->
-  <footer class="footer bg-dark text-white">
-  <br><br>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <h5>About Us</h5>
-        <p>Our Company is a leading provider of high-quality clothing. We strive to define street style for
-          the upcoming generation.
-        </p>
-      </div>
-      <div class="col-md-4">
-        <h5>Contact Information</h5>
-        <p>
-          Address: Aston Street, The Zone<br>
-          Phone: +44 123456789<br>
-          Email: contactus@thezone.co.uk
-        </p>
-      </div>
-      <div class="col-md-4">
-        <h5>Follow Us</h5>
-        <p>Stay connected with us on Instagram:</p>
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            <a href="https://www.instagram.com/thezzoneecom/" class="text-white" style="font-size: 30px;">
-              <i class="fa fa-instagram"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-md-12">
-        <p class="text-center">
-          &copy; 2023 The Zone. All rights reserved.
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
+  <?php include('..\TheZone\footer.php') ?>
   <!-- Footer End -->
 
 </body>
