@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-  echo '<script>console.log('.$_COOKIE['shopping_cart'].')</script>';
-
-
   if (isset($_POST['add-to-cart'])) {
     $productId = $_POST['product-id'];
 
@@ -13,7 +9,7 @@ session_start();
 
     setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 
-    echo $_COOKIE['shopping_cart'];
+    echo $_COOKIE['shopping_cart']; //For testing purposes until shopping cart page made
   }
 ?>
 <!doctype html>
