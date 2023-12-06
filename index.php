@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-  echo '<script>console.log('.$_COOKIE['shopping_cart'].')</script>';
-
-
   if (isset($_POST['add-to-cart'])) {
     $productId = $_POST['product-id'];
 
