@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TheZone - Products</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../THEZONE/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
@@ -39,19 +39,22 @@
    ?>
     
     <h2>Contact Us</h2>
-    
+    <div class="container">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="name">Name:</label>
+        <label class="name">Name:</label>
         <input type="text" id="name" name="name" required><br>
     
-        <label for="email">Email:</label>
+        <label class="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
     
-        <label for="message">Message:</label>
+        <label class="message">Message:</label>
         <textarea id="message" name="message" rows="4" required></textarea><br>
     
         <input type="submit" value="Submit">
     </form>
+
+    </div>
+    
 
     
     
