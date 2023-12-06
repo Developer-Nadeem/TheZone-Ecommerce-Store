@@ -5,7 +5,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; justify-content: space-between; align-items: center; width:100%;">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="index.php">Home</a>
@@ -22,22 +22,18 @@
                 <li><a class="dropdown-item" href="products.php">Womens</a></li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="shopping-cart.php">Shopping</a>
-            </li> 
-           </ul>
+          </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
-         
           <ul class="navbar-nav">
             <li class="nav-item">
               <?php
               if (isset($_SESSION['email'])) {
-                echo '<li><a href="logout.php" class="btn btn-outline-dark navbar-btn">Log Out</a></li>';
+                echo '<li><a href="logout.php" class="btn btn-outline-dark navbar-btn">Logout<img src="images/logout-icon.png" alt="Logout" width="20" height="20">/a></li>';
               } else {
-                echo '<li><a href="login-signup-page.php"class="btn btn-outline-dark">Login/Signup</a></li>';
+                echo '<li><a href="login-signup-page.php"class="btn btn-outline-dark">Login<img src="images/login-icon.png" alt="Login/Signup" width="20" height="20"></a></li>';
               }
               ?>
             </li>
