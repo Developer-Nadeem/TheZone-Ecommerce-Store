@@ -22,11 +22,15 @@
                 <li><a class="dropdown-item" href="products.php">Womens</a></li>
               </ul>
             </li>
-          </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="shopping-cart.php">Shopping</a>
+            </li> 
+           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
+         
           <ul class="navbar-nav">
             <li class="nav-item">
               <?php
