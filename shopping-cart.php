@@ -19,3 +19,5 @@ session_start();
   <?php include('..\TheZone\\navbar.php')?>
 
   <!--Navbar End-->
+    
+  </body>
