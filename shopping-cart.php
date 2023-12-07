@@ -25,9 +25,12 @@ session_start();
             <ul id="cart-items">
                 <!-- Cart items will be dynamically added here@khizzer -->
             </ul>
-            <p class="total-price">Total: £<span id="cart-total">0.00</span></p>
+            <p class="text-center">Total: £<span id="cart-total">0.00</span></p>
             <!-- change the above to display total price of products -->
-            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+            <div style="text-align: center;">
+                <button class="shoppingcart-button" type="submit" name="checkout-button" onclick="checkout()">Check Out</button>
+            </div>
+
         </div>
 
     </main>
