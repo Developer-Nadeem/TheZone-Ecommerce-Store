@@ -24,9 +24,13 @@
               <li><a class="dropdown-item" href="products.php">Mens</a></li>
               <li><a class="dropdown-item" href="products.php">Womens</a></li>
             </ul>
+          <          <li class="nav-item">
+            <a class="nav-link active" href="shopping-cart.php">
+              <span class="material-symbols-outlined">&#xe001;</span> <!-- Unicode for the shopping cart -->
+              Shopping Cart
+            </a>
           </li>
-          <li>
-            <a href="shopping-cart.php">Basket</a></li>
+
         </ul>
         <form class="d-flex" role="search" action="search_products.php" method="get">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data" autocomplete="off">
