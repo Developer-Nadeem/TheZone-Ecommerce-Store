@@ -1,5 +1,5 @@
 div {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 
@@ -7,226 +7,226 @@ div {
 
 
 .logo {
-    width: 12vw;
+  width: 12vw;
 }
 
 /*hero*/
 
 .img-container {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .sub-image {
-    position: absolute;
-    top: 0;
-    right: 0;
-    /* Adjust this to position the image accordingly */
-    width: auto;
-    /* Adjust the width as needed */
-    height: 25%;
-    /* Adjust the height as needed */
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* Adjust this to position the image accordingly */
+  width: auto;
+  /* Adjust the width as needed */
+  height: 25%;
+  /* Adjust the height as needed */
 }
 
 .content-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .text-container {
-    flex: 1;
-    color: white;
+  flex: 1;
+  color: white;
 }
 
 .image-container {
-    flex-shrink: 0;
-    /* Prevent the image from shrinking */
+  flex-shrink: 0;
+  /* Prevent the image from shrinking */
 }
 
 .sub-image {
-    width: 100%;
-    /* Adjust the width as needed */
-    height: auto;
-    /* Maintain aspect ratio */
+  width: 100%;
+  /* Adjust the width as needed */
+  height: auto;
+  /* Maintain aspect ratio */
 }
 
 .txt {
-    position: absolute;
-    top: 20vw;
-    left: 2%;
-    display: flex;
-    flex-direction: column;
+  position: absolute;
+  top: 20vw;
+  left: 2%;
+  display: flex;
+  flex-direction: column;
 
 }
 
 #aboutsection {
-    position: relative;
+  position: relative;
 }
 
 /* aboutus-text and aboutus-text2 are used to position the text in the about us page appropriately */
 #aboutus-text {
-    position: absolute;
-    top: 140%;
-    left: 42%;
-    font-weight: bold;
+  position: absolute;
+  top: 140%;
+  left: 42%;
+  font-weight: bold;
 }
 
 #aboutus-text2 {
-    position: absolute;
-    top: 170%;
-    left: 42%;
-    font-weight: bold;
+  position: absolute;
+  top: 170%;
+  left: 42%;
+  font-weight: bold;
 }
 
 #hero-text {
-    font-size: 3vw;
-    font-weight: bold;
+  font-size: 3vw;
+  font-weight: bold;
 }
 
 #hero-subtext {
-    margin-top: 2vw;
-    font-size: 2vw;
+  margin-top: 2vw;
+  font-size: 2vw;
 }
 
 .subsection {
-    position: relative;
+  position: relative;
 }
 
 #hero-subtext-right {
-    position: absolute;
-    margin-top: 2vw;
-    font-size: 2vw;
-    text-align: right;
-    color: blue;
+  position: absolute;
+  margin-top: 2vw;
+  font-size: 2vw;
+  text-align: right;
+  color: blue;
 }
 
 #hero-btn {
-    background-color: white;
-    width: fit-content;
-    padding: 0.6vw;
-    box-sizing: border-box;
-    border-radius: 5px;
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 2vw;
-    font-size: 1.8vw;
+  background-color: white;
+  width: fit-content;
+  padding: 0.6vw;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 2vw;
+  font-size: 1.8vw;
 }
 
 .big-button {
-    background-color: white;
-    width: fit-content;
-    padding: 1.2vw;
-    /* Adjust padding to make the button bigger */
-    box-sizing: border-box;
-    font-weight: bold;
+  background-color: white;
+  width: fit-content;
+  padding: 1.2vw;
+  /* Adjust padding to make the button bigger */
+  box-sizing: border-box;
+  font-weight: bold;
 }
 
 /* added hover effect eligible for us on all hero buttons */
 #hero-btn:hover {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 .menubox {
-    display: flex;
-    justify-content: center;
-    width: fit-content;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  position: relative;
 }
 
 .menu {
-    margin-top: 2.5vw;
-    border-radius: 20px;
-    width: 80%;
+  margin-top: 2.5vw;
+  border-radius: 20px;
+  width: 80%;
 }
 
 .menu:hover {
-    scale: 1.1;
-    transition: all 0.3s ease;
+  scale: 1.1;
+  transition: all 0.3s ease;
 }
 
 .labels {
-    position: absolute;
-    bottom: 20%;
-    color: white;
+  position: absolute;
+  bottom: 20%;
+  color: white;
 }
 
 .productbox {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
 }
 
 .product {
-    margin-top: 2vw;
+  margin-top: 2vw;
 }
 
 /*Best sellers */
 
 .best-selling {
-    background-color: white;
-    margin-left: 3vw;
+  background-color: white;
+  margin-left: 3vw;
 }
 
 .title {
-    font-size: 2.5vw;
-    font-weight: 500;
-    margin-right: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    width: fit-content;
-    margin-left: 2vw;
-    margin: auto;
-    padding: 2vw;
+  font-size: 2.5vw;
+  font-weight: 500;
+  margin-right: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  width: fit-content;
+  margin-left: 2vw;
+  margin: auto;
+  padding: 2vw;
 }
 
 .item-boxes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 1vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1vw;
 }
 
 .checked {
-    color: orange;
+  color: orange;
 }
 
 .card {
-    margin-bottom: 2vw;
+  margin-bottom: 2vw;
 }
 
 .just-arrived {
-    background-color: rgb(242, 242, 233);
+  background-color: rgb(242, 242, 233);
 }
 
 
 /*banner */
 .banner {
-    position: relative;
+  position: relative;
 
 }
 
 .banner-txt {
-    width: auto;
-    position: absolute;
-    top: 40%;
-    color: white;
-    margin-left: 2vw;
+  width: auto;
+  position: absolute;
+  top: 40%;
+  color: white;
+  margin-left: 2vw;
 
 }
 
 #banner-btn {
-    background-color: white;
-    width: fit-content;
-    padding: 0.6vw;
-    box-sizing: border-box;
-    border-radius: 20px;
-    color: black;
-    text-decoration: none;
-    font-weight: 600;
-    margin-top: 2vw;
-    font-size: 1.4vw;
+  background-color: white;
+  width: fit-content;
+  padding: 0.6vw;
+  box-sizing: border-box;
+  border-radius: 20px;
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 2vw;
+  font-size: 1.4vw;
 
 }
 
@@ -236,217 +236,323 @@ div {
 
 .show-password-signup,
 .show-password-login {
-    cursor: pointer;
-    color: rgb(0, 136, 255);
+  cursor: pointer;
+  color: rgb(0, 136, 255);
 }
 
 
 .show-password-signup.visible,
 .show-password-login.visible {
-    cursor: pointer;
-    color: rgb(255, 0, 0);
+  cursor: pointer;
+  color: rgb(255, 0, 0);
 }
 
 .login-signup-page {
-    display: grid;
-    height: 100%;
-    width: 100%;
-    place-items: center;
-  }
+  display: grid;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+}
 
-  .login-signup-page .form-wrapper {
-    overflow: hidden;
-    
-    max-width: 600px;
-    background: rgb(230, 230, 230);
-    padding: 30px;
-    border-radius: 5px;
-    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
-  }
+.login-signup-page .form-wrapper {
+  overflow: hidden;
 
-  .login-signup-page .form-wrapper .slide-controls {
-    position: relative;
-    display: flex;
-    height: 50px;
-    width: 100%;
-    overflow: hidden;
-    margin: 30px 0 10px 0;
-    justify-content: space-between;
-    border-radius: 5px;
-  }
+  max-width: 600px;
+  background: rgb(230, 230, 230);
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+}
 
-  .login-signup-page .slide-controls .slide {
-    height: 100%;
-    width: 100%;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    line-height: 48px;
-    cursor: pointer;
-    z-index: 1;
-    transition: all 0.6s ease;
-  }
+.login-signup-page .form-wrapper .slide-controls {
+  position: relative;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0 10px 0;
+  justify-content: space-between;
+  border-radius: 5px;
+}
 
-  .login-signup-page .slide-controls label.signup {
-    color: #bbb;
-  }
+.login-signup-page .slide-controls .slide {
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 48px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.6s ease;
+}
 
-  .login-signup-page .slide-controls .slider-tab {
-    position: absolute;
-    height: 100%;
-    width: 50%;
-    left: 0;
-    z-index: 0;
-    border-radius: 5px;
-    background: -webkit-linear-gradient(left, #444, #2c2c2c);
-    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
+.login-signup-page .slide-controls label.signup {
+  color: #bbb;
+}
 
-  .login-signup-page input[type="radio"] {
-    display: none;
-  }
+.login-signup-page .slide-controls .slider-tab {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  z-index: 0;
+  border-radius: 5px;
+  background: -webkit-linear-gradient(left, #444, #2c2c2c);
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
 
-  .login-signup-page #signup:checked~.slider-tab {
-    left: 50%;
-  }
+.login-signup-page input[type="radio"] {
+  display: none;
+}
 
-  .login-signup-page #signup:checked~label.signup {
-    color: #fff;
-    cursor: default;
-    user-select: none;
-  }
+.login-signup-page #signup:checked~.slider-tab {
+  left: 50%;
+}
 
-  .login-signup-page #signup:checked~label.login {
-    color: #000;
-  }
+.login-signup-page #signup:checked~label.signup {
+  color: #fff;
+  cursor: default;
+  user-select: none;
+}
 
-  .login-signup-page #login:checked~label.signup {
-    color: #000;
-  }
+.login-signup-page #signup:checked~label.login {
+  color: #000;
+}
 
-  .login-signup-page #login:checked~label.login {
-    cursor: default;
-    user-select: none;
-  }
+.login-signup-page #login:checked~label.signup {
+  color: #000;
+}
 
-  .login-signup-page .form-wrapper .form-container {
-    width: 100%;
-    overflow: hidden;
-  }
+.login-signup-page #login:checked~label.login {
+  cursor: default;
+  user-select: none;
+}
 
-  .login-signup-page .form-container .form-inner {
-    display: flex;
-    width: 200%;
-    text-align: center;
-  }
+.login-signup-page .form-wrapper .form-container {
+  width: 100%;
+  overflow: hidden;
+}
 
-  .login-signup-page .form-container .form-inner form {
-    width: 50%;
-    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
+.login-signup-page .form-container .form-inner {
+  display: flex;
+  width: 200%;
+  text-align: center;
+}
 
-  .login-signup-page .form-inner form .field {
-    height: 50px;
-    width: 90%;
-    margin-top: 20px;
-    margin-right: auto;
-    margin-left: auto;
-  }
+.login-signup-page .form-container .form-inner form {
+  width: 50%;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
 
-  .login-signup-page .form-inner form .field input {
-    height: 100%;
-    width: 100%;
-    outline: none;
-    padding-left: 15px;
-    border-radius: 5px;
-    border: 1px solid rgb(230, 230, 230);
-    border-bottom-width: 2px;
-    font-size: 17px;
-    transition: all 0.3s ease;
-  }
+.login-signup-page .form-inner form .field {
+  height: 50px;
+  width: 90%;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
 
-  .login-signup-page .form-inner form .field input:focus {
-    border-color: #444;
-  }
+.login-signup-page .form-inner form .field input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 15px;
+  border-radius: 5px;
+  border: 1px solid rgb(230, 230, 230);
+  border-bottom-width: 2px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
 
-  .login-signup-page .form-inner form .field input::placeholder {
-    color: #999;
-    transition: all 0.3s ease;
-  }
+.login-signup-page .form-inner form .field input:focus {
+  border-color: #444;
+}
 
-  .login-signup-page form .field input:focus::placeholder {
-    color: #b3b3b3;
-  }
+.login-signup-page .form-inner form .field input::placeholder {
+  color: #999;
+  transition: all 0.3s ease;
+}
 
-  .login-signup-page .form-inner form .pass-link {
-    margin-top: 5px;
-  }
+.login-signup-page form .field input:focus::placeholder {
+  color: #b3b3b3;
+}
 
-  .login-signup-page .form-inner form .signup-link {
-    text-align: center;
-    margin-top: 30px;
-  }
+.login-signup-page .form-inner form .pass-link {
+  margin-top: 5px;
+}
 
-  .login-signup-page .form-inner form .pass-link a,
-  .login-signup-page .form-inner form .signup-link a {
-    color: #444;
-    text-decoration: none;
-  }
+.login-signup-page .form-inner form .signup-link {
+  text-align: center;
+  margin-top: 30px;
+}
 
-  .login-signup-page .form-inner form .pass-link a:hover,
-  .login-signup-page .form-inner form .signup-link a:hover {
-    text-decoration: underline;
-  }
+.login-signup-page .form-inner form .pass-link a,
+.login-signup-page .form-inner form .signup-link a {
+  color: #444;
+  text-decoration: none;
+}
 
-  .login-signup-page form .btn {
-    height: 50px;
-    width: 100%;
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-  }
+.login-signup-page .form-inner form .pass-link a:hover,
+.login-signup-page .form-inner form .signup-link a:hover {
+  text-decoration: underline;
+}
 
-  .login-signup-page form .btn .btn-layer {
-    height: 100%;
-    width: 300%;
-    position: absolute;
-    left: -100%;
-    background: -webkit-linear-gradient(right, #444, #2c2c2c, #444);
-    border-radius: 5px;
-    transition: all 0.4s ease;
-  }
+.login-signup-page form .btn {
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
 
-  .login-signup-page form .btn:hover .btn-layer {
-    left: 0;
-  }
+.login-signup-page form .btn .btn-layer {
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: -webkit-linear-gradient(right, #444, #2c2c2c, #444);
+  border-radius: 5px;
+  transition: all 0.4s ease;
+}
 
-  .login-signup-page form .btn input[type="submit"] {
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    position: relative;
-    background: none;
-    border: none;
-    color: #fff;
-    padding-left: 0;
-    border-radius: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+.login-signup-page form .btn:hover .btn-layer {
+  left: 0;
+}
 
-  /* css styles for the footer */
-  .footer {
-    margin-top: 30px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    padding: 10px 0;
-  }
-  
-  .footer p {
-    margin: 0;
-  }
+.login-signup-page form .btn input[type="submit"] {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  background: none;
+  border: none;
+  color: #fff;
+  padding-left: 0;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* css styles for the footer */
+.footer {
+  margin-top: 30px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.shopping-cart-button:hover img {
+  content: url('images/shopping-cart-icon-hover.png');
+}
+
+/* styles for the reset password page */
+
+.changepass-container {
+  width: 300px;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 90px;
+}
+
+.changepass-container form {
+  background: rgb(230, 230, 230);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cfield {
+  margin-bottom: 15px;
+}
+
+.changepass-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.changepass-input-pass {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.changepass-input-submit {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.changepass-input-submit:hover {
+  background-color: #555;
+}
+
+/* styles for the shopping-cart page */
+
+.shoppingcart-container {
+  width: 300px;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 90px;
+  background: rgb(230, 230, 230);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
 
+/* styles for the checkout page */
+.checkout-container {
+  width: 300px;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 90px;
+}
+
+.checkout-container form {
+  background: rgb(230, 230, 230);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.checkout-input-field {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.checkout-input-submit {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkout-input-submit:hover {
+  background-color: #555;
+}
