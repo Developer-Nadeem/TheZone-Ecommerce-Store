@@ -35,7 +35,7 @@
               <input type="password" id="loginPassword" name="password" placeholder="Password" required>
             </div>
             <span class="show-password-login" onclick="loginTogglePassword()">Show</span>
-            <div class="pass-link"><a href="#">Forgot password?</a></div>
+            <div class="pass-link"><a href="resetpass-page.php">Forgot password?</a></div>
             <div class="field btn">
               <div class="btn-layer"></div>
               <input type="submit" value="Login" name="login">
