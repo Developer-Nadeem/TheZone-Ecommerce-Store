@@ -26,7 +26,7 @@
             </ul>
           </li>
           <li class="nav-item">
-    <a class="nav-link active" href="shopping-cart.php">
+    <a class="nav-link active" id =  "shopping-cart-label" href="shopping-cart.php">
         Shopping cart
     </a>
        </li>
