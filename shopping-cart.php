@@ -19,5 +19,23 @@ session_start();
   <?php include('..\TheZone\\navbar.php')?>
 
   <!--Navbar End-->
-    
-  </body>
+  <main>
+    <p>hello</p>
+    <section id="cart">
+
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="total">0.00</span></p>
+        <button onclick="checkout()">Checkout</button>
+    </section>
+
+    <section id="products">
+        <h2>Products</h2>
+        <ul id="product-list">
+            <!-- Product items will be dynamically added here -->
+        </ul>
+    </section>
+  </main>
+
+
+</body>

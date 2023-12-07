@@ -19,7 +19,7 @@
 
 <body>
   <!--Navbar Start-->
-  <?php include('..\TheZone\\navbar.php')?>
+  <?php include('..\TheZone\navbar.php')?>
 
   <!--Navbar End-->
 
