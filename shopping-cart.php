@@ -31,7 +31,7 @@ session_start();
             <button onclick="checkout()">Checkout</button>
         </section>
 
-        <section id="products">
+        <section id="products"> 
             <h2>Products</h2>
             <ul id="product-list">
                 <!-- Product items will be dynamically added here --> 
@@ -39,6 +39,10 @@ session_start();
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="script.js">
+
+ 
+
+    </script>
     
   </body>
