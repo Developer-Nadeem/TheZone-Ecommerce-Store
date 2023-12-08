@@ -571,3 +571,8 @@ div {
 .checkout-input-submit:hover {
   background-color: #555;
 }
+
+/* card body */
+.card-body{
+  margin: 1vw;
+}

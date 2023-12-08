@@ -74,7 +74,7 @@ session_start();
                 <div>
                   <form method="post">
                       <input type="hidden" name="product-id" value="product1">
-                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                      <button type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
                   </form>
                 </div>
             </div>
@@ -95,7 +95,7 @@ session_start();
                 <div>
                   <form method="post">
                       <input type="hidden" name="product-id" value="product2">
-                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                      <button type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
                   </form>
                 </div>
               </div>
@@ -116,7 +116,7 @@ session_start();
                 <div>
                   <form method="post">
                       <input type="hidden" name="product-id" value="product3">
-                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                      <button type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
                   </form>
                 </div>
               </div>
@@ -137,7 +137,7 @@ session_start();
                 <div>
                   <form method="post">
                       <input type="hidden" name="product-id" value="product4">
-                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
                   </form>
                 </div>
               </div>
@@ -159,6 +159,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -174,6 +180,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -189,6 +201,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -204,6 +222,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
