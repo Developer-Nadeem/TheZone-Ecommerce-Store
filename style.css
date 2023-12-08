@@ -576,3 +576,24 @@ div {
 .card-body{
   margin: 1vw;
 }
+
+/* contact page */
+.inputs{
+ margin: 10px;
+ width: 200px;
+}
+
+.name-label{
+  margin-right: 2vw;
+}
+.email-label{
+  margin-right: 2.3vw;
+}
+.message-label{
+  margin-right: 0.5vw;
+}
+
+
+
+
+
