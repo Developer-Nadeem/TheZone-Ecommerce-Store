@@ -35,7 +35,7 @@ session_start();
     <!-- Hero page -->
     <section>
       <div class="container-fluid hero">
-        <img class="img-fluid hero-img" src="..\TheZone\images\young-woman-sitting-leaning-standing-man2.jpg" alt="heropage">
+        <img class="img-fluid hero-img" src="..\TheZone\images\hero-img.jpg" alt="heropage">
         <div class="txt">
           <h1 id="hero-text">The classics, elevated.</h1>
           <h4 id="hero-subtext">Seasonless style designed with<br>ultimate comfort in mind.</h4>
@@ -49,7 +49,7 @@ session_start();
       <div class="container-fluid">
         <div class="row">
           <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Mens.jpg" alt="Mens"><a class="labels" href="#">Mens</a></div>
-          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Womens.jpg" alt="Womens"><a class="labels" href="#">Womens</a></div>
+          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\womens-menu.jpg" alt="Womens"><a class="labels" href="#">Womens</a></div>
           <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Kid.jpg" alt="kids"><a class="labels" href="#">Kids</a></div>
         </div>
       </div>
@@ -74,7 +74,7 @@ session_start();
                 <div>
                   <form method="post">
                       <input type="hidden" name="product-id" value="product1">
-                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                      <button type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
                   </form>
                 </div>
             </div>
@@ -95,7 +95,7 @@ session_start();
                 <div>
                   <form method="post">
                       <input type="hidden" name="product-id" value="product2">
-                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                      <button type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
                   </form>
                 </div>
               </div>
@@ -116,7 +116,7 @@ session_start();
                 <div>
                   <form method="post">
                       <input type="hidden" name="product-id" value="product3">
-                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                      <button type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
                   </form>
                 </div>
               </div>
@@ -137,7 +137,7 @@ session_start();
                 <div>
                   <form method="post">
                       <input type="hidden" name="product-id" value="product4">
-                      <button type="submit" name='add-to-cart' class="btn btn-primary add-to-cart">Add To Cart</button>
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
                   </form>
                 </div>
               </div>
@@ -159,6 +159,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -174,6 +180,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -189,6 +201,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -204,6 +222,12 @@ session_start();
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
                 </p>
+                <div>
+                  <form method="post">
+                      <input type="hidden" name="product-id" value="product4">
+                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

@@ -16,11 +16,12 @@ session_start();
 
 <body>
   <!--Navbar Start-->
-  <?php include('..\TheZone\\navbar.php')?>
+  <?php include('..\TheZone\\navbar.php') ?>
 
   <!--Navbar End-->
 
   <main>
+    <h1 class="text-center">Men's clothing</h1>
     <div class="container mt-6">
       <div class="row">
         <?php
@@ -28,7 +29,7 @@ session_start();
         require("connectiondb.php");
 
         //gets all from products
-        $stmt = $db->query("SELECT * FROM inventory");
+        $stmt = $db->query("SELECT * FROM inventory WHERE GenderID = 1");
 
         //loops through all the db's rows and display the products
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
