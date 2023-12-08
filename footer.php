@@ -36,7 +36,7 @@
       <div class="col-md-4">
       <h5><a href="aboutus.php">About Us</a></h5>
 
-        <p>The Zone is a leading provider of high-quality clothing. <br> We strive to define street wear for
+        <p>The Zone is a leading provider of <br> high-quality clothing. <br> We strive to define street wear for<br>
           the new generation.
         </p>
       </div>

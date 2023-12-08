@@ -438,30 +438,6 @@ div {
   cursor: pointer;
 }
 
-/* css styles for the footer */
-.footer {
-  margin-top: 0px;
-  padding-top: 20px;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  /* padding: 0px 0; */
-}
-
-.footer p {
-  margin: 0;
-}
-
-/* used for "About Us" text in footer */
-.footer h5 a {
-  text-decoration: none; 
-  color: white; 
-  position: relative; 
-}
-
-.footer h5 a:hover {
-  text-decoration: underline; /* Add underline on hover */
-}
 
 .shopping-cart-button:hover img {
   content: url('images/shopping-cart-icon-hover.png');
