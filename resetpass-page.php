@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!doctype html>
 <html lang="en">
 
@@ -41,29 +38,30 @@ session_start();
         <div class="changepass-container">
             <form onsubmit="return validatePassword()" method="post" action="resettingpass.php">
 
-                <label class="changepass-label" for="currentPassword">Current Password:</label>
+                <label class="changepass-label" for="email">Email:</label>
                 <div class="cfield">
-                    <input class="changepass-input-pass" type="password" id="currentPassword" name="currentPassword" required><br>
+                    <input class="changepass-input" type="text" id="email" name="email" required><br>
                 </div>
 
-                <label for="newPassword">New Password:</label>
+                <label class="changepass-label" for="newPassword">New Password:</label>
                 <div class="cfield">
-                    <input class="changepass-input-pass" type="password" id="newPassword" name="newPassword" required><br>
+                    <input class="changepass-input" type="password" id="newPassword" name="newPassword" required><br>
                 </div>
 
-                <label for="confirmNewPassword">Confirm New Password:</label>
+                <label class="changepass-label" for="confirmNewPassword">Confirm New Password:</label>
                 <div class="cfield">
-                    <input class="changepass-input-pass" type="password" id="confirmNewPassword" name="confirmNewPassword" required><br>
+                    <input class="changepass-input" type="password" id="confirmNewPassword" name="confirmNewPassword" required><br>
                 </div>
 
                 <div style="text-align: center;">
                     <input class="changepass-input-submit" type="submit" value="Reset Password">
+                    <input type="hidden" name="submitted" value="true" />
                 </div>
             </form>
         </div>
     </main>
-<!-- needed for drop down menu -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <!-- needed for drop down menu -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- Footer Start -->
     <?php include('..\TheZone\footer.php') ?>
     <!-- Footer End -->
