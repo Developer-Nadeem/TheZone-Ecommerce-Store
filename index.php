@@ -35,7 +35,7 @@ session_start();
     <!-- Hero page -->
     <section>
       <div class="container-fluid hero">
-        <img class="img-fluid hero-img" src="..\TheZone\images\young-woman-sitting-leaning-standing-man2.jpg" alt="heropage">
+        <img class="img-fluid hero-img" src="..\TheZone\images\hero-img.jpg" alt="heropage">
         <div class="txt">
           <h1 id="hero-text">The classics, elevated.</h1>
           <h4 id="hero-subtext">Seasonless style designed with<br>ultimate comfort in mind.</h4>

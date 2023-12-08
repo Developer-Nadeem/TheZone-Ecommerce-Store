@@ -82,11 +82,13 @@ div {
 #hero-text {
     font-size: 3vw;
     font-weight: bold;
+    color: white;
 }
 
 #hero-subtext {
     margin-top: 2vw;
     font-size: 2vw;
+    color: white;
 }
 
 .subsection {
