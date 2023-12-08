@@ -67,6 +67,9 @@ if (isset($_POST['submitted'])) {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $passHash);
 
+        // after you registered email
+        $_SESSION['user_email'] = $email;
+        $_SESSION['signup_success'] = true;
 
         $stmt->execute();
         // This part displays a success message when you have created an account
