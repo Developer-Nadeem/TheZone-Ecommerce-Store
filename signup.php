@@ -1,14 +1,16 @@
 <?php
+session_start();
+
 //checks if the signup form has been submitted
 if (isset($_POST['submitted'])) {
     require("connectiondb.php");
 
     // Validate and sanatise the inputs
-    $fname = isset($_POST['fname'])?htmlspecialchars($_POST['fname']):false;
-    $lname = isset($_POST['lname'])?htmlspecialchars($_POST['lname']):false;
-    $email = isset($_POST['email'])?filter_var($_POST['email'], FILTER_SANITIZE_EMAIL):false;
-    $pass = isset($_POST['password'])?trim($_POST['password']):false;
-    $confirm_password = isset($_POST['confirm_password'])?trim($_POST['confirm_password']):false;
+    $fname = isset($_POST['fname']) ? htmlspecialchars($_POST['fname']) : false;
+    $lname = isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : false;
+    $email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) : false;
+    $pass = isset($_POST['password']) ? trim($_POST['password']) : false;
+    $confirm_password = isset($_POST['confirm_password']) ? trim($_POST['confirm_password']) : false;
 
     if (!($fname)) {
         echo "Please enter your first name";
@@ -21,17 +23,17 @@ if (isset($_POST['submitted'])) {
     }
 
     if (!($email)) {
-        echo "Please enter your email adress";
+        echo "Please enter your email address";
         exit;
     }
 
-    if (!($pass)){
+    if (!($pass)) {
         echo "Please enter a password";
         exit;
     }
 
-    if(!($confirm_password)){
-        echo "Please re enter your password";
+    if (!($confirm_password)) {
+        echo "Please re-enter your password";
         exit;
     }
 
@@ -67,7 +69,22 @@ if (isset($_POST['submitted'])) {
 
 
         $stmt->execute();
-        echo "Registration successful!";
+        // This part displays a success message when you have created an account
+    echo '<div id="signup-success-popup" class="popup-container">
+    <div class="popup-content">
+        <span class="close-popup" onclick="closePopup()">&times;</span>
+        <p>Registration successful!</p>
+    </div>
+  </div>';
+
+// This part redirects you to the homepage after 3 seconds which is index.php
+echo '<script>
+    setTimeout(function(){
+        window.location.href = "index.php";
+    }, 3000);
+  </script>';
+        exit;
+        
     } catch (PDOException $e) {
         echo "Sorry, a database error occurred! <br>";
         echo "Error details: <em>" . $e->getMessage() . "</em>";
