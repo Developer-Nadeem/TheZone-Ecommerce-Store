@@ -67,27 +67,11 @@ if (isset($_POST['submitted'])) {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $passHash);
 
-        // after you registered email
-        $_SESSION['user_email'] = $email;
-        $_SESSION['signup_success'] = true;
-
         $stmt->execute();
-        // This part displays a success message when you have created an account
-    echo '<div id="signup-success-popup" class="popup-container">
-    <div class="popup-content">
-        <span class="close-popup" onclick="closePopup()">&times;</span>
-        <p>Registration successful!</p>
-    </div>
-  </div>';
-
-// This part redirects you to the homepage after 3 seconds which is index.php
-echo '<script>
-    setTimeout(function(){
-        window.location.href = "index.php";
-    }, 3000);
-  </script>';
+        echo "Registration successful!";
+        // This part redirects you to the homepage after 3 seconds which is index.php
+        echo '<script> setTimeout(function(){ window.location.href = "index.php"; }, 3000);  </script>';
         exit;
-        
     } catch (PDOException $e) {
         echo "Sorry, a database error occurred! <br>";
         echo "Error details: <em>" . $e->getMessage() . "</em>";

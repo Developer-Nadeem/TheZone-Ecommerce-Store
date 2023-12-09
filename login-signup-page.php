@@ -46,7 +46,7 @@
 
 <body>
   <!--Navbar Start-->
-  <?php include('..\TheZone\\navbar.php')?>
+  <?php include('..\TheZone\\navbar.php') ?>
   <!--Navbar End-->
 
   <main class="login-signup-page">
@@ -121,7 +121,7 @@
   <!-- Footer End -->
 
   <!--bootstrap javascript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 </body>
 
@@ -159,20 +159,21 @@
     }
   }
 
+  
   function showPopup(popupId) {
-  var popup = document.getElementById(popupId);
-  popup.style.display = 'block';
+    var popup = document.getElementById(popupId);
+    popup.style.display = 'block';
 
-  setTimeout(function() {
-    popup.style.display = 'none'; 
-  }, 3000); // 
-}
+    setTimeout(function() {
+      popup.style.display = 'none';
+    }, 3000); // 
+  }
 
   document.addEventListener('DOMContentLoaded', function() {
     <?php
     if (isset($_SESSION['signup_success']) && $_SESSION['signup_success']) {
       echo 'showPopup();';
-      unset($_SESSION['signup_success']); 
+      unset($_SESSION['signup_success']);
     }
     ?>
   });
@@ -200,10 +201,9 @@
     signupBtn.click();
     return false;
   };
-  
-
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
 </script>
+
 </html>

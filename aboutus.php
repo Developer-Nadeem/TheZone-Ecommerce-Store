@@ -54,7 +54,7 @@ session_start();
           </h4>
           <h1 id="aboutus-text2" style="top: 200%;">Your's Truly, The Zone</h1>
           <!-- Button to redirect user from the about us page to the products page for shopping -->
-          <a style="position: absolute; top: 210%; left: 42%;" href="products.php" class="big-button" id="hero-btn">Discover Your True Style</a>
+          <a style="position: absolute; top: 210%; left: 42%;" href="products-men.php" class="big-button" id="hero-btn">Discover Your True Style</a>
         </div>
       </div>
 

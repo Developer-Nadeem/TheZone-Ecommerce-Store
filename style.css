@@ -438,18 +438,6 @@ div {
   cursor: pointer;
 }
 
-/* css styles for the footer */
-.footer {
-  margin-top: 30px;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  padding: 10px 0;
-}
-
-.footer p {
-  margin: 0;
-}
 
 .shopping-cart-button:hover img {
   content: url('images/shopping-cart-icon-hover.png');
