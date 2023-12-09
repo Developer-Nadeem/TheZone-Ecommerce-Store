@@ -28,8 +28,8 @@ session_start();
         // gets the db
         require("connectiondb.php");
 
-        //gets all from products
-        $stmt = $db->query("SELECT * FROM inventory WHERE GenderID = 1");
+        //gets all male products
+        $stmt = $db->query("SELECT ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 1");
 
         //loops through all the db's rows and display the products
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
