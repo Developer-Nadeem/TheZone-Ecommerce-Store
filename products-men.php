@@ -17,7 +17,6 @@ session_start();
 <body>
   <!--Navbar Start-->
   <?php include('..\TheZone\\navbar.php') ?>
-
   <!--Navbar End-->
 
   <main>
@@ -31,7 +30,7 @@ session_start();
         // gets all male products
         $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 1");
 
-        // loops through all the db's rows and display the products
+        // loops through all the db's rows and display the products for mens
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
           echo '<div class="card" style="width: 18rem">';
