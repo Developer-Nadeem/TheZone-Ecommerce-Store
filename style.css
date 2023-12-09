@@ -497,7 +497,7 @@ div {
   max-width: 600px;
   margin: 0 auto;
   margin-top: 20px;
-  margin-bottom: 90px;
+  margin-bottom: 20px;
   background: rgb(230, 230, 230);
   padding: 20px;
   border-radius: 8px;
@@ -580,8 +580,3 @@ div {
 .message-label{
   margin-right: 0.5vw;
 }
-
-
-
-
-

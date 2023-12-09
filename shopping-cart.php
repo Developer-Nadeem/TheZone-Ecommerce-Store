@@ -12,6 +12,58 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+        .sample-product {
+            border: 2px solid #000; 
+            border-radius: 10px;
+            padding: 10px; 
+            margin-top: 10px; 
+            text-align: left; 
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto; /* margin left and right set to auto to centre align the product container */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sample-product h3 {
+            margin: 15px; 
+            font-size: 20px;
+        }
+
+        .sample-product img {
+            width: 120px; /* setting a fixed width for the image for consistency */
+            height: auto; 
+            border: 3px solid #000; 
+            border-radius: 10px;
+            margin: 15px;
+
+        }
+
+        .sample-product button {
+            background-color: #ff0000; 
+            border-radius: 5px;
+            color: #fff; 
+            border: none; 
+            margin: 15px;
+            padding: 5px 10px; 
+            cursor: pointer; 
+            transition: background-color 0.2s ease, color 0.2s ease; /* transition of colour upon hover */
+            position: absolute; /* positioning the button absolutely so that it can be on the bottom right*/
+            bottom: 0; 
+            right: 0; 
+        }
+
+        .sample-product button:hover {
+            background-color: #fff; /* changing background color on hover */
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            padding: 5px 10px; 
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -31,6 +83,14 @@ session_start();
                 <button class="shoppingcart-button" type="submit" name="checkout-button" onclick="checkout()">Check Out</button>
             </div>
 
+        </div>
+
+        <!-- div section for a product with its name, price and product image -->
+        <div class="sample-product">
+            <h3>Grey Zipped Sweater</h3>
+            <h3>£10.99</h3>
+            <img src="..\TheZone\images\product2.webp" alt="Sample Product Image">
+            <button onclick="removeProduct()">Remove</button>
         </div>
 
     </main>
@@ -85,6 +145,11 @@ session_start();
             };
 
             // ...
+        }
+
+        function removeProduct() {
+            // function to remove product from cart page
+
         }
         //  make changes where needed@khizzer
     </script>
