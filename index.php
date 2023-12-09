@@ -1,16 +1,16 @@
 <?php
 session_start();
-  if (isset($_POST['add-to-cart'])) {
-    $productId = $_POST['product-id'];
+if (isset($_POST['add-to-cart'])) {
+  $productId = $_POST['product-id'];
 
-    $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
+  $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
 
-    array_push($shoppingCart, $productId);
+  array_push($shoppingCart, $productId);
 
-    setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 
-    echo $_COOKIE['shopping_cart']; //For testing purposes until shopping cart page made
-  }
+  echo $_COOKIE['shopping_cart']; //For testing purposes until shopping cart page made
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,7 +27,7 @@ session_start();
 
 <body>
   <!--Navbar Start-->
-  <?php include('..\TheZone\navbar.php')?>
+  <?php include('..\TheZone\navbar.php') ?>
   <!--Navbar End-->
 
 
@@ -59,181 +59,32 @@ session_start();
       <div class="container-fluid">
         <header class="title">Best-selling</header>
         <div class="row item-boxes">
-          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product1.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-                <div>
-                  <form method="post">
-                      <input type="hidden" name="product-id" value="product1">
-                      <button type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
-                  </form>
-                </div>
-            </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product2.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-                <div>
-                  <form method="post">
-                      <input type="hidden" name="product-id" value="product2">
-                      <button type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product3.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-                <div>
-                  <form method="post">
-                      <input type="hidden" name="product-id" value="product3">
-                      <button type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product4.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-                <div>
-                  <form method="post">
-                      <input type="hidden" name="product-id" value="product4">
-                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php
+          // gets the db
+          require("connectiondb.php");
+
+          $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory");
+
+          // loops through the first 8 rows and displays the products
+          for ($i = 0; $i < 8 && ($row = $stmt->fetch(PDO::FETCH_ASSOC)); $i++) {
+            echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
+            echo '<div class="card" style="width: 18rem">';
+            echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
+            echo '<div class="card-body">';
+            echo '<p class="card-text">' . $row['ProductName'] . '</p>';
+            echo '<p class="card-text"><strong>£' . $row['Price'] . '</strong></p>';
+            echo '<div>';
+            echo '<form method="post">';
+            echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
+            echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
+            echo '</form>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+          }
+          ?>
         </div>
-
-
-        <div class="row item-boxes">
-          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product1.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-                <div>
-                  <form method="post">
-                      <input type="hidden" name="product-id" value="product4">
-                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product2.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-                <div>
-                  <form method="post">
-                      <input type="hidden" name="product-id" value="product4">
-                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product3.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-                <div>
-                  <form method="post">
-                      <input type="hidden" name="product-id" value="product4">
-                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product4.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-                <div>
-                  <form method="post">
-                      <input type="hidden" name="product-id" value="product4">
-                      <button id="add-to-cart" type="submit" name='add-to-cart' class="btn btn-dark add-to-cart">Add To Cart</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </section>
 
     <!-- banner -->
@@ -252,63 +103,40 @@ session_start();
       <div class="container-fluid">
         <header class="title">COMING SOON</header>
         <div class="row item-boxes">
-          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product1.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product2.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\product3.webp" alt="Card image cap">
-              <div class="card-body">
-                <p><strong>Product Title</strong></p>
-                <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </p>
-              </div>
-            </div>
-          </div>
+          <?php
+          // gets the db
+          require("connectiondb.php");
 
+          $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory");
+
+          // loops through the first 3 rows and displays the products
+          for ($i = 0; $i < 3 && ($row = $stmt->fetch(PDO::FETCH_ASSOC)); $i++) {
+            echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
+            echo '<div class="card" style="width: 18rem">';
+            echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
+            echo '<div class="card-body">';
+            echo '<p class="card-text">' . $row['ProductName'] . '</p>';
+            echo '<p class="card-text"><strong>£' . $row['Price'] . '</strong></p>';
+            echo '<div>';
+            echo '<form method="post">';
+            echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
+            echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
+            echo '</form>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+          }
+          ?>
         </div>
       </div>
     </section>
 
     <!-- social media -->
     <div data-mc-src="f7f1f169-7190-4a0c-826d-bcec4e85bfba#instagram"></div>
-        
-        <script 
-          src="https://cdn2.woxo.tech/a.js#64346c2a36a38e7b470f83cd" 
-          async data-usrc>
-        </script>
+
+    <script src="https://cdn2.woxo.tech/a.js#64346c2a36a38e7b470f83cd" async data-usrc>
+    </script>
 
   </main>
 

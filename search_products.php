@@ -27,7 +27,7 @@ session_start();
   if (isset($_GET['search_data_products'])) {
     $search_data_value = $_GET['search_data'];
 
-    $stmt = $db->query("SELECT ProductName, Price, ImageUrl FROM inventory WHERE ProductName LIKE '%$search_data_value%'");
+    $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE ProductName LIKE '%$search_data_value%'");
     $numOfRows = $stmt->rowCount() == 0;
     if ($numOfRows) {
       echo '<h2 class = "text-center text-danger">No results match your search</h2>';
@@ -38,10 +38,16 @@ session_start();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"">';
       echo '<div class="card" style="width: 18rem">';
-      echo '<img src="..\TheZone\images\\' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
+      echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
       echo '<div class="card-body">';
       echo '<p class="card-text">' . $row['ProductName'] . '</p>';
       echo '<p class="card-text"><Strong>£' . $row['Price'] . '</Strong></p>';
+      echo '</div>';
+      echo '<form method="post">';
+      echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
+      echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
+      echo '</form>';
+      echo '</div>';
       echo '</div>';
       echo '</div>';
       echo '</div>';

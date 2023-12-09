@@ -29,16 +29,22 @@ session_start();
         require("connectiondb.php");
 
         //gets all male products
-        $stmt = $db->query("SELECT ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 2");
+        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 2");
 
         //loops through all the db's rows and display the products
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"">';
           echo '<div class="card" style="width: 18rem">';
-          echo '<img src="..\TheZone\images\\' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
+          echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
           echo '<div class="card-body">';
           echo '<p class="card-text">' . $row['ProductName'] . '</p>';
           echo '<p class="card-text"><Strong>£' . $row['Price'] . '</Strong></p>';
+          echo '</div>';
+          echo '<form method="post">';
+          echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
+          echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
+          echo '</form>';
+          echo '</div>';
           echo '</div>';
           echo '</div>';
           echo '</div>';

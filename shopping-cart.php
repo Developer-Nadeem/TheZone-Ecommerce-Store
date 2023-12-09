@@ -76,6 +76,14 @@ session_start();
             <h2 class="text-center">Your Cart</h2>
             <ul id="cart-items">
                 <!-- Cart items will be dynamically added here@khizzer -->
+                <?php
+                    $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
+                    foreach(unserialize($shopping_cart) as $item) {
+                        echo '<div class="cart-item" style="background-color: white; "';
+                        echo '<p> '. $item . '</p>';
+                        echo '</div>';
+                    }
+                ?>
             </ul>
             <p class="text-center">Total: £<span id="cart-total">0.00</span></p>
             <!-- change the above to display total price of products -->
