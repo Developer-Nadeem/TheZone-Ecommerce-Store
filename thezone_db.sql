@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2023 at 10:36 AM
+-- Generation Time: Dec 09, 2023 at 09:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,6 +46,17 @@ CREATE TABLE `category` (
   `CategoryName` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`CategoryID`, `CategoryName`) VALUES
+(1, 'T-Shirt'),
+(2, 'Jumper'),
+(3, 'Hoodie'),
+(4, 'Trainers'),
+(5, 'Jeans');
+
 -- --------------------------------------------------------
 
 --
@@ -60,6 +71,14 @@ CREATE TABLE `contactrequests` (
   `RequestTime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `contactrequests`
+--
+
+INSERT INTO `contactrequests` (`RequestID`, `Name`, `Email`, `Message`, `RequestTime`) VALUES
+(1, 'Nadeem H', '220038500@aston.ac.uk', 'testing', '2023-12-09 09:50:44'),
+(2, 'Nadeem H', '220038500@aston.ac.uk', 'testing if this still works, when i made some changes.', '2023-12-09 09:56:44');
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +89,14 @@ CREATE TABLE `genders` (
   `GenderID` int(11) NOT NULL,
   `GenderType` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `genders`
+--
+
+INSERT INTO `genders` (`GenderID`, `GenderType`) VALUES
+(1, 'Male'),
+(2, 'Female');
 
 -- --------------------------------------------------------
 
@@ -87,6 +114,37 @@ CREATE TABLE `inventory` (
   `CategoryID` int(11) DEFAULT NULL,
   `GenderID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`ProductID`, `ProductName`, `ProductDescription`, `Price`, `ImageURL`, `StockQuantity`, `CategoryID`, `GenderID`) VALUES
+(1, 'Champion X Coca Cola Crewneck T-Shirt 220184 T-shirt (bwb)', 'Elevate your style with this classic crewneck T-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448604-champion-x-coca-cola-crewneck-tshirt-220184-tshirt-bwb.jpg?w=1920', 100, 1, 1),
+(2, 'Champion X Coca Cola Cardigan Top 220192 Sweater (hlg/loy)', 'Elevate your style with this classic jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 88, 'https://static.super-shop.com/1448614-champion-x-coca-cola-cardigan-top-220192-sweater-hlg-loy.jpg?w=1920', 100, 2, 2),
+(3, 'Prosto Yezz Jumper (black)', 'Elevate your style with this classic Jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 48, 'https://static.super-shop.com/1439438-prosto-yezz-sweatshirt-black.jpg?w=1920', 100, 2, 1),
+(4, 'Converse Chuck Taylor All Star Lift Hi Shoes Wmn (black)', 'Elevate your style with these sneakers, featuring a comfortable fit and timeless design for everyday casual wear.', 79, 'https://static.super-shop.com/1212146-converse-chuck-taylor-all-star-lift-hi-shoes-wmn-black.jpg?w=1920', 100, 4, 1),
+(6, 'Prosto Jeans Regular Pocklog Pants (blue)', 'Elevate your style with these Jeans, featuring a comfortable fit and timeless design for everyday casual wear.', 46, 'https://static.super-shop.com/1212146-converse-chuck-taylor-all-star-lift-hi-shoes-wmn-black.jpg?w=1920', 100, 5, 1),
+(7, 'Champion X Coca Cola Hooded Sweatshirt 220180 Hoodie (nbk)', 'Elevate your style with this classic hoodie, featuring a comfortable fit and timeless design for everyday casual wear.', 69, 'https://static.super-shop.com/1448594-champion-x-coca-cola-hooded-sweatshirt-220180-hoodie-nbk.jpg?w=1920', 100, 3, 1),
+(8, 'Champion X Coca Cola Crewneck T-Shirt 220184 T-shirt (dox)', 'Elevate your style with this classic t-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448606-champion-x-coca-cola-crewneck-tshirt-220184-tshirt-dox.jpg?w=19200', 100, 1, 2),
+(9, 'Champion X Coca Cola Crewneck T-Shirt 220184 T-shirt (hlg)', 'Elevate your style with this classic t-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448605-champion-x-coca-cola-crewneck-tshirt-220184-tshirt-hlg.jpg?w=1920', 100, 1, 2),
+(10, 'Champion X Coca Cola Crewneck T-Shirt 220183 T-shirt (vapy)', 'Elevate your style with this classic t-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448602-champion-x-coca-cola-crewneck-tshirt-220183-tshirt-vapy.jpg?w=1920', 100, 1, 1),
+(11, 'Champion X Coca Cola Crewneck T-Shirt 220183 T-shirt (nbk)', 'Elevate your style with this classic t-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448603-champion-x-coca-cola-crewneck-tshirt-220183-tshirt-nbk.jpg?w=1920', 100, 1, 1),
+(12, 'Thrasher Hoodie Flame HD Wmn (black)', 'Elevate your style with this classic hoodie, featuring a comfortable fit and timeless design for everyday casual wear.', 65, 'https://static.super-shop.com/1238796-thrasher-hoodie-flame-hd-wmn-black.jpg?w=1920', 100, 3, 2),
+(13, 'Burton Mountain HD Hoodie (true black)', 'Elevate your style with this classic hoodie, featuring a comfortable fit and timeless design for everyday casual wear.', 83, 'https://static.super-shop.com/1069874-burton-mountain-hd-hoodie-true-black.jpg?w=1920', 100, 3, 1),
+(14, 'Champion X Coca Cola Hooded Sweatshirt 220180 Hoodie (hlg)', 'Elevate your style with this classic hoodie, featuring a comfortable fit and timeless design for everyday casual wear.', 69, 'https://static.super-shop.com/1448593-champion-x-coca-cola-hooded-sweatshirt-220180-hoodie-hlg.jpg?w=1920', 100, 3, 1),
+(15, 'Method Tech Riding HD Hoodie (black)', 'Elevate your style with this classic hoodie, featuring a comfortable fit and timeless design for everyday casual wear.', 100, 'https://static.super-shop.com/1445496-method-tech-riding-hd-hoodie-black.jpg?w=1920', 100, 3, 2),
+(16, 'Champion X Coca Cola Crewneck Jumper 220181  (bwb)', 'Elevate your style with this classic Jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 100, 'https://static.super-shop.com/1448595-champion-x-coca-cola-crewneck-sweatshirt-220181-sweatshirt-bwb.jpg?w=1920', 100, 2, 1),
+(17, 'Thrasher Jumper Skate Mag Crew (black)', 'Elevate your style with this classic Jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 50, 'https://static.super-shop.com/1228413-thrasher-sweatshirt-skate-mag-crew-black.jpg?w=1920', 100, 2, 2),
+(18, 'Carhartt WIP DeadKebab Knock Knock Sweatshirt (black)', 'Elevate your style with this classic Jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 112, 'https://static.super-shop.com/1433227-carhartt-wip-deadkebab-knock-knock-sweatshirt-black.jpg?w=1920', 100, 2, 1),
+(19, 'Vans Old Skool trainers', 'Elevate your style with these classic trainers, featuring a comfortable fit and timeless design for everyday casual wear.', 63, 'https://static.super-shop.com/1183275-vans-old-skool-shoes-flame-black-black-true-white.jpg?w=1920', 100, 4, 2),
+(20, 'Es trainers Accel Og (brw/gum)', 'Elevate your style with these classic trainers, featuring a comfortable fit and timeless design for everyday casual wear.', 65, 'https://static.super-shop.com/1411563-es-shoes-accel-og-brw-gum.jpg?w=1920', 100, 4, 1),
+(21, 'Etnies trainers Barge Ls (green/gum)', 'Elevate your style with these classic trainers, featuring a comfortable fit and timeless design for everyday casual wear.', 68, 'https://static.super-shop.com/968053-etnies-shoes-barge-ls-green-gum.jpg?w=1920', 100, 4, 1),
+(22, 'Vans Sk8 Hi Shoes (pig suede douglas fir)', 'Elevate your style with these classic trainers, featuring a comfortable fit and timeless design for everyday casual wear.', 90, 'https://static.super-shop.com/1415123-vans-sk8-hi-shoes-pig-suede-douglas-fir.jpg?w=1920', 100, 4, 1),
+(23, 'MassDnm Slang Jeans Baggi Fit Pants (Light Blue Stone Wash)', 'Elevate your style with these classic jeans, featuring a comfortable fit and timeless design for everyday casual wear.', 52, 'https://static.super-shop.com/1434553-massdnm-slang-jeans-baggi-fit-pants-light-blue-stone-wash.jpg?w=1920', 100, 5, 1),
+(24, 'MassDnm Pants Base Jeans Regular Fit (blue)', 'Elevate your style with these classic jeans, featuring a comfortable fit and timeless design for everyday casual wear.', 48, 'https://static.super-shop.com/1434271-massdnm-pants-base-jeans-regular-fit-blue.jpg?w=1920', 100, 5, 1),
+(25, 'Malita Jeans Log Sl Pants (elastic blue)', 'Elevate your style with these classic jeans, featuring a comfortable fit and timeless design for everyday casual wear.', 48, 'https://static.super-shop.com/1367045-malita-jeans-log-sl-pants-elastic-blue.jpg?w=1920', 100, 5, 2),
+(26, 'MassDnm Craft Jeans Baggy Fit Pants (black washed)', 'Elevate your style with these classic jeans, featuring a comfortable fit and timeless design for everyday casual wear.', 52, 'https://static.super-shop.com/1367047-massdnm-craft-jeans-baggy-fit-pants-black-washed.jpg?w=1920', 100, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -246,25 +304,25 @@ ALTER TABLE `addressdetails`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `CategoryID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `contactrequests`
 --
 ALTER TABLE `contactrequests`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `genders`
 --
 ALTER TABLE `genders`
-  MODIFY `GenderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `GenderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `orderitems`
