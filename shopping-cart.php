@@ -20,7 +20,7 @@ session_start();
             padding: 10px; 
             margin-top: 10px; 
             text-align: left; 
-            width: 30%;
+            width: 100%;
             margin-left: auto;
             margin-right: auto; /* margin left and right set to auto to centre align the product container */
             overflow: hidden;
@@ -74,13 +74,16 @@ session_start();
     <main>
         <div class="shoppingcart-container">
             <h2 class="text-center">Your Cart</h2>
-            <ul id="cart-items">
+            <ul id="cart-items" style="padding-left: 10px; padding-right: 10px">
                 <!-- Cart items will be dynamically added here@khizzer -->
                 <?php
-                    $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
+                    $shopping_cart = isset($_COOKIE['shopping_cart']) ? $_COOKIE['shopping_cart'] : array();
                     foreach(unserialize($shopping_cart) as $item) {
-                        echo '<div class="cart-item" style="background-color: white; "';
-                        echo '<p> '. $item . '</p>';
+                        echo '<div class="sample-product">';
+                        echo'<h3>'. $item .'</h3>';
+                        echo '<h3>£10.99</h3>';
+                        echo '<img src="..\TheZone\images\\' . $item. '.webp" alt="Sample Product Image">';
+                        echo '<button onclick="removeProduct()">Remove</button>';
                         echo '</div>';
                     }
                 ?>
@@ -94,12 +97,6 @@ session_start();
         </div>
 
         <!-- div section for a product with its name, price and product image -->
-        <div class="sample-product">
-            <h3>Grey Zipped Sweater</h3>
-            <h3>£10.99</h3>
-            <img src="..\TheZone\images\product2.webp" alt="Sample Product Image">
-            <button onclick="removeProduct()">Remove</button>
-        </div>
 
     </main>
 
