@@ -27,7 +27,7 @@ session_start();
   if (isset($_GET['search_data_products'])) {
     $search_data_value = $_GET['search_data'];
 
-    $stmt = $db->query("SELECT * FROM inventory WHERE ProductName LIKE '%$search_data_value%'");
+    $stmt = $db->query("SELECT ProductName, Price, ImageUrl FROM inventory WHERE ProductName LIKE '%$search_data_value%'");
     $numOfRows = $stmt->rowCount() == 0;
     if ($numOfRows) {
       echo '<h2 class = "text-center text-danger">No results match your search</h2>';
