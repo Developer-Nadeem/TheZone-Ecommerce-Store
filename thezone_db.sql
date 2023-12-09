@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2023 at 10:25 PM
+-- Generation Time: Dec 09, 2023 at 10:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -54,7 +54,8 @@ CREATE TABLE `category` (
 
 CREATE TABLE `contactrequests` (
   `RequestID` int(11) NOT NULL,
-  `UserID` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
   `Message` varchar(1000) DEFAULT NULL,
   `RequestTime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -180,8 +181,7 @@ ALTER TABLE `category`
 -- Indexes for table `contactrequests`
 --
 ALTER TABLE `contactrequests`
-  ADD PRIMARY KEY (`RequestID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD PRIMARY KEY (`RequestID`);
 
 --
 -- Indexes for table `genders`
@@ -299,12 +299,6 @@ ALTER TABLE `useraccounts`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `contactrequests`
---
-ALTER TABLE `contactrequests`
-  ADD CONSTRAINT `contactrequests_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `useraccounts` (`UserID`);
 
 --
 -- Constraints for table `inventory`

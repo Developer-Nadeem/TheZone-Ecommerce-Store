@@ -17,32 +17,11 @@
   <!--Navbar Start-->
   <?php include('..\TheZone\\navbar.php') ?>
   <!--Navbar End-->
-  <?php
-  // if ($SERVER[] == "Post") {
-  //     $name = $_POST["name please"];
-  //     $email = $_POST["this is the email"];
-  //     $message = $_POST["any messages here please"];
-  
-
-  //     $adminEmail = "admins email";
-  
-
-  //     $email = "name $name\n";
-  //     $email = "email $email\n";
-  //     $email = "message $message\n";
-  
-
-  //     mail($adminEmail, $subject, $emailMessage);
-  
-
-  //     echo "<p>Thank you for your request, we will get back to you shortly</p>";
-  // }
-  ?>
 
   <div class="container container-pos">
   <h2>Contact Us</h2>
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form method="post" action="contacts.php">
       <label class="name-label" for="name">Name:</label>
       <input class="name inputs" type="text" id="name" name="name" required><br>
 
@@ -51,8 +30,8 @@
 
       <label class="message-label" for="message">Message:</label>
       <textarea class="message inputs" id="message" name="message" rows="4" required></textarea><br>
-
       <input class="submit-btn" type="submit" value="Submit">
+      <input type="hidden" name="submitted" value="true">
     </form>
   </div>
  <!-- needed for drop down menu -->
@@ -60,3 +39,64 @@
 </body>
 
 </html>
+<?php
+include("connectiondb.php");
+if(isset($_POST["submitted"]) && !empty(isset($_POST["message"]))&& !empty(isset($_POST["email"]))&& !empty(isset($_POST["name"]))){
+  try{
+    
+    date_default_timezone_set('UTC');
+    $currentDateTime = date('Y-m-d H:i:s');
+
+    $query = $db->prepare("INSERT INTO contactrequests VALUES ('',:name,:email,:message,:Timestamp) ");
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $message = trim($_POST['message']);
+    $query->bindParam(':name',$name);
+    $query->bindParam(':email',$email);
+    $query->bindParam(':message',$message);
+    $query->bindParam(':Timestamp',$currentDateTime);
+    $query->execute();
+
+
+
+  }catch(PDOException $ex){
+
+
+
+
+}
+
+
+}
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
