@@ -33,7 +33,7 @@ session_start();
 
         //loops through all the db's rows and display the products
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-          echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"">';
+          echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
           echo '<div class="card" style="width: 18rem">';
           echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
           echo '<div class="card-body">';
@@ -46,10 +46,7 @@ session_start();
           echo '</form>';
           echo '</div>';
           echo '</div>';
-          echo '</div>';
-          echo '</div>';
         }
-
         ?>
       </div>
     </div>
