@@ -92,7 +92,7 @@ session_start();
     }
 
     function submitForm() {
-      //if (validateCardholderName() && validateCardNumber() && validateExpiryDate() && validateCVV()) {
+      if (validateCardholderName() && validateCardNumber() && validateExpiryDate() && validateCVV()) {
         fetch('order.php', {
           method: 'POST',
           headers: {
@@ -110,7 +110,7 @@ session_start();
         }).catch((err) => {
           console.log(err);
         })
-      //}
+      }
     }
   </script>
   <!-- needed for drop down menu -->
