@@ -14,9 +14,8 @@ if (isset($_POST['add-to-cart'])) {
   array_push($shoppingCart, $productId);
 
   setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-
-  echo $_COOKIE['shopping_cart']; //For testing purposes until shopping cart page made
 }
+
 ?>
 <!doctype html>
 <html lang="en">
