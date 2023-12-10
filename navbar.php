@@ -13,9 +13,6 @@
             <li class="nav-item">
               <a class="nav-link" href="aboutus.php">About Us</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contacts.php">Contact Us</a>
-            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Products
@@ -42,7 +39,7 @@
             </li>
           </ul>
 
-        </div>
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
+</header>

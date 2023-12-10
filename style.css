@@ -80,13 +80,13 @@ div {
 }
 
 #hero-text {
-  font-size: 3vw;
-  font-weight: bold;
+    font-size: 3vw;
+    font-weight: bold;
 }
 
 #hero-subtext {
-  margin-top: 2vw;
-  font-size: 2vw;
+    margin-top: 2vw;
+    font-size: 2vw;
 }
 
 .subsection {
@@ -436,61 +436,18 @@ div {
   cursor: pointer;
 }
 
-/* css styles for the footer */
-.footer {
-  margin-top: 30px;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  padding: 10px 0;
-}
-
-.footer p {
-  margin: 0;
-}
-
-/* contact us page css */
-.Contact Us{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-}
-
-.name{
-  height: 100%;
-  width: 100%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: 1px solid rgb(230, 230, 230);
-  border-bottom-width: 2px;
-  font-size: 17px;
-  transition: all 0.3s ease;
-}
+  /* css styles for the footer */
+  .footer {
+    margin-top: 30px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  .footer p {
+    margin: 0;
+  }
 
 
-.email{
-  height: 100%;
-  width: 100%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: 1px solid rgb(230, 230, 230);
-  border-bottom-width: 2px;
-  font-size: 17px;
-  transition: all 0.3s ease;
-}
-
-#message {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: 1px solid rgb(230, 230, 230);
-  border-bottom-width: 2px;
-  font-size: 17px;
-  transition: all 0.3s ease;
-}
-
+  /* test commit */
