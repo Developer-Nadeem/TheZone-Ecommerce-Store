@@ -39,6 +39,7 @@ if (isset($_POST['add-to-cart'])) {
 
   <main>
     <h1 class="text-center">Women's clothing</h1>
+    <p class="text-center">Explore The Zone's exclusive women's fashion collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
     <div class="container mt-6">
       <div class="row">
         <?php

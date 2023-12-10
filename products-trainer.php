@@ -37,16 +37,16 @@ if (isset($_POST['add-to-cart'])) {
   <!--Navbar End-->
 
   <main>
-    <h1 class="text-center">Men's clothing</h1>
-    <p class="text-center">Explore The Zone's exclusive men's fashion collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
+    <h1 class="text-center">Trainers</h1>
+    <p class="text-center">Explore The Zone's exclusive trainer collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
     <div class="container mt-6">
       <div class="row">
         <?php
         // gets the db
         require("connectiondb.php");
 
-        // gets all male products
-        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 1");
+        // gets all products under the trainers category
+        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE CategoryID = 4");
 
         // loops through all the db's rows and display the products for mens
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

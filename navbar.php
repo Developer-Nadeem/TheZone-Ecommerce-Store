@@ -23,6 +23,14 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="products-men.php">Mens</a></li>
               <li><a class="dropdown-item" href="products-women.php">Womens</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="products-tshirt.php">T-Shirts</a></li>
+              <li><a class="dropdown-item" href="products-hoodie.php">Hoodies</a></li>
+              <li><a class="dropdown-item" href="products-jumper.php">Jumpers</a></li>
+              <li><a class="dropdown-item" href="products-jean.php">Jeans</a></li>
+              <li><a class="dropdown-item" href="products-trainer.php">Trainers</a></li>
             </ul>
           </li>
         </ul>
