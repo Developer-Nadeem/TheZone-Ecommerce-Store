@@ -15,8 +15,6 @@
 
         $total_price = 0;
 
-        echo $_SESSION['email'];
-
         $stmt = $db->query("SELECT UserID FROM useraccounts WHERE Email = '" . $_SESSION['email'] . "'");
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $user_id = $row['UserID'];
