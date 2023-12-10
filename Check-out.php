@@ -92,14 +92,25 @@ session_start();
     }
 
     function submitForm() {
-      if (validateCardholderName() && validateCardNumber() && validateExpiryDate() && validateCVV()) {
-        alert('Payment successful!');
+      //if (validateCardholderName() && validateCardNumber() && validateExpiryDate() && validateCVV()) {
+        fetch('order.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: 'checkout=' + encodeURIComponent(true)
+        }).then((res) => {
+          console.log('Response')
+          alert('Payment successful!');
         // Simulate a payment process
-        setTimeout(() => {
-          alert('Transaction completed. Thank you for shopping with us!');
-          // Clear the shopping cart and update the view
-        }, 2000);
-      }
+          setTimeout(() => {
+            alert('Transaction completed. Thank you for shopping with us!');
+          }, 2000);
+          
+        }).catch((err) => {
+          console.log(err);
+        })
+      //}
     }
   </script>
   <!-- needed for drop down menu -->
