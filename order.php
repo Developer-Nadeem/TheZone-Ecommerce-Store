@@ -51,6 +51,9 @@
             $stmt->bindValue(':quantity', 1, PDO::PARAM_INT);
             $stmt->execute();
         };
+
+        $_COOKIE['shopping_cart'] = serialize(array());
+        $_COOKIE['shopping_cart_json'] = json_encode(array());
     //}
 ?>
 
