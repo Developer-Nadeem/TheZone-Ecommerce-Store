@@ -228,8 +228,6 @@ if (isset($_POST['remove-from-cart'])) {
 
                                 const productId = form.querySelector('[name="product-id"]').value;
 
-                                console.log('clicked btn');
-
                                 fetch('shopping-cart.php', {
                                     method: 'POST',
                                     headers: {
@@ -239,6 +237,18 @@ if (isset($_POST['remove-from-cart'])) {
                                 }).then((res) => {
                                     console.log(res);
                                     event.target.closest('.sample-product').remove();
+
+                                    const shoppingCartJson = JSON.parse(getCookieValue('shopping_cart_json'));
+
+                                    //If shoppingcartjson is empty
+                                    if (shoppingCartJson.length === 0) {
+                                        document.getElementById('cart-items').innerHTML = '<div class="sample-product"><h3>Cart is empty</h3></div>';
+                                        
+                                        const checkoutBtn = document.getElementById('checkout-button');
+                                        
+                                        checkoutBtn.setAttribute('href', 'index.php');
+                                        checkoutBtn.innerHTML = 'Shop Now';
+                                    }
                                 }).catch((err) => {
                                     console.log(err);
                                 })
@@ -261,9 +271,9 @@ if (isset($_POST['remove-from-cart'])) {
                 <div style="text-align: center; margin-bottom: 15px;">
                 <?php
                     if (unserialize($shopping_cart) == null) {
-                        echo '<a class="shoppingcart-button" name="checkout-button" href="index.php">Shop Now</a>';
+                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>';
                     } else {
-                        echo '<a class="shoppingcart-button" name="checkout-button" href="checkout.php">Check Out</a>';
+                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</a>';
                     }
                 ?>
                 </div>
