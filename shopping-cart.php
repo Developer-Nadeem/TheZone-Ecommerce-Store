@@ -190,7 +190,7 @@ if (isset($_POST['remove-from-cart'])) {
                             echo '<div class="sample-product">';
                             echo '<img src="'. $row['ImageUrl']. '" alt="Sample Product Image">';
                             echo'<h3>'. $row['ProductName'] .'</h3>';
-                            echo '<h3>£'. $row['Price'] .'</h3>';
+                            echo '<h3 class="item-price">£'. $row['Price'] .'</h3>';
                             echo '<form method="post" class="remove-form">';
                             echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
                             echo '<button type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</button>';
@@ -217,12 +217,38 @@ if (isset($_POST['remove-from-cart'])) {
                         return "";
                     }
 
-                    const shoppingCartJson = JSON.parse(getCookieValue('shopping_cart_json'));
-
                     // Wait for DOM to load
                     document.addEventListener('DOMContentLoaded', function() {
-                        document.querySelectorAll('.remove-form').forEach(function(form) {
-                            //Detect button click
+                        const shoppingCartJson = JSON.parse(getCookieValue('shopping_cart_json'));
+                    function updatePrice() {
+                        const shoppingCartJson = JSON.parse(getCookieValue('shopping_cart_json'));
+
+                        if (shoppingCartJson.length === 0) {
+                            document.getElementById('cart-items').innerHTML = '<div class="sample-product"><h3>Cart is empty</h3></div>';
+                            
+                            const checkoutBtn = document.getElementById('checkout-button');
+                            
+                            checkoutBtn.setAttribute('href', 'index.php');
+                            checkoutBtn.innerHTML = 'Shop Now';
+
+                            document.getElementById('cart-total').innerHTML = '0';
+                        } else {
+                            console.log('Shopping cart is not empty');
+                                    
+                            let total = 0;
+                            
+                            document.querySelectorAll('.item-price').forEach(function(itemPrice) {
+                                console.log('Price found');
+                                total += parseFloat(itemPrice.innerHTML.substring(1));
+                            });
+
+                            document.getElementById('cart-total').innerHTML = total.toFixed(2);
+                        }
+                    }
+
+                    updatePrice();
+
+                        document.querySelectorAll('.remove-form').forEach(function(form) {                            
                             form.addEventListener('submit', function(event) {
                                 event.preventDefault();
 
@@ -238,17 +264,7 @@ if (isset($_POST['remove-from-cart'])) {
                                     console.log(res);
                                     event.target.closest('.sample-product').remove();
 
-                                    const shoppingCartJson = JSON.parse(getCookieValue('shopping_cart_json'));
-
-                                    //If shoppingcartjson is empty
-                                    if (shoppingCartJson.length === 0) {
-                                        document.getElementById('cart-items').innerHTML = '<div class="sample-product"><h3>Cart is empty</h3></div>';
-                                        
-                                        const checkoutBtn = document.getElementById('checkout-button');
-                                        
-                                        checkoutBtn.setAttribute('href', 'index.php');
-                                        checkoutBtn.innerHTML = 'Shop Now';
-                                    }
+                                    updatePrice();
                                 }).catch((err) => {
                                     console.log(err);
                                 })
