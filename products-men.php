@@ -16,8 +16,6 @@ if (isset($_POST['add-to-cart'])) {
   setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 
   setcookie('shopping_cart_json', json_encode($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-
-  echo $_COOKIE['shopping_cart']; //For testing purposes until shopping cart page made
 }
 ?>
 <!DOCTYPE html>
