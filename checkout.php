@@ -31,7 +31,7 @@ session_start();
 
         <label class="checkout-label" for="cardNumber">Card Number:</label>
         <div class="cfield">
-          <input class="checkout-input-field" placeholder="1111 2222 3333 4444" required>
+          <input class="checkout-input-field" id="cardNumber" placeholder="1111 2222 3333 4444" required>
         </div>
 
         <label class="checkout-label" for="expiryDate">Expiry Date:</label>
@@ -45,7 +45,7 @@ session_start();
         </div>
 
         <div style="text-align: center;">
-          <input class="checkout-input-submit" type="submit" value="Check Out" name="checkout-button" onclick="submitForm()">
+          <input id='checkout-btn' class="checkout-input-submit" type="submit" value="Check Out" name="checkout-button" onclick="submitForm()">
           <input type="hidden" name="submitted" value="true" />
         </div>
       </form>
@@ -55,70 +55,71 @@ session_start();
 
 
   <script>
-    function validateCardholderName() {
-      return true;
-      
-      const name = document.getElementById('cardholderName').value;
-      if (name.length < 3) {
-        alert('Invalid Cardholder Name');
-        return false;
+    //on document load
+    document.addEventListener('DOMContentLoaded', () => {
+      function validateCardholderName() {
+        const name = document.getElementById('cardholderName').value;
+        if (name.length < 3) {
+          alert('Invalid Cardholder Name');
+          return false;
+        }
+        return true;
       }
-      return true;
-    }
 
-    function validateCardNumber() {
-      return true;
-
-      const number = document.getElementById('cardNumber').value;
-      if (number.length !== 19 || !number.includes('-')) {
-        alert('Invalid Card Number');
-        return false;
+      function validateCardNumber() {
+        const number = document.getElementById('cardNumber').value;
+        if (number.length !== 19 || !number.includes('-')) {
+          alert('Invalid Card Number');
+          return false;
+        }
+        return true;
       }
-      return true;
-    }
 
-    function validateExpiryDate() {
-      return true;
-
-      const date = document.getElementById('expiryDate').value;
-      if (date.length !== 5 || date.indexOf('/') !== 2) {
-        alert('Invalid Expiry Date');
-        return false;
+      function validateExpiryDate() {
+        const date = document.getElementById('expiryDate').value;
+        if (date.length !== 5 || date.indexOf('/') !== 2) {
+          alert('Invalid Expiry Date');
+          return false;
+        }
+        return true;
       }
-      return true;
-    }
 
-    function validateCVV() {
-      return true;
-      const cvv = document.getElementById('cvv').value;
-      if (cvv.length !== 3) {
-        alert('Invalid CVV');
-        return false;
+      function validateCVV() {
+        const cvv = document.getElementById('cvv').value;
+        if (cvv.length !== 3) {
+          alert('Invalid CVV');
+          return false;
+        }
+        return true;
       }
-      return true;
-    }
 
-    function submitForm() {
-      if (validateCardholderName() && validateCardNumber() && validateExpiryDate() && validateCVV()) {
-        fetch('order.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: 'checkout=' + encodeURIComponent(true)
-        }).then((res) => {
-          console.log('Response')
-          alert('Payment successful!');
-        // Simulate a payment process
-          setTimeout(() => {
-            alert('Transaction completed. Thank you for shopping with us!');
-          }, 2000);
-          
-        }).catch((err) => {
-          console.log(err);
-        })
+      function submitForm() {
+        if (validateCardholderName() && validateCardNumber() && validateExpiryDate() && validateCVV()) {
+          fetch('order.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'checkout=' + encodeURIComponent(true)
+          }).then((res) => {
+            console.log('Response')
+            alert('Payment successful!');
+          // Simulate a payment process
+            setTimeout(() => {
+              alert('Transaction completed. Thank you for shopping with us!');
+            }, 2000);
+            
+          }).catch((err) => {
+            console.log(err);
+          })
+        }
       }
-    }
+
+      document.getElementById('checkout-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        submitForm();
+      });
+    })
   </script>
   <!-- needed for drop down menu -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
