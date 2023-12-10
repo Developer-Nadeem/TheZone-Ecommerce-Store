@@ -138,6 +138,11 @@ div {
   position: relative;
 }
 
+.menurow{
+  display: flex;
+  justify-content: center ;
+}
+
 .menu {
   margin-top: 2.5vw;
   border-radius: 20px;

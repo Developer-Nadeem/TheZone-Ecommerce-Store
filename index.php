@@ -48,13 +48,13 @@ if (isset($_POST['add-to-cart'])) {
     <!-- Menus -->
     <section>
       <div class="container-fluid">
-        <div class="row">
-          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Mens.jpg" alt="Mens"><a
+        <div class="row menurow">
+          <div class="col-4 menubox"><img class="img-fluid menu" src="..\TheZone\images\Mens.jpg" alt="Mens"><a
               class="labels" href="..\TheZone\products-men.php">Mens</a></div>
-          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\womens-menu.jpg" alt="Womens"><a
+          <div class="col-4 menubox"><img class="img-fluid menu" src="..\TheZone\images\womens-menu.jpg" alt="Womens"><a
               class="labels" href="..\TheZone\products-women.php">Womens</a></div>
-          <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Kid.jpg" alt="kids"><a
-              class="labels" href="#">Kids</a></div>
+          <!-- <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Kid.jpg" alt="kids"><a
+              class="labels" href="#">Kids</a></div> -->
         </div>
       </div>
     </section>
