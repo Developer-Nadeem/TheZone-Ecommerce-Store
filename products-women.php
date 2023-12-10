@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_COOKIE['shopping_cart'])) {
+  setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+}
+
 if (isset($_POST['add-to-cart'])) {
   $productId = $_POST['product-id'];
 
