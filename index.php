@@ -100,7 +100,7 @@ if (isset($_POST['add-to-cart'])) {
         <div class="banner-txt">
           <h2>Ethics meet style.</h2>
           <h4>Effortless, elevated, easy-to-wear.</h4>
-          <a id="banner-btn" href="best-selling">SHOP NOW</a>
+          <a id="banner-btn" href="#best-selling">SHOP NOW</a>
         </div>
       </div>
     </section>
