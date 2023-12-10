@@ -100,11 +100,11 @@ session_start();
         }
 
         hr {
-            height: 4px; /* Set the height to make it thicker */
-            width: 55%; /* Set the width to make it shorter (adjust as needed) */
-            margin: 20px auto; /* Center the line by setting margin and using auto for left and right */
-            background-color: #000; /* Set the background color of the line */
-            border: none; /* Remove the default border */
+            height: 4px; 
+            width: 55%; 
+            margin: 20px auto; 
+            background-color: #000; 
+            border: none; 
         }
     </style>
 
