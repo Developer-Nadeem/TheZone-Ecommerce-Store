@@ -56,7 +56,7 @@ session_start();
             padding: 10px; 
             margin-top: 10px; 
             text-align: left; 
-            width: 55%;
+            width: 30%;
             margin-left: auto;
             margin-right: auto; /* margin left and right set to auto to centre align the product container */
             overflow: hidden;
@@ -120,14 +120,14 @@ session_start();
         <!-- <div class="shoppingcart-container">
             <h2 class="text-center">Your Cart</h2>
             <ul id="cart-items">
-
+                <!-- Cart items will be dynamically added here@khizzer -->
                 <?php
-                    // $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
-                    // foreach(unserialize($shopping_cart) as $item) {
-                    //     echo '<div class="cart-item" style="background-color: white; "';
-                    //     echo '<p> '. $item . '</p>';
-                    //     echo '</div>';
-                    // }
+                    $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
+                    foreach(unserialize($shopping_cart) as $item) {
+                        echo '<div class="cart-item" style="background-color: white; "';
+                        echo '<p> '. $item . '</p>';
+                        echo '</div>';
+                    }
                 ?>
             </ul>
             <p class="text-center">Total: £<span id="cart-total">0.00</span></p>
@@ -136,41 +136,14 @@ session_start();
                 <button class="shoppingcart-button" type="submit" name="checkout-button" onclick="checkout()">Check Out</button>
             </div>
 
-        </div> -->
+        </div>
 
-        <!-- div section for the entire cart and the total amount display -->
-        <div class="whole-cart">
-
-            <!-- div section for cart items to be shown -->
-            <div class="cart-items">
-                <div style="background-color: #333; color: white; text-align: center;padding: 15px;">
-                    <h3>Your Cart</h3>
-                </div>
-                <div class="sample-product">
-                    <img src="..\TheZone\images\product2.webp" alt="Sample Product Image">
-                    <h3>Grey Zipped Sweater</h3>
-                    <h3>£10.99</h3>
-                    <button onclick="removeProduct()">Remove</button>
-                </div>
-                <hr style="">
-                <div class="sample-product">
-                    <img src="..\TheZone\images\product2.webp" alt="Sample Product Image">
-                    <h3>Grey Zipped Sweater</h3>
-                    <h3>£10.99</h3>
-                    <button onclick="removeProduct()">Remove</button>
-                </div>
-            </div>
-                    
-            <!-- div section to show the total and the option to checkout via button -->
-            <div class="total-section">
-                <h4>TOTAL</h4>
-                <hr>
-                <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
-                <div style="text-align: center; margin-bottom: 15px;">
-                <button class="shoppingcart-button" type="submit" name="checkout-button" onclick="checkout()">Check Out</button>
-                </div>
-            </div>    
-
+        <!-- div section for a product with its name, price and product image -->
+        <div class="sample-product">
+            <h3>Grey Zipped Sweater</h3>
+            <h3>£10.99</h3>
+            <img src="..\TheZone\images\product2.webp" alt="Sample Product Image">
+            <button onclick="removeProduct()">Remove</button>
         </div>
 
     </main>

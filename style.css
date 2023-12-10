@@ -561,8 +561,16 @@ div {
 }
 
 /* card body */
+.card{
+  min-height: 43vw !important;
+}
+
 .card-body{
   margin: 1vw;
+}
+.add-to-cart{
+  position: absolute;
+  bottom: 3%;
 }
 
 /* contact page */
