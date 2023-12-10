@@ -259,7 +259,13 @@ if (isset($_POST['remove-from-cart'])) {
                 <hr>
                 <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
                 <div style="text-align: center; margin-bottom: 15px;">
-                <a class="shoppingcart-button" name="checkout-button" href='checkout.php'>Check Out</a>
+                <?php
+                    if (unserialize($shopping_cart) == null) {
+                        echo '<a class="shoppingcart-button" name="checkout-button" href="index.php">Shop Now</a>';
+                    } else {
+                        echo '<a class="shoppingcart-button" name="checkout-button" href="checkout.php">Check Out</a>';
+                    }
+                ?>
                 </div>
             </div>    
 
