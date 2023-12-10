@@ -40,7 +40,7 @@ if (isset($_POST['add-to-cart'])) {
         <div class="txt">
           <h1 id="hero-text">The classics, elevated.</h1>
           <h4 id="hero-subtext">Seasonless style designed with<br>ultimate comfort in mind.</h4>
-          <a id="hero-btn" href="#">SHOP NOW</a>
+          <a id="hero-btn" href="#best-selling">SHOP NOW</a>
         </div>
       </div>
     </section>
@@ -59,7 +59,7 @@ if (isset($_POST['add-to-cart'])) {
       </div>
     </section>
 
-    <section class="best-selling">
+    <section class="best-selling" id="best-selling">
       <div class="container-fluid">
         <header class="title">Best-selling</header>
         <div class="row item-boxes">
@@ -100,7 +100,7 @@ if (isset($_POST['add-to-cart'])) {
         <div class="banner-txt">
           <h2>Ethics meet style.</h2>
           <h4>Effortless, elevated, easy-to-wear.</h4>
-          <a id="banner-btn" href="#">SHOP NOW</a>
+          <a id="banner-btn" href="best-selling">SHOP NOW</a>
         </div>
       </div>
     </section>
