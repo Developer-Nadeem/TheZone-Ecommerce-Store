@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2023 at 09:13 PM
+-- Generation Time: Dec 10, 2023 at 06:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -156,8 +156,7 @@ CREATE TABLE `orderitems` (
   `OrderItemID` int(11) NOT NULL,
   `OrderID` int(11) DEFAULT NULL,
   `ProductID` int(11) DEFAULT NULL,
-  `Quantity` int(11) DEFAULT NULL,
-  `SubTotal` decimal(10,2) DEFAULT NULL
+  `Quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -172,8 +171,8 @@ CREATE TABLE `orders` (
   `OrderTime` datetime DEFAULT NULL,
   `OrderStatus` varchar(255) DEFAULT NULL,
   `TotalAmount` int(11) DEFAULT NULL,
-  `PaymentID` int(11) NOT NULL,
-  `AddressID` int(11) NOT NULL
+  `PaymentID` int(11) DEFAULT NULL,
+  `AddressID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -328,13 +327,13 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `orderitems`
 --
 ALTER TABLE `orderitems`
-  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `paymentdetails`
@@ -352,7 +351,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
