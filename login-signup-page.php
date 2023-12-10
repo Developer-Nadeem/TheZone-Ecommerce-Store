@@ -14,7 +14,6 @@
 <body>
   <!--Navbar Start-->
   <?php include('..\TheZone\\navbar.php')?>
-
   <!--Navbar End-->
 
   <main class="login-signup-page">
