@@ -15,6 +15,8 @@
 
         $total_price = 0;
 
+        echo $_SESSION['email'];
+
         $stmt = $db->query("SELECT UserID FROM useraccounts WHERE Email = '" . $_SESSION['email'] . "'");
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $user_id = $row['UserID'];
@@ -50,8 +52,8 @@
             $stmt->execute();
         };
 
-        $_COOKIE['shopping_cart'] = serialize(array());
-        $_COOKIE['shopping_cart_json'] = json_encode(array());
+        setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+        setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
     //}
 ?>
 

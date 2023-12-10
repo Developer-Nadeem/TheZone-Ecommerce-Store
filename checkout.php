@@ -56,6 +56,8 @@ session_start();
 
   <script>
     function validateCardholderName() {
+      return true;
+      
       const name = document.getElementById('cardholderName').value;
       if (name.length < 3) {
         alert('Invalid Cardholder Name');
@@ -65,6 +67,8 @@ session_start();
     }
 
     function validateCardNumber() {
+      return true;
+
       const number = document.getElementById('cardNumber').value;
       if (number.length !== 19 || !number.includes('-')) {
         alert('Invalid Card Number');
@@ -74,6 +78,8 @@ session_start();
     }
 
     function validateExpiryDate() {
+      return true;
+
       const date = document.getElementById('expiryDate').value;
       if (date.length !== 5 || date.indexOf('/') !== 2) {
         alert('Invalid Expiry Date');
@@ -83,6 +89,7 @@ session_start();
     }
 
     function validateCVV() {
+      return true;
       const cvv = document.getElementById('cvv').value;
       if (cvv.length !== 3) {
         alert('Invalid CVV');
