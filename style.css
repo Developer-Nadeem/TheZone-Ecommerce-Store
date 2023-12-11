@@ -80,15 +80,15 @@ div {
 }
 
 #hero-text {
-    font-size: 3vw;
-    font-weight: bold;
-    color: white;
+  font-size: 3vw;
+  font-weight: bold;
+  color: white;
 }
 
 #hero-subtext {
-    margin-top: 2vw;
-    font-size: 2vw;
-    color: white;
+  margin-top: 2vw;
+  font-size: 2vw;
+  color: white;
 }
 
 .subsection {
@@ -138,9 +138,9 @@ div {
   position: relative;
 }
 
-.menurow{
+.menurow {
   display: flex;
-  justify-content: center ;
+  justify-content: center;
 }
 
 .menu {
@@ -509,7 +509,7 @@ div {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.shoppingcart-button{
+.shoppingcart-button {
   background-color: #333;
   color: #fff;
   padding: 10px 112px;
@@ -518,7 +518,7 @@ div {
   cursor: pointer;
 }
 
-.shoppingcart-button:hover{
+.shoppingcart-button:hover {
   background-color: #555;
 }
 
@@ -566,30 +566,16 @@ div {
 }
 
 /* card body */
-.card{
+.card {
   min-height: 43vw !important;
 }
 
-.card-body{
+.card-body {
   margin: 1vw;
 }
-.add-to-cart{
+
+.add-to-cart {
   position: absolute;
   bottom: 3%;
 }
 
-/* contact page */
-.inputs{
- margin: 10px;
- width: 200px;
-}
-
-.name-label{
-  margin-right: 2vw;
-}
-.email-label{
-  margin-right: 2.3vw;
-}
-.message-label{
-  margin-right: 0.5vw;
-}
