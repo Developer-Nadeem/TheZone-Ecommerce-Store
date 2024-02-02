@@ -13,7 +13,7 @@
 
 <body>
   <!--Navbar Start-->
-  <?php include('../TheZone//navbar.php') ?>
+  <?php include('navbar.php') ?>
   <!--Navbar End-->
 
   <h2 class="text-center">Contact Us</h2>

@@ -5,18 +5,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bootstrap demo</title>
-  <link rel="stylesheet" href="../TheZone/style.css">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
-  <?php include('../TheZone/navbar.php') ?>
+  <?php include('navbar.php') ?>
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-6"><img class="img-fluid product-img" src="../TheZone/images/mens.jpg" alt="product-image"></div>
+      <div class="col-6"><img class="img-fluid product-img" src="images/mens.jpg" alt="product-image"></div>
       <div class="col-6 product-desc">
         <h3>Product Title</h3>
         <p class="stars">
@@ -81,7 +81,7 @@
 
 
 
-  <?php include('../TheZone/footer.php')  ?>
+  <?php include('footer.php')  ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>

@@ -10,11 +10,9 @@ div {
   width: 12vw;
 }
 
-.navbar {
-  max-width: 100%;
-}
-
-.navbar-nav {
+.navbar,
+.navbar-nav,
+.container-fluid {
   max-width: 100%;
 }
 .banner-txt h2,h4{
@@ -684,6 +682,4 @@ div {
 .review{
   border-radius: 5%;
   margin: 2%;
-  
-
 }
