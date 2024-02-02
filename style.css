@@ -10,6 +10,14 @@ div {
   width: 12vw;
 }
 
+.navbar {
+  max-width: 100%;
+}
+
+.navbar-nav {
+  max-width: 100%;
+}
+
 /*hero*/
 
 .img-container {
