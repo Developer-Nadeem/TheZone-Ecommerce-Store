@@ -18,8 +18,6 @@ if (isset($_POST['add-to-cart'])) {
 
 }
 
-/*test push */
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -81,7 +79,7 @@ if (isset($_POST['add-to-cart'])) {
           // loops through the first 8 rows and displays the products
           for ($i = 0; $i < 8 && ($row = $stmt->fetch(PDO::FETCH_ASSOC)); $i++) {
             echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
-            echo '<a id="main-link" href = "../TheZone/product-page.php"><div class="card" style="width: 18rem">';
+            echo '<a id="main-link" href = "product-page.php?product_id='.$row['ProductID'].'"><div class="card" style="width: 18rem">';
             echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
             echo '<div class="card-body">';
             echo '<p class="card-text">' . $row['ProductName'] . '</p>';
