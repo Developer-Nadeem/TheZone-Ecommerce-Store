@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (!isset($_COOKIE['shopping_cart'])) {
+  setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+}
+
 if (isset($_POST['add-to-cart'])) {
   $productId = $_POST['product-id'];
 
@@ -8,9 +14,10 @@ if (isset($_POST['add-to-cart'])) {
   array_push($shoppingCart, $productId);
 
   setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  setcookie('shopping_cart_json', json_encode($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 
-  echo $_COOKIE['shopping_cart']; //For testing purposes until shopping cart page made
 }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,7 +27,7 @@ if (isset($_POST['add-to-cart'])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TheZone</title>
-  <link rel="stylesheet" href="..\TheZone\style.css">
+  <link rel="stylesheet" href="../TheZone/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,7 +35,7 @@ if (isset($_POST['add-to-cart'])) {
 
 <body>
   <!--Navbar Start-->
-  <?php include('..\TheZone\navbar.php') ?>
+  <?php include('../TheZone/navbar.php') ?>
   <!--Navbar End-->
 
 
@@ -36,11 +43,11 @@ if (isset($_POST['add-to-cart'])) {
     <!-- Hero page -->
     <section>
       <div class="container-fluid hero">
-        <img class="img-fluid hero-img" src="..\TheZone\images\hero-img.jpg" alt="heropage">
+        <img class="img-fluid hero-img" src="../TheZone/images\hero-img.jpg" alt="heropage">
         <div class="txt">
           <h1 id="hero-text">The classics, elevated.</h1>
           <h4 id="hero-subtext">Seasonless style designed with<br>ultimate comfort in mind.</h4>
-          <a id="hero-btn" href="#">SHOP NOW</a>
+          <a id="hero-btn" href="#best-selling">SHOP NOW</a>
         </div>
       </div>
     </section>
@@ -48,6 +55,7 @@ if (isset($_POST['add-to-cart'])) {
     <!-- Menus -->
     <section>
       <div class="container-fluid">
+<<<<<<< HEAD
         <div class="row">
           <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Mens.jpg" alt="Mens"><a
               class="labels" href="..\TheZone\products-men.php">Mens</a></div>
@@ -55,11 +63,20 @@ if (isset($_POST['add-to-cart'])) {
               class="labels" href="..\TheZone\products-women.php">Womens</a></div>
           <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Kid.jpg" alt="kids"><a
               class="labels" href="#">Kids</a></div>
+=======
+        <div class="row menurow">
+          <div class="col-4 menubox"><img class="img-fluid menu" src="../TheZone/images/Mens.jpg" alt="Mens"><a
+              class="labels" href="../TheZone/products-men.php">Mens</a></div>
+          <div class="col-4 menubox"><img class="img-fluid menu" src="../TheZone/images/womens-menu.jpg" alt="Womens"><a
+              class="labels" href="../TheZone/products-women.php">Womens</a></div>
+          <!-- <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Kid.jpg" alt="kids"><a
+              class="labels" href="#">Kids</a></div> -->
+>>>>>>> 492ad02de5e3195258e6c7ca7acad0030af7e248
         </div>
       </div>
     </section>
 
-    <section class="best-selling">
+    <section class="best-selling" id="best-selling">
       <div class="container-fluid">
         <header class="title">Best-selling</header>
         <div class="row item-boxes">
@@ -95,12 +112,12 @@ if (isset($_POST['add-to-cart'])) {
     <section>
       <div class="container-fluid banner">
         <img class="img-fluid"
-          src="..\TheZone\images\portrait-young-woman-dressed-hoodie-ripped-jeans-leaning-wall-while-sitting-skateboard-bridge-footway2.jpg"
+          src="../TheZone/images/portrait-young-woman-dressed-hoodie-ripped-jeans-leaning-wall-while-sitting-skateboard-bridge-footway2.jpg"
           alt="banner">
         <div class="banner-txt">
           <h2>Ethics meet style.</h2>
           <h4>Effortless, elevated, easy-to-wear.</h4>
-          <a id="banner-btn" href="#">SHOP NOW</a>
+          <a id="banner-btn" href="#best-selling">SHOP NOW</a>
         </div>
       </div>
     </section>
@@ -111,7 +128,7 @@ if (isset($_POST['add-to-cart'])) {
         <div class="row item-boxes">
           <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
             <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\coming-soon1.jpg" alt="hoodie">
+              <img class="card-img-top" src="../TheZone/images/coming-soon1.jpg" alt="hoodie">
               <div class="card-body">
                 <p><strong>Minimalist Hoodie</strong></p>
                 <p class="card-text">£10.99</p>
@@ -126,7 +143,7 @@ if (isset($_POST['add-to-cart'])) {
           </div>
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
             <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\coming-soon2.jpg" alt="hoodie">
+              <img class="card-img-top" src="../TheZone/images/coming-soon2.jpg" alt="hoodie">
               <div class="card-body">
                 <p><strong>Minimalist Hoodie(Blue)</strong></p>
                 <p class="card-text">£10.99</p>
@@ -141,7 +158,7 @@ if (isset($_POST['add-to-cart'])) {
           </div>
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
             <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="..\TheZone\images\coming-soon3.jpg" alt="hoodie">
+              <img class="card-img-top" src="../TheZone/images/coming-soon3.jpg" alt="hoodie">
               <div class="card-body">
                 <p><strong>Minimalist creative Hoodie</strong></p>
                 <p class="card-text">£10.99</p>
@@ -172,7 +189,7 @@ if (isset($_POST['add-to-cart'])) {
     crossorigin="anonymous"></script>
 
   <!-- Footer Start -->
-  <?php include('..\TheZone\footer.php') ?>
+  <?php include('../TheZone/footer.php') ?>
   <!-- Footer End -->
 
 </body>

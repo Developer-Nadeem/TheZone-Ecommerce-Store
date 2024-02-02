@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2023 at 09:13 PM
+-- Generation Time: Dec 10, 2023 at 06:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -124,7 +124,6 @@ INSERT INTO `inventory` (`ProductID`, `ProductName`, `ProductDescription`, `Pric
 (2, 'Champion X Coca Cola Cardigan Top 220192 Sweater (hlg/loy)', 'Elevate your style with this classic jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 88, 'https://static.super-shop.com/1448614-champion-x-coca-cola-cardigan-top-220192-sweater-hlg-loy.jpg?w=1920', 100, 2, 2),
 (3, 'Prosto Yezz Jumper (black)', 'Elevate your style with this classic Jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 48, 'https://static.super-shop.com/1439438-prosto-yezz-sweatshirt-black.jpg?w=1920', 100, 2, 1),
 (4, 'Converse Chuck Taylor All Star Lift Hi Shoes Wmn (black)', 'Elevate your style with these sneakers, featuring a comfortable fit and timeless design for everyday casual wear.', 79, 'https://static.super-shop.com/1212146-converse-chuck-taylor-all-star-lift-hi-shoes-wmn-black.jpg?w=1920', 100, 4, 1),
-(6, 'Prosto Jeans Regular Pocklog Pants (blue)', 'Elevate your style with these Jeans, featuring a comfortable fit and timeless design for everyday casual wear.', 46, 'https://static.super-shop.com/1212146-converse-chuck-taylor-all-star-lift-hi-shoes-wmn-black.jpg?w=1920', 100, 5, 1),
 (7, 'Champion X Coca Cola Hooded Sweatshirt 220180 Hoodie (nbk)', 'Elevate your style with this classic hoodie, featuring a comfortable fit and timeless design for everyday casual wear.', 69, 'https://static.super-shop.com/1448594-champion-x-coca-cola-hooded-sweatshirt-220180-hoodie-nbk.jpg?w=1920', 100, 3, 1),
 (8, 'Champion X Coca Cola Crewneck T-Shirt 220184 T-shirt (dox)', 'Elevate your style with this classic t-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448606-champion-x-coca-cola-crewneck-tshirt-220184-tshirt-dox.jpg?w=19200', 100, 1, 2),
 (9, 'Champion X Coca Cola Crewneck T-Shirt 220184 T-shirt (hlg)', 'Elevate your style with this classic t-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448605-champion-x-coca-cola-crewneck-tshirt-220184-tshirt-hlg.jpg?w=1920', 100, 1, 2),
@@ -156,8 +155,7 @@ CREATE TABLE `orderitems` (
   `OrderItemID` int(11) NOT NULL,
   `OrderID` int(11) DEFAULT NULL,
   `ProductID` int(11) DEFAULT NULL,
-  `Quantity` int(11) DEFAULT NULL,
-  `SubTotal` decimal(10,2) DEFAULT NULL
+  `Quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -172,8 +170,8 @@ CREATE TABLE `orders` (
   `OrderTime` datetime DEFAULT NULL,
   `OrderStatus` varchar(255) DEFAULT NULL,
   `TotalAmount` int(11) DEFAULT NULL,
-  `PaymentID` int(11) NOT NULL,
-  `AddressID` int(11) NOT NULL
+  `PaymentID` int(11) DEFAULT NULL,
+  `AddressID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -328,13 +326,13 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `orderitems`
 --
 ALTER TABLE `orderitems`
-  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `paymentdetails`
@@ -352,7 +350,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

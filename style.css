@@ -10,6 +10,14 @@ div {
   width: 12vw;
 }
 
+.navbar {
+  max-width: 100%;
+}
+
+.navbar-nav {
+  max-width: 100%;
+}
+
 /*hero*/
 
 .img-container {
@@ -80,15 +88,15 @@ div {
 }
 
 #hero-text {
-    font-size: 3vw;
-    font-weight: bold;
-    color: white;
+  font-size: 3vw;
+  font-weight: bold;
+  color: white;
 }
 
 #hero-subtext {
-    margin-top: 2vw;
-    font-size: 2vw;
-    color: white;
+  margin-top: 2vw;
+  font-size: 2vw;
+  color: white;
 }
 
 .subsection {
@@ -138,6 +146,14 @@ div {
   position: relative;
 }
 
+<<<<<<< HEAD
+=======
+.menurow {
+  display: flex;
+  justify-content: center;
+}
+
+>>>>>>> 492ad02de5e3195258e6c7ca7acad0030af7e248
 .menu {
   margin-top: 2.5vw;
   border-radius: 20px;
@@ -504,7 +520,7 @@ div {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.shoppingcart-button{
+.shoppingcart-button {
   background-color: #333;
   color: #fff;
   padding: 10px 112px;
@@ -513,7 +529,7 @@ div {
   cursor: pointer;
 }
 
-.shoppingcart-button:hover{
+.shoppingcart-button:hover {
   background-color: #555;
 }
 
@@ -561,18 +577,20 @@ div {
 }
 
 /* card body */
-.card{
+.card {
   min-height: 43vw !important;
 }
 
-.card-body{
+.card-body {
   margin: 1vw;
 }
-.add-to-cart{
+
+.add-to-cart {
   position: absolute;
   bottom: 3%;
 }
 
+<<<<<<< HEAD
 /* contact page */
 .inputs{
  margin: 10px;
@@ -638,3 +656,83 @@ div {
 }
 
 
+=======
+
+/*product img */
+
+.product-img{
+  border-radius: 10px;
+  margin: 2vw;
+  margin-left: 5vw;
+  width: 70%;
+}
+.product-desc h3,.stars,.desc,.price,p,.sizes{
+  margin: 2vw;
+  margin-bottom: 0;
+
+}
+.stars{
+  margin-top: 2px;
+  margin-left: 2vw;
+}
+.sizes{
+  margin: 0;
+  margin-left: 2vw;
+  margin-bottom: 2vw;
+  display: flex;
+  width: 20%;
+  justify-content: space-between;
+}
+
+
+.sizes a{
+  text-align: center;
+  align-items: center;
+  list-style: none;
+  text-decoration: none;
+  color: #000;
+  
+  padding: 3px;
+  background-color:rgb(239, 239, 239);
+  border-radius: 5px 5px;
+  
+}
+
+.sizes a:hover{
+  text-align: center;
+  align-items: center;
+  list-style: none;
+  text-decoration: none;
+  color: #000;
+  background-color:rgb(156, 156, 156);
+  padding: 3px;
+  border-radius: 5px 5px;
+  
+}
+.product-btns{
+  
+  margin: 2vw;
+  margin-top: 1vw;
+  margin-bottom: 0;
+}
+.Quantity{
+  margin: 2vw;
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 10vw;
+  height: 2vw;
+}
+
+/*reviews */
+
+.reviews h2{
+  margin: 2vw;
+}
+
+.review{
+  border-radius: 5%;
+  margin: 2%;
+  
+
+}
+>>>>>>> 492ad02de5e3195258e6c7ca7acad0030af7e248

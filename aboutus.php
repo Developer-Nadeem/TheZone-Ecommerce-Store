@@ -9,7 +9,7 @@ session_start();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About us</title>
-  <link rel="stylesheet" href="..\TheZone\style.css">
+  <link rel="stylesheet" href="../TheZone/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -18,7 +18,7 @@ session_start();
 
 <body>
   <!--Navbar Start-->
-  <?php include('..\TheZone\\navbar.php')?>
+  <?php include('../TheZone//navbar.php')?>
   <!--Navbar End-->
   <main>
     <!-- first sectioin with lefet aligned text placed onto an image -->
@@ -26,7 +26,7 @@ session_start();
 
       <div class="container-fluid hero">
 
-        <img class="img-fluid hero-img" src="..\TheZone\images\fashionable-men-jacket-hanging-clothing-store-generated-by-ai.jpg" alt="heropage">
+        <img class="img-fluid hero-img" src="../TheZone/images/fashionable-men-jacket-hanging-clothing-store-generated-by-ai.jpg" alt="heropage">
         <div class="txt" style="color: white; ">
 
           <h1 id="hero-text">The Zone. What is it About?</h1>
@@ -46,7 +46,7 @@ session_start();
     <section>
 
       <div class="container-fluid aboutsection">
-        <img class="img-fluid" src="..\TheZone\images\cool-man-with-hoodie.jpg" alt="heropage">
+        <img class="img-fluid" src="../TheZone/images/cool-man-with-hoodie.jpg" alt="heropage">
         <div style="color: white;">
           <h1 id="aboutus-text"><br>The Zone isn't just about clothes.<br> It's a lifestyle.</h1>
           <h4 id="aboutus-text2">Join us where fashion meets comfort, and individuality meets community.
@@ -64,7 +64,7 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
   <!-- Footer Start -->
-  <?php include('..\TheZone\footer.php') ?>
+  <?php include('../TheZone/footer.php') ?>
   <!-- Footer End -->
 
 </body>

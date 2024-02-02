@@ -46,7 +46,7 @@
 
 <body>
   <!--Navbar Start-->
-  <?php include('..\TheZone\\navbar.php') ?>
+  <?php include('../TheZone//navbar.php') ?>
   <!--Navbar End-->
 
   <main class="login-signup-page">
@@ -117,7 +117,7 @@
   </div>
 
   <!-- Footer Start -->
-  <?php include('..\TheZone\footer.php') ?>
+  <?php include('../TheZone/footer.php') ?>
   <!-- Footer End -->
 
   <!--bootstrap javascript -->
