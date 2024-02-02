@@ -56,7 +56,7 @@ if (isset($_POST['add-to-cart'])) {
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
-          echo '<div class="card" style="width: 18rem">';
+          echo '<a id="main-link" href = "product-page.php?product_id='.$row['ProductID'].'"><div class="card" style="width: 18rem">';
           echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
           echo '<div class="card-body">';
           echo '<p class="card-text">' . $row['ProductName'] . '</p>';
@@ -66,7 +66,7 @@ if (isset($_POST['add-to-cart'])) {
           echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
           echo '</form>';
           echo '</div>';
-          echo '</div>';
+          echo '</div></a>';
           echo '</div>';
         }
       }
