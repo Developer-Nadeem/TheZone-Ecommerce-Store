@@ -1,3 +1,33 @@
+<?php
+session_start();
+require("connectiondb.php");
+
+if (isset($_GET['product_id'])) {
+  $product = $_GET['product_id'];
+
+  $stmt = $db->prepare("SELECT ProductID, ProductName, ProductDescription ,Price, ImageUrl FROM inventory WHERE ProductID = ?");
+  $stmt->execute([$product]);
+  $productDetails = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+if (!isset($_COOKIE['shopping_cart'])) {
+  setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+}
+
+if (isset($_POST['add-to-cart'])) {
+  $productId = $_POST['product-id'];
+
+  $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
+
+  array_push($shoppingCart, $productId);
+
+  setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  setcookie('shopping_cart_json', json_encode($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+
+}
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -15,19 +45,23 @@
   <?php include('navbar.php') ?>
 
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-6"><img class="img-fluid product-img" src="images/mens.jpg" alt="product-image"></div>
-      <div class="col-6 product-desc">
-        <h3>Product Title</h3>
-        <p class="stars">
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-        </p>
-        <p class="price"><strong>£49.99</strong></p>
-        <p class="desc">Elevate your style with this classic hoodie, featuring a comfortable fit <br>and timeless design for everyday casual wear.</p>
+    <?php
+
+    if (isset($productDetails)) {
+      echo 
+      '<div class="row">
+        <div class="col-6"><img class="img-fluid product-img" src="' . $productDetails['ImageUrl'] . '" alt="' . $productDetails['ProductName'] . '"></div>
+        <div class="col-6 product-desc">
+          <h3>' . $productDetails['ProductName'] . '</h3>
+            <p class="stars">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </p>
+        <p class="price"><strong>£' . $productDetails['Price'] . '</strong></p>
+        <p class="desc">' . $productDetails['ProductDescription'] . '</p>
         <br>
         <p>Size:</p>
         <div class="sizes">
@@ -38,16 +72,18 @@
         <Span><a href="#">XL</a></Span>
         </div>
         <p >Quantity:</p>
-        <form action="#">
+        <form method="post">
+          <input type="hidden" name="product-id" value="' . $productDetails['ProductID'] . '">
           <input class="Quantity" type="number" name="" id="" placeholder="1">
+          <div class="product-btns">
+          <button type="submit" name="add-to-cart" class="btn btn-outline-dark add-toCart">Add to Cart</button>
+          <button type="button" class="btn btn-outline-dark Buy-Now">Buy Now</button>
+          </div>
         </form>
-        <div class="product-btns">
-        <span><button type="button" class="btn btn-outline-dark add-toCart">Add to Cart</button></span>
-        <span><button type="button" class="btn btn-outline-dark Buy-Now">Buy Now</button></span>
-        </div>
       </div>
     </div>
-  </div>
+  </div>';
+  }?>
   
   <div class="container-fluid reviews">
     <h2>Reviews:</h2>
