@@ -1,5 +1,27 @@
 <?php
 session_start();
+
+if (!isset($_COOKIE['shopping_cart'])) {
+    setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+    setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+}
+
+if (isset($_POST['remove-from-cart'])) {
+    $productId = $_POST['product-id'];
+
+    $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
+
+    foreach ($shoppingCart as $key => $value) {
+        if ($value == $productId) {
+            unset($shoppingCart[$key]);
+            break;
+        }
+    }
+
+    setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+
+    setcookie('shopping_cart_json', json_encode($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,7 +78,7 @@ session_start();
             padding: 10px; 
             margin-top: 10px; 
             text-align: left; 
-            width: 30%;
+            width: 50%;
             margin-left: auto;
             margin-right: auto; /* margin left and right set to auto to centre align the product container */
             overflow: hidden;
@@ -113,103 +135,173 @@ session_start();
 
 <body>
     <!--Navbar Start-->
-    <?php include('..\TheZone\\navbar.php') ?>
+    <?php include('../TheZone//navbar.php') ?>
     <!--Navbar End-->
 
     <main>
+        <!-- <div class="shoppingcart-container"> -->
         <!-- <div class="shoppingcart-container">
             <h2 class="text-center">Your Cart</h2>
             <ul id="cart-items">
-                <!-- Cart items will be dynamically added here@khizzer -->
                 <?php
-                    $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
-                    foreach(unserialize($shopping_cart) as $item) {
-                        echo '<div class="cart-item" style="background-color: white; "';
-                        echo '<p> '. $item . '</p>';
-                        echo '</div>';
-                    }
+                    // $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
+                    // foreach(unserialize($shopping_cart) as $item) {
+                    //     echo '<div class="cart-item" style="background-color: white; "';
+                    //     echo '<p> '. $item . '</p>';
+                    //     echo '</div>';
+                    // }
+                    // $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
+                    // foreach(unserialize($shopping_cart) as $item) {
+                    //     echo '<div class="cart-item" style="background-color: white; "';
+                    //     echo '<p> '. $item . '</p>';
+                    //     echo '</div>';
+                    // }
                 ?>
             </ul>
             <p class="text-center">Total: £<span id="cart-total">0.00</span></p>
-
             <div style="text-align: center;">
                 <button class="shoppingcart-button" type="submit" name="checkout-button" onclick="checkout()">Check Out</button>
             </div>
-
         </div>
+        </div> -->
+
+        <!-- div section for the entire cart and the total amount display -->
+        <div class="whole-cart">
+
+            <!-- div section for cart items to be shown -->
+            <div class="cart-items">
+                <div style="background-color: #333; color: white; text-align: center;padding: 15px;">
+                    <h3>Your Cart</h3>
+                </div>
+
+                <ul id="cart-items">
+                <?php
+                    require("connectiondb.php");
+                    $shopping_cart = isset($_COOKIE['shopping_cart']) ? $_COOKIE['shopping_cart'] : array();
+                    if (unserialize($shopping_cart) == null) {
+                        echo '<div class="sample-product">';
+                        echo '<h3>Cart is empty</h3>';
+                        echo '</div>';
+                    } else {
+                        foreach(unserialize($shopping_cart) as $item) {
+                            $stmt = $db->query("SELECT ProductName, Price, ImageUrl, ProductID FROM inventory WHERE ProductID = $item");
+                            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                            echo '<div class="sample-product">';
+                            echo '<img src="'. $row['ImageUrl']. '" alt="Sample Product Image">';
+                            echo'<h3>'. $row['ProductName'] .'</h3>';
+                            echo '<h3 class="item-price">£'. $row['Price'] .'</h3>';
+                            echo '<form method="post" class="remove-form">';
+                            echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
+                            echo '<button type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</button>';
+                            echo '</form>';
+                            echo '</div>';
+                        }
+                    }
+                
+                ?>
+                <script>
+                    function getCookieValue(cookieName) {
+                        const name = cookieName + "=";
+                        const decodedCookie = decodeURIComponent(document.cookie);
+                        const cookieArray = decodedCookie.split(';');
+                        for (let i = 0; i < cookieArray.length; i++) {
+                            let cookie = cookieArray[i];
+                            while (cookie.charAt(0) === ' ') {
+                                cookie = cookie.substring(1);
+                            }
+                            if (cookie.indexOf(name) === 0) {
+                                return cookie.substring(name.length, cookie.length);
+                            }
+                        }
+                        return "";
+                    }
+
+                    // Wait for DOM to load
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const shoppingCartJson = JSON.parse(getCookieValue('shopping_cart_json'));
+                    function updatePrice() {
+                        const shoppingCartJson = JSON.parse(getCookieValue('shopping_cart_json'));
+
+                        if (shoppingCartJson.length === 0) {
+                            document.getElementById('cart-items').innerHTML = '<div class="sample-product"><h3>Cart is empty</h3></div>';
+                            
+                            const checkoutBtn = document.getElementById('checkout-button');
+                            
+                            checkoutBtn.setAttribute('href', 'index.php');
+                            checkoutBtn.innerHTML = 'Shop Now';
+
+                            document.getElementById('cart-total').innerHTML = '0';
+                        } else {
+                            console.log('Shopping cart is not empty');
+                                    
+                            let total = 0;
+                            
+                            document.querySelectorAll('.item-price').forEach(function(itemPrice) {
+                                console.log('Price found');
+                                total += parseFloat(itemPrice.innerHTML.substring(1));
+                            });
+
+                            document.getElementById('cart-total').innerHTML = total.toFixed(2);
+                        }
+                    }
+
+                    updatePrice();
+
+                        document.querySelectorAll('.remove-form').forEach(function(form) {                            
+                            form.addEventListener('submit', function(event) {
+                                event.preventDefault();
+
+                                const productId = form.querySelector('[name="product-id"]').value;
+
+                                fetch('shopping-cart.php', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    },
+                                    body: 'product-id=' + encodeURIComponent(productId) + '&remove-from-cart=' + encodeURIComponent(true)
+                                }).then((res) => {
+                                    console.log(res);
+                                    event.target.closest('.sample-product').remove();
+
+                                    updatePrice();
+                                }).catch((err) => {
+                                    console.log(err);
+                                })
+                            })
+                        })
+
+                        //
+                    })
+                </script>
+                </ul>
+            </div>
+                
+
+
+            <!-- div section to show the total and the option to checkout via button -->
+            <div class="total-section">
+                <h4>TOTAL</h4>
+                <hr>
+                <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
+                <div style="text-align: center; margin-bottom: 15px;">
+                <?php
+                    if (unserialize($shopping_cart) == null) {
+                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>';
+                    } else {
+                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</a>';
+                    }
+                ?>
+                </div>
+            </div>    
 
         <!-- div section for a product with its name, price and product image -->
-        <div class="sample-product">
-            <h3>Grey Zipped Sweater</h3>
-            <h3>£10.99</h3>
-            <img src="..\TheZone\images\product2.webp" alt="Sample Product Image">
-            <button onclick="removeProduct()">Remove</button>
-        </div>
 
     </main>
 
     <!-- Footer Start -->
-    <?php include('..\TheZone\footer.php') ?>
+    <?php include('../TheZone/footer.php') ?>
     <!-- Footer End -->
-
-
-    <script>
-        function checkout() {
-            // Redirect to check out page
-            window.location.href = 'check-out.php';
-        }
-
-        // Render the cart
-        function renderCart() {
-            // ...
-
-            // Render the cart items
-            for (let item of cart.items) {
-                // ...
-
-                // Add a remove button
-                li.innerHTML += `
-            <button class="remove-btn" data-itemid="${item.id}">Remove</button>
-        `;
-            }
-
-            // ...
-        }
-        // Event listeners
-        document.getElementById('cart').addEventListener('click', function(event) {
-            if (event.target.classList.contains('remove-btn')) {
-                // Remove the item from the cart
-                const itemId = event.target.dataset.itemid;
-                cart.removeItem(itemId);
-
-                // Re-render the cart
-                renderCart();
-            }
-        });
-
-        // Cart constructor
-        function Cart() {
-            // ...
-
-            // Add a method to remove an item from the cart
-            this.removeItem = function(itemId) {
-                this.items = this.items.filter(function(item) {
-                    return item.id !== itemId;
-                });
-
-                // Save the updated cart to local storage
-                this.saveToLocalStorage();
-            };
-
-            // ...
-        }
-
-        function removeProduct() {
-            // function to remove product from cart page
-
-        }
-        //  make changes where needed@khizzer
-    </script>
     <!-- needed for drop down menu -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

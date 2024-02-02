@@ -43,7 +43,7 @@
       <div class="col-md-4">
         <h5>Contact Information</h5>
         <p>
-        <a href="contact.php" style="text-decoration: none; color: white; position: relative; display: inline-block;"
+        <a href="contacts.php" style="text-decoration: none; color: white; position: relative; display: inline-block;"
     onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Contact Us Via Form!</a>
           <br>
           Address: Aston Street, The Zone<br>

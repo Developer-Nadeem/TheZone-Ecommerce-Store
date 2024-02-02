@@ -25,7 +25,7 @@ if (isset($_POST['add-to-cart'])) {
   <!-- Same head for a consistent format -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Products</title>
+  <title>Jeans</title>
   <link rel="stylesheet" href="../TheZone/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -37,16 +37,16 @@ if (isset($_POST['add-to-cart'])) {
   <!--Navbar End-->
 
   <main>
-    <h1 class="text-center">Men's clothing</h1>
-    <p class="text-center">Explore The Zone's exclusive men's fashion collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
+    <h1 class="text-center">Jeans</h1>
+    <p class="text-center">Explore The Zone's exclusive jeans collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
     <div class="container mt-6">
       <div class="row">
         <?php
         // gets the db
         require("connectiondb.php");
 
-        // gets all male products
-        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 1");
+        // gets all products under the Jean category
+        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE CategoryID = 5");
 
         // loops through all the db's rows and display the products for mens
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
