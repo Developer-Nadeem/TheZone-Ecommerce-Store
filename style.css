@@ -3,8 +3,8 @@ div {
 }
 
 
-/*logo*/
 
+/*logo*/
 
 .logo {
   width: 12vw;
@@ -17,6 +17,16 @@ div {
 .navbar-nav {
   max-width: 100%;
 }
+.banner-txt h2,h4{
+  overflow: hidden;
+}
+.banner-txt{
+  height: 20vw;
+}
+#banner-btn{
+  margin-top: 2%;
+}
+
 
 /*hero*/
 
@@ -91,12 +101,14 @@ div {
   font-size: 3vw;
   font-weight: bold;
   color: white;
+  overflow: hidden;
 }
 
 #hero-subtext {
   margin-top: 2vw;
   font-size: 2vw;
   color: white;
+  overflow: hidden;
 }
 
 .subsection {
@@ -575,7 +587,10 @@ div {
 
 /* card body */
 .card {
-  min-height: 43vw !important;
+  min-height: 44vw !important;
+}
+.card:hover{
+  scale: 1.05;
 }
 
 .card-body {
@@ -585,6 +600,13 @@ div {
 .add-to-cart {
   position: absolute;
   bottom: 3%;
+}
+.card-text{
+  margin-left: 0px;
+}
+#main-link{
+  text-decoration: none;
+  
 }
 
 

@@ -79,7 +79,7 @@ if (isset($_POST['add-to-cart'])) {
           // loops through the first 8 rows and displays the products
           for ($i = 0; $i < 8 && ($row = $stmt->fetch(PDO::FETCH_ASSOC)); $i++) {
             echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
-            echo '<div class="card" style="width: 18rem">';
+            echo '<a id="main-link" href = "../TheZone/product-page.php"><div class="card" style="width: 18rem">';
             echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
             echo '<div class="card-body">';
             echo '<p class="card-text">' . $row['ProductName'] . '</p>';
@@ -91,7 +91,7 @@ if (isset($_POST['add-to-cart'])) {
             echo '</form>';
             echo '</div>';
             echo '</div>';
-            echo '</div>';
+            echo '</div></a>';
             echo '</div>';
           }
           ?>
@@ -120,9 +120,9 @@ if (isset($_POST['add-to-cart'])) {
             <div class="card" style="width: 18rem;">
               <img class="card-img-top" src="../TheZone/images/coming-soon1.jpg" alt="hoodie">
               <div class="card-body">
-                <p><strong>Minimalist Hoodie</strong></p>
+                <p class="card-text"><strong>Minimalist Hoodie</strong></p>
                 <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
+                <p class="card-text"><span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star"></span>
@@ -135,9 +135,9 @@ if (isset($_POST['add-to-cart'])) {
             <div class="card" style="width: 18rem;">
               <img class="card-img-top" src="../TheZone/images/coming-soon2.jpg" alt="hoodie">
               <div class="card-body">
-                <p><strong>Minimalist Hoodie(Blue)</strong></p>
+                <p class="card-text"><strong>Minimalist Hoodie(Blue)</strong></p>
                 <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
+                <p class="card-text"><span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star"></span>
@@ -150,9 +150,9 @@ if (isset($_POST['add-to-cart'])) {
             <div class="card" style="width: 18rem;">
               <img class="card-img-top" src="../TheZone/images/coming-soon3.jpg" alt="hoodie">
               <div class="card-body">
-                <p><strong>Minimalist creative Hoodie</strong></p>
+                <p class="card-text"><strong>Minimalist creative Hoodie</strong></p>
                 <p class="card-text">£10.99</p>
-                <p><span class="fa fa-star checked"></span>
+                <p class="card-text" ><span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star"></span>
