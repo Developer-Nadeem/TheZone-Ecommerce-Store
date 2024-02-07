@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
     <?php include('../TheZone/adminnavbar.php') ?>
 
     <h1>
