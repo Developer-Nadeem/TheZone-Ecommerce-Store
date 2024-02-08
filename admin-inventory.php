@@ -15,197 +15,137 @@
 <body>
     <?php include('../TheZone/adminnavbar.php') ?>
     <main class="container">
-        <div id="chart-container">
-            <canvas id="myChart" width="400" height=" 200"></canvas>
+        <!-- <div id="product-form">
+            <h2>Add Product</h2>
+            <form id="add-product">
+                <label for="product-name">Name:</label>
+                <input type="text" id="product-name" name="product-name" required><br><br>
+
+                <label for="product-price">Price:</label>
+                <input type="number" id="product-price" name="product-price" required><br><br>
+                <label for="product-quantity">Quantity:</label>
+                <input type="number" id="product-quantity" name="product-quantity" required><br><br>
+                <button type="submit">Add Product</button>
+            </form>
+        </div> -->
+
+        <div id="container" class="table-responsive">
+            <table class="table-product-list">
+                <thead>
+                    <tr class="tr">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="product-list"></tbody>
+            </table>
         </div>
 
-        <div id="container">
-
-            <div class="product-list">
-
-            </div>
-        </div>
         <style>
-        .container {
-
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+        .table-product-list {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        #chart-container {
-            flex: 1;
-            margin-right: 20px;
-
-        }
-
-        .product-list {
-
-            flex: 1;
-        }
-
-        .product-list {
-
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 50px;
-
-        }
-
-        .product {
-            border: 5px solid #ccc;
+        .table-product-list th,
+        .table-product-list td {
             padding: 20px;
-            text-align: center;
-
+            border: 1px solid #ccc;
         }
 
-        .product img {
+        .table-product-list th {
+            background-color: #444;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
 
-            max-width: 100%;
-            height: auto;
+        .table-product-list td {
+            text-align: center;
+        }
+
+        .table-product-list tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table-product-list tbody tr:hover {
+            background-color: #ddd;
         }
         </style>
 
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
         const dummyProducts = [{
                 name: 'Product 1',
-                imageUrl: 'images/beautiful-smiling-model-with-horns-hairstyle-dressed-summer-hipster-jacket-jeans-clothes-sexy-carefree-girl-posing-street-trendy-funny-positive-woman-having-fun-sunglasses.jpg',
                 price: 20,
                 quantity: 50,
-                sales: {
-                    today: 50,
-                    thisMonth: 90,
-                    thisYear: 200
-                }
+
             },
             {
                 name: 'Product 2',
-                imageUrl: 'images/beautiful-smiling-model-with-horns-hairstyle-dressed-summer-hipster-jacket-jeans-clothes-sexy-carefree-girl-posing-street-trendy-funny-positive-woman-having-fun-sunglasses.jpg',
                 price: 30,
                 quantity: 60,
-                sales: {
-                    today: 50,
-                    thisMonth: 90,
-                    thisYear: 250
-                }
+
             },
             {
                 name: 'Product 3',
-                imageUrl: 'images/young-couple-wearing-trucker-hat.jpg',
                 price: 140,
                 quantity: 40,
-                sales: {
-                    today: 70,
-                    thisMonth: 90,
-                    thisYear: 500
-                }
+
             },
             {
                 name: 'Product 4',
-                imageUrl: 'images/fashion-model-with-beautiful-face-perfect-body-wearing-trendy-dress-holding-brown-leather-hand-bag-full-length.jpg',
                 price: 58,
                 quantity: 90,
-                sales: {
-                    today: 60,
-                    thisMonth: 90,
-                    thisYear: 200
-                }
+
             },
             {
                 name: 'Product 5 ',
-                imageUrl: 'images/fashion-model-with-beautiful-face-perfect-body-wearing-trendy-dress-holding-brown-leather-hand-bag-full-length.jpg',
-                price: 170,
+                price: 40,
                 quantity: 30,
-                sales: {
-                    today: 70,
-                    thisMonth: 95,
-                    thisYear: 300
-                }
-            }
 
+            }
         ];
 
-
-
         function displayProductList(products) {
-            const productListDiv = document.querySelector('.product-list');
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
 
-            products.forEach(product => {
-                const productDiv = document.createElement('div');
-                productDiv.classList.add('product');
-
-                const image = document.createElement('img');
-                image.src = product.imageUrl;
-                image.alt = product.name;
-                productDiv.appendChild(image);
-
-                const name = document.createElement('p');
-                name.textContent = `Name: ${product.name}`;
-                productDiv.appendChild(name);
-
-                const price = document.createElement('p');
-                price.textContent = `Price: £${product.price}`;
-                productDiv.appendChild(price);
-
-                const stockQuantity = document.createElement('p');
-                stockQuantity.textContent = `Stock Quantity: ${product.quantity}`;
-                productDiv.appendChild(stockQuantity);
-
-                const todaySales = document.createElement('p');
-                todaySales.textContent = `Today's sales: ${product.sales.today}`;
-                productDiv.appendChild(todaySales);
-
-                const thisMonthSales = document.createElement('p');
-                thisMonthSales.textContent = `This Month's sales: ${product.sales.thisMonth}`;
-                productDiv.appendChild(thisMonthSales);
-
-                const thisYearSales = document.createElement('p');
-                thisYearSales.textContent = `This Year's sales: ${product.sales.thisYear}`;
-                productDiv.appendChild(thisYearSales);
-
-                productListDiv.appendChild(productDiv);
+            products.forEach((product, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${product.name}</td>
+                        <td>${product.price}</td>
+                        <td>${product.quantity}</td>
+                        
+                    `;
+                productList.appendChild(row);
             });
         }
 
         displayProductList(dummyProducts);
 
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: dummyProducts.map(product => product.name),
-                datasets: [{
-                        label: 'Today\'s Sales',
-                        data: dummyProducts.map(product => product.sales.today),
-                        backgroundColor: 'rgba(9, 122, 62, 0.8)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 5
-                    },
-                    {
-                        label: 'This Month\'s Sales',
-                        data: dummyProducts.map(product => product.sales.thisMonth),
-                        backgroundColor: 'rgba(249, 48, 188, 0.8)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 5
-                    },
-                    {
-                        label: 'This Year\'s Sales',
-                        data: dummyProducts.map(product => product.sales.thisYear),
-                        backgroundColor: 'rgba(156, 166, 223, 0.8)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 5
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+        document.getElementById('add-product').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const productName = document.getElementById('product-name').value;
+            const productPrice = parseFloat(document.getElementById('product-price').value);
+            const productQuantity = parseInt(document.getElementById('product-quantity').value);
+
+            const newProduct = {
+                name: productName,
+                price: productPrice,
+                quantity: productQuantity,
+
+            };
+
+            dummyProducts.push(newProduct);
+
+            displayProductList(dummyProducts);
+
+            document.getElementById('add-product').reset();
         });
         </script>
 
