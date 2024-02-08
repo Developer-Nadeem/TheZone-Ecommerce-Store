@@ -13,21 +13,18 @@
     <style>
         body {
             background-color: lightgrey;
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
         }
 
         .column {
             flex: 1;
-            height: 100vh; 
-            width: 100%; 
+            height: 100vh;
+            width: 33%;
             background-size: cover;
             background-position: center;
             color: white;
             text-align: center;
             border: solid 5px black;
             border-radius: 0px;
-            margin-bottom: 10px; 
         }
 
         .button {
@@ -49,7 +46,7 @@
         }
 
         #column1 {
-            background-image: url('images/admin_inventory.avif');
+            background-image: url('images/admin_inventory.avif'); /* Replace 'background2.jpg' with your actual image file path */
         }
 
         #column2 {
@@ -57,13 +54,7 @@
         }
 
         #column3 {
-            background-image: url('images/admins_orders.jpg');
-        }
-
-        @media screen and (min-width: 768px) {
-            .column {
-                width: 33.33%; 
-            }
+            background-image: url('images/admins_orders.jpg'); /* Replace 'background3.jpg' with your actual image file path */
         }
     </style>
 </head>
@@ -76,23 +67,23 @@
 
     <main>
 
-    <div style="display: flex; flex-wrap: wrap;">
+    <div style="display: flex;">
 
         <div id="column1" class="column">
-            <button class="button">INVENTORY</button>
+            <button class="button">INVENTORY VIEW</button>
         </div>
 
         <div id="column2" class="column">
-            <button class="button">CUSTOMERS</button>
+            <button class="button">CUSTOMERS VIEW</button>
         </div>
 
         <div id="column3" class="column">
-            <button class="button">ORDERS</button>
+            <button class="button">ORDERS VIEW</button>
         </div>
 
     </div>
 
     </main>
 
+
 </body>
-</html>
