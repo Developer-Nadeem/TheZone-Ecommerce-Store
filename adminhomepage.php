@@ -21,8 +21,9 @@
             flex: 1;
             height: 100vh;
             width: 33%;
-            background-size: cover;
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
             color: white;
             text-align: center;
             border: solid 5px black;
@@ -32,7 +33,7 @@
         }
 
         .button {
-            margin-top: 25%;
+            margin-top: 12%;
             font-size: 28px;
             font-weight: bold;
             padding: 20px;
