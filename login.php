@@ -11,17 +11,23 @@ if (isset($_POST['submitted'])) {
 
   try {
     //checks the database for the matching password and email
-    $stmt = $db->prepare('SELECT Pass FROM useraccounts WHERE Email = ?');
+    $stmt = $db->prepare('SELECT Pass, isAdmin FROM useraccounts WHERE Email = ?');
     $stmt->execute(array($_POST['email']));
 
+
     // fetch the result row and check 
-    if ($stmt->rowCount() > 0) {  
+    if ($stmt->rowCount() > 0) {
       $row = $stmt->fetch();
 
-      if (password_verify($_POST['password'], $row['Pass'])) { 
+      if (password_verify($_POST['password'], $row['Pass'])) {
         session_start();
         $_SESSION["email"] = $_POST['email'];
-        header("Location:login-success.php");
+
+        if ($row['isAdmin'] == 1) {
+          header("Location: adminhomepage.php"); 
+        } else {
+          header("Location: login-success.php"); 
+        }
         exit();
       } else {
         echo "<p style='color:red'>Error logging in, password does not match </p>";
@@ -30,7 +36,6 @@ if (isset($_POST['submitted'])) {
       //else display an error
       echo "<p style='color:red'>Error logging in, Username not found </p>";
     }
-
   } catch (PDOException $e) {
     echo ("Failed to connect to the database.<br>");
     echo "Error details: <em>" . $e->getMessage() . "</em>";
