@@ -70,7 +70,7 @@ if (isset($_POST['submitted'])) {
         $stmt->execute();
         echo "Registration successful!";
         // This part redirects you to the homepage after 3 seconds which is index.php
-        echo '<script> setTimeout(function(){ window.location.href = "index.php"; }, 3000);  </script>';
+        echo '<script> setTimeout(function(){ window.location.href = "login-signup-page.php"; }, 3000);  </script>';
         exit;
     } catch (PDOException $e) {
         echo "Sorry, a database error occurred! <br>";
