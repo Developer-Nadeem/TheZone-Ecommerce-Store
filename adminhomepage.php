@@ -33,7 +33,7 @@
         }
 
         .button {
-            margin-top: 12%;
+            margin-top: 8%;
             font-size: 28px;
             font-weight: bold;
             padding: 20px;
@@ -51,11 +51,11 @@
         }
 
         #column1 {
-            background-image: url('images/box.png'); 
+            background-image: url('images/box_new.png'); 
         }
 
         #column2 {
-            background-image: url('images/customer.png'); 
+            background-image: url('images/group.png'); 
         }
 
         #column3 {
