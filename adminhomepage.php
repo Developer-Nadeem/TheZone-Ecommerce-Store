@@ -21,16 +21,19 @@
             flex: 1;
             height: 100vh;
             width: 33%;
-            background-size: cover;
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
             color: white;
             text-align: center;
             border: solid 5px black;
             border-radius: 0px;
+            margin: 10px;
+            border-radius: 10px;
         }
 
         .button {
-            margin-top: 25%;
+            margin-top: 8%;
             font-size: 28px;
             font-weight: bold;
             padding: 20px;
@@ -48,15 +51,21 @@
         }
 
         #column1 {
-            background-image: url('images/admin_inventory.avif'); /* Replace 'background2.jpg' with your actual image file path */
+            background-image: url('images/box_new.png'); 
         }
 
         #column2 {
-            background-image: url('images/admin_customers.jpg'); 
+            background-image: url('images/group.png'); 
         }
 
         #column3 {
-            background-image: url('images/admins_orders.jpg'); /* Replace 'background3.jpg' with your actual image file path */
+            background-image: url('images/tracking.png'); 
+        }
+
+        @media screen and (min-width: 768px) {
+            .column {
+                width: 33.33%; 
+            }
         }
     </style>
 </head>

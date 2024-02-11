@@ -16,6 +16,9 @@
 
 <body>
 <?php include('../TheZone/adminnavbar.php') ?>
+
+<!-- CustomerID, Customer Name,  -->
+
 <h1>
 
         text
