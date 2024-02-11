@@ -34,7 +34,7 @@
       <div class="modal-body">
                 <input type="hidden" name="update_id" id="update_id">
                 <div class="form-group">
-                <label for="ProductID"> ID</label><br>
+                <label for="ProductID">Product ID</label><br>
                 <input type="text" name="ProductID" class="form-control" id="ProductID" style="pointer-events:none;" ><br>
                
             </div>
