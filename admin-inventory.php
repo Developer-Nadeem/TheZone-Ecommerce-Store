@@ -89,7 +89,7 @@
             <tbody>
                 <?php
                 include('../TheZone/connectiondb.php');
-                include("../TheZone/navbar.php");
+                include("../TheZone/adminnavbar.php");
                 
 
                 
