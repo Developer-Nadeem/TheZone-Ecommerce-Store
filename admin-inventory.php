@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+// Checks if the user is logged in, if not it redirects you to the login/signup page
+if (!isset($_SESSION['email'])) {
+    header("Location: login-signup-page.php");
+    exit();
+}
+
+// Preforms another check to see if the logged in account is an admin, if not, it doesn't allow the user to access the page
+if ($_SESSION['isAdmin'] !== 1) {
+    echo '<h1 style="color:red;">Forbidden Access</h1>
+    <p>You don\'t have permission to access this page</p>';
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +30,6 @@
 
 <body>
 <?php
- session_start();
  if(!isset($_SESSION['CSRF_Token'])){
     $_SESSION['CSRF_Token'] = bin2hex(random_bytes(32));
   }

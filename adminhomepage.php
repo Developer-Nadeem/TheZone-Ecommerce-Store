@@ -1,4 +1,21 @@
-<?php session_start(); ?>
+<?php
+
+session_start();
+
+// Checks if the user is logged in, if not it redirects you to the login/signup page
+if (!isset($_SESSION['email'])) {
+    header("Location: login-signup-page.php");
+    exit();
+}
+
+// Preforms another check to see if the logged in account is an admin, if not, it doesn't allow the user to access the page
+if ($_SESSION['isAdmin'] !== 1) {
+    echo '<h1 style="color:red;">Forbidden Access</h1>
+    <p>You don\'t have permission to access this page</p>';
+    exit();
+}
+?>
+
 
 <!doctype html>
 <html lang="en">
@@ -9,8 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TheZone</title>
     <link rel="stylesheet" href="../TheZone/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
@@ -51,48 +67,48 @@
         }
 
         #column1 {
-            background-image: url('images/box_new.png'); 
+            background-image: url('images/box_new.png');
         }
 
         #column2 {
-            background-image: url('images/group.png'); 
+            background-image: url('images/group.png');
         }
 
         #column3 {
-            background-image: url('images/tracking.png'); 
+            background-image: url('images/tracking.png');
         }
 
         @media screen and (min-width: 768px) {
             .column {
-                width: 33.33%; 
+                width: 33.33%;
             }
         }
     </style>
 </head>
 
 <body>
-    
+
     <!-- navbar -->
     <?php include('../TheZone/adminnavbar.php') ?>
     <!-- navbar end -->
 
     <main>
 
-    <div style="display: flex;">
+        <div style="display: flex;">
 
-        <div id="column1" class="column">
-            <button class="button">INVENTORY VIEW</button>
+            <div id="column1" class="column">
+                <button class="button">INVENTORY VIEW</button>
+            </div>
+
+            <div id="column2" class="column">
+                <button class="button">CUSTOMERS VIEW</button>
+            </div>
+
+            <div id="column3" class="column">
+                <button class="button">ORDERS VIEW</button>
+            </div>
+
         </div>
-
-        <div id="column2" class="column">
-            <button class="button">CUSTOMERS VIEW</button>
-        </div>
-
-        <div id="column3" class="column">
-            <button class="button">ORDERS VIEW</button>
-        </div>
-
-    </div>
 
     </main>
 
