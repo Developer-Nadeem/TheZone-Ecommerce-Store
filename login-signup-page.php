@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Checks if the user is logged in, if not it redirects you to the login/signup page
+if (isset($_SESSION['email'])) {
+    header("Location: index.php");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
