@@ -47,6 +47,26 @@ if (isset($_POST['submitted'])) {
         exit;
     }
 
+    if(strlen($pass) < 8){
+        echo "Your password must be at minimum 8 characters.";
+        exit;
+    }
+
+    if (!preg_match('/[a-z]/', $pass) || !preg_match('/[A-Z]/', $pass)) {
+        echo "Your password must contain at least one lowercase and uppercase letter";
+        exit;
+    }
+
+    if (!preg_match('/[0-9]/', $pass)) {
+        echo "Your password must contain at least one number";
+        exit;
+    }
+
+    if (preg_match('/[\s\0\'"`]/', $pass)) {
+        echo "Your password must not contain any whitespaces, control characters, \' , \" or \` characters ";
+        exit;
+    }
+
     $checkEmail = $db->prepare("SELECT COUNT(*) FROM useraccounts WHERE Email = :email");
     $checkEmail->bindParam(':email', $email);
     $checkEmail->execute();
