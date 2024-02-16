@@ -84,6 +84,12 @@ if ($_SESSION['isAdmin'] !== 1) {
             }
         }
     </style>
+    <script>
+        // Function to handle button click and redirect
+        function redirectToPage(pageUrl) {
+            window.location.href = pageUrl;
+        }
+    </script>
 </head>
 
 <body>
@@ -97,15 +103,15 @@ if ($_SESSION['isAdmin'] !== 1) {
         <div style="display: flex;">
 
             <div id="column1" class="column">
-                <button class="button">INVENTORY VIEW</button>
+                <button class="button" onclick="redirectToPage('admin-inventory.php')">INVENTORY VIEW</button>
             </div>
 
             <div id="column2" class="column">
-                <button class="button">CUSTOMERS VIEW</button>
+                <button class="button" onclick="redirectToPage('admin-customers.php')">CUSTOMERS VIEW</button>
             </div>
 
             <div id="column3" class="column">
-                <button class="button">ORDERS VIEW</button>
+                <button class="button" onclick="redirectToPage('admin-order.php')">ORDERS VIEW</button>
             </div>
 
         </div>
