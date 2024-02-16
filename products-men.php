@@ -18,8 +18,7 @@ if (isset($_POST['add-to-cart'])) {
   setcookie('shopping_cart_json', json_encode($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+
 
 <head>
   <!-- Same head for a consistent format -->
@@ -35,6 +34,26 @@ if (isset($_POST['add-to-cart'])) {
   <!--Navbar Start-->
   <?php include('../TheZone//navbar.php') ?>
   <!--Navbar End-->
+  <!DOCTYPE html>
+<html lang="en">
+<!-- Filter Box Start -->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form method="get" class="d-flex align-items-center justify-content-end">
+        <label class="me-2">Sort by:</label>
+        <select name="filter" class="form-select">
+           <option value="low-high">Low-High</option>
+           <option value="high-low"> High-Low</option>
+          </select>
+          <button type="submit" class="btn btn-secondary ms-2">
+            <i class="fa fa-filter"></i> Apply Filter
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
 
   <main>
     <h1 class="text-center">Men's clothing</h1>
@@ -47,7 +66,7 @@ if (isset($_POST['add-to-cart'])) {
 
         // gets all male products
         $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 1");
-
+        
         // loops through all the db's rows and display the products for mens
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
