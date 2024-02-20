@@ -62,7 +62,7 @@ if ($_SESSION['isAdmin'] !== 1) {
         }
 
         .button:hover {
-            background-color: black;
+            background-color: rgb(140, 140, 140);
             color: #fff;
         }
 
@@ -76,6 +76,10 @@ if ($_SESSION['isAdmin'] !== 1) {
 
         #column3 {
             background-image: url('images/tracking.png');
+        }
+
+        #column4 {
+            background-image: url('images/envelope.png')
         }
 
         @media screen and (min-width: 768px) {
@@ -103,17 +107,20 @@ if ($_SESSION['isAdmin'] !== 1) {
         <div style="display: flex;">
 
             <div id="column1" class="column">
-                <button class="button" onclick="redirectToPage('admin-inventory.php')">INVENTORY VIEW</button>
+                <button class="button" onclick="redirectToPage('admin-inventory.php')">INVENTORY</button>
             </div>
 
             <div id="column2" class="column">
-                <button class="button" onclick="redirectToPage('admin-customers.php')">CUSTOMERS VIEW</button>
+                <button class="button" onclick="redirectToPage('admin-customers.php')">CUSTOMERS</button>
             </div>
 
             <div id="column3" class="column">
-                <button class="button" onclick="redirectToPage('admin-order.php')">ORDERS VIEW</button>
+                <button class="button" onclick="redirectToPage('admin-order.php')">ORDERS</button>
             </div>
 
+            <div id="column4" class="column">
+                <button class="button" onclick="redirectToPage('admin-contacts.php')">CONTACT</button>
+            </div>
         </div>
 
     </main>

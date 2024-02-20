@@ -26,6 +26,35 @@ if ($_SESSION['isAdmin'] !== 1) {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="../TheZone/style.css">
     <title>Inventory</title>
+    <style>
+        .modal-body {
+            padding: 25px;
+            margin: 25px;
+        }
+
+        .modal-title {
+            padding: 10px;  
+        }
+
+        .form-group {
+            width: 100%;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .custom-padding .modal-body {
+            padding: 50px; /* Adjust the value as needed */
+        }
+
+        .main-form {
+            padding: 30px;
+        }
+
+        .btn-secondary {
+            margin: 5px;    
+        }
+    </style>
 </head>
 
 <body>
@@ -38,48 +67,51 @@ if ($_SESSION['isAdmin'] !== 1) {
 ?>
 <!-- //pop up modal -->
 <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content invform">
-      <div class="modal-header invheader">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Edit Inventory:</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../TheZone/Inventory-update-code.php" method="post" >
-      <div class="modal-body">
-                <input type="hidden" name="update_id" id="update_id">
-                <div class="form-group">
-                <label for="ProductID">Product ID</label><br>
-                <input type="text" name="ProductID" class="form-control" id="ProductID" style="pointer-events:none;" ><br>
-               
+    <div class="main-form">
+        <form action="../TheZone/Inventory-update-code.php" method="post" class="custom-padding">
+            <div class="modal-body">
+                    
+                        <input type="hidden" name="update_id" id="update_id">
+                    <div class="form-group">
+                        <label for="ProductID" class="col-form-label">Product ID</label>
+                        <input type="text" name="ProductID" class="form-control" id="ProductID" style="pointer-events:none;" >
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="ProductName" class="col-form-label">Product Name</label>
+                        <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
+                    </div>
+                    <div class="form-group">
+                        <label for="Description" class="col-form-label">Description</label><br>
+                    <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Price" class="col-form-label">Price</label>
+                        <input required type="text" name="Price" class="form-control" id="Price" >
+                    </div>
+                    <div class="form-group">
+                        <label for="Quantity" class="col-form-label">Quantity</label>
+                        <input required type="text" name="Quantity" class="form-control" id="Quantity" ><br>
+                    </div>
+                    
+                
             </div>
-            <div class="form-group">
-                <label for="ProductName">Product Name</label>
-                <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
+            <div class="modal-footer">
+                <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="hidden" name="submitted" id="submitted">
+                <button type="submit" name = "updatedata" class="btn btn-secondary">Update Inventory</button>
             </div>
-            <div class="form-group">
-                <label for="Description">Description</label><br>
-               <textarea required name="Description" id="Description" cols="61" rows="2"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="Price">Price</label>
-                <input required type="text" name="Price" class="form-control" id="Price" >
-            </div>
-            <div class="form-group">
-                <label for="Quantity">Quantity</label>
-                <input required type="text" name="Quantity" class="form-control" id="Quantity" ><br>
-            </div>
-            
-           
-      </div>
-      <div class="modal-footer">
-            <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <input type="hidden" name="submitted" id="submitted">
-        <button type="submit" name = "updatedata" class="btn- btn-primary">Update Inventory</button>
-      </div>
-      </form>
+        </form>
+    </div>
     </div>
   </div>
 </div>
