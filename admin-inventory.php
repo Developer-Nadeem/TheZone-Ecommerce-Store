@@ -55,6 +55,65 @@ if ($_SESSION['isAdmin'] !== 1) {
         .btn-secondary {
             margin: 5px;
         }
+
+        .inventory-search {
+            margin: 10px;
+        }
+
+        /* Filter Section Styling */
+        .inv-filter-container {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        
+        .inv-filter-container > div {
+            padding: 0 10px; 
+            border-right: 3px solid #000; 
+        }
+
+        .inv-filter-container > div:last-child {
+            margin-right: -1px;
+            border-right: 1px solid #ccc;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        select, input[type="search"] {
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .inventory-search {
+            margin-top: 10px;
+        }
+
+        .inv-dropdown {
+            margin-right: 5px;
+        }
+
+        /* Optional: Add some styling for better visibility of the search input */
+        .inventory-search input[type="search"] {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .checkboxes {
+            padding: 5px;
+        }
     </style>
 </head>
 
@@ -122,41 +181,48 @@ if ($_SESSION['isAdmin'] !== 1) {
 
     <!-- Filter box -->
     <section class="inv-filter-container">
-        <label for="inv-dropdown">Sort by: </label>
-        <select name="inv-dropdown">
-            <option value="default">None</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="stock-high">Stock: Low to High</option>
-            <option value="stock-low">Stock: High to Low</option>
-        </select>
+        <div class="checkboxes">
+            <label for="inv-dropdown">Sort By: </label>
+            <select name="inv-dropdown">
+                <option value="default">None</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="stock-high">Stock: Low to High</option>
+                <option value="stock-low">Stock: High to Low</option>
+            </select>
+        </div>
 
-        <label>Filter by: </label>
+        <div>
+            <label>Filter By: </label>
 
-        <label for="male">Male:</label>
-        <input type="checkbox" id="male" name="male" value="Male">
+            <label for="male">Male:</label>
+            <input type="checkbox" id="male" name="male" value="Male">
 
-        <label for="female">Female:</label>
-        <input type="checkbox" id="female" name="female" value="Female">
+            <label for="female">Female:</label>
+            <input type="checkbox" id="female" name="female" value="Female">
 
-        <label for="hoodie">Hoodie:</label>
-        <input type="checkbox" id="hoodie" name="hoodie" value="Hoodie">
+            <label for="hoodie">Hoodie:</label>
+            <input type="checkbox" id="hoodie" name="hoodie" value="Hoodie">
 
-        <label for="jeans">Jeans:</label>
-        <input type="checkbox" id="jeans" name="jeans" value="Jeans">
+            <label for="jeans">Jeans:</label>
+            <input type="checkbox" id="jeans" name="jeans" value="Jeans">
 
-        <label for="jumper">Jumper:</label>
-        <input type="checkbox" id="jumper" name="jumper" value="Jumper">
+            <label for="jumper">Jumper:</label>
+            <input type="checkbox" id="jumper" name="jumper" value="Jumper">
 
-        <label for="trainer">Trainer:</label>
-        <input type="checkbox" id="trainer" name="trainer" value="Trainer">
+            <label for="trainer">Trainer:</label>
+            <input type="checkbox" id="trainer" name="trainer" value="Trainer">
 
-        <label for="tshirt">T-Shirt:</label>
-        <input type="checkbox" id="tshirt" name="tshirt" value="Tshirt">
+            <label for="tshirt">T-Shirt:</label>
+            <input type="checkbox" id="tshirt" name="tshirt" value="Tshirt">
+        </div>
 
-        <form role="search" action="#" method="get">
-            <input type="search" placeholder="Search" aria-label="Search" name="inv-search_data" autocomplete="off">
-        </form>
+        <div>
+            <form role="search" action="#" method="get" class="inventory-search">
+                <label>Find Product: </label>
+                <input type="search" class="" placeholder="Search" aria-label="Search" name="inv-search_data" autocomplete="off">
+            </form>
+        </div>
 
     </section>
 
