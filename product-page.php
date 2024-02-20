@@ -48,8 +48,9 @@ if (isset($_POST['add-to-cart'])) {
       border-radius: 50%;
       cursor: none;
       /* Sets the size of the magnifier glass: */
-      width: 100px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
+      display: none;
     }
   </style>
 </head>
