@@ -530,12 +530,11 @@ div {
 .shoppingcart-button {
   background-color: #333;
   color: #fff;
-  padding: 10px 112px;
+  padding: 10px 25%;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin: 2vw;
-  display: flex;
   justify-content: center;
 }
 
