@@ -42,7 +42,26 @@ if (isset($_POST['remove-from-cart'])) {
             margin-top: auto;
             margin-bottom: auto;
             background-color: rgb(230, 230, 230);
+        }
+
+        .checkout-right-section {
             width: 30%;
+            margin-bottom: auto;
+            margin-top: auto;
+            width: 30%
+        }
+
+        .discount-section {
+            border: 2.5px solid black;
+            border-radius: 5px;
+            margin-top: auto;
+            margin-bottom: 2vw;
+            background-color: rgb(230, 230, 230);
+        }
+
+        .discount-section h4 {
+            text-align: center;
+            margin-top: 5px;
         }
 
         .total-section h4 {
@@ -278,22 +297,33 @@ if (isset($_POST['remove-from-cart'])) {
             </div>
                 
 
-
+            <div class="checkout-right-section">
+                <div class="discount-section">
+                    <h4>DISCOUNT</h4>
+                    <hr>
+                    <form style="margin-bottom: 15px;">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="exampleInput" placeholder="Enter discount code">
+                        </div>
+                    </form>
+                    <a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>
+                </div>    
+                <div class="total-section">
+                    <h4>TOTAL</h4>
+                    <hr>
+                    <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <?php
+                            if (unserialize($shopping_cart) == null) {
+                                echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>';
+                            } else {
+                                echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</a>';
+                            }
+                        ?>
+                    </div>
+                </div>    
+            </div>
             <!-- div section to show the total and the option to checkout via button -->
-            <div class="total-section">
-                <h4>TOTAL</h4>
-                <hr>
-                <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
-                <div style="text-align: center; margin-bottom: 15px;">
-                <?php
-                    if (unserialize($shopping_cart) == null) {
-                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>';
-                    } else {
-                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</a>';
-                    }
-                ?>
-                </div>
-            </div>    
 
         <!-- div section for a product with its name, price and product image -->
 
