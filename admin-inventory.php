@@ -137,7 +137,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="main-form">
+               
                     <form action="../TheZone/Inventory-update-code.php" method="post" class="custom-padding">
                         <div class="modal-body">
 
@@ -173,7 +173,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                             <button type="submit" name="updatedata" class="btn btn-secondary">Update Inventory</button>
                         </div>
                     </form>
-                </div>
+             
             </div>
         </div>
     </div>
