@@ -104,6 +104,7 @@ if (isset($_POST["submitted"]) && !empty(isset($_POST["message"])) && !empty(iss
     $query->bindParam(':Timestamp', $currentDateTime);
     $query->execute();
   } catch (PDOException $ex) {
+    print('sorry a database error occured');
   }
 }
 ?>

@@ -676,12 +676,12 @@ div {
 /*reviews */
 
 .reviews h2{
-  margin: 2vw;
+  margin: 1.5vw;
 }
 
 .review{
   border-radius: 5%;
-  margin: 2%;
+  margin: 1.5%;
 }
 
 .inv{
@@ -689,3 +689,10 @@ div {
   height: 100px;
 }
 
+.feedback-box{
+  margin: 20px;
+}
+.feedback-btn{
+  margin: 20px;
+  margin-top: 5px;
+}
