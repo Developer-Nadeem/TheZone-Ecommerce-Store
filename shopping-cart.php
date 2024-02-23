@@ -376,12 +376,14 @@ if (isset($_POST['remove-from-cart'])) {
                 <div class="discount-section">
                     <h4>DISCOUNT</h4>
                     <hr>
-                    <form style="margin-bottom: 15px;">
+                    <form style="margin-bottom: 15px; margin-left: 15px; margin-right: 15px">
                         <div class="form-group">
                             <input type="text" class="form-control" id="exampleInput" placeholder="Enter discount code">
                         </div>
                     </form>
-                    <a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>
+                    <div style="text-align: center; margin-bottom: 15px; margin-top: 15px;">
+                        <button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Apply Code</button>
+                    </div>
                 </div>    
                 <div class="total-section">
                     <h4>TOTAL</h4>
@@ -390,9 +392,9 @@ if (isset($_POST['remove-from-cart'])) {
                     <div style="text-align: center; margin-bottom: 15px;">
                         <?php
                             if (unserialize($shopping_cart) == null) {
-                                echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>';
+                                echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</button>';
                             } else {
-                                echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</a>';
+                                echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</button>';
                             }
                         ?>
                     </div>

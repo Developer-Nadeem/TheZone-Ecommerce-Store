@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -39,7 +40,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 
-  <?php include("footer.php"); ?>
+  <!-- Footer Start -->
+<?php include('footer.php') ?>
+<!-- Footer End -->
+
 </body>
 
 <style>
@@ -88,22 +92,31 @@
 </html>
 <?php
 include("connectiondb.php");
-if (isset($_POST["submitted"]) && !empty(isset($_POST["message"])) && !empty(isset($_POST["email"])) && !empty(isset($_POST["name"]))) {
-  try {
 
-    date_default_timezone_set('UTC');
-    $currentDateTime = date('Y-m-d H:i:s');
+if (isset($_POST["submitted"]) && isset($_POST["message"]) && isset($_POST["email"]) && isset($_POST["name"])) {
+    try {
+        date_default_timezone_set('UTC');
+        $currentDateTime = date('Y-m-d H:i:s');
 
-    $query = $db->prepare("INSERT INTO contactrequests VALUES ('',:name,:email,:message,:Timestamp) ");
-    $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
-    $message = trim($_POST['message']);
-    $query->bindParam(':name', $name);
-    $query->bindParam(':email', $email);
-    $query->bindParam(':message', $message);
-    $query->bindParam(':Timestamp', $currentDateTime);
-    $query->execute();
-  } catch (PDOException $ex) {
-  }
+        $query = $db->prepare("INSERT INTO contactrequests VALUES ('', :name, :email, :message, :Timestamp) ");
+        $name = trim($_POST['name']);
+        $email = trim($_POST['email']);
+        $message = trim($_POST['message']);
+        $query->bindParam(':name', $name);
+        $query->bindParam(':email', $email);
+        $query->bindParam(':message', $message);
+        $query->bindParam(':Timestamp', $currentDateTime);
+
+        if ($query->execute()) {
+            //This is the form to show the popup message when you have submitted successfully
+            echo '<script>alert("Your message has been successfully submitted!");</script>';
+        } else {
+            // This message will popup if an error occurred when submitting the form
+            echo '<script>alert("Error: Unable to submit your message. Please try again later.");</script>';
+        }
+    } catch (PDOException $ex) {
+        // PDO exception
+        echo '<script>alert("Error: ' . $ex->getMessage() . '");</script>';
+    }
 }
 ?>
