@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Checks if the user is logged in, if not it redirects you to the login/signup page
+// If the user is already logged in, it redirects them to the home page
 if (isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
@@ -216,5 +216,6 @@ if (isset($_SESSION['email'])) {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 </html>

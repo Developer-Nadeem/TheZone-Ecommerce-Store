@@ -36,7 +36,6 @@
         </ul>
         <form class="d-flex" role="search" action="search_products.php" method="get">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data" autocomplete="off">
-          <input type="submit" class="btn btn-outline-dark" value="Search" name="search_data_products">
         </form>
         <ul class="navbar-nav">
           <li class="nav-item">

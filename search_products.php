@@ -43,7 +43,7 @@ if (isset($_POST['add-to-cart'])) {
 
       require("connectiondb.php");
 
-      if (isset($_GET['search_data_products'])) {
+      if (isset($_GET['search_data'])) {
         $search_data_value = $_GET['search_data'];
 
         $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE ProductName LIKE '%$search_data_value%'");

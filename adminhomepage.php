@@ -62,7 +62,7 @@ if ($_SESSION['isAdmin'] !== 1) {
         }
 
         .button:hover {
-            background-color: black;
+            background-color: rgb(140, 140, 140);
             color: #fff;
         }
 
@@ -78,12 +78,22 @@ if ($_SESSION['isAdmin'] !== 1) {
             background-image: url('images/tracking.png');
         }
 
+        #column4 {
+            background-image: url('images/envelope.png')
+        }
+
         @media screen and (min-width: 768px) {
             .column {
                 width: 33.33%;
             }
         }
     </style>
+    <script>
+        // Function to handle button click and redirect
+        function redirectToPage(pageUrl) {
+            window.location.href = pageUrl;
+        }
+    </script>
 </head>
 
 <body>
@@ -97,17 +107,20 @@ if ($_SESSION['isAdmin'] !== 1) {
         <div style="display: flex;">
 
             <div id="column1" class="column">
-                <button class="button">INVENTORY VIEW</button>
+                <button class="button" onclick="redirectToPage('admin-inventory.php')">INVENTORY</button>
             </div>
 
             <div id="column2" class="column">
-                <button class="button" > <a style="text-decoration: none; color: black; " href="../TheZone/admin-customers.php">CUSTOMERS VIEW</a></button>
+                <button class="button" onclick="redirectToPage('admin-customers.php')">CUSTOMERS</button>
             </div>
 
             <div id="column3" class="column">
-                <button class="button"><a style="text-decoration: none; color: black; " href="../TheZone/admin-order.php">ORDERS VIEW</a></button>
+                <button class="button" onclick="redirectToPage('admin-order.php')">ORDERS</button>
             </div>
 
+            <div id="column4" class="column">
+                <button class="button" onclick="redirectToPage('admin-contacts.php')">CONTACT</button>
+            </div>
         </div>
 
     </main>

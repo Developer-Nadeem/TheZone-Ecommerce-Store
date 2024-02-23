@@ -42,7 +42,27 @@ if (isset($_POST['remove-from-cart'])) {
             margin-top: auto;
             margin-bottom: auto;
             background-color: rgb(230, 230, 230);
+        }
+
+        .checkout-right-section {
             width: 30%;
+            margin-bottom: auto;
+            margin-top: auto;
+            width: 30%;
+            margin-right: 30px;   
+        }
+
+        .discount-section {
+            border: 2.5px solid black;
+            border-radius: 5px;
+            margin-top: auto;
+            margin-bottom: 2vw;
+            background-color: rgb(230, 230, 230);
+        }
+
+        .discount-section h4 {
+            text-align: center;
+            margin-top: 5px;
         }
 
         .total-section h4 {
@@ -78,9 +98,8 @@ if (isset($_POST['remove-from-cart'])) {
             padding: 10px; 
             margin-top: 10px; 
             text-align: left; 
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto; /* margin left and right set to auto to centre align the product container */
+            width: 80%;
+            margin-right: auto; 
             overflow: hidden;
             position: relative;
             display: flex;
@@ -92,7 +111,7 @@ if (isset($_POST['remove-from-cart'])) {
         }
 
         .sample-product img {
-            width: 120px; /* setting a fixed width for the image for consistency */
+            width: 120px; 
             height: auto; 
             border: 2.5px solid #000; 
             border-radius: 5px;
@@ -165,6 +184,7 @@ if (isset($_POST['remove-from-cart'])) {
         </div>
         </div> -->
 
+        <div style="display: flex; margin-bottom: 100px;">
         <!-- div section for the entire cart and the total amount display -->
         <div class="whole-cart">
 
@@ -183,18 +203,57 @@ if (isset($_POST['remove-from-cart'])) {
                         echo '<h3>Cart is empty</h3>';
                         echo '</div>';
                     } else {
-                        foreach(unserialize($shopping_cart) as $item) {
+                        $cart_items = array_count_values(unserialize($shopping_cart));
+
+                        foreach($cart_items as $item => $quantity) {
                             $stmt = $db->query("SELECT ProductName, Price, ImageUrl, ProductID FROM inventory WHERE ProductID = $item");
                             $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
+                            // echo '<div class="sample-product">';
+                            // echo '<img src="'. $row['ImageUrl']. '" alt="Sample Product Image">';
+                            // echo'<h3>'. $row['ProductName'];
+                            // echo '<h3> Quantity: '. '<span class="item-count">' . $quantity . '</span></h3>';
+                            // echo '<h3 class="item-price">£'. $row['Price'] .'</h3>';
+                            // echo '<form method="post" class="remove-form">';
+                            // echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
+                            // echo '<button type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</button>';
+                            // echo '</form>';
+                            // echo '</div>';
+
                             echo '<div class="sample-product">';
-                            echo '<img src="'. $row['ImageUrl']. '" alt="Sample Product Image">';
-                            echo'<h3>'. $row['ProductName'] .'</h3>';
-                            echo '<h3 class="item-price">£'. $row['Price'] .'</h3>';
+
+                            echo '<img src="' . $row['ImageUrl'] . '" alt="Sample Product Image">';
+                            echo '<h3>' . $row['ProductName'];
+                            echo '<h3 class="item-price">£' . $row['Price'] . '</h3>';
+                            echo '<h3> Quantity: ';
+
+                            echo '<div style="margin: 10px; padding: 10px; border: 1px solid #ccc; display: flex;">';
+
+                            // -- update product quantity form starts here --
+                            echo '<div>';
+                            echo '<form method="post" class="update-form">';
+                            echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
+                            echo '<button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', -1)">-</button>';
+                            echo '<span class="item-count">' . $quantity . '</span>';
+                            echo '<button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', 1)">+</button>';
+                            echo '</form>';
+                            echo '</div>';
+                            // -- update product quantity form ends here --
+
+                            echo '</h3>';
+                            
+
+                            // -- remove product form starts here -- 
+                            echo '<div>';
                             echo '<form method="post" class="remove-form">';
                             echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
                             echo '<button type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</button>';
                             echo '</form>';
+                            echo '</div>';
+
+                            echo '</div>';
+                            // -- remove product form ends here --
+                            
                             echo '</div>';
                         }
                     }
@@ -273,29 +332,78 @@ if (isset($_POST['remove-from-cart'])) {
 
                         //
                     })
+
+                //     document.addEventListener("DOMContentLoaded", function () {
+                //     var quantityForms = document.querySelectorAll('.quantity-form');
+
+                //     quantityForms.forEach(function (form) {
+                //         var quantityInput = form.querySelector('.quantity');
+                //         var decreaseButton = form.querySelector('.decrease-quantity');
+                //         var increaseButton = form.querySelector('.increase-quantity');
+                //         var currentQuantity = parseInt(quantityInput.textContent);
+
+                //         decreaseButton.addEventListener('click', function () {
+                //             if (currentQuantity > 1) {
+                //                 currentQuantity--;
+                //                 quantityInput.textContent = currentQuantity;
+                //             }
+                //         });
+
+                //         increaseButton.addEventListener('click', function () {
+                //             currentQuantity++;
+                //             quantityInput.textContent = currentQuantity;
+                //         });
+                //     });
+                // });
+
+                function updateQuantity(productID, change) {
+                var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.quantity');
+                var currentQuantity = parseInt(quantityElement.innerHTML);
+                var newQuantity = currentQuantity + change;
+
+                if (newQuantity >= 0) {
+                quantityElement.innerHTML = newQuantity;
+
+                // You may also want to update the server or cookie with the new quantity here
+                }
+            }
                 </script>
                 </ul>
             </div>
                 
 
-
+            <div class="checkout-right-section">
+                <div class="discount-section">
+                    <h4>DISCOUNT</h4>
+                    <hr>
+                    <form style="margin-bottom: 15px; margin-left: 15px; margin-right: 15px">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="exampleInput" placeholder="Enter discount code">
+                        </div>
+                    </form>
+                    <div style="text-align: center; margin-bottom: 15px; margin-top: 15px;">
+                        <button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Apply Code</button>
+                    </div>
+                </div>    
+                <div class="total-section">
+                    <h4>TOTAL</h4>
+                    <hr>
+                    <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <?php
+                            if (unserialize($shopping_cart) == null) {
+                                echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</button>';
+                            } else {
+                                echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</button>';
+                            }
+                        ?>
+                    </div>
+                </div>    
+            </div>
             <!-- div section to show the total and the option to checkout via button -->
-            <div class="total-section">
-                <h4>TOTAL</h4>
-                <hr>
-                <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
-                <div style="text-align: center; margin-bottom: 15px;">
-                <?php
-                    if (unserialize($shopping_cart) == null) {
-                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>';
-                    } else {
-                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</a>';
-                    }
-                ?>
-                </div>
-            </div>    
 
         <!-- div section for a product with its name, price and product image -->
+        </div>
 
     </main>
 

@@ -42,7 +42,7 @@ if ($_SESSION['isAdmin'] !== 1) {
     ?>
 
     <!-- pop up modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -133,6 +133,7 @@ if ($_SESSION['isAdmin'] !== 1) {
     <script>
         $(document).ready(function() {
             $('.editbtn').click(function() {
+                $('#editmodal').modal('show');
                 console.log('Edit button clicked');
 
                 var userID = $(this).data('userid');

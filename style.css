@@ -530,10 +530,12 @@ div {
 .shoppingcart-button {
   background-color: #333;
   color: #fff;
-  padding: 10px 112px;
+  padding: 10px 25%;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 2vw;
+  justify-content: center;
 }
 
 .shoppingcart-button:hover {
@@ -676,12 +678,12 @@ div {
 /*reviews */
 
 .reviews h2{
-  margin: 1.5vw;
+  margin: 2vw;
 }
 
 .review{
   border-radius: 5%;
-  margin: 1.5%;
+  margin: 2%;
 }
 
 .inv{
@@ -689,10 +691,16 @@ div {
   height: 100px;
 }
 
-.feedback-box{
-  margin: 20px;
+.invform {
+  padding: 25px;
+  margin: 25px;
 }
-.feedback-btn{
-  margin: 20px;
-  margin-top: 5px;
+
+.invheader {
+  padding: 10px;
+}
+
+.nav-link:hover {
+  color: black;
+  text-decoration: underline;
 }
