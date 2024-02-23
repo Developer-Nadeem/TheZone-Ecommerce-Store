@@ -27,6 +27,7 @@ if ($_SESSION['isAdmin'] !== 1) {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="../TheZone/style.css">
     <title>Customer details</title>
+
 </head>
 
 <body>
@@ -52,7 +53,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../TheZone/edit-user.php" method="post">
+                <form action="../TheZone/edit-user.php" method="post" class="custom-padding">
                     <div class="modal-body">
         
                             <div class="form-group">

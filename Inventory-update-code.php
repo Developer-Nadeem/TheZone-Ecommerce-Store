@@ -11,12 +11,14 @@ if (isset($_POST['submitted'])) {
             $price = trim($_POST['Price']);
             $quantity = trim($_POST['Quantity']);
             $productID = trim($_POST['ProductID']);
+            $finalprice = preg_replace("/[^0-9]/", "", $price);
+
           
     
             $updatevals = $db->prepare("UPDATE inventory SET ProductName=:productName, ProductDescription=:description, Price=:price, StockQuantity=:stock WHERE ProductID = :productID");
             $updatevals->bindParam(':productName', $productName);
             $updatevals->bindParam(':description', $description);
-            $updatevals->bindParam(':price', $price);
+            $updatevals->bindParam(':price', $finalprice);
             $updatevals->bindParam(':stock', $quantity);
             $updatevals->bindParam(':productID', $productID);
             $updatevals->execute();

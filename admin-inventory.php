@@ -114,6 +114,12 @@ if ($_SESSION['isAdmin'] !== 1) {
         .checkboxes {
             padding: 5px;
         }
+        .low-stock{
+            color:red;
+            font-weight: bold;
+            padding: 0;
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -252,7 +258,11 @@ if ($_SESSION['isAdmin'] !== 1) {
                     echo "<td style='width: 150px;'>" . $product['ProductName'] . "</td>";
                     echo "<td>" . $product['ProductDescription'] . "</td>";
                     echo "<td>£" . $product['Price'] . "</td>";
+                    if($product['StockQuantity']<20){
+                    echo "<td><p class=low-stock>" . $product['StockQuantity'] ."</p> </td>";
+                    }else{
                     echo "<td>" . $product['StockQuantity'] . "</td>";
+                    }
                     echo "<td style='display:none;'>" . $product['ProductID'] . "</td>";
                     echo "<td><button type='button' class='btn btn-primary editbtn'>EDIT</button></td>";
                     echo "</tr>";
@@ -279,7 +289,7 @@ if ($_SESSION['isAdmin'] !== 1) {
 
                 console.log(data);
 
-
+                
 
                 $('#ProductName').val(data[1]);
                 $('#Description').val(data[2]);
