@@ -36,6 +36,7 @@ if (isset($_POST['add-to-cart'])) {
   <!--Navbar End-->
   <!DOCTYPE html>
 <html lang="en">
+  
 <!-- Filter Box Start -->
 <div class="container mt-3">
   <div class="row">
@@ -47,12 +48,14 @@ if (isset($_POST['add-to-cart'])) {
            <option value="high-low"> High-Low</option>
           </select>
           <button type="submit" class="btn btn-secondary ms-2">
-            <i class="fa fa-filter"></i> Apply Filter
+            <i class="Apply sort"></i> Apply sort
           </button>
         </form>
       </div>
+     </div>
     </div>
-  </div>
+ 
+  
 
 
   <main>

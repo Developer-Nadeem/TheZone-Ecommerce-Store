@@ -37,6 +37,53 @@ if (isset($_POST['add-to-cart'])) {
 
   <!--Navbar End-->
 
+  <!-- Filter Box Start -->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form method="get" class="d-flex align-items-center justify-content-end">
+        <label class="me-2">Sort by:</label>
+        <select name="filter" class="form-select">
+           <option value="low-high">Low-High</option>
+           <option value="high-low"> High-Low</option>
+          </select>
+          <button type="submit" class="btn btn-secondary ms-2">
+            <i class="Apply sort"></i> Apply sort
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <select name="brand" class="form-select ms-2">
+          <option value="all">All Brands</option>
+          <option value="brand1">Brand 1</option>
+          <option value="brand2">Brand 2</option>
+          <!-- Add more brand options as needed -->
+        </select>
+
+        <!-- Price Range Filter -->
+        <label class="ms-2">Price Range:</label>
+        <input type="text" name="minPrice" placeholder="Min Price" class="form-control ms-2">
+        <input type="text" name="maxPrice" placeholder="Max Price" class="form-control ms-2">
+
+        <!-- Category Filter -->
+        <label class="ms-2">Category:</label>
+        <select name="category" class="form-select ms-2">
+          <option value="all">All Categories</option>
+          <option value="men">Men</option>
+          <option value="women">Women</option>
+          <!-- Add more category options as needed -->
+        </select>
+
+        <button type="submit" class="btn btn-secondary ms-2">
+          <i class="Apply sort"></i> Apply Filters
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Filter and Sort Box End -->
+
   <main>
     <h1 class="text-center">Women's clothing</h1>
     <p class="text-center">Explore The Zone's exclusive women's fashion collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
