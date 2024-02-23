@@ -534,6 +534,9 @@ div {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 2vw;
+  display: flex;
+  justify-content: center;
 }
 
 .shoppingcart-button:hover {
