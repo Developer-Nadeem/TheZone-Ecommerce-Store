@@ -699,3 +699,8 @@ div {
 .invheader {
   padding: 10px;
 }
+
+.nav-link:hover {
+  color: black;
+  text-decoration: underline;
+}
