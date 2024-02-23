@@ -101,11 +101,11 @@ if ($_SESSION['isAdmin'] !== 1) {
             </div>
 
             <div id="column2" class="column">
-                <button class="button">CUSTOMERS VIEW</button>
+                <button class="button" > <a style="text-decoration: none; color: black; " href="../TheZone/admin-customers.php">CUSTOMERS VIEW</a></button>
             </div>
 
             <div id="column3" class="column">
-                <button class="button">ORDERS VIEW</button>
+                <button class="button"><a style="text-decoration: none; color: black; " href="../TheZone/admin-order.php">ORDERS VIEW</a></button>
             </div>
 
         </div>
