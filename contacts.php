@@ -108,10 +108,10 @@ if (isset($_POST["submitted"]) && isset($_POST["message"]) && isset($_POST["emai
         $query->bindParam(':Timestamp', $currentDateTime);
 
         if ($query->execute()) {
-            // Form submitted successfully
+            //This is the form to show the popup message when you have submitted successfully
             echo '<script>alert("Your message has been successfully submitted!");</script>';
         } else {
-            // Database insertion failed
+            // This message will popup if an error occurred when submitting the form
             echo '<script>alert("Error: Unable to submit your message. Please try again later.");</script>';
         }
     } catch (PDOException $ex) {
