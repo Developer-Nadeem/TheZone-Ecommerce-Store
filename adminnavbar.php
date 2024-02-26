@@ -24,7 +24,7 @@
                         <a class="nav-link" href="admin-order.php">Orders</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="admin-contacts">Contact Requests</a> 
+                        <a class="nav-link" href="admin-contacts.php">Contact Requests</a> 
                     </li>
                 </ul>
 
