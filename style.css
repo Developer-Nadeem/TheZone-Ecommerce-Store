@@ -706,4 +706,10 @@ div {
 }
 
 /* admin inventory */
-
+.addbtn{
+  display: flex;
+  justify-content: center;
+}
+.binbtn{
+  margin-top: 10px;
+}
