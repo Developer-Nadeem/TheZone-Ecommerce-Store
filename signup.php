@@ -47,6 +47,26 @@ if (isset($_POST['submitted'])) {
         exit;
     }
 
+    if(strlen($pass) < 8){
+        echo "Your password must be at minimum 8 characters.";
+        exit;
+    }
+
+    if (!preg_match('/[a-z]/', $pass) || !preg_match('/[A-Z]/', $pass)) {
+        echo "Your password must contain at least one lowercase and uppercase letter";
+        exit;
+    }
+
+    if (!preg_match('/[0-9]/', $pass)) {
+        echo "Your password must contain at least one number";
+        exit;
+    }
+
+    if (preg_match('/[\s\0\'"`]/', $pass)) {
+        echo "Your password must not contain any whitespaces, control characters, \' , \" or \` characters ";
+        exit;
+    }
+
     $checkEmail = $db->prepare("SELECT COUNT(*) FROM useraccounts WHERE Email = :email");
     $checkEmail->bindParam(':email', $email);
     $checkEmail->execute();
@@ -70,7 +90,7 @@ if (isset($_POST['submitted'])) {
         $stmt->execute();
         echo "Registration successful!";
         // This part redirects you to the homepage after 3 seconds which is index.php
-        echo '<script> setTimeout(function(){ window.location.href = "index.php"; }, 3000);  </script>';
+        echo '<script> setTimeout(function(){ window.location.href = "login-signup-page.php"; }, 3000);  </script>';
         exit;
     } catch (PDOException $e) {
         echo "Sorry, a database error occurred! <br>";

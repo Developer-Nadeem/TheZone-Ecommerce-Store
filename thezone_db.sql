@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2023 at 06:12 PM
+-- Generation Time: Feb 02, 2024 at 03:51 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -77,7 +77,27 @@ CREATE TABLE `contactrequests` (
 
 INSERT INTO `contactrequests` (`RequestID`, `Name`, `Email`, `Message`, `RequestTime`) VALUES
 (1, 'Nadeem H', '220038500@aston.ac.uk', 'testing', '2023-12-09 09:50:44'),
-(2, 'Nadeem H', '220038500@aston.ac.uk', 'testing if this still works, when i made some changes.', '2023-12-09 09:56:44');
+(2, 'Nadeem H', '220038500@aston.ac.uk', 'testing if this still works, when i made some changes.', '2023-12-09 09:56:44'),
+(3, 'Nadeem H', '220038500@aston.ac.uk', 'abc', '2023-12-13 09:38:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `discount_codes`
+--
+
+CREATE TABLE `discount_codes` (
+  `discount_id` int(11) NOT NULL,
+  `discount_code` varchar(50) DEFAULT NULL,
+  `discount_percentage` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `discount_codes`
+--
+
+INSERT INTO `discount_codes` (`discount_id`, `discount_code`, `discount_percentage`) VALUES
+(4, 'SALE', 10);
 
 -- --------------------------------------------------------
 
@@ -124,6 +144,7 @@ INSERT INTO `inventory` (`ProductID`, `ProductName`, `ProductDescription`, `Pric
 (2, 'Champion X Coca Cola Cardigan Top 220192 Sweater (hlg/loy)', 'Elevate your style with this classic jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 88, 'https://static.super-shop.com/1448614-champion-x-coca-cola-cardigan-top-220192-sweater-hlg-loy.jpg?w=1920', 100, 2, 2),
 (3, 'Prosto Yezz Jumper (black)', 'Elevate your style with this classic Jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 48, 'https://static.super-shop.com/1439438-prosto-yezz-sweatshirt-black.jpg?w=1920', 100, 2, 1),
 (4, 'Converse Chuck Taylor All Star Lift Hi Shoes Wmn (black)', 'Elevate your style with these sneakers, featuring a comfortable fit and timeless design for everyday casual wear.', 79, 'https://static.super-shop.com/1212146-converse-chuck-taylor-all-star-lift-hi-shoes-wmn-black.jpg?w=1920', 100, 4, 1),
+(6, 'Prosto Jeans Regular Pocklog Pants (blue)', 'Elevate your style with these Jeans, featuring a comfortable fit and timeless design for everyday casual wear.', 46, 'https://static.super-shop.com/1212146-converse-chuck-taylor-all-star-lift-hi-shoes-wmn-black.jpg?w=1920', 100, 5, 1),
 (7, 'Champion X Coca Cola Hooded Sweatshirt 220180 Hoodie (nbk)', 'Elevate your style with this classic hoodie, featuring a comfortable fit and timeless design for everyday casual wear.', 69, 'https://static.super-shop.com/1448594-champion-x-coca-cola-hooded-sweatshirt-220180-hoodie-nbk.jpg?w=1920', 100, 3, 1),
 (8, 'Champion X Coca Cola Crewneck T-Shirt 220184 T-shirt (dox)', 'Elevate your style with this classic t-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448606-champion-x-coca-cola-crewneck-tshirt-220184-tshirt-dox.jpg?w=19200', 100, 1, 2),
 (9, 'Champion X Coca Cola Crewneck T-Shirt 220184 T-shirt (hlg)', 'Elevate your style with this classic t-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448605-champion-x-coca-cola-crewneck-tshirt-220184-tshirt-hlg.jpg?w=1920', 100, 1, 2),
@@ -155,7 +176,8 @@ CREATE TABLE `orderitems` (
   `OrderItemID` int(11) NOT NULL,
   `OrderID` int(11) DEFAULT NULL,
   `ProductID` int(11) DEFAULT NULL,
-  `Quantity` int(11) DEFAULT NULL
+  `Quantity` int(11) DEFAULT NULL,
+  `SubTotal` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -170,8 +192,8 @@ CREATE TABLE `orders` (
   `OrderTime` datetime DEFAULT NULL,
   `OrderStatus` varchar(255) DEFAULT NULL,
   `TotalAmount` int(11) DEFAULT NULL,
-  `PaymentID` int(11) DEFAULT NULL,
-  `AddressID` int(11) DEFAULT NULL
+  `PaymentID` int(11) NOT NULL,
+  `AddressID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -218,6 +240,15 @@ CREATE TABLE `useraccounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `useraccounts`
+--
+
+INSERT INTO `useraccounts` (`UserID`, `Firstname`, `Lastname`, `Email`, `Pass`, `isAdmin`) VALUES
+(1, 'Nadeem', 'H', '2200385050@aston.ac.uk', '$2y$10$wlIfuobBWDepRKfKJCMohetNxuXjF3qG8jcDaNB2N2p2t/YBqMqTC', NULL),
+(2, 'a', 'a', 'a@gmail.com', '$2y$10$e6cimJprorq.fnjfzwzEJuv7edmXSd2gVwDXk4ax8NLtoz7WsB0uu', NULL),
+(3, 'b', 'b', 'B@gmail.com', '$2y$10$h1o8t1sk9IQbGkk6CasdNe.K7x/1cl.sVnjCZoaj7z71ixTWqjXU.', NULL);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -238,6 +269,12 @@ ALTER TABLE `category`
 --
 ALTER TABLE `contactrequests`
   ADD PRIMARY KEY (`RequestID`);
+
+--
+-- Indexes for table `discount_codes`
+--
+ALTER TABLE `discount_codes`
+  ADD PRIMARY KEY (`discount_id`);
 
 --
 -- Indexes for table `genders`
@@ -308,7 +345,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `contactrequests`
 --
 ALTER TABLE `contactrequests`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `discount_codes`
+--
+ALTER TABLE `discount_codes`
+  MODIFY `discount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `genders`
@@ -326,13 +369,13 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `orderitems`
 --
 ALTER TABLE `orderitems`
-  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `paymentdetails`
@@ -350,7 +393,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

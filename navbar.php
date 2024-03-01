@@ -2,7 +2,7 @@
   <!-- test comment in navbar.php -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.php"><img class="img-fluid logo" src="../TheZone/images/logo-tp.png" alt="Logo"></a>
+      <a class="navbar-brand" href="index.php"><img class="img-fluid logo" src="images/logo-tp.png" alt="Logo"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -37,7 +37,6 @@
         </ul>
         <form class="d-flex" role="search" action="search_products.php" method="get">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data" autocomplete="off">
-          <input type="submit" class="btn btn-outline-dark" value="Search" name="search_data_products">
         </form>
         <ul class="navbar-nav">
           <li class="nav-item">

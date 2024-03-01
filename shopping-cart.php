@@ -42,7 +42,26 @@ if (isset($_POST['remove-from-cart'])) {
             margin-top: auto;
             margin-bottom: auto;
             background-color: rgb(230, 230, 230);
+        }
+
+        .checkout-right-section {
             width: 30%;
+            margin-bottom: auto;
+            margin-top: auto;
+            width: 30%
+        }
+
+        .discount-section {
+            border: 2.5px solid black;
+            border-radius: 5px;
+            margin-top: auto;
+            margin-bottom: 2vw;
+            background-color: rgb(230, 230, 230);
+        }
+
+        .discount-section h4 {
+            text-align: center;
+            margin-top: 5px;
         }
 
         .total-section h4 {
@@ -62,7 +81,7 @@ if (isset($_POST['remove-from-cart'])) {
             margin-top: 20px;
             margin-bottom: 30px;
             margin-right: auto;
-            margin-left: auto;
+            margin-left: 5%;
             background-color: rgb(230, 230, 230);
         }
 
@@ -78,12 +97,16 @@ if (isset($_POST['remove-from-cart'])) {
             padding: 10px; 
             margin-top: 10px; 
             text-align: left; 
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto; /* margin left and right set to auto to centre align the product container */
+            margin-left: 10%;
+            margin-right: 10%; /* margin left and right set to auto to centre align the product container */
             overflow: hidden;
             position: relative;
             display: flex;
+        }
+
+        .sample-product ul {
+            margin: 0%;
+            padding: 0%
         }
 
         .sample-product h3 {
@@ -122,19 +145,11 @@ if (isset($_POST['remove-from-cart'])) {
         }
 
         hr {
-<<<<<<< HEAD
-            height: 4px; 
-            width: 55%; 
-            margin: 20px auto; 
-            background-color: #000; 
-            border: none; 
-=======
             height: 4px; /* Set the height to make it thicker */
             width: 55%; /* Set the width to make it shorter (adjust as needed) */
             margin: 20px auto; /* Center the line by setting margin and using auto for left and right */
             background-color: #000; /* Set the background color of the line */
             border: none; /* Remove the default border */
->>>>>>> 492ad02de5e3195258e6c7ca7acad0030af7e248
         }
     </style>
 
@@ -143,36 +158,10 @@ if (isset($_POST['remove-from-cart'])) {
 
 <body>
     <!--Navbar Start-->
-    <?php include('../TheZone//navbar.php') ?>
+    <?php include('navbar.php') ?>
     <!--Navbar End-->
 
     <main>
-        <!-- <div class="shoppingcart-container"> -->
-        <!-- <div class="shoppingcart-container">
-            <h2 class="text-center">Your Cart</h2>
-            <ul id="cart-items">
-                <?php
-                    // $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
-                    // foreach(unserialize($shopping_cart) as $item) {
-                    //     echo '<div class="cart-item" style="background-color: white; "';
-                    //     echo '<p> '. $item . '</p>';
-                    //     echo '</div>';
-                    // }
-                    // $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
-                    // foreach(unserialize($shopping_cart) as $item) {
-                    //     echo '<div class="cart-item" style="background-color: white; "';
-                    //     echo '<p> '. $item . '</p>';
-                    //     echo '</div>';
-                    // }
-                ?>
-            </ul>
-            <p class="text-center">Total: £<span id="cart-total">0.00</span></p>
-            <div style="text-align: center;">
-                <button class="shoppingcart-button" type="submit" name="checkout-button" onclick="checkout()">Check Out</button>
-            </div>
-        </div>
-        </div> -->
-
         <!-- div section for the entire cart and the total amount display -->
         <div class="whole-cart">
 
@@ -181,24 +170,8 @@ if (isset($_POST['remove-from-cart'])) {
                 <div style="background-color: #333; color: white; text-align: center;padding: 15px;">
                     <h3>Your Cart</h3>
                 </div>
-<<<<<<< HEAD
-                <div class="sample-product">
-                    <img src="..\TheZone\images\product2.webp" alt="Sample Product Image">
-                    <h3>Grey Zipped Sweater</h3>
-                    <h3>£10.99</h3>
-                    <button onclick="removeProduct()">Remove</button>
-                </div>
-                <hr style="">
-                <div class="sample-product">
-                    <img src="..\TheZone\images\product2.webp" alt="Sample Product Image">
-                    <h3>Grey Zipped Sweater</h3>
-                    <h3>£10.99</h3>
-                    <button onclick="removeProduct()">Remove</button>
-                </div>
-            </div>
-=======
 
-                <ul id="cart-items">
+                <ul id="cart-items" style="list-style-type: none; margin-left: 0;">
                 <?php
                     require("connectiondb.php");
                     $shopping_cart = isset($_COOKIE['shopping_cart']) ? $_COOKIE['shopping_cart'] : array();
@@ -303,96 +276,46 @@ if (isset($_POST['remove-from-cart'])) {
                 
 
 >>>>>>> 492ad02de5e3195258e6c7ca7acad0030af7e248
-
-            <!-- div section to show the total and the option to checkout via button -->
-            <div class="total-section">
-                <h4>TOTAL</h4>
-                <hr>
-                <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
-                <div style="text-align: center; margin-bottom: 15px;">
+            <div class="checkout-right-section">
+                <div class="discount-section">
+                    <h4>DISCOUNT</h4>
+                    <hr>
+                    <form style="margin-bottom: 15px; margin-left: 15px; margin-right: 15px">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="exampleInput" placeholder="Enter discount code">
+                        </div>
+                    </form>
+                    <div style="text-align: center; margin-bottom: 15px; margin-top: 15px;">
+                        <button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Apply Code</button>
+                    </div>
+                </div>    
+                <div class="total-section">
+                    <h4>TOTAL</h4>
+                    <hr>
+                    <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
+                    <div style="text-align: center; margin-bottom: 15px;">
 <<<<<<< HEAD
                 <button class="shoppingcart-button" type="submit" name="checkout-button" onclick="checkout()">Check Out</button>
 =======
-                <?php
-                    if (unserialize($shopping_cart) == null) {
-                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>';
-                    } else {
-                        echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</a>';
-                    }
-                ?>
+                        <?php
+                            if (unserialize($shopping_cart) == null) {
+                                echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</button>';
+                            } else {
+                                echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</button>';
+                            }
+                        ?>
 >>>>>>> 492ad02de5e3195258e6c7ca7acad0030af7e248
-                </div>
-            </div>    
+                    </div>
+                </div>    
+            </div>
+            <!-- div section to show the total and the option to checkout via button -->
 
         <!-- div section for a product with its name, price and product image -->
 
     </main>
 
     <!-- Footer Start -->
-<<<<<<< HEAD
-    <?php include('..\TheZone\footer.php') ?>
-    <!-- Footer End -->
-
-
-    <script>
-        function checkout() {
-            // Redirect to check out page
-            window.location.href = 'check-out.php';
-        }
-
-        // Render the cart
-        function renderCart() {
-            // ...
-
-            // Render the cart items
-            for (let item of cart.items) {
-                // ...
-
-                // Add a remove button
-                li.innerHTML += `
-            <button class="remove-btn" data-itemid="${item.id}">Remove</button>
-        `;
-            }
-
-            // ...
-        }
-        // Event listeners
-        document.getElementById('cart').addEventListener('click', function(event) {
-            if (event.target.classList.contains('remove-btn')) {
-                // Remove the item from the cart
-                const itemId = event.target.dataset.itemid;
-                cart.removeItem(itemId);
-
-                // Re-render the cart
-                renderCart();
-            }
-        });
-
-        // Cart constructor
-        function Cart() {
-            // ...
-
-            // Add a method to remove an item from the cart
-            this.removeItem = function(itemId) {
-                this.items = this.items.filter(function(item) {
-                    return item.id !== itemId;
-                });
-
-                // Save the updated cart to local storage
-                this.saveToLocalStorage();
-            };
-
-            // ...
-        }
-
-        function removeProduct() {
-            // function to remove product from cart page
-
-        }
-        //  make changes where needed@khizzer
-    </script>
-=======
-    <?php include('../TheZone/footer.php') ?>
+    <?php include('footer.php') ?>
     <!-- Footer End -->
 >>>>>>> 492ad02de5e3195258e6c7ca7acad0030af7e248
     <!-- needed for drop down menu -->

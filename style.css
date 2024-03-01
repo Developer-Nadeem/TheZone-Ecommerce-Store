@@ -3,20 +3,28 @@ div {
 }
 
 
-/*logo*/
 
+/*logo*/
 
 .logo {
   width: 12vw;
 }
 
-.navbar {
+.navbar,
+.navbar-nav,
+.container-fluid {
   max-width: 100%;
+}
+.banner-txt h2,h4{
+  overflow: hidden;
+}
+.banner-txt{
+  height: 20vw;
+}
+#banner-btn{
+  margin-top: 2%;
 }
 
-.navbar-nav {
-  max-width: 100%;
-}
 
 /*hero*/
 
@@ -91,12 +99,14 @@ div {
   font-size: 3vw;
   font-weight: bold;
   color: white;
+  overflow: hidden;
 }
 
 #hero-subtext {
   margin-top: 2vw;
   font-size: 2vw;
   color: white;
+  overflow: hidden;
 }
 
 .subsection {
@@ -523,10 +533,12 @@ div {
 .shoppingcart-button {
   background-color: #333;
   color: #fff;
-  padding: 10px 112px;
+  padding: 10px 25%;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 2vw;
+  justify-content: center;
 }
 
 .shoppingcart-button:hover {
@@ -578,7 +590,10 @@ div {
 
 /* card body */
 .card {
-  min-height: 43vw !important;
+  min-height: 44vw !important;
+}
+.card:hover{
+  scale: 1.05;
 }
 
 .card-body {
@@ -589,74 +604,14 @@ div {
   position: absolute;
   bottom: 3%;
 }
-
-<<<<<<< HEAD
-/* contact page */
-.inputs{
- margin: 10px;
- width: 200px;
- height: 100%;
-  width: 100%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: 1px solid rgb(230, 230, 230);
-  border-bottom-width: 2px;
-  font-size: 17px;
-  transition: all 0.3s ease;
+.card-text{
+  margin-left: 0px;
+}
+#main-link{
+  text-decoration: none;
+  
 }
 
-.name-label{
-  margin-right: 2vw;
-  height: 80%;
-  width: 80%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: 1px solid rgb(230, 230, 230);
-  border-bottom-width: 2px;
-  font-size: 17px;
-  transition: all 0.3s ease;
-}
-.email-label{
-  margin-right: 2.3vw;
-  height: 80%;
-  width: 80%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: 1px solid rgb(230, 230, 230);
-  border-bottom-width: 2px;
-  font-size: 17px;
-  transition: all 0.3s ease;
-}
-.message-label{
-  margin-right: 0.5vw;
-  height: 80%;
-  width: 80%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: 1px solid rgb(230, 230, 230);
-  border-bottom-width: 2px;
-  font-size: 17px;
-  transition: all 0.3s ease;
-}
-
-.contact-container {
-  width: 300px;
-  max-width: 600px;
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: rgb(230, 230, 230);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-
-=======
 
 /*product img */
 
@@ -732,7 +687,26 @@ div {
 .review{
   border-radius: 5%;
   margin: 2%;
-  
-
 }
->>>>>>> 492ad02de5e3195258e6c7ca7acad0030af7e248
+
+.inv{
+  width: 10px;
+  height: 100px;
+}
+
+.invform {
+  padding: 25px;
+  margin: 25px;
+}
+
+.invheader {
+  padding: 10px;
+}
+
+.nav-link:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+/* admin inventory */
+
