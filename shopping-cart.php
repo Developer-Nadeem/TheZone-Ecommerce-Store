@@ -319,6 +319,17 @@ if (isset($_POST['remove-from-cart'])) {
 
                         //
                     })
+
+                    function updateQuantity(productID, change) {
+                    var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
+                    var currentQuantity = parseInt(quantityElement.innerHTML);
+                    var newQuantity = currentQuantity + change;
+
+                    if (newQuantity >= 0) {
+                    quantityElement.innerHTML = newQuantity;
+                    }
+                    // You may also want to update the server or cookie with the new quantity here
+                }
                 </script>
                 </ul>
             </div>
