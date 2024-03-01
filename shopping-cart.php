@@ -135,7 +135,7 @@ if (isset($_POST['remove-from-cart'])) {
             font-weight: bold;
         }
 
-        .sample-product remove-button {
+        .sample-product button {
             background-color: #ff0000; 
             border-radius: 3px;
             color: #fff; 
@@ -149,7 +149,7 @@ if (isset($_POST['remove-from-cart'])) {
             transition: background-color 0.2s ease, color 0.2s ease; 
         }
 
-        .sample-product remove-button:hover {
+        .sample-product button:hover {
             background-color: #fff;
             color: #ff0000;
             font-weight: bold;
@@ -234,7 +234,7 @@ if (isset($_POST['remove-from-cart'])) {
                             echo '<div>';
                             echo '<form method="post" class="remove-form">';
                             echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-                            echo '<remove-button type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</remove-button>';
+                            echo '<button id="remove-button" type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</button>';
                             echo '</form>';
                             echo '</div>';
 
