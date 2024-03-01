@@ -65,14 +65,7 @@ if (isset($_POST['add-to-cart'])) {
         <label class="ms-2">Price Range:</label>
         <input type="text" name="minPrice" placeholder="Min Price" class="form-control ms-2" style="width: 100px;">
         <input type="text" name="maxPrice" placeholder="Max Price" class="form-control ms-2" style="width: 100px;">
-
-        <!-- Category Filter -->
-        <label class="ms-2">Category:</label>
-        <select name="category" class="form-select ms-2">
-          <option value="all">All Categories</option>
-          <option value="men">Men</option>
-          <option value="women">Women</option>
-          <!-- Add more category options as needed -->
+        
         </select>
 
         <button type="submit" class="btn btn-secondary ms-2">

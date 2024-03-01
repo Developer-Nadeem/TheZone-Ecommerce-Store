@@ -70,7 +70,7 @@ if (isset($_POST['add-to-cart'])) {
           <option value="all">All Categories</option>
           <option value="men">Men</option>
           <option value="women">Women</option>
-          <!-- Add more category options as needed -->
+          
         </select>
 
         <button type="submit" class="btn btn-secondary ms-2">
