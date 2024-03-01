@@ -48,8 +48,7 @@ if (isset($_POST['remove-from-cart'])) {
             width: 30%;
             margin-bottom: auto;
             margin-top: auto;
-            width: 30%;
-            /* margin-right: 30px;    */
+            width: 30%
         }
 
         .discount-section {
@@ -72,18 +71,17 @@ if (isset($_POST['remove-from-cart'])) {
 
         .whole-cart {
             display: flex;
-            justify-content: space-evenly;
-            width: 100%;
+            width: 95%;
         }
         
         .cart-items {
             border: 2.5px solid black;
             border-radius: 5px;
-            width: 70%;
+            width: 60%;
             margin-top: 20px;
             margin-bottom: 30px;
             margin-right: auto;
-            margin-left: auto;
+            margin-left: 5%;
             background-color: rgb(230, 230, 230);
         }
 
@@ -99,11 +97,16 @@ if (isset($_POST['remove-from-cart'])) {
             padding: 10px; 
             margin-top: 10px; 
             text-align: left; 
-            width: 90%;
-            margin-right: auto; 
-            /* overflow: hidden; */
+            margin-left: 10%;
+            margin-right: 10%; /* margin left and right set to auto to centre align the product container */
+            overflow: hidden;
             position: relative;
             display: flex;
+        }
+
+        .sample-product ul {
+            margin: 0%;
+            padding: 0%
         }
 
         .sample-product h3 {
@@ -112,7 +115,7 @@ if (isset($_POST['remove-from-cart'])) {
         }
 
         .sample-product img {
-            width: 120px; 
+            width: 120px; /* setting a fixed width for the image for consistency */
             height: auto; 
             border: 2.5px solid #000; 
             border-radius: 5px;
@@ -120,47 +123,25 @@ if (isset($_POST['remove-from-cart'])) {
 
         }
 
-        .sample-product quantity-button {
+        .sample-product button {
             background-color: #ff0000; 
             border-radius: 3px;
             color: #fff; 
             border: none; 
-            margin: 20px;
+            margin: 15px;
             padding: 5px 10px; 
             cursor: pointer; 
-            transition: background-color 0.2s ease, color 0.2s ease; 
+            transition: background-color 0.2s ease, color 0.2s ease; /* transition of colour upon hover */
+            position: absolute; /* positioning the button absolutely so that it can be on the bottom right*/
             bottom: 0; 
             right: 0; 
-            display: inline-block;
-            width: 25%;
-            text-align: center;
         }
 
-        .sample-product quantity-button:hover {
+        .sample-product button:hover {
             background-color: #fff; /* changing background color on hover */
             color: #ff0000;
-            /* border: 2.5px solid #ff0000; */
-            font-weight: bold;
-        }
-
-        .sample-product remove-button {
-            background-color: #ff0000; 
-            border-radius: 3px;
-            color: #fff; 
-            border: none; 
-            margin: 10px;
+            border: 2.5px solid #ff0000;
             padding: 5px 10px; 
-            cursor: pointer; 
-            bottom: 0; 
-            right: 0; 
-            position: absolute;
-            transition: background-color 0.2s ease, color 0.2s ease; 
-        }
-
-        .sample-product remove-button:hover {
-            background-color: #fff;
-            color: #ff0000;
-            font-weight: bold;
         }
 
         hr {
@@ -169,13 +150,6 @@ if (isset($_POST['remove-from-cart'])) {
             margin: 20px auto; /* Center the line by setting margin and using auto for left and right */
             background-color: #000; /* Set the background color of the line */
             border: none; /* Remove the default border */
-        }
-
-        .update-form {
-            width: 90%;
-            height: 5%;
-            display: flex;
-            justify-content: space-evenly;
         }
     </style>
 
@@ -188,33 +162,6 @@ if (isset($_POST['remove-from-cart'])) {
     <!--Navbar End-->
 
     <main>
-        <!-- <div class="shoppingcart-container"> -->
-        <!-- <div class="shoppingcart-container">
-            <h2 class="text-center">Your Cart</h2>
-            <ul id="cart-items">
-                <?php
-                    // $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
-                    // foreach(unserialize($shopping_cart) as $item) {
-                    //     echo '<div class="cart-item" style="background-color: white; "';
-                    //     echo '<p> '. $item . '</p>';
-                    //     echo '</div>';
-                    // }
-                    // $shopping_cart = $_COOKIE['shopping_cart'] ? $_COOKIE['shopping_cart'] : array();
-                    // foreach(unserialize($shopping_cart) as $item) {
-                    //     echo '<div class="cart-item" style="background-color: white; "';
-                    //     echo '<p> '. $item . '</p>';
-                    //     echo '</div>';
-                    // }
-                ?>
-            </ul>
-            <p class="text-center">Total: £<span id="cart-total">0.00</span></p>
-            <div style="text-align: center;">
-                <button class="shoppingcart-button" type="submit" name="checkout-button" onclick="checkout()">Check Out</button>
-            </div>
-        </div>
-        </div> -->
-
-        <div style="display: flex; justify-content: space-evenly; margin-bottom: 100px;">
         <!-- div section for the entire cart and the total amount display -->
         <div class="whole-cart">
 
@@ -224,66 +171,27 @@ if (isset($_POST['remove-from-cart'])) {
                     <h3>Your Cart</h3>
                 </div>
 
-                <ul id="cart-items">
+                <ul id="cart-items" style="list-style-type: none; margin-left: 0;">
                 <?php
                     require("connectiondb.php");
                     $shopping_cart = isset($_COOKIE['shopping_cart']) ? $_COOKIE['shopping_cart'] : array();
-                    if (!empty($shopping_cart) && is_array($shopping_cart)) {
+                    if (unserialize($shopping_cart) == null) {
                         echo '<div class="sample-product">';
                         echo '<h3>Cart is empty</h3>';
                         echo '</div>';
                     } else {
-                        $cart_items = array_count_values(unserialize($shopping_cart));
-
-                        foreach($cart_items as $item => $quantity) {
+                        foreach(unserialize($shopping_cart) as $item) {
                             $stmt = $db->query("SELECT ProductName, Price, ImageUrl, ProductID FROM inventory WHERE ProductID = $item");
                             $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
-                            // echo '<div class="sample-product">';
-                            // echo '<img src="'. $row['ImageUrl']. '" alt="Sample Product Image">';
-                            // echo'<h3>'. $row['ProductName'];
-                            // echo '<h3> Quantity: '. '<span class="item-count">' . $quantity . '</span></h3>';
-                            // echo '<h3 class="item-price">£'. $row['Price'] .'</h3>';
-                            // echo '<form method="post" class="remove-form">';
-                            // echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-                            // echo '<button type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</button>';
-                            // echo '</form>';
-                            // echo '</div>';
-
                             echo '<div class="sample-product">';
-
-                            echo '<img src="' . $row['ImageUrl'] . '" alt="Sample Product Image">';
-                            echo '<h3>' . $row['ProductName'];
-                            echo '<h3 class="item-price">£' . $row['Price'] . '</h3>';
-                            echo '<h3> Quantity: ';
-
-                            echo '<div style="margin: 10px; padding: 10px; border: 1px solid #ccc; display: flex;">';
-
-                            // -- update product quantity form starts here --
-                            echo '<div class="update-form">';
-                            echo '<form method="post" class="update-form">';
-                            echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', 1)">+</quantity-button>';
-                            echo '<span class="item-count">' . $quantity . '</span>';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', -1)">- </quantity-button>';
-                            echo '</form>';
-                            echo '</div>';
-                            // -- update product quantity form ends here --
-
-                            echo '</h3>';
-                            
-
-                            // -- remove product form starts here -- 
-                            echo '<div>';
+                            echo '<img src="'. $row['ImageUrl']. '" alt="Sample Product Image">';
+                            echo'<h3>'. $row['ProductName'] .'</h3>';
+                            echo '<h3 class="item-price">£'. $row['Price'] .'</h3>';
                             echo '<form method="post" class="remove-form">';
                             echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-                            echo '<remove-button type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</remove-button>';
+                            echo '<button type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</button>';
                             echo '</form>';
-                            echo '</div>';
-
-                            echo '</div>';
-                            // -- remove product form ends here --
-                            
                             echo '</div>';
                         }
                     }
@@ -362,41 +270,6 @@ if (isset($_POST['remove-from-cart'])) {
 
                         //
                     })
-
-                //     document.addEventListener("DOMContentLoaded", function () {
-                //     var quantityForms = document.querySelectorAll('.quantity-form');
-
-                //     quantityForms.forEach(function (form) {
-                //         var quantityInput = form.querySelector('.quantity');
-                //         var decreaseButton = form.querySelector('.decrease-quantity');
-                //         var increaseButton = form.querySelector('.increase-quantity');
-                //         var currentQuantity = parseInt(quantityInput.textContent);
-
-                //         decreaseButton.addEventListener('click', function () {
-                //             if (currentQuantity > 1) {
-                //                 currentQuantity--;
-                //                 quantityInput.textContent = currentQuantity;
-                //             }
-                //         });
-
-                //         increaseButton.addEventListener('click', function () {
-                //             currentQuantity++;
-                //             quantityInput.textContent = currentQuantity;
-                //         });
-                //     });
-                // });
-
-                function updateQuantity(productID, change) {
-                    var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
-                    var currentQuantity = parseInt(quantityElement.innerHTML);
-                    var newQuantity = currentQuantity + change;
-
-                    if (newQuantity >= 0) {
-                    quantityElement.innerHTML = newQuantity;
-
-                    // You may also want to update the server or cookie with the new quantity here
-                }
-            }
                 </script>
                 </ul>
             </div>
@@ -427,14 +300,12 @@ if (isset($_POST['remove-from-cart'])) {
                                 echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</button>';
                             }
                         ?>
-                </div>
-            </div>    
-        </div>
+                    </div>
+                </div>    
+            </div>
             <!-- div section to show the total and the option to checkout via button -->
 
         <!-- div section for a product with its name, price and product image -->
-        </div>
-                    
 
     </main>
 
