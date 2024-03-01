@@ -133,7 +133,7 @@ if ($_SESSION['isAdmin'] !== 1) {
     include("../TheZone/adminnavbar.php");
 
     ?>
-    <!-- //pop up modal -->
+    <!-- //pop up modal for editing item -->
     <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -177,6 +177,68 @@ if ($_SESSION['isAdmin'] !== 1) {
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <input type="hidden" name="submitted" id="submitted">
                             <button type="submit" name="updatedata" class="btn btn-secondary">Update Inventory</button>
+                        </div>
+                    </form>
+             
+            </div>
+        </div>
+    </div>
+    <!-- modal end -->
+
+     <!-- //pop up modal for adding item -->
+     <div class="modal fade" id="newItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Item:</h5>
+                    <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+               
+                    <form action="../TheZone/admin-inventory-add-item.php" method="post" class="custom-padding">
+                        <div class="modal-body">
+
+                            <input type="hidden" name="update_id" id="update_id">
+                            
+                            <div class="form-group">
+                                <label for="ProductName" class="col-form-label">Product Name</label>
+                                <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
+                            </div>
+                            <div class="form-group">
+                                <label for="Description" class="col-form-label">Description</label><br>
+                                <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2" placeholder="Enter a product description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="ImageURL" class="col-form-label">Image URL</label>
+                                <input required type="text" class="form-control" name="ImageURL" id="ImageURL" aria-describedby="ImageURL" placeholder="ImageURL">
+                            </div>
+                            <div class="form-group">
+                                <label for="Price" class="col-form-label">Price</label>
+                                <input required type="text" name="Price" class="form-control" id="Price" placeholder="£">
+                            </div>
+                            <div class="form-group">
+                                <label for="Quantity" class="col-form-label">Quantity</label>
+                                <input required type="text" name="Quantity" class="form-control" id="Quantity" placeholder="Enter stock quantity"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="CatID" class="col-form-label">CategoryID</label>
+                                <input required type="text" name="CatID" class="form-control" id="CatID" placeholder="Enter Category ID"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="GenderID" class="col-form-label">GenderID</label>
+                                <input required type="text" name="GenderID" class="form-control" id="GenderID" placeholder="Enter Gender ID"><br>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="hidden" name="submitted" id="submitted">
+                            <button type="submit" name="updatedata" class="btn btn-secondary">Save</button>
                         </div>
                     </form>
              
@@ -231,7 +293,7 @@ if ($_SESSION['isAdmin'] !== 1) {
         </div>
 
     </section>
-
+    <button type='button' class='btn btn-primary addnewbtn'> + Add new </button>
  <!-- //table content -->
     <section class="hero">
         <table id="example" class="table table-striped" style="width:100%">
@@ -299,6 +361,17 @@ if ($_SESSION['isAdmin'] !== 1) {
 
             })
         });
+
+        $(document).ready(function(){
+            $('.addnewbtn').on('click', function(){
+                $('#newItem').modal('show');
+            })
+
+
+
+        })
+
+        
     </script>
 
 </body>
