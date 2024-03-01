@@ -326,7 +326,13 @@ if ($_SESSION['isAdmin'] !== 1) {
                     echo "<td>" . $product['StockQuantity'] . "</td>";
                     }
                     echo "<td style='display:none;'>" . $product['ProductID'] . "</td>";
-                    echo "<td><button type='button' class='btn btn-primary editbtn'>EDIT</button></td>";
+                    echo "<td><button type='button' class='btn btn-primary editbtn'>EDIT</button>";
+                     
+                    echo "<form style='display: inline-block;' action='../TheZone/remove-product.php' method='post'>";
+                    echo "<input type='hidden' name='removeProductID' value='" . $product['ProductID'] . "'>";
+                    echo "<button type='submit' class='btn btn-danger'>REMOVE</button>";
+                    echo "</form>";
+                    echo "</td>";
                     echo "</tr>";
                 }
                 ?>
