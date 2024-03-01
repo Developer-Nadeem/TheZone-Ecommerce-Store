@@ -36,6 +36,54 @@ if (isset($_POST['add-to-cart'])) {
   <?php include('../TheZone//navbar.php') ?>
   <!--Navbar End-->
 
+  <!-- Filter Box Start -->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form method="get" class="d-flex align-items-center justify-content-end">
+        <label class="me-2">Sort by:</label>
+        <select name="filter" class="form-select">
+          <option value="low-high">Low-High</option>
+          <option value="high-low">High-Low</option>
+        </select>
+         <!-- Brand Filter -->
+         <label class="ms-2">Brand:</label>
+        <select name="brand" class="form-select ms-2">
+          <option value="all">All Brands</option>
+          <option value="brand1">champion x cola</option>
+          <option value="brand1">thrasher</option>
+          <option value="brand1">method tech</option>
+          <option value="brand2">vans</option>
+          <option value="brand1">malita</option>
+          <option value="brand1">MassDnm</option>
+
+        </select>
+
+        <!-- Price Range Filter -->
+        <label class="ms-2">Price Range:</label>
+        <input type="text" name="minPrice" placeholder="Min Price" class="form-control ms-2" style="width: 100px;">
+        <input type="text" name="maxPrice" placeholder="Max Price" class="form-control ms-2" style="width: 100px;">
+
+        <!-- Category Filter -->
+        <label class="ms-2">Category:</label>
+        <select name="category" class="form-select ms-2">
+          <option value="all">All Categories</option>
+          <option value="men">Men</option>
+          <option value="women">Women</option>
+          <!-- Add more category options as needed -->
+        </select>
+
+        <button type="submit" class="btn btn-secondary ms-2">
+          <i class="Apply sort"></i> Apply Filters
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Filter and Sort Box End -->
+
   <main>
     <h1 class="text-center">Jumpers</h1>
     <p class="text-center">Explore The Zone's exclusive jumper collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
