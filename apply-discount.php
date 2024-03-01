@@ -1,14 +1,14 @@
 <?php
     require("connectiondb.php");
 
-    if (!isset($_GET['discount_code'])) {
+    if (!isset($_POST['discount_code'])) {
         $response = "You have not entered a discount code.";
         header('Content-Type: application/json');
         echo json_encode($response);
         return;
     }
 
-    $discountCode = $_GET['discount_code'];
+    $discountCode = $_POST['discount_code'];
 
     $stmt = $db->prepare("SELECT * FROM discount_codes WHERE LOWER(discount_code) = LOWER(:discountCode)");
     $stmt->bindValue(':discountCode', $discountCode);
