@@ -341,11 +341,11 @@ if (isset($_POST['remove-from-cart'])) {
                     <hr>
                     <form style="margin-bottom: 15px; margin-left: 15px; margin-right: 15px">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="exampleInput" placeholder="Enter discount code">
+                            <input type="text" class="form-control" id="discount-code-box" placeholder="Enter discount code">
                         </div>
                     </form>
                     <div style="text-align: center; margin-bottom: 15px; margin-top: 15px;">
-                        <button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Apply Code</button>
+                        <a class="shoppingcart-button" id= "apply-discount-button" name="checkout-button">Apply Code</a>
                     </div>
                 </div>    
                 <div class="total-section">
@@ -357,7 +357,7 @@ if (isset($_POST['remove-from-cart'])) {
                             if (unserialize($shopping_cart) == null) {
                                 echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</button>';
                             } else {
-                                echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</button>';
+                                echo '<a href="checkout.php" class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</a>';
                             }
                         ?>
                     </div>
@@ -373,6 +373,31 @@ if (isset($_POST['remove-from-cart'])) {
     <?php include('footer.php') ?>
     <!-- Footer End -->
     <!-- needed for drop down menu -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('apply-discount-button').addEventListener('click', () => {
+                let discountCode = document.getElementById('discount-code-box').value;
+
+                fetch('apply-discount.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'discount_code=' + encodeURIComponent(discountCode)
+                }).then(res => res.json()).then(data => {
+                    console.log(data);
+                    if (data.success) {
+                        const total = parseFloat(document.getElementById('cart-total').innerHTML);
+                        const discount = total * (data.discount_percentage / 100);
+                        document.getElementById('cart-total').innerHTML = (total - discount).toFixed(2);
+                    } else {
+                        alert(data);
+                    }
+                })
+            })
+        })
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 

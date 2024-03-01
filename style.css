@@ -535,6 +535,7 @@ div {
   border-radius: 4px;
   cursor: pointer;
   margin: 2vw;
+  text-decoration: none;
   justify-content: center;
 }
 
