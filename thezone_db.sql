@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 03:51 PM
+-- Generation Time: Mar 08, 2024 at 03:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -180,6 +180,13 @@ CREATE TABLE `orderitems` (
   `SubTotal` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orderitems`
+--
+
+INSERT INTO `orderitems` (`OrderItemID`, `OrderID`, `ProductID`, `Quantity`, `SubTotal`) VALUES
+(1, 11, 2, 1, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -188,13 +195,20 @@ CREATE TABLE `orderitems` (
 
 CREATE TABLE `orders` (
   `OrderID` int(11) NOT NULL,
-  `UserID` int(11) DEFAULT NULL,
-  `OrderTime` datetime DEFAULT NULL,
-  `OrderStatus` varchar(255) DEFAULT NULL,
-  `TotalAmount` int(11) DEFAULT NULL,
-  `PaymentID` int(11) NOT NULL,
-  `AddressID` int(11) NOT NULL
+  `UserID` int(11) NOT NULL,
+  `OrderTime` datetime NOT NULL,
+  `OrderStatus` varchar(255) NOT NULL,
+  `TotalAmount` int(11) NOT NULL,
+  `PaymentID` int(11) DEFAULT NULL,
+  `AddressID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`OrderID`, `UserID`, `OrderTime`, `OrderStatus`, `TotalAmount`, `PaymentID`, `AddressID`) VALUES
+(11, 0, '2024-03-08 15:22:18', 'Pending', 88, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -246,7 +260,8 @@ CREATE TABLE `useraccounts` (
 INSERT INTO `useraccounts` (`UserID`, `Firstname`, `Lastname`, `Email`, `Pass`, `isAdmin`) VALUES
 (1, 'Nadeem', 'H', '2200385050@aston.ac.uk', '$2y$10$wlIfuobBWDepRKfKJCMohetNxuXjF3qG8jcDaNB2N2p2t/YBqMqTC', NULL),
 (2, 'a', 'a', 'a@gmail.com', '$2y$10$e6cimJprorq.fnjfzwzEJuv7edmXSd2gVwDXk4ax8NLtoz7WsB0uu', NULL),
-(3, 'b', 'b', 'B@gmail.com', '$2y$10$h1o8t1sk9IQbGkk6CasdNe.K7x/1cl.sVnjCZoaj7z71ixTWqjXU.', NULL);
+(3, 'b', 'b', 'B@gmail.com', '$2y$10$h1o8t1sk9IQbGkk6CasdNe.K7x/1cl.sVnjCZoaj7z71ixTWqjXU.', NULL),
+(4, 'admin', 'Nadeem', 'adminNadeem@gmail.com', '$2y$10$7Ae4sVxX1esldw4RMG6KDuu2suw5lhI08rkObLOYuTh9/qAs43vpu', 1);
 
 --
 -- Indexes for dumped tables
@@ -369,13 +384,13 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `orderitems`
 --
 ALTER TABLE `orderitems`
-  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `paymentdetails`
@@ -393,7 +408,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
