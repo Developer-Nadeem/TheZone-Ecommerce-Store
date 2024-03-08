@@ -267,29 +267,9 @@ if (isset($_POST['remove-from-cart'])) {
                     document.addEventListener('DOMContentLoaded', function() {
                         const shoppingCartJson = JSON.parse(getCookieValue('shopping_cart_json'));
                     function updatePrice() {
-                        const shoppingCartJson = JSON.parse(getCookieValue('shopping_cart_json'));
-
-                        if (shoppingCartJson.length === 0) {
-                            document.getElementById('cart-items').innerHTML = '<div class="sample-product"><h3>Cart is empty</h3></div>';
-                            
-                            const checkoutBtn = document.getElementById('checkout-button');
-                            
-                            checkoutBtn.setAttribute('href', 'index.php');
-                            checkoutBtn.innerHTML = 'Shop Now';
-
-                            document.getElementById('cart-total').innerHTML = '0';
-                        } else {
-                            console.log('Shopping cart is not empty');
-                                    
-                            let total = 0;
-                            
-                            document.querySelectorAll('.item-price').forEach(function(itemPrice) {
-                                console.log('Price found');
-                                total += parseFloat(itemPrice.innerHTML.substring(1));
-                            });
-
-                            document.getElementById('cart-total').innerHTML = total.toFixed(2);
-                        }
+                        fetch('get-cart-total.php').then(res => res.json()).then(data => {
+                            document.getElementById('cart-total').innerHTML = data;
+                        });
                     }
 
                     updatePrice();
@@ -386,11 +366,21 @@ if (isset($_POST['remove-from-cart'])) {
                     <div style="text-align: center; margin-bottom: 15px; margin-top: 15px;">
                         <a class="shoppingcart-button" id= "apply-discount-button" name="checkout-button">Apply Code</a>
                     </div>
-                </div>    
+                </div>
                 <div class="total-section">
                     <h4>TOTAL</h4>
                     <hr>
-                    <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p>
+                    <?php
+                        $total = 0;
+                        $cart_items = array_count_values(unserialize($shopping_cart));
+                        foreach($cart_items as $item => $quantity) {
+                            $stmt = $db->query("SELECT Price FROM inventory WHERE ProductID = $item");
+                            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $total += $row['Price'] * $quantity;
+                        }
+                        echo '<p class="text-center">Total Price: £<span id="cart-total">' . $total . '</span></p>';
+                    ?>
+                    <!-- <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p> -->
                     <div style="text-align: center; margin-bottom: 15px;">
                         <?php
                             if (unserialize($shopping_cart) == null) {
@@ -412,10 +402,38 @@ if (isset($_POST['remove-from-cart'])) {
     <?php include('footer.php') ?>
     <!-- Footer End -->
     <!-- needed for drop down menu -->
+
+    
     <script>
+        function getCookieValue(cookieName) {
+            const name = cookieName + "=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i];
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1);
+                }
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+            return "";
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('apply-discount-button').addEventListener('click', () => {
-                let discountCode = document.getElementById('discount-code-box').value;
+                let discountCodeBox = document.getElementById('discount-code-box');
+
+                console.log(getCookieValue('discount_code'));
+
+                if (getCookieValue('discount_code') != "") {
+                    console.log('Discount already applied');
+                    discountCodeBox.innerHTML = "Discount Already Applied";
+                    return;
+                };
+
+                let discountCode = discountCodeBox.value;
 
                 fetch('apply-discount.php', {
                     method: 'POST',
