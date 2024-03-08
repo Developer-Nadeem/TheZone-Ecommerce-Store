@@ -69,13 +69,14 @@ if ($_SESSION['isAdmin'] !== 1) {
                      echo "<td>" . $row['PaymentID'] . "</td>";
                      echo "<td>" . $row['AddressID'] . "</td>";
                      echo "<td>";
-                     echo "<form action='update-order.php' method='post'>";
+                     echo "<form action='../TheZone/update-order.php' method='post'>";
                      echo "<input type='hidden' name='orderID' value='" . $row['OrderID'] . "'>";
                      echo "<select class='form-select' name='orderStatus'>";
                      echo "<option value='Processing'>Processing</option>";
                      echo "<option value='Shipped'>Shipped</option>";
                      echo "<option value='Delivered'>Delivered</option>";
                      echo "</select>";
+                     echo "<input type='hidden' name='submitted' id='submitted'>";
                      echo "<button type='submit' class='btn btn-primary'>Update</button>";
                      echo "</form>";
                      echo "</td>";
