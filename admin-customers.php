@@ -81,6 +81,11 @@ if ($_SESSION['isAdmin'] !== 1) {
                             <input required type="password" class="form-control" name="editUserPassword"
                                 id="editUserPassword" placeholder="Enter new password">
                         </div>
+                        <div class="form-group">
+                            <label for="isAdmin">isAdmin(0/1)</label>
+                            <input type="text" class="form-control" name="isAdmin"
+                                id="isAdmin" placeholder="Enter 0 for False or 1 for True) ">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>">
@@ -127,7 +132,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                     echo "<td>" . $user['Pass'] . "</td>";
                     echo "<td>" . ($user['isAdmin'] ? 'Yes' : 'No') . "</td>";
                     echo "<td>";
-                    echo "<button type='button' class='btn btn-primary editbtn' data-userid='" . $user['UserID'] . "' data-firstname='" . $user['Firstname'] . "' data-lastname='" . $user['Lastname'] . "' data-useremail='" . $user['Email'] . "' data-userpassword='" . $user['Pass'] . "'>EDIT</button>";
+                    echo "<button type='button' class='btn btn-primary editbtn' data-userid='" . $user['UserID'] . "' data-firstname='" . $user['Firstname'] . "' data-lastname='" . $user['Lastname'] . "' data-useremail='" . $user['Email'] . "' data-userpassword='" . $user['Pass'] . "' data-isadmin ='".$user['isAdmin'] . "'>EDIT</button>";
 
 
                     echo "<form style='display: inline-block;' action='../TheZone/remove-user.php' method='post'>";
@@ -158,6 +163,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                 var userEmail = $(this).data('useremail');
                 var userPassword = $(this).data('userpassword');
                 var lastname = $(this).data('lastname');
+                var isAdmin = $(this).data('isadmin');
 
 
                 console.log('User ID:', userID);
@@ -165,6 +171,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                 console.log('User Email:', userEmail);
                 console.log('User Password:', userPassword);
                 console.log('lastname:', lastname);
+                console.log('isAdmin:', isAdmin);
 
 
                 $('#editUserID').val(userID);
@@ -172,6 +179,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                 $('#editLastName').val(lastname);
                 $('#editUserEmail').val(userEmail);
                 $('#editUserPassword').val(userPassword);
+                $('#isAdmin').val(isAdmin);
             });
         });
     </script>
