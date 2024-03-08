@@ -225,9 +225,10 @@ if (isset($_POST['remove-from-cart'])) {
                             echo '<div class="update-form">';
                             echo '<form method="post" class="update-form">';
                             echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', 1)">+</quantity-button>';
+                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', 1,  ' . $row['Price'] . '))">+</quantity-button>';
                             echo '<span class="item-count">' . $quantity . '</span>';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', -1)">- </quantity-button>';
+                            // echo '<span class="item-price">' . $price . '</span>';
+                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', -1,  ' . $row['Price'] . '))">- </quantity-button>';
                             echo '</form>';
                             echo '</div>';
                             // -- update product quantity form ends here --
@@ -320,16 +321,44 @@ if (isset($_POST['remove-from-cart'])) {
                         //
                     })
 
-                    function updateQuantity(productID, change) {
-                    var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
-                    var currentQuantity = parseInt(quantityElement.innerHTML);
-                    var newQuantity = currentQuantity + change;
+                    function updateQuantity(productID, change, basePrice) {
+                        var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
+                        var priceElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-price');
 
-                    if (newQuantity >= 0) {
-                    quantityElement.innerHTML = newQuantity;
+                        var currentQuantity = parseInt(quantityElement.innerHTML);
+                        var newQuantity = currentQuantity + change;
+                        var newPrice = basePrice * newQuantity;
+
+                        if (newQuantity >= 0) {
+                            quantityElement.innerHTML = newQuantity;
+
+                            priceElement.innerHTML = '£' + newPrice.toFixed(2);
+                            
+                        }
                     }
-                    // You may also want to update the server or cookie with the new quantity here
-                }
+
+                    // function updateQuantity(element, change) {
+                    //     var form = element.closest('.update-form');
+                    //     var productId = form.querySelector('[name="product-id"]').value;
+                    //     var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
+                    //     var priceElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-price');
+
+                    //     var currentQuantity = parseInt(quantityElement.innerHTML);
+                    //     var newQuantity = currentQuantity + change;
+
+                    //     if (newQuantity >= 0) {
+                    //         quantityElement.innerHTML = newQuantity;
+
+                    //         // Assuming you have a variable to store the initial product price
+                    //         // You may need to fetch this value from the server or store it elsewhere
+                    //         var initialPrice = /* Add your logic to fetch the initial price */;
+
+                    //         // Calculate the new price and update the price element
+                    //         var newPrice = initialPrice * newQuantity;
+                    //         priceElement.innerHTML = '£' + newPrice.toFixed(2);
+                    //     }
+                    // }
+
                 </script>
                 </ul>
             </div>
