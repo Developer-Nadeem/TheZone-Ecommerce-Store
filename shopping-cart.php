@@ -225,10 +225,9 @@ if (isset($_POST['remove-from-cart'])) {
                             echo '<div class="update-form">';
                             echo '<form method="post" class="update-form">';
                             echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', 1,  ' . $row['Price'] . '))">+</quantity-button>';
+                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', 1))">+</quantity-button>';
                             echo '<span class="item-count">' . $quantity . '</span>';
-                            // echo '<span class="item-price">' . $price . '</span>';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', -1,  ' . $row['Price'] . '))">- </quantity-button>';
+                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', -1))">- </quantity-button>';
                             echo '</form>';
                             echo '</div>';
                             // -- update product quantity form ends here --
@@ -321,21 +320,32 @@ if (isset($_POST['remove-from-cart'])) {
                         //
                     })
 
-                    function updateQuantity(productID, change, basePrice) {
+                    function updateQuantity(productID, change) {
                         var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
-                        var priceElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-price');
-
                         var currentQuantity = parseInt(quantityElement.innerHTML);
                         var newQuantity = currentQuantity + change;
-                        var newPrice = basePrice * newQuantity;
 
                         if (newQuantity >= 0) {
-                            quantityElement.innerHTML = newQuantity;
-
-                            priceElement.innerHTML = '£' + newPrice.toFixed(2);
-                            
+                        quantityElement.innerHTML = newQuantity;
                         }
+                        // You may also want to update the server or cookie with the new quantity here
                     }
+
+                    // function updateQuantity(productID, change, basePrice) {
+                    //     var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
+                    //     var priceElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-price');
+
+                    //     var currentQuantity = parseInt(quantityElement.innerHTML);
+                    //     var newQuantity = currentQuantity + change;
+                    //     var newPrice = basePrice * newQuantity;
+
+                    //     if (newQuantity >= 0) {
+                    //         quantityElement.innerHTML = newQuantity;
+
+                    //         priceElement.innerHTML = '£' + newPrice.toFixed(2);
+                            
+                    //     }
+                    // }
 
                     // function updateQuantity(element, change) {
                     //     var form = element.closest('.update-form');
