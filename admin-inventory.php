@@ -73,13 +73,13 @@ if ($_SESSION['isAdmin'] !== 1) {
             text-align: center;
         }
 
-        
-        .inv-filter-container > div {
-            padding: 0 10px; 
-            border-right: 3px solid #000; 
+
+        .inv-filter-container>div {
+            padding: 0 10px;
+            border-right: 3px solid #000;
         }
 
-        .inv-filter-container > div:last-child {
+        .inv-filter-container>div:last-child {
             margin-right: -1px;
             border-right: 1px solid #ccc;
         }
@@ -88,7 +88,8 @@ if ($_SESSION['isAdmin'] !== 1) {
             margin-right: 10px;
         }
 
-        select, input[type="search"] {
+        select,
+        input[type="search"] {
             padding: 8px;
             font-size: 14px;
         }
@@ -114,8 +115,9 @@ if ($_SESSION['isAdmin'] !== 1) {
         .checkboxes {
             padding: 5px;
         }
-        .low-stock{
-            color:red;
+
+        .low-stock {
+            color: red;
             font-weight: bold;
             padding: 0;
             margin: 0;
@@ -143,50 +145,50 @@ if ($_SESSION['isAdmin'] !== 1) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-               
-                    <form action="../TheZone/Inventory-update-code.php" method="post" class="custom-padding">
-                        <div class="modal-body">
 
-                            <input type="hidden" name="update_id" id="update_id">
-                            <div class="form-group">
-                                <label for="ProductID" class="col-form-label">Product ID</label>
-                                <input type="text" name="ProductID" class="form-control" id="ProductID" style="pointer-events:none;">
+                <form action="../TheZone/Inventory-update-code.php" method="post" class="custom-padding">
+                    <div class="modal-body">
 
-                            </div>
-                            <div class="form-group">
-                                <label for="ProductName" class="col-form-label">Product Name</label>
-                                <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
-                            </div>
-                            <div class="form-group">
-                                <label for="Description" class="col-form-label">Description</label><br>
-                                <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="Price" class="col-form-label">Price</label>
-                                <input required type="text" name="Price" class="form-control" id="Price">
-                            </div>
-                            <div class="form-group">
-                                <label for="Quantity" class="col-form-label">Quantity</label>
-                                <input required type="text" name="Quantity" class="form-control" id="Quantity"><br>
-                            </div>
-
+                        <input type="hidden" name="update_id" id="update_id">
+                        <div class="form-group">
+                            <label for="ProductID" class="col-form-label">Product ID</label>
+                            <input type="text" name="ProductID" class="form-control" id="ProductID" style="pointer-events:none;">
 
                         </div>
-                        <div class="modal-footer">
-                            <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="hidden" name="submitted" id="submitted">
-                            <button type="submit" name="updatedata" class="btn btn-secondary">Update Inventory</button>
+                        <div class="form-group">
+                            <label for="ProductName" class="col-form-label">Product Name</label>
+                            <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
                         </div>
-                    </form>
-             
+                        <div class="form-group">
+                            <label for="Description" class="col-form-label">Description</label><br>
+                            <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="Price" class="col-form-label">Price</label>
+                            <input required type="text" name="Price" class="form-control" id="Price">
+                        </div>
+                        <div class="form-group">
+                            <label for="Quantity" class="col-form-label">Quantity</label>
+                            <input required type="text" name="Quantity" class="form-control" id="Quantity"><br>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="hidden" name="submitted" id="submitted">
+                        <button type="submit" name="updatedata" class="btn btn-secondary">Update Inventory</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
     <!-- modal end -->
 
-     <!-- //pop up modal for adding item -->
-     <div class="modal fade" id="newItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- //pop up modal for adding item -->
+    <div class="modal fade" id="newItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -195,53 +197,53 @@ if ($_SESSION['isAdmin'] !== 1) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-               
-                    <form action="../TheZone/admin-inventory-add-item.php" method="post" class="custom-padding">
-                        <div class="modal-body">
 
-                            <input type="hidden" name="update_id" id="update_id">
-                            
-                            <div class="form-group">
-                                <label for="ProductName" class="col-form-label">Product Name</label>
-                                <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
-                            </div>
-                            <div class="form-group">
-                                <label for="Description" class="col-form-label">Description</label><br>
-                                <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2" placeholder="Enter a product description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="ImageURL" class="col-form-label">Image URL</label>
-                                <input required type="text" class="form-control" name="ImageURL" id="ImageURL" aria-describedby="ImageURL" placeholder="ImageURL">
-                            </div>
-                            <div class="form-group">
-                                <label for="Price" class="col-form-label">Price</label>
-                                <input required type="text" name="Price" class="form-control" id="Price" placeholder="£">
-                            </div>
-                            <div class="form-group">
-                                <label for="Quantity" class="col-form-label">Quantity</label>
-                                <input required type="text" name="Quantity" class="form-control" id="Quantity" placeholder="Enter stock quantity"><br>
-                            </div>
-                            <div class="form-group">
-                                <label for="CatID" class="col-form-label">CategoryID</label>
-                                <input required type="text" name="CatID" class="form-control" id="CatID" placeholder="Enter Category ID"><br>
-                            </div>
-                            <div class="form-group">
-                                <label for="GenderID" class="col-form-label">GenderID</label>
-                                <input required type="text" name="GenderID" class="form-control" id="GenderID" placeholder="Enter Gender ID"><br>
-                            </div>
+                <form action="../TheZone/admin-inventory-add-item.php" method="post" class="custom-padding">
+                    <div class="modal-body">
 
+                        <input type="hidden" name="update_id" id="update_id">
 
-
-
+                        <div class="form-group">
+                            <label for="ProductName" class="col-form-label">Product Name</label>
+                            <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
                         </div>
-                        <div class="modal-footer">
-                            <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="hidden" name="submitted" id="submitted">
-                            <button type="submit" name="updatedata" class="btn btn-secondary">Save</button>
+                        <div class="form-group">
+                            <label for="Description" class="col-form-label">Description</label><br>
+                            <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2" placeholder="Enter a product description"></textarea>
                         </div>
-                    </form>
-             
+                        <div class="form-group">
+                            <label for="ImageURL" class="col-form-label">Image URL</label>
+                            <input required type="text" class="form-control" name="ImageURL" id="ImageURL" aria-describedby="ImageURL" placeholder="ImageURL">
+                        </div>
+                        <div class="form-group">
+                            <label for="Price" class="col-form-label">Price</label>
+                            <input required type="text" name="Price" class="form-control" id="Price" placeholder="£">
+                        </div>
+                        <div class="form-group">
+                            <label for="Quantity" class="col-form-label">Quantity</label>
+                            <input required type="text" name="Quantity" class="form-control" id="Quantity" placeholder="Enter stock quantity"><br>
+                        </div>
+                        <div class="form-group">
+                            <label for="CatID" class="col-form-label">CategoryID</label>
+                            <input required type="text" name="CatID" class="form-control" id="CatID" placeholder="Enter Category ID"><br>
+                        </div>
+                        <div class="form-group">
+                            <label for="GenderID" class="col-form-label">GenderID</label>
+                            <input required type="text" name="GenderID" class="form-control" id="GenderID" placeholder="Enter Gender ID"><br>
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="hidden" name="submitted" id="submitted">
+                        <button type="submit" name="updatedata" class="btn btn-secondary">Save</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -251,12 +253,12 @@ if ($_SESSION['isAdmin'] !== 1) {
     <section class="inv-filter-container">
         <div class="checkboxes">
             <label for="inv-dropdown">Sort By: </label>
-            <select name="inv-dropdown">
+            <select name="inv-dropdown" onchange="sortInventory()">
                 <option value="default">None</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="stock-high">Stock: Low to High</option>
-                <option value="stock-low">Stock: High to Low</option>
+                <option value="price-high">Price (High to Low)</option>
+                <option value="price-low">Price (Low to High)</option>
+                <option value="stock-high">Stock (High to Low)</option>
+                <option value="stock-low">Stock (Low to High)</option>
             </select>
         </div>
 
@@ -285,16 +287,9 @@ if ($_SESSION['isAdmin'] !== 1) {
             <input type="checkbox" id="tshirt" name="tshirt" value="Tshirt">
         </div>
 
-        <div>
-            <form role="search" action="#" method="get" class="inventory-search">
-                <label>Find Product: </label>
-                <input type="search" class="" placeholder="Search" aria-label="Search" name="inv-search_data" autocomplete="off">
-            </form>
-        </div>
-
     </section>
     <div class="addbtn"><button type='button' class='btn btn-primary addnewbtn'> + Add new </button></div>
- <!-- //table content -->
+    <!-- //table content -->
     <section class="hero">
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
@@ -311,7 +306,58 @@ if ($_SESSION['isAdmin'] !== 1) {
                 <?php
                 include('../TheZone/connectiondb.php');
 
-                $inventory = $db->prepare("SELECT * FROM Inventory");
+                //checks to see if a sort filter has been selected, if not, it uses the default
+                $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'default';
+
+                switch ($sortOption) {
+                    case 'price-high':
+                        $orderBy = 'ORDER BY Price DESC';
+                        break;
+                    case 'price-low':
+                        $orderBy = 'ORDER BY Price ASC';
+                        break;
+                    case 'stock-high':
+                        $orderBy = 'ORDER BY StockQuantity DESC';
+                        break;
+                    case 'stock-low':
+                        $orderBy = 'ORDER BY StockQuantity ASC';
+                        break;
+                    default:
+                        $orderBy = '';
+                        break;
+                }
+
+
+                // This is for the filters
+                $filters = [];
+                if (isset($_GET['male'])) {
+                    $filters[] = "GenderID = '1'";
+                }
+                if (isset($_GET['female'])) {
+                    $filters[] = "GenderID = '2'";
+                }
+                if (isset($_GET['tshirt'])) {
+                    $filters[] = "CategoryID = '1'";
+                }
+                if (isset($_GET['jumper'])) {
+                    $filters[] = "CategoryID = '2'";
+                }
+                if (isset($_GET['hoodie'])) {
+                    $filters[] = "CategoryID = '3'";
+                }
+                if (isset($_GET['trainer'])) {
+                    $filters[] = "CategoryID = '4'";
+                }
+                if (isset($_GET['jeans'])) {
+                    $filters[] = "CategoryID = '5'";
+                }
+
+                $filterCondition = ''; 
+                if (!empty($filters)) {
+                    $filterCondition = 'WHERE ' . implode(' AND ', $filters);
+                }
+
+                $inventory = $db->prepare("SELECT * FROM Inventory $filterCondition $orderBy");
                 $inventory->execute();
 
                 foreach ($inventory as $product) {
@@ -320,14 +366,14 @@ if ($_SESSION['isAdmin'] !== 1) {
                     echo "<td style='width: 150px;'>" . $product['ProductName'] . "</td>";
                     echo "<td>" . $product['ProductDescription'] . "</td>";
                     echo "<td>£" . $product['Price'] . "</td>";
-                    if($product['StockQuantity']<20){
-                    echo "<td><p class=low-stock>" . $product['StockQuantity'] ."</p> </td>";
-                    }else{
-                    echo "<td>" . $product['StockQuantity'] . "</td>";
+                    if ($product['StockQuantity'] < 20) {
+                        echo "<td><p class=low-stock>" . $product['StockQuantity'] . "</p> </td>";
+                    } else {
+                        echo "<td>" . $product['StockQuantity'] . "</td>";
                     }
                     echo "<td style='display:none;'>" . $product['ProductID'] . "</td>";
                     echo "<td><button type='button' class='btn btn-primary editbtn'>EDIT</button>";
-                     
+
                     echo "<form class='binbtn' style='display: inline-block;' action='../TheZone/remove-product.php' method='post'>";
                     echo "<input type='hidden' name='removeProductID' value='" . $product['ProductID'] . "'>";
                     echo "<input type='hidden' name='productName' value='" . $product['ProductName'] . "'>";
@@ -361,8 +407,6 @@ if ($_SESSION['isAdmin'] !== 1) {
 
                 console.log(data);
 
-                
-
                 $('#ProductName').val(data[1]);
                 $('#Description').val(data[2]);
                 $('#Price').val(data[3]);
@@ -372,17 +416,31 @@ if ($_SESSION['isAdmin'] !== 1) {
             })
         });
 
-        $(document).ready(function(){
-            $('.addnewbtn').on('click', function(){
+        $(document).ready(function() {
+            $('.addnewbtn').on('click', function() {
                 $('#newItem').modal('show');
             })
-
-
-
         })
-
-        
     </script>
+
+
+    <script>
+        window.onload = function() {
+            // This keeps the sort filter to the one selected when refreshing after selection
+            var urlParams = new URLSearchParams(window.location.search);
+            var sortValue = urlParams.get('sort');
+
+            if (sortValue) {
+                document.querySelector("select[name='inv-dropdown']").value = sortValue;
+            }
+        };
+
+        function sortInventory() {
+            var sortValue = document.querySelector("select[name='inv-dropdown']").value;
+            window.location.href = "admin-inventory.php?sort=" + sortValue;
+        }
+    </script>
+
 
 </body>
 
