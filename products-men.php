@@ -51,16 +51,18 @@ if (isset($_POST['add-to-cart'])) {
         <select name="brand" class="form-select ms-2">
           <option value="all">All Brands</option>
           <option value="brand1">champion x cola</option>
-          <option value="brand1">prosto yezz</option>
-          <option value="brand1">converse</option>
-          <option value="brand2">vans</option>
-          <option value="brand1">prosto</option>
-          <option value="brand1">carhartt</option>
-          <option value="brand1">MassDnm</option>
-          <option value="brand1">Etnies</option>
-          <option value="brand1">Es</option>
+          <option value="brand2">prosto yezz</option>
+          <option value="brand3">converse</option>
+          <option value="brand4">vans</option>
+          <option value="brand5">prosto</option>
+          <option value="brand6">carhartt</option>
+          <option value="brand7">MassDnm</option>
+          <option value="brand8">Etnies</option>
+          <option value="brand9">Es</option>
 
         </select>
+
+
 
         <!-- Price Range Filter -->
         <label class="ms-2">Price Range:</label>
@@ -79,6 +81,28 @@ if (isset($_POST['add-to-cart'])) {
 
 
 <!-- Filter and Sort Box End -->
+<!-- PHP for backend filtering -->
+<?php
+// Assuming $products is an array of products or fetched from a database
+$selectedBrand = $_GET['champion x cola'];
+
+// Filter products based on the selected brand
+if ($selectedBrand && $selectedBrand !== 'all') {
+    $filteredProducts = array_filter($products, function ($product) use ($selectedBrand) {
+        return $product['brand1'] == $selectedBrand;
+    });
+} else {
+    // If 'All Brands' is selected or no brand is selected, display all products
+    $filteredProducts = $selectedBrand;
+}
+
+// Display the filtered products
+foreach ($selectedBrand as $_GET) {
+    echo '<div>' . $product['name'] . '</div>';
+}
+?>
+
+
 
   <main>
     <h1 class="text-center">Men's clothing</h1>
@@ -116,6 +140,40 @@ if (isset($_POST['add-to-cart'])) {
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
   </script>
+  <!-- price range backend-->
+  <?php
+// Assuming you have a database connection
+$servername = "your_servername";
+$username = "your_username";
+$password = "your_password";
+$dbname = "your_database";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Get user input
+$minPrice = isset($_GET['minPrice']) ? intval($_GET['minPrice']) : 0;
+$maxPrice = isset($_GET['maxPrice']) ? intval($_GET['maxPrice']) : PHP_INT_MAX;
+
+// Construct and execute SQL query
+$sql = "SELECT * FROM products WHERE product_price BETWEEN $minPrice AND $maxPrice";
+$result = $conn->query($sql);
+
+// Display filtered results
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "Product ID: " . $row["product_id"]. " - Name: " . $row["product_name"]. " - Price: " . $row["product_price"]. "<br>";
+    }
+} else {
+    echo "No results found.";
+}
+
+$conn->close();
+?>
+
 
   <!-- Footer Start -->
   <?php include('footer.php') ?>
