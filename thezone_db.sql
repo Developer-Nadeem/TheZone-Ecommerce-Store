@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2024 at 03:25 PM
+-- Generation Time: Mar 08, 2024 at 04:26 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -140,7 +140,7 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`ProductID`, `ProductName`, `ProductDescription`, `Price`, `ImageURL`, `StockQuantity`, `CategoryID`, `GenderID`) VALUES
-(1, 'Champion X Coca Cola Crewneck T-Shirt 220184 T-shirt (bwb)', 'Elevate your style with this classic crewneck T-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448604-champion-x-coca-cola-crewneck-tshirt-220184-tshirt-bwb.jpg?w=1920', 100, 1, 1),
+(1, 'Champion X Coca Cola Crewneck T-Shirt 220184 T-shirt (bwb)', 'Elevate your style with this classic crewneck T-shirt, featuring a comfortable fit and timeless design for everyday casual wear.', 30, 'https://static.super-shop.com/1448604-champion-x-coca-cola-crewneck-tshirt-220184-tshirt-bwb.jpg?w=1920', 19, 1, 1),
 (2, 'Champion X Coca Cola Cardigan Top 220192 Sweater (hlg/loy)', 'Elevate your style with this classic jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 88, 'https://static.super-shop.com/1448614-champion-x-coca-cola-cardigan-top-220192-sweater-hlg-loy.jpg?w=1920', 100, 2, 2),
 (3, 'Prosto Yezz Jumper (black)', 'Elevate your style with this classic Jumper, featuring a comfortable fit and timeless design for everyday casual wear.', 48, 'https://static.super-shop.com/1439438-prosto-yezz-sweatshirt-black.jpg?w=1920', 100, 2, 1),
 (4, 'Converse Chuck Taylor All Star Lift Hi Shoes Wmn (black)', 'Elevate your style with these sneakers, featuring a comfortable fit and timeless design for everyday casual wear.', 79, 'https://static.super-shop.com/1212146-converse-chuck-taylor-all-star-lift-hi-shoes-wmn-black.jpg?w=1920', 100, 4, 1),
@@ -250,7 +250,7 @@ CREATE TABLE `useraccounts` (
   `Lastname` varchar(255) DEFAULT NULL,
   `Email` varchar(255) DEFAULT NULL,
   `Pass` varchar(255) DEFAULT NULL,
-  `isAdmin` tinyint(1) DEFAULT NULL
+  `isAdmin` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -258,10 +258,11 @@ CREATE TABLE `useraccounts` (
 --
 
 INSERT INTO `useraccounts` (`UserID`, `Firstname`, `Lastname`, `Email`, `Pass`, `isAdmin`) VALUES
-(1, 'Nadeem', 'H', '2200385050@aston.ac.uk', '$2y$10$wlIfuobBWDepRKfKJCMohetNxuXjF3qG8jcDaNB2N2p2t/YBqMqTC', NULL),
-(2, 'a', 'a', 'a@gmail.com', '$2y$10$e6cimJprorq.fnjfzwzEJuv7edmXSd2gVwDXk4ax8NLtoz7WsB0uu', NULL),
-(3, 'b', 'b', 'B@gmail.com', '$2y$10$h1o8t1sk9IQbGkk6CasdNe.K7x/1cl.sVnjCZoaj7z71ixTWqjXU.', NULL),
-(4, 'admin', 'Nadeem', 'adminNadeem@gmail.com', '$2y$10$7Ae4sVxX1esldw4RMG6KDuu2suw5lhI08rkObLOYuTh9/qAs43vpu', 1);
+(1, 'Nadeem', 'H', '2200385050@aston.ac.uk', '$2y$10$wlIfuobBWDepRKfKJCMohetNxuXjF3qG8jcDaNB2N2p2t/YBqMqTC', 0),
+(2, 'a', 'a', 'a@gmail.com', '$2y$10$a2hMCvyk.sZvnSUBdEFF8.91r4z4ejTH74AujYD2LnjE89ILU18LS', 0),
+(3, 'b', 'b', 'B@gmail.com', '$2y$10$ZW5q9yZ5whGJuX92pZMhheTswphUQ0DNqWrN8pUGJ3uqtGSjMApa6', 1),
+(4, 'admin', 'Nadeem', 'adminNadeem@gmail.com', '$2y$10$7Ae4sVxX1esldw4RMG6KDuu2suw5lhI08rkObLOYuTh9/qAs43vpu', 1),
+(5, 'test', 'test-admin', 'test12@gmail.com', '$2y$10$GdmIwSj23YYKxwAA9y0m0O3u7zY3.h5UlTLrAX4m9uFlp7NwoyGsa', 1);
 
 --
 -- Indexes for dumped tables
@@ -408,7 +409,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
