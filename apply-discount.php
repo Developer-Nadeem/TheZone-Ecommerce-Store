@@ -21,8 +21,8 @@
             "discount_percentage" => $row['discount_percentage']
         );
 
-        $_COOKIE['discount_code'] = $discountCode;
-        $_COOKIE['discount_percentage'] = $row['discount_percentage'];
+        setcookie('discount_code', $discountCode, time() + (86400), "/");
+        setcookie('discount_percentage', $row['discount_percentage'], time() + (86400), "/");
     } else {
         $response = "Invalid discount code";
     }
