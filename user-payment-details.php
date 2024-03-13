@@ -1,24 +1,3 @@
-<?php
-session_start();
-include('connectiondb.php');
-
-if (!isset($_COOKIE['shopping_cart'])) {
-  setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
-  setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
-}
-
-if (isset($_POST['add-to-cart'])) {
-  $productId = $_POST['product-id'];
-
-  $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
-
-  array_push($shoppingCart, $productId);
-
-  setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-
-  setcookie('shopping_cart_json', json_encode($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-}
-?>
 <!doctype html>
 <html lang="en">
 
@@ -33,8 +12,6 @@ if (isset($_POST['add-to-cart'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
-
 <body>
     <!--Navbar Start-->
     <?php include('navbar.php') ?>
@@ -42,40 +19,90 @@ if (isset($_POST['add-to-cart'])) {
 
 
     <main>
-        <div>
-            <div class="container-3">
-                <h1>Your Account</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <a href="user-page.php" class="btn btn-primary">Back to User Page</a>
+                    <h1 class="text-center">Your Account</h1>
 
-                <!-- Payment Details Table -->
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <!-- Add Payment Details Button -->
+                    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal"
+                        data-bs-target="#addPaymentModal">Add Payment Details</button>
+
+                    <?php if (isset($paymentDetails) && !empty($paymentDetails)) : ?>
+                    <table class="table">
                         <thead>
                             <tr>
+                                <th>Payment ID</th>
                                 <th>Cardholder Name</th>
                                 <th>Card Number</th>
                                 <th>Expiry Date</th>
-                                <th>Actions</th>
+                                <th>CVV</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach ($paymentDetails as $paymentDetail) : ?>
+                            <tr>
+                                <td><?php echo $paymentDetail['PaymentID']; ?></td>
+                                <td><?php echo $paymentDetail['CardholderName']; ?></td>
+                                <td><?php echo $paymentDetail['CardNumber']; ?></td>
+                                <td><?php echo $paymentDetail['ExpiryDate']; ?></td>
+                                <td><?php echo $paymentDetail['CVV']; ?></td>
+                                <td>
 
-                            <?php
-                            
-                            foreach ($paymentDetails as $payment) {
-                                echo "<tr>";
-                                echo "<td>{$payment['CardholderName']}</td>";
-                                echo "<td>{$payment['CardNumber']}</td>";
-                                echo "<td>{$payment['ExpiryDate']}</td>";
-                                echo "<td><button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editPaymentModal'>Edit</button></td>";
-                                echo "</tr>";
-                            }
-                            ?>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#editPaymentModal"
+                                        data-paymentid="<?php echo $paymentDetail['PaymentID']; ?>"
+                                        data-cardholdername="<?php echo $paymentDetail['CardholderName']; ?>"
+                                        data-cardnumber="<?php echo $paymentDetail['CardNumber']; ?>"
+                                        data-expirydate="<?php echo $paymentDetail['ExpiryDate']; ?>"
+                                        data-cvv="<?php echo $paymentDetail['CVV']; ?>">Edit</button>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <?php else : ?>
+                    <p>No payment details found.</p>
+                    <?php endif; ?>
+
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Add Payment Modal -->
+    <div class="modal fade" id="addPaymentModal" tabindex="-1" aria-labelledby="addPaymentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPaymentModalLabel">Add Payment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form for adding payment details -->
+                    <form action="add-payment-details.php" method="POST">
+                        <div class="mb-3">
+                            <label for="cardholderName" class="form-label">Cardholder Name</label>
+                            <input type="text" class="form-control" id="cardholderName" name="cardholderName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="expiryDate" class="form-label">Expiry Date</label>
+                            <input type="text" class="form-control" id="expiryDate" name="expiryDate" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Payment Details</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Edit Payment Modal -->
     <div class="modal fade" id="editPaymentModal" tabindex="-1" aria-labelledby="editPaymentModalLabel"
         aria-hidden="true">
@@ -89,17 +116,19 @@ if (isset($_POST['add-to-cart'])) {
                     <!-- Form for editing payment details -->
                     <form action="update-payment-details.php" method="POST">
                         <div class="mb-3">
-                            <label for="cardholderName" class="form-label">Cardholder Name</label>
-                            <input type="text" class="form-control" id="cardholderName" name="cardholderName" required>
+                            <label for="editCardholderName" class="form-label">Cardholder Name</label>
+                            <input type="text" class="form-control" id="editCardholderName" name="editCardholderName"
+                                required>
                         </div>
                         <div class="mb-3">
-                            <label for="cardNumber" class="form-label">Card Number</label>
-                            <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+                            <label for="editCardNumber" class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="editCardNumber" name="editCardNumber" required>
                         </div>
                         <div class="mb-3">
-                            <label for="expiryDate" class="form-label">Expiry Date</label>
-                            <input type="text" class="form-control" id="expiryDate" name="expiryDate" required>
+                            <label for="editExpiryDate" class="form-label">Expiry Date</label>
+                            <input type="text" class="form-control" id="editExpiryDate" name="editExpiryDate" required>
                         </div>
+                        <input type="hidden" id="editPaymentID" name="editPaymentID">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </form>
                 </div>
@@ -107,13 +136,33 @@ if (isset($_POST['add-to-cart'])) {
         </div>
     </div>
 
-
-
     <!-- Footer Start -->
     <?php include('footer.php') ?>
     <!-- Footer End -->
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-wNclOarT2rwK2M+XCYf1zWPyjHwWe5bs4AWt4Thos2YR+cR1XtlKStn1YFnTk3lu" crossorigin="anonymous">
+    </script>
+
+
+    <script>
+    var editModal = document.getElementById('editPaymentModal');
+    editModal.addEventListener('show.bs.modal', function(event) {
+
+        var button = event.relatedTarget;
+
+        var paymentID = button.getAttribute('data-paymentid');
+        var cardholderName = button.getAttribute('data-cardholdername');
+        var cardNumber = button.getAttribute('data-cardnumber');
+        var expiryDate = button.getAttribute('data-expirydate');
+        var cvv = button.getAttribute('data-cvv');
+
+        editModal.querySelector('#editPaymentID').value = paymentID;
+        editModal.querySelector('#editCardholderName').value = cardholderName;
+        editModal.querySelector('#editCardNumber').value = cardNumber;
+        editModal.querySelector('#editExpiryDate').value = expiryDate;
+    })
     </script>
 </body>
 

@@ -42,58 +42,61 @@ if (isset($_POST['add-to-cart'])) {
 
     <main>
         <div class="container mt-3">
-            <h1>Your Account</h1>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card bg-light text-dark" onclick="redirectToPage('Your Orders')">
-                        <div class="card-body" style="height: 150px;">
-                            <h5 class="card-title">Your Orders</h5>
-                            <ul class="list-unstyled">
-                                <li>Track, return, cancel an order</li>
-                                <li>Send invoice to email</li>
-                                <li>Buy again</li>
-                            </ul>
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+
+                    <h1>Your Account</h1>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card bg-light text-dark" onclick="redirectToPage('Your Orders')">
+                                <div class="card-body" style="height: 150px;">
+                                    <h5 class="card-title">Your Orders</h5>
+                                    <ul class="list-unstyled">
+                                        <li>Track, return, cancel an order</li>
+                                        <li>Send invoice to email</li>
+                                        <li>Buy again</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light text-dark" onclick="redirectToPage('Login and Security')">
+                                <div class="card-body" style="height: 150px;">
+                                    <h5 class="card-title">Login and Security</h5>
+                                    <ul class="list-unstyled">
+                                        <li>Manage password</li>
+                                        <li>Email</li>
+                                        <li>Mobile number</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light text-dark" onclick="redirectToPage('Your Address')">
+                                <div class="card-body" style="height: 150px;">
+                                    <h5 class="card-title">Your Address</h5>
+                                    <ul class="list-unstyled">
+                                        <li>Edit</li>
+                                        <li>Set default</li>
+                                        <li>Remove</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light text-dark" onclick="redirectToPage('Your Payment Details')">
+                                <div class="card-body" style="height: 150px;">
+                                    <h5 class="card-title">Your Payment Details</h5>
+                                    <ul class="list-unstyled">
+                                        <li>Edit</li>
+                                        <li>Set default</li>
+                                        <li>Remove</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card bg-light text-dark" onclick="redirectToPage('Login and Security')">
-                        <div class="card-body" style="height: 150px;">
-                            <h5 class="card-title">Login and Security</h5>
-                            <ul class="list-unstyled">
-                                <li>Manage password</li>
-                                <li>Email</li>
-                                <li>Mobile number</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card bg-light text-dark" onclick="redirectToPage('Your Address')">
-                        <div class="card-body" style="height: 150px;">
-                            <h5 class="card-title">Your Address</h5>
-                            <ul class="list-unstyled">
-                                <li>Edit</li>
-                                <li>Set default</li>
-                                <li>Remove</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card bg-light text-dark" onclick="redirectToPage('Your Payment Details')">
-                        <div class="card-body" style="height: 150px;">
-                            <h5 class="card-title">Your Payment Details</h5>
-                            <ul class="list-unstyled">
-                                <li>Edit</li>
-                                <li>Set default</li>
-                                <li>Remove</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
     </main>
     <script>

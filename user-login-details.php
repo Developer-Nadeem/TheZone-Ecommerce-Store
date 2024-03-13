@@ -47,7 +47,9 @@ $userDetails = $stmt->fetch(PDO::FETCH_ASSOC);
     <!-- Main Content -->
     <main>
         <div class="container">
+            <a href="user-page.php" class="btn btn-primary">Back to User Page</a>
             <section style="overflow-x: auto; display: flex; justify-content: center;">
+
                 <h1>Your Account</h1>
             </section>
             <section style="overflow-x: auto;">

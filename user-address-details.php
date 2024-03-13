@@ -27,6 +27,7 @@ $email = $_SESSION['email'];
 
 <body>
     <?php include('../TheZone/navbar.php') ?>
+    <a href="user-page.php" class="btn btn-primary">Back to User Page</a>
     <section style="overflow-x: auto; display: flex; justify-content: center;">
         <h1>Your Account</h1>
     </section>

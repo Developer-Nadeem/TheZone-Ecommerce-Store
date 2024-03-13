@@ -56,36 +56,40 @@ $orders = $stmt->fetchAll();
 
     <main>
         <div class="container">
-            <h1>Your Orders</h1>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Order Time</th>
-                        <th>Status</th>
-                        <th>Total Amount</th>
-                        <th>Address</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($orders as $order): ?>
-                    <tr>
-                        <td><?php echo $order['OrderID']; ?></td>
-                        <td><?php echo $order['OrderTime']; ?></td>
-                        <td><?php echo $order['OrderStatus']; ?></td>
-                        <td><?php echo $order['TotalAmount']; ?></td>
-                        <td><?php echo $order['AddressLine1'] . ", " . $order['City'] . ", " . $order['Postcode'] . ", " . $order['Country']; ?>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary edit-order" data-bs-toggle="modal"
-                                data-bs-target="#editOrderModal"
-                                data-order-id="<?php echo $order['OrderID']; ?>">Edit</button>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+            <a href="user-page.php" class="btn btn-primary">Back to User Page</a>
+            <section style="overflow-x: auto; display: flex; justify-content: center;">
+                <h1>Your Orders</h1>
+            </section>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Order Time</th>
+                    <th>Status</th>
+                    <th>Total Amount</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($orders as $order): ?>
+                <tr>
+                    <td><?php echo $order['OrderID']; ?></td>
+                    <td><?php echo $order['OrderTime']; ?></td>
+                    <td><?php echo $order['OrderStatus']; ?></td>
+                    <td><?php echo $order['TotalAmount']; ?></td>
+                    <td><?php echo $order['AddressLine1'] . ", " . $order['City'] . ", " . $order['Postcode'] . ", " . $order['Country']; ?>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary edit-order" data-bs-toggle="modal"
+                            data-bs-target="#editOrderModal"
+                            data-order-id="<?php echo $order['OrderID']; ?>">Edit</button>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
         </div>
     </main>
 
