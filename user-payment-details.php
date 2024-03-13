@@ -25,9 +25,7 @@
                     <a href="user-page.php" class="btn btn-primary">Back to User Page</a>
                     <h1 class="text-center">Your Account</h1>
 
-                    <!-- Add Payment Details Button -->
-                    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal"
-                        data-bs-target="#addPaymentModal">Add Payment Details</button>
+
 
                     <?php if (isset($paymentDetails) && !empty($paymentDetails)) : ?>
                     <table class="table">
