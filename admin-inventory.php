@@ -251,42 +251,48 @@ if ($_SESSION['isAdmin'] !== 1) {
 
     <!-- Filter box -->
     <section class="inv-filter-container">
-        <div class="checkboxes">
-            <label for="inv-dropdown">Sort By: </label>
-            <select name="inv-dropdown" onchange="sortInventory()">
-                <option value="default">None</option>
-                <option value="price-high">Price (High to Low)</option>
-                <option value="price-low">Price (Low to High)</option>
-                <option value="stock-high">Stock (High to Low)</option>
-                <option value="stock-low">Stock (Low to High)</option>
-            </select>
-        </div>
+        <form id="filterForm" action="" method="get">
+            <!-- Sort By Dropdown -->
+            <div class="checkboxes">
+                <label for="inv-dropdown">Sort By: </label>
+                <select name="inv-dropdown">
+                    <option value="default">None</option>
+                    <option value="price-high">Price (High to Low)</option>
+                    <option value="price-low">Price (Low to High)</option>
+                    <option value="stock-high">Stock (High to Low)</option>
+                    <option value="stock-low">Stock (Low to High)</option>
+                </select>
+            </div>
 
-        <div>
-            <label>Filter By: </label>
+            <!-- Filter By checkboxes -->
+            <div>
+                <label>Filter By: </label>
 
-            <label for="male">Male:</label>
-            <input type="checkbox" id="male" name="male" value="Male">
+                <label for="male">Male:</label>
+                <input type="checkbox" id="male" name="male" value="Male">
 
-            <label for="female">Female:</label>
-            <input type="checkbox" id="female" name="female" value="Female">
+                <label for="female">Female:</label>
+                <input type="checkbox" id="female" name="female" value="Female">
 
-            <label for="hoodie">Hoodie:</label>
-            <input type="checkbox" id="hoodie" name="hoodie" value="Hoodie">
+                <label for="hoodie">Hoodie:</label>
+                <input type="checkbox" id="hoodie" name="hoodie" value="Hoodie">
 
-            <label for="jeans">Jeans:</label>
-            <input type="checkbox" id="jeans" name="jeans" value="Jeans">
+                <label for="jeans">Jeans:</label>
+                <input type="checkbox" id="jeans" name="jeans" value="Jeans">
 
-            <label for="jumper">Jumper:</label>
-            <input type="checkbox" id="jumper" name="jumper" value="Jumper">
+                <label for="jumper">Jumper:</label>
+                <input type="checkbox" id="jumper" name="jumper" value="Jumper">
 
-            <label for="trainer">Trainer:</label>
-            <input type="checkbox" id="trainer" name="trainer" value="Trainer">
+                <label for="trainer">Trainer:</label>
+                <input type="checkbox" id="trainer" name="trainer" value="Trainer">
 
-            <label for="tshirt">T-Shirt:</label>
-            <input type="checkbox" id="tshirt" name="tshirt" value="Tshirt">
-        </div>
+                <label for="tshirt">T-Shirt:</label>
+                <input type="checkbox" id="tshirt" name="tshirt" value="Tshirt">
 
+                <button type="button" onclick="applyFilters()">Apply Filters</button>
+
+            </div>
+        </form>
     </section>
     <div class="addbtn"><button type='button' class='btn btn-primary addnewbtn'> + Add new </button></div>
     <!-- //table content -->
@@ -307,7 +313,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                 include('../TheZone/connectiondb.php');
 
                 //checks to see if a sort filter has been selected, if not, it uses the default
-                $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'default';
+                $sortOption = isset($_GET['inv-dropdown']) ? $_GET['inv-dropdown'] : 'default';
 
                 switch ($sortOption) {
                     case 'price-high':
@@ -327,37 +333,45 @@ if ($_SESSION['isAdmin'] !== 1) {
                         break;
                 }
 
+                // Stores all checked filtering options inside an array
+                $filterBox = [];
 
-                // This is for the filters
-                $filters = [];
+                // Performs checks to see if the checkboxes have been selected
                 if (isset($_GET['male'])) {
-                    $filters[] = "GenderID = '1'";
+                    $filterBox[] = "GenderID = '1'";
                 }
+
                 if (isset($_GET['female'])) {
-                    $filters[] = "GenderID = '2'";
+                    $filterBox[] = "GenderID = '2'";
                 }
-                if (isset($_GET['tshirt'])) {
-                    $filters[] = "CategoryID = '1'";
-                }
-                if (isset($_GET['jumper'])) {
-                    $filters[] = "CategoryID = '2'";
-                }
+
                 if (isset($_GET['hoodie'])) {
-                    $filters[] = "CategoryID = '3'";
+                    $filterBox[] = "CategoryID = '3'";
                 }
-                if (isset($_GET['trainer'])) {
-                    $filters[] = "CategoryID = '4'";
-                }
+
                 if (isset($_GET['jeans'])) {
-                    $filters[] = "CategoryID = '5'";
+                    $filterBox[] = "CategoryID = '5'";
                 }
 
-                $filterCondition = ''; 
-                if (!empty($filters)) {
-                    $filterCondition = 'WHERE ' . implode(' AND ', $filters);
+                if (isset($_GET['jumper'])) {
+                    $filterBox[] = "CategoryID = '2'";
                 }
 
-                $inventory = $db->prepare("SELECT * FROM Inventory $filterCondition $orderBy");
+                if (isset($_GET['trainer'])) {
+                    $filterBox[] = "CategoryID = '4'";
+                }
+
+                if (isset($_GET['tshirt'])) {
+                    $filterBox[] = "CategoryID = '1'";
+                }
+
+                // Combine conditions using AND
+                $filterOption = '';
+                if (!empty($filterBox)) {
+                    $filterOption = "WHERE " . implode(" OR ", $filterBox);
+                }
+
+                $inventory = $db->prepare("SELECT * FROM Inventory $filterOption $orderBy");
                 $inventory->execute();
 
                 foreach ($inventory as $product) {
@@ -426,18 +440,24 @@ if ($_SESSION['isAdmin'] !== 1) {
 
     <script>
         window.onload = function() {
-            // This keeps the sort filter to the one selected when refreshing after selection
             var urlParams = new URLSearchParams(window.location.search);
-            var sortValue = urlParams.get('sort');
+            var sortValue = urlParams.get('inv-dropdown');
+            var filterValues = ['male', 'female', 'hoodie', 'jeans', 'jumper', 'trainer', 'tshirt'];
 
             if (sortValue) {
                 document.querySelector("select[name='inv-dropdown']").value = sortValue;
             }
+
+            filterValues.forEach(function(filter) {
+                var filterValue = urlParams.get(filter);
+                if (filterValue) {
+                    document.querySelector("input[name='" + filter + "']").checked = true;
+                }
+            });
         };
 
-        function sortInventory() {
-            var sortValue = document.querySelector("select[name='inv-dropdown']").value;
-            window.location.href = "admin-inventory.php?sort=" + sortValue;
+        function applyFilters() {
+            document.getElementById("filterForm").submit();
         }
     </script>
 
