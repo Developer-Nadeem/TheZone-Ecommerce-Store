@@ -31,7 +31,7 @@
 
         if (isset($_COOKIE['discount_code'])) {
             $stmt = $db->prepare("SELECT * FROM discount_codes WHERE LOWER(discount_code) = LOWER(:discountCode)");
-            $stmt->bindValue(':discountCode', $discountCode);
+            $stmt->bindValue(':discountCode', $_COOKIE['discount_code']);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
