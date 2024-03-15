@@ -25,7 +25,7 @@ if (isset($_POST['add-to-cart'])) {
   <!-- Same head for a consistent format -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Products</title>
+  <title>Trainers</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -81,7 +81,7 @@ if (isset($_POST['add-to-cart'])) {
 
   <main>
     <h1 class="text-center">Trainers</h1>
-    <p class="text-center">Explore The Zone's exclusive men's fashion collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
+    <p class="text-center">Explore The Zone's exclusive trainer collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
     <div class="container mt-6">
       <div class="row">
         <?php
