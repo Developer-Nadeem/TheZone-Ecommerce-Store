@@ -29,6 +29,17 @@
             $total_price += $row['Price'];
         }
 
+        if (isset($_COOKIE['discount_code'])) {
+            $stmt = $db->prepare("SELECT * FROM discount_codes WHERE LOWER(discount_code) = LOWER(:discountCode)");
+            $stmt->bindValue(':discountCode', $discountCode);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $discount_percentage = $row['discount_percentage'];
+
+            $total_price = $total_price - ($total_price * ($discount_percentage / 100));
+        }
+
         $date_time = date("Y-m-d H:i:s");
 
         $stmt = $db->prepare("INSERT INTO orders (UserID, OrderTime, OrderStatus, TotalAmount) VALUES (:userid, :ordertime, :orderstatus, :totalamount)");

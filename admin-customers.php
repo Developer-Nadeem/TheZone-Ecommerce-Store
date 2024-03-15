@@ -27,7 +27,103 @@ if ($_SESSION['isAdmin'] !== 1) {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="../TheZone/style.css">
     <title>Customer details</title>
+        <style>
+        .modal-body {
+            padding: 25px;
+            margin: 25px;
+        }
 
+        .modal-title {
+            padding: 10px;
+        }
+
+        .form-group {
+            width: 100%;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .custom-padding .modal-body {
+            padding: 50px;
+            /* Adjust the value as needed */
+        }
+
+        .main-form {
+            padding: 30px;
+        }
+
+        .btn-secondary {
+            margin: 5px;
+        }
+
+        .inventory-search {
+            margin: 10px;
+        }
+
+        /* Filter Section Styling */
+        .inv-filter-container {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            margin: 10px;
+            text-align: center;
+        }
+
+
+        .inv-filter-container>div {
+            padding: 0 10px;
+            border-right: 3px solid #000;
+        }
+
+        .inv-filter-container>div:last-child {
+            margin-right: -1px;
+            border-right: 1px solid #ccc;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        select,
+        input[type="search"] {
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .inventory-search {
+            margin-top: 10px;
+        }
+
+        .inv-dropdown {
+            margin-right: 5px;
+        }
+
+        /* Optional: Add some styling for better visibility of the search input */
+        .inventory-search input[type="search"] {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .checkboxes {
+            padding: 5px;
+        }
+
+        .low-stock {
+            color: red;
+            font-weight: bold;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -43,8 +139,7 @@ if ($_SESSION['isAdmin'] !== 1) {
     ?>
 
     <!-- pop up modal -->
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -53,6 +148,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <form action="../TheZone/edit-user.php" method="post" class="custom-padding">
                     <div class="modal-body">
         
