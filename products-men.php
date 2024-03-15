@@ -25,7 +25,7 @@ if (isset($_POST['add-to-cart'])) {
   <!-- Same head for a consistent format -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Products</title>
+  <title>Men's Clothing</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,31 +35,36 @@ if (isset($_POST['add-to-cart'])) {
   <!--Navbar Start-->
   <?php include('navbar.php') ?>
   <!--Navbar End-->
+
   <!-- Filter Box Start -->
   <div class="container mt-3">
     <div class="row">
       <div class="col-md-6 offset-md-3">
 
-        <form method="get" class="d-flex align-items-center justify-content-end">
+        <form method="get" class="d-flex align-items-center justify-content-end" id="filterForm">
           <label class="me-2">Sort by:</label>
-          <select name="filter" class="form-select">
-            <option value="low-high">Low-High</option>
-            <option value="high-low">High-Low</option>
+          <select name="sort" class="form-select">
+            <option value="default">None</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
           </select>
 
           <!-- Brand Filter -->
           <label class="ms-2">Brand:</label>
           <select name="brand" class="form-select ms-2">
             <option value="all">All Brands</option>
-            <option value="brand1">champion x cola</option>
-            <option value="brand2">prosto yezz</option>
-            <option value="brand3">converse</option>
-            <option value="brand4">vans</option>
-            <option value="brand5">prosto</option>
-            <option value="brand6">carhartt</option>
-            <option value="brand7">MassDnm</option>
-            <option value="brand8">Etnies</option>
-            <option value="brand9">Es</option>
+            <option value="champion x coca cola">champion x coca cola</option>
+            <option value="prosto yezz">prosto yezz</option>
+            <option value="converse">converse</option>
+            <option value="vans">vans</option>
+            <option value="prosto">prosto</option>
+            <option value="carhatt">carhartt</option>
+            <option value="MassDnm">MassDnm</option>
+            <option value="Etnies">Etnies</option>
+            <option value="Es">Es</option>
+            <option value="Thrasher">Thrasher</option>
+            <option value="Method">Method</option>
+            <option value="Burton">Burton</option>
           </select>
 
           <!-- Price Range Filter -->
@@ -67,7 +72,7 @@ if (isset($_POST['add-to-cart'])) {
           <input type="text" name="minPrice" placeholder="Min Price" class="form-control ms-2" style="width: 100px;">
           <input type="text" name="maxPrice" placeholder="Max Price" class="form-control ms-2" style="width: 100px;">
 
-          <button type="submit" class="btn btn-secondary ms-2">
+          <button type="submit" onclick="applyFilters()" class="btn btn-secondary ms-2">
             <i class="Apply sort"></i> Apply Filters
           </button>
         </form>
@@ -84,8 +89,41 @@ if (isset($_POST['add-to-cart'])) {
         // gets the db
         require("connectiondb.php");
 
+
+        // This is for the sort by feature
+        $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'default';
+        $orderBy = '';
+
+        switch ($sortOption) {
+          case 'low-high':
+            $orderBy = 'ORDER BY Price ASC';
+            break;
+          case 'high-low':
+            $orderBy = 'ORDER BY Price DESC';
+            break;
+          default:
+            break;
+        }
+
+        //This is the code that sorts the products by brand
+        $brandFilter = isset($_GET['brand']) ? $_GET['brand'] : 'all';
+        $brandCondition = ($brandFilter != 'all') ? " AND ProductName LIKE '%$brandFilter%'" : '';
+
+        //This is the code that filters products by price range
+        $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : null;
+        $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : null;
+        $priceCondition = '';
+
+        if ($minPrice !== null && $maxPrice !== null && $minPrice !== '' && $maxPrice !== '') {
+          $priceCondition = " AND Price BETWEEN $minPrice AND $maxPrice";
+        } elseif ($minPrice !== null && $minPrice !== '') {
+          $priceCondition = " AND Price >= $minPrice";
+        } elseif ($maxPrice !== null && $maxPrice !== '') {
+          $priceCondition = " AND Price <= $maxPrice";
+        }
+
         // gets all male products
-        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 1");
+        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 1 $brandCondition $priceCondition $orderBy");
 
         // loops through all the db's rows and display the products for mens
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -94,7 +132,7 @@ if (isset($_POST['add-to-cart'])) {
           echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
           echo '<div class="card-body">';
           echo '<p class="card-text">' . $row['ProductName'] . '</p>';
-          echo '<p class="card-text"><strong>£' . $row['Price'] . '</strong></p>';
+          echo '<p class="card-text"><strong>Â£' . $row['Price'] . '</strong></p>';
           echo '<form method="post">';
           echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
           echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
@@ -111,7 +149,52 @@ if (isset($_POST['add-to-cart'])) {
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
   </script>
-  <!-- price range backend-->
+
+  <!-- Script to update the filters once the apply button is clicked-->
+  <script>
+    window.onload = function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var sortValue = urlParams.get('sort');
+      var brandValue = urlParams.get('brand');
+      var minPrice = urlParams.get('minPrice');
+      var maxPrice = urlParams.get('maxPrice');
+
+      if (sortValue) {
+        document.querySelector("select[name='sort']").value = sortValue;
+      }
+
+      if (brandValue) {
+        document.querySelector("select[name='brand']").value = brandValue;
+      }
+
+      if (minPrice) {
+        document.querySelector("input[name='minPrice']").value = minPrice;
+      }
+
+      if (maxPrice) {
+        document.querySelector("input[name='maxPrice']").value = maxPrice;
+      }
+    };
+
+    function applyFilters() {
+      var sortValue = document.querySelector("select[name='sort']").value;
+      var brandValue = document.querySelector("select[name='brand']").value;
+      var minPrice = document.querySelector("input[name='minPrice']").value;
+      var maxPrice = document.querySelector("input[name='maxPrice']").value;
+
+      var url = "products-men.php?sort=" + sortValue + "&brand=" + brandValue;
+
+      if (minPrice !== "") {
+        url += "&minPrice=" + minPrice;
+      }
+
+      if (maxPrice !== "") {
+        url += "&maxPrice=" + maxPrice;
+      }
+
+      window.location.href = url;
+    }
+  </script>
 
   <!-- Footer Start -->
   <?php include('footer.php') ?>

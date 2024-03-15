@@ -36,70 +36,51 @@ if (isset($_POST['add-to-cart'])) {
   <?php include('navbar.php') ?>
   <!--Navbar End-->
   <!-- Filter Box Start -->
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <form method="get" class="d-flex align-items-center justify-content-end">
-        <label class="me-2">Sort by:</label>
-        <select name="filter" class="form-select">
-          <option value="low-high">Low-High</option>
-          <option value="high-low">High-Low</option>
-        </select>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
 
-        <!-- Brand Filter -->
-        <label class="ms-2">Brand:</label>
-        <select name="brand" class="form-select ms-2">
-          <option value="all">All Brands</option>
-          <option value="brand1">champion x cola</option>
-          <option value="brand1">prosto yezz</option>
-          <option value="brand1">Thrasher</option>
-          <option value="brand1">carhartt</option>
+        <form method="get" class="d-flex align-items-center justify-content-end" id="filterForm">
+          <label class="me-2">Sort by:</label>
+          <select name="sort" class="form-select">
+            <option value="default">None</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
+          </select>
 
-        </select>
+          <!-- Brand Filter -->
+          <label class="ms-2">Brand:</label>
+          <select name="brand" class="form-select ms-2">
+            <option value="all">All Brands</option>
+            <option value="champion x coca cola">champion x coca cola</option>
+            <option value="prosto yezz">prosto yezz</option>
+            <option value="converse">converse</option>
+            <option value="vans">vans</option>
+            <option value="prosto">prosto</option>
+            <option value="carhatt">carhartt</option>
+            <option value="MassDnm">MassDnm</option>
+            <option value="Etnies">Etnies</option>
+            <option value="Es">Es</option>
+            <option value="Thrasher">Thrasher</option>
+            <option value="Method">Method</option>
+            <option value="Burton">Burton</option>
+          </select>
 
-        <!-- Price Range Filter -->
-        <label class="ms-2">Price Range:</label>
-        <input type="text" name="minPrice" placeholder="Min Price" class="form-control ms-2" style="width: 100px;">
-        <input type="text" name="maxPrice" placeholder="Max Price" class="form-control ms-2" style="width: 100px;">
-        
-        </select>
+          <!-- Price Range Filter -->
+          <label class="ms-2">Price Range:</label>
+          <input type="text" name="minPrice" placeholder="Min Price" class="form-control ms-2" style="width: 100px;">
+          <input type="text" name="maxPrice" placeholder="Max Price" class="form-control ms-2" style="width: 100px;">
 
-        <button type="submit" class="btn btn-secondary ms-2">
-          <i class="Apply sort"></i> Apply Filters
-        </button>
-      </form>
+          <button type="submit" onclick="applyFilters()" class="btn btn-secondary ms-2">
+            <i class="Apply sort"></i> Apply Filters
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
-
-
-<!-- Filter and Sort Box End -->
-
-<!-- PHP for backend filtering -->
-<?php
-// Assuming $products is an array of products or fetched from a database
-$selectedBrand = $_GET['champion x cola'];
-
-// Filter products based on the selected brand
-if ($selectedBrand && $selectedBrand !== 'all') {
-    $filteredProducts = array_filter($products, function ($product) use ($selectedBrand) {
-        return $product['brand1'] == $selectedBrand;
-    });
-} else {
-    // If 'All Brands' is selected or no brand is selected, display all products
-    $filteredProducts = $selectedBrand;
-}
-
-// Display the filtered products
-foreach ($selectedBrand as $_GET) {
-    echo '<div>' . $product['name'] . '</div>';
-}
-?>
-
-
 
   <main>
-    <h1 class="text-center">Men's clothing</h1>
+    <h1 class="text-center">Jumpers</h1>
     <p class="text-center">Explore The Zone's exclusive men's fashion collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
     <div class="container mt-6">
       <div class="row">
@@ -107,17 +88,50 @@ foreach ($selectedBrand as $_GET) {
         // gets the db
         require("connectiondb.php");
 
+
+        // This is for the sort by feature
+        $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'default';
+        $orderBy = '';
+
+        switch ($sortOption) {
+          case 'low-high':
+            $orderBy = 'ORDER BY Price ASC';
+            break;
+          case 'high-low':
+            $orderBy = 'ORDER BY Price DESC';
+            break;
+          default:
+            break;
+        }
+
+        //This is the code that sorts the products by brand
+        $brandFilter = isset($_GET['brand']) ? $_GET['brand'] : 'all';
+        $brandCondition = ($brandFilter != 'all') ? " AND ProductName LIKE '%$brandFilter%'" : '';
+
+        //This is the code that filters products by price range
+        $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : null;
+        $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : null;
+        $priceCondition = '';
+
+        if ($minPrice !== null && $maxPrice !== null && $minPrice !== '' && $maxPrice !== '') {
+          $priceCondition = " AND Price BETWEEN $minPrice AND $maxPrice";
+        } elseif ($minPrice !== null && $minPrice !== '') {
+          $priceCondition = " AND Price >= $minPrice";
+        } elseif ($maxPrice !== null && $maxPrice !== '') {
+          $priceCondition = " AND Price <= $maxPrice";
+        }
+
         // gets all male products
-        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE GenderID = 1");
+        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE CategoryID = 2 $brandCondition $priceCondition $orderBy");
 
         // loops through all the db's rows and display the products for mens
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
-          echo '<a id="main-link" href = "product-page.php?product_id='.$row['ProductID'].'"><div class="card" style="width: 18rem">';
+          echo '<a id="main-link" href = "product-page.php?product_id=' . $row['ProductID'] . '"><div class="card" style="width: 18rem">';
           echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
           echo '<div class="card-body">';
           echo '<p class="card-text">' . $row['ProductName'] . '</p>';
-          echo '<p class="card-text"><strong>£' . $row['Price'] . '</strong></p>';
+          echo '<p class="card-text"><strong>Â£' . $row['Price'] . '</strong></p>';
           echo '<form method="post">';
           echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
           echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
@@ -134,75 +148,51 @@ foreach ($selectedBrand as $_GET) {
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
   </script>
-  <!-- price range backend-->
-  <?php
-// Assuming you have a database connection
-$servername = "your_servername";
-$username = "your_username";
-$password = "your_password";
-$dbname = "your_database";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+  <!-- Script to update the filters once the apply button is clicked-->
+  <script>
+    window.onload = function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var sortValue = urlParams.get('sort');
+      var brandValue = urlParams.get('brand');
+      var minPrice = urlParams.get('minPrice');
+      var maxPrice = urlParams.get('maxPrice');
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+      if (sortValue) {
+        document.querySelector("select[name='sort']").value = sortValue;
+      }
 
-// Get user input
-$minPrice = isset($_GET['minPrice']) ? intval($_GET['minPrice']) : 0;
-$maxPrice = isset($_GET['maxPrice']) ? intval($_GET['maxPrice']) : PHP_INT_MAX;
+      if (brandValue) {
+        document.querySelector("select[name='brand']").value = brandValue;
+      }
 
-// Construct and execute SQL query
-$sql = "SELECT * FROM products WHERE product_price BETWEEN $minPrice AND $maxPrice";
-$result = $conn->query($sql);
+      if (minPrice) {
+        document.querySelector("input[name='minPrice']").value = minPrice;
+      }
 
-// Display filtered results
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "Product ID: " . $row["product_id"]. " - Name: " . $row["product_name"]. " - Price: " . $row["product_price"]. "<br>";
+      if (maxPrice) {
+        document.querySelector("input[name='maxPrice']").value = maxPrice;
+      }
+    };
+
+    function applyFilters() {
+      var sortValue = document.querySelector("select[name='sort']").value;
+      var brandValue = document.querySelector("select[name='brand']").value;
+      var minPrice = document.querySelector("input[name='minPrice']").value;
+      var maxPrice = document.querySelector("input[name='maxPrice']").value;
+
+      var url = "products-men.php?sort=" + sortValue + "&brand=" + brandValue;
+
+      if (minPrice !== "") {
+        url += "&minPrice=" + minPrice;
+      }
+
+      if (maxPrice !== "") {
+        url += "&maxPrice=" + maxPrice;
+      }
+
+      window.location.href = url;
     }
-} else {
-    echo "No results found.";
-}
-
-$conn->close();
-?>
-
-  <main>
-    <h1 class="text-center">Jumpers</h1>
-    <p class="text-center">Explore The Zone's exclusive jumper collection, where streetwear fashion meets comfort, offering the latest styles to elevate your urban lifestyle.</p>
-    <div class="container mt-6">
-      <div class="row">
-        <?php
-        // gets the db
-        require("connectiondb.php");
-
-        // gets all products under the jumper category
-        $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE CategoryID = 2");
-
-        // loops through all the db's rows and display the products for mens
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-          echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
-          echo '<a id="main-link" href = "product-page.php?product_id='.$row['ProductID'].'"><div class="card" style="width: 18rem">';
-          echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
-          echo '<div class="card-body">';
-          echo '<p class="card-text">' . $row['ProductName'] . '</p>';
-          echo '<p class="card-text"><strong>£' . $row['Price'] . '</strong></p>';
-          echo '<form method="post">';
-          echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-          echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
-          echo '</form>';
-          echo '</div>';
-          echo '</div></a>';
-          echo '</div>';
-        }
-        ?>
-      </div>
-    </div>
-
-  </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
   </script>
 
   <!-- Footer Start -->
