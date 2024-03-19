@@ -1,3 +1,24 @@
+<?php
+session_start();
+
+if (!isset($_COOKIE['shopping_cart'])) {
+  setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+}
+
+if (isset($_POST['add-to-cart'])) {
+  $productId = $_POST['product-id'];
+
+  $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
+
+  array_push($shoppingCart, $productId);
+
+  setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  setcookie('shopping_cart_json', json_encode($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,8 +63,8 @@
 
 
   <!-- Footer Start -->
-<?php include('footer.php') ?>
-<!-- Footer End -->
+  <?php include('footer.php') ?>
+  <!-- Footer End -->
 
 </body>
 
@@ -95,29 +116,29 @@
 include("connectiondb.php");
 
 if (isset($_POST["submitted"]) && isset($_POST["message"]) && isset($_POST["email"]) && isset($_POST["name"])) {
-    try {
-        date_default_timezone_set('UTC');
-        $currentDateTime = date('Y-m-d H:i:s');
+  try {
+    date_default_timezone_set('UTC');
+    $currentDateTime = date('Y-m-d H:i:s');
 
-        $query = $db->prepare("INSERT INTO contactrequests VALUES ('', :name, :email, :message, :Timestamp) ");
-        $name = trim($_POST['name']);
-        $email = trim($_POST['email']);
-        $message = trim($_POST['message']);
-        $query->bindParam(':name', $name);
-        $query->bindParam(':email', $email);
-        $query->bindParam(':message', $message);
-        $query->bindParam(':Timestamp', $currentDateTime);
+    $query = $db->prepare("INSERT INTO contactrequests VALUES ('', :name, :email, :message, :Timestamp) ");
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $message = trim($_POST['message']);
+    $query->bindParam(':name', $name);
+    $query->bindParam(':email', $email);
+    $query->bindParam(':message', $message);
+    $query->bindParam(':Timestamp', $currentDateTime);
 
-        if ($query->execute()) {
-            //This is the form to show the popup message when you have submitted successfully
-            echo '<script>alert("Your message has been successfully submitted!");</script>';
-        } else {
-            // This message will popup if an error occurred when submitting the form
-            echo '<script>alert("Error: Unable to submit your message. Please try again later.");</script>';
-        }
-    } catch (PDOException $ex) {
-        // PDO exception
-        echo '<script>alert("Error: ' . $ex->getMessage() . '");</script>';
+    if ($query->execute()) {
+      //This is the form to show the popup message when you have submitted successfully
+      echo '<script>alert("Your message has been successfully submitted!");</script>';
+    } else {
+      // This message will popup if an error occurred when submitting the form
+      echo '<script>alert("Error: Unable to submit your message. Please try again later.");</script>';
     }
+  } catch (PDOException $ex) {
+    // PDO exception
+    echo '<script>alert("Error: ' . $ex->getMessage() . '");</script>';
+  }
 }
 ?>
