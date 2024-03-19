@@ -29,7 +29,7 @@ $email = $_SESSION['email'];
 include('connectiondb.php');
 
 // Fetch orders for the logged-in user
-$stmt = $db->prepare("SELECT orders.OrderID, orders.OrderTime, orders.OrderStatus, orders.TotalAmount, addressdetails.AddressLine1, addressdetails.City, addressdetails.Postcode, addressdetails.Country FROM orders INNER JOIN addressdetails ON orders.AddressID = addressdetails.AddressID WHERE orders.UserID IN (SELECT UserID FROM useraccounts WHERE Email = ?)");
+$stmt = $db->prepare("SELECT orders.OrderID, orders.OrderTime, orders.OrderStatus, orders.TotalAmount FROM orders WHERE orders.UserID IN (SELECT UserID FROM useraccounts WHERE Email = ?)");
 $stmt->execute([$email]);
 $orders = $stmt->fetchAll();
 
@@ -68,7 +68,6 @@ $orders = $stmt->fetchAll();
                     <th>Order Time</th>
                     <th>Status</th>
                     <th>Total Amount</th>
-                    <th>Address</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -79,7 +78,6 @@ $orders = $stmt->fetchAll();
                     <td><?php echo $order['OrderTime']; ?></td>
                     <td><?php echo $order['OrderStatus']; ?></td>
                     <td><?php echo $order['TotalAmount']; ?></td>
-                    <td><?php echo $order['AddressLine1'] . ", " . $order['City'] . ", " . $order['Postcode'] . ", " . $order['Country']; ?>
                     </td>
                     <td>
                         <button type="button" class="btn btn-primary edit-order" data-bs-toggle="modal"
