@@ -43,9 +43,39 @@ if ($_SESSION['isAdmin'] !== 1) {
             color: white;
             text-align: center;
             border: solid 5px black;
-            border-radius: 0px;
             margin: 10px;
             border-radius: 10px;
+        }
+
+        .panel {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            width: 95%;
+            color: white;
+            border: solid 5px black;
+            border-radius: 10px;
+            margin:10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .panel-button {
+            margin-top: 5%;
+            margin-bottom: 5%;
+            font-size: 30px;
+            font-weight: bold;
+            padding: 20px;
+            background-color: white;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            width: 35%;
+        }
+
+        .panel-button:hover {
+            background-color: rgb(140,140,140);
+            color: #fff;
         }
 
         .button {
@@ -103,6 +133,11 @@ if ($_SESSION['isAdmin'] !== 1) {
     <!-- navbar end -->
 
     <main>
+
+        <!-- Admin Panel Button -->
+        <div class="panel">
+            <button style="margin-top: auto, margin-bottom: auto;" class="panel-button" onclick="redirectToPage('admin-panel.php')">ADMIN PANEL</button>
+        </div>
 
         <div style="display: flex;">
 
