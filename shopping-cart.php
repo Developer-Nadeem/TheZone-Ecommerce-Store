@@ -217,7 +217,8 @@ if (isset($_POST['remove-from-cart'])) {
                             echo '<div class="sample-product">';
                             echo '<img src="' . $row['ImageUrl'] . '" alt="Sample Product Image">';
                             echo '<h3>' . $row['ProductName'];
-                            echo '<h3 class="item-price">£' . $row['Price'] . '</h3>';
+                            echo '<span class="item-price" data-product-price-id="' . $row['ProductID'] . '">£' . $row['Price'] . '</span>';
+
                             echo '<h3> Quantity: ';
                             echo '<div style="margin: 10px; padding: 10px; border: 1px solid #ccc; display: flex;">';
 
@@ -225,9 +226,9 @@ if (isset($_POST['remove-from-cart'])) {
                             echo '<div class="update-form">';
                             echo '<form method="post" class="update-form">';
                             echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', 1))">+</quantity-button>';
-                            echo '<span class="item-count">' . $quantity . '</span>';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(' . $row['ProductID'] . ', -1))">- </quantity-button>';
+                            echo '<quantity-button type="button" class="" onclick="updateQuantity(\'' . $row['ProductID'] . '\', 1);">+</quantity-button>';
+                            echo '<span class="item-count" data-product-id="' . $row['ProductID'] . '">' . $quantity . '</span>';
+                            echo '<quantity-button type="button" class="" onclick="updateQuantity(\'' . $row['ProductID'] . '\', -1);">-</quantity-button>';
                             echo '</form>';
                             echo '</div>';
                             // -- update product quantity form ends here --
@@ -300,15 +301,39 @@ if (isset($_POST['remove-from-cart'])) {
                         //
                     })
 
-                    function updateQuantity(productID, change) {
-                        var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
-                        var currentQuantity = parseInt(quantityElement.innerHTML);
-                        var newQuantity = currentQuantity + change;
+                    // function updateQuantity(productID, change) {
+                    //     var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
+                    //     var currentQuantity = parseInt(quantityElement.innerHTML);
+                    //     var newQuantity = currentQuantity + change;
 
-                        if (newQuantity >= 0) {
-                        quantityElement.innerHTML = newQuantity;
+                    //     if (newQuantity >= 0) {
+                    //     quantityElement.innerHTML = newQuantity;
+                    //     }
+                    //     // You may also want to update the server or cookie with the new quantity here
+                    // }
+
+                    function updateQuantity(productId, change) {
+                        // Get the current quantity and price for the product
+                        let itemCountElement = document.querySelector(`span[data-product-id="${productId}"]`);
+                        let itemPriceElement = document.querySelector(`span[data-product-price-id="${productId}"]`);
+                        let currentQuantity = parseInt(itemCountElement.innerHTML);
+                        let currentPrice = parseFloat(itemPriceElement.innerHTML.slice(1));
+
+                        // Update the quantity
+                        let newQuantity = currentQuantity + change;
+                        if (newQuantity < 1) {
+                            newQuantity = 1;
                         }
-                        // You may also want to update the server or cookie with the new quantity here
+                        itemCountElement.innerHTML = newQuantity;
+
+                        // Update the price
+                        let newPrice = newQuantity < currentQuantity ? newQuantity * currentPrice / currentQuantity : newQuantity * currentPrice;
+                        itemPriceElement.innerHTML = '£' + newPrice.toFixed(2);
+
+                        // Update the shopping cart cookie
+                        let shoppingCart = getShoppingCart();
+                        shoppingCart[productId] = newQuantity;
+                        setShoppingCart(shoppingCart);
                     }
 
                     // function updateQuantity(productID, change, basePrice) {
@@ -327,27 +352,6 @@ if (isset($_POST['remove-from-cart'])) {
                     //     }
                     // }
 
-                    // function updateQuantity(element, change) {
-                    //     var form = element.closest('.update-form');
-                    //     var productId = form.querySelector('[name="product-id"]').value;
-                    //     var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
-                    //     var priceElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-price');
-
-                    //     var currentQuantity = parseInt(quantityElement.innerHTML);
-                    //     var newQuantity = currentQuantity + change;
-
-                    //     if (newQuantity >= 0) {
-                    //         quantityElement.innerHTML = newQuantity;
-
-                    //         // Assuming you have a variable to store the initial product price
-                    //         // You may need to fetch this value from the server or store it elsewhere
-                    //         var initialPrice = /* Add your logic to fetch the initial price */;
-
-                    //         // Calculate the new price and update the price element
-                    //         var newPrice = initialPrice * newQuantity;
-                    //         priceElement.innerHTML = '£' + newPrice.toFixed(2);
-                    //     }
-                    // }
 
                 </script>
                 </ul>
