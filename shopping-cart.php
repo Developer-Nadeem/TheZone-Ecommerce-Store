@@ -199,22 +199,12 @@ if (isset($_POST['remove-from-cart'])) {
                         echo '<h3>Cart is empty</h3>';
                         echo '</div>';
                     } else {
-                        $cart_items = array_count_values(unserialize($shopping_cart));
+                        $cart_items = unserialize($shopping_cart);
                         foreach($cart_items as $item => $quantity) {
                             $stmt = $db->query("SELECT ProductName, Price, ImageUrl, ProductID FROM inventory WHERE ProductID = $item");
                             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-                            // echo '<div class="sample-product">';
-                            // echo '<img src="'. $row['ImageUrl']. '" alt="Sample Product Image">';
-                            // echo'<h3>'. $row['ProductName'];
-                            // echo '<h3> Quantity: '. '<span class="item-count">' . $quantity . '</span></h3>';
-                            // echo '<h3 class="item-price">£'. $row['Price'] .'</h3>';
-                            // echo '<form method="post" class="remove-form">';
-                            // echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-                            // echo '<button type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</button>';
-                            // echo '</form>';
-                            // echo '</div>';
-                            echo '<div class="sample-product">';
+
+                            echo '<div class="sample-product" product-id="' . $row['ProductID'] . '">';
                             echo '<img src="' . $row['ImageUrl'] . '" alt="Sample Product Image">';
                             echo '<h3>' . $row['ProductName'];
                             echo '<span class="item-price" data-product-price-id="' . $row['ProductID'] . '">£' . $row['Price'] . '</span>';
@@ -272,7 +262,7 @@ if (isset($_POST['remove-from-cart'])) {
                             document.getElementById('cart-total').innerHTML = data;
                         });
                     }
-
+                    
                     updatePrice();
 
                         document.querySelectorAll('.remove-form').forEach(function(form) {                            
@@ -301,58 +291,31 @@ if (isset($_POST['remove-from-cart'])) {
                         //
                     })
 
-                    // function updateQuantity(productID, change) {
-                    //     var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
-                    //     var currentQuantity = parseInt(quantityElement.innerHTML);
-                    //     var newQuantity = currentQuantity + change;
-
-                    //     if (newQuantity >= 0) {
-                    //     quantityElement.innerHTML = newQuantity;
-                    //     }
-                    //     // You may also want to update the server or cookie with the new quantity here
-                    // }
-
                     function updateQuantity(productId, change) {
-                        // Get the current quantity and price for the product
-                        let itemCountElement = document.querySelector(`span[data-product-id="${productId}"]`);
-                        let itemPriceElement = document.querySelector(`span[data-product-price-id="${productId}"]`);
-                        let currentQuantity = parseInt(itemCountElement.innerHTML);
-                        let currentPrice = parseFloat(itemPriceElement.innerHTML.slice(1));
+                        fetch('update-product-quantity.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: 'product_id=' + encodeURIComponent(productId) + '&quantity_change=' + encodeURIComponent(change)
+                        }).then(res => res.json()).then(data => {
 
-                        // Update the quantity
-                        let newQuantity = currentQuantity + change;
-                        if (newQuantity < 1) {
-                            newQuantity = 1;
-                        }
-                        itemCountElement.innerHTML = newQuantity;
+                            fetch('get-cart-total.php').then(res => res.json()).then(data => {
+                            document.getElementById('cart-total').innerHTML = data;
+                            });
 
-                        // Update the price
-                        let newPrice = newQuantity < currentQuantity ? newQuantity * currentPrice / currentQuantity : newQuantity * currentPrice;
-                        itemPriceElement.innerHTML = '£' + newPrice.toFixed(2);
+                            if (data == 0) {
+                                //Find a sample-product that has a matching product id and remove it
+                                const sampleProduct = document.querySelector('.sample-product[product-id="' + productId + '"]');
+                                sampleProduct.remove();
+                                console.log(getCookieValue('shopping_cart_json'));
+                                return;
+                            }
 
-                        // Update the shopping cart cookie
-                        let shoppingCart = getShoppingCart();
-                        shoppingCart[productId] = newQuantity;
-                        setShoppingCart(shoppingCart);
+                            const itemCount = document.querySelector('.item-count[data-product-id="' + productId + '"]');
+                            itemCount.innerHTML = data;
+                        })
                     }
-
-                    // function updateQuantity(productID, change, basePrice) {
-                    //     var quantityElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-count');
-                    //     var priceElement = document.querySelector('.sample-product [name="product-id"][value="' + productID + '"]').parentNode.querySelector('.item-price');
-
-                    //     var currentQuantity = parseInt(quantityElement.innerHTML);
-                    //     var newQuantity = currentQuantity + change;
-                    //     var newPrice = basePrice * newQuantity;
-
-                    //     if (newQuantity >= 0) {
-                    //         quantityElement.innerHTML = newQuantity;
-
-                    //         priceElement.innerHTML = '£' + newPrice.toFixed(2);
-                            
-                    //     }
-                    // }
-
-
                 </script>
                 </ul>
             </div>
@@ -376,7 +339,7 @@ if (isset($_POST['remove-from-cart'])) {
                     <hr>
                     <?php
                         $total = 0;
-                        $cart_items = array_count_values(unserialize($shopping_cart));
+                        $cart_items = unserialize($shopping_cart);
                         foreach($cart_items as $item => $quantity) {
                             $stmt = $db->query("SELECT Price FROM inventory WHERE ProductID = $item");
                             $row = $stmt->fetch(PDO::FETCH_ASSOC);

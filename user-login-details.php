@@ -1,22 +1,26 @@
 <?php
 session_start();
 
-if (!isset($_COOKIE['shopping_cart'])) {
-  setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
-  setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
-}
+  if (!isset($_COOKIE['shopping_cart'])) {
+    setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+    setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  }
 
-if (isset($_POST['add-to-cart'])) {
-  $productId = $_POST['product-id'];
+  if (isset($_POST['add-to-cart'])) {
+    $productId = $_POST['product-id'];
 
-  $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
+    $shopping_cart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
+    $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
 
-  array_push($shoppingCart, $productId);
+    if (array_key_exists($productId, $shopping_cart)) {
+      $shopping_cart[$productId] += $quantity;
+    } else {
+        $shopping_cart[$productId] = $quantity;
+    };
 
-  setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-
-  setcookie('shopping_cart_json', json_encode($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-}
+    setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+    setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  }
 
 // Fetch logged-in user's email
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
