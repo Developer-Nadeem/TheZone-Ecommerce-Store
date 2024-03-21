@@ -131,7 +131,7 @@ if (isset($_POST['add-to-cart'])) {
           echo '<img src="' . $row['ImageUrl'] . '" class="card-img-top" alt="' . $row['ProductName'] . '">';
           echo '<div class="card-body">';
           echo '<p class="card-text">' . $row['ProductName'] . '</p>';
-          echo '<p class="card-text"><strong>Â£' . $row['Price'] . '</strong></p>';
+          echo '<p class="card-text"><strong>£' . $row['Price'] . '</strong></p>';
           echo '<form method="post">';
           echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
           echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';

@@ -57,9 +57,9 @@
         <div class="container-fluid">
           <div class="row menurow">
             <div class="col-4 menubox"><img class="img-fluid menu" src="images/Mens.jpg" alt="Mens"><a
-                class="labels" href="/products-men.php">Mens</a></div>
+                class="labels" href="../TheZone/products-men.php">Mens</a></div>
             <div class="col-4 menubox"><img class="img-fluid menu" src="images/womens-menu.jpg" alt="Womens"><a
-                class="labels" href="/products-women.php">Womens</a></div>
+                class="labels" href="../TheZone/products-women.php">Womens</a></div>
             <!-- <div class="col menubox"><img class="img-fluid menu" src="..\TheZone\images\Kid.jpg" alt="kids"><a
                 class="labels" href="#">Kids</a></div> -->
           </div>
