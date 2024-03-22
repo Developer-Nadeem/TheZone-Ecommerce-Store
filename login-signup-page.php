@@ -56,9 +56,21 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
       flex: 1;
     }
 
-    .show-password-login {
+    .show-password-login, .show-password-signup {
       margin-left: 5px;
       cursor: pointer;
+      background-color: #2c2c2c;
+      color: white;
+      border-radius: 5px;
+      padding: 5px;
+      font-weight: bold;
+      transition: 0.2s ease;
+      
+    }
+
+    .show-password-login:hover, .show-password-signup:hover {
+      background-color: white;
+      color: #2c2c2c;
     }
 
     .error-msg {
@@ -163,6 +175,7 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
                 echo $noConfirmPassInput;
               } ?>
             </div>
+            <br>
             <div>
               <span class="show-password-signup" onclick="signupTogglePassword()">Show</span>
             </div>
@@ -233,11 +246,9 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
     if (loginPasswordInput.type === 'password') {
       loginPasswordInput.type = 'text';
       showPasswordSpanLogin.textContent = 'Hide';
-      showPasswordSpanLogin.classList.add('visible');
     } else {
       loginPasswordInput.type = 'password';
       showPasswordSpanLogin.textContent = 'Show';
-      showPasswordSpanLogin.classList.remove('visible');
     }
   }
 
@@ -250,12 +261,10 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
       passwordInput.type = 'text';
       confirmPasswordInput.type = 'text';
       showPasswordSpanSignup.textContent = 'Hide';
-      showPasswordSpanSignup.classList.add('visible');
     } else {
       passwordInput.type = 'password';
       confirmPasswordInput.type = 'password';
       showPasswordSpanSignup.textContent = 'Show';
-      showPasswordSpanSignup.classList.remove('visible');
     }
   }
 

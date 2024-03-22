@@ -265,13 +265,6 @@ div {
   color: rgb(0, 136, 255);
 }
 
-
-.show-password-signup.visible,
-.show-password-login.visible {
-  cursor: pointer;
-  color: rgb(255, 0, 0);
-}
-
 .login-signup-page {
   display: grid;
   height: 100%;
