@@ -100,7 +100,7 @@ if (isset($_POST['submitted'])) {
         $stmt->bindParam(':password', $passHash);
 
         $stmt->execute();
-        $_SESSION['signupSuccess'] = "Registration successful! You can now log in";
+        $_SESSION['signupSuccess'] = "Registration successful!";
         header("Location: login-signup-page.php");
         exit();
     } catch (PDOException $e) {

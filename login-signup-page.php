@@ -42,6 +42,47 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <style>
+    .field {
+      position: relative;
+    }
+
+    .password-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .password-wrapper input[type="password"] {
+      flex: 1;
+    }
+
+    .show-password-login, .show-password-signup {
+      margin-left: 5px;
+      cursor: pointer;
+      background-color: #2c2c2c;
+      color: white;
+      border-radius: 5px;
+      padding: 5px;
+      font-weight: bold;
+      transition: 0.2s ease;
+      
+    }
+
+    .show-password-login:hover, .show-password-signup:hover {
+      background-color: white;
+      color: #2c2c2c;
+    }
+
+    .error-msg {
+      color: red;
+      font-weight: bold;
+    }
+
+    .green-msg {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -62,18 +103,34 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
         <div class="form-inner">
           <form method="post" action="login.php" class="login">
             <div class="field">
-              <input type="text" name="email" placeholder="Email Address">
-              <?php if (!empty($emailError)) {
-                echo $emailError;
-              } ?>
+              <input type="text" name="email" placeholder="Email Address" style="height: 50px;">
             </div>
             <div class="field">
-              <input type="password" id="loginPassword" name="password" placeholder="Password">
-              <?php if (!empty($passwordError)) {
-                echo $passwordError;
-              } ?>
+              <div class="password-wrapper">
+                <input type="password" id="loginPassword" name="password" placeholder="Password" style="height: 50px;">
+                <span class="show-password-login" onclick="loginTogglePassword()">Show</span>
+              </div>
+              <div class="error-msg">
+                <?php if (!empty($passwordError)) {
+                  echo $passwordError;
+                }
+                if (!empty($emailError)) {
+                  echo $emailError;
+                }
+                if (!empty($noInputError)) {
+                  echo $noInputError;
+                } ?>
+              </div>
+              <div class="green-msg">
+                <?php
+                if (!empty($signupSuccess)) {
+                  echo $signupSuccess;
+                }
+                ?>
+              </div>
             </div>
-            <span class="show-password-login" onclick="loginTogglePassword()">Show</span>
+            <br>
+            <br>
             <div class="pass-link"><a href="resetpass-page.php">Forgot password?</a></div>
             <div class="field btn">
               <div class="btn-layer"></div>
@@ -81,14 +138,6 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
               <input type="hidden" name="submitted" value="true" />
             </div>
             <div class="signup-link">Dont have an account? <a href="">Signup now</a></div>
-            <?php
-            if (!empty($noInputError)) {
-              echo $noInputError;
-            }
-            if (!empty($signupSuccess)) {
-              echo $signupSuccess;
-            }
-            ?>
           </form>
 
           <form method="post" action="signup.php" class="signup">
@@ -126,6 +175,7 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
                 echo $noConfirmPassInput;
               } ?>
             </div>
+            <br>
             <div>
               <span class="show-password-signup" onclick="signupTogglePassword()">Show</span>
             </div>
@@ -196,11 +246,9 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
     if (loginPasswordInput.type === 'password') {
       loginPasswordInput.type = 'text';
       showPasswordSpanLogin.textContent = 'Hide';
-      showPasswordSpanLogin.classList.add('visible');
     } else {
       loginPasswordInput.type = 'password';
       showPasswordSpanLogin.textContent = 'Show';
-      showPasswordSpanLogin.classList.remove('visible');
     }
   }
 
@@ -213,12 +261,10 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
       passwordInput.type = 'text';
       confirmPasswordInput.type = 'text';
       showPasswordSpanSignup.textContent = 'Hide';
-      showPasswordSpanSignup.classList.add('visible');
     } else {
       passwordInput.type = 'password';
       confirmPasswordInput.type = 'password';
       showPasswordSpanSignup.textContent = 'Show';
-      showPasswordSpanSignup.classList.remove('visible');
     }
   }
 

@@ -128,6 +128,7 @@ session_start();
         // gets all male products
         $stmt = $db->query("SELECT ProductID, ProductName, Price, ImageUrl FROM inventory WHERE CategoryID = 3 $brandCondition $priceCondition $orderBy");
 
+  
         // loops through all the db's rows and display the products for mens
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
@@ -136,10 +137,8 @@ session_start();
           echo '<div class="card-body">';
           echo '<p class="card-text">' . $row['ProductName'] . '</p>';
           echo '<p class="card-text"><strong>£' . $row['Price'] . '</strong></p>';
-          echo '<form method="post">';
           echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-          echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
-          echo '</form>';
+          echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">View Product</button>';
           echo '</div>';
           echo '</div></a>';
           echo '</div>';
