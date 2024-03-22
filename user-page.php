@@ -69,37 +69,21 @@ if (isset($_POST['add-to-cart'])) {
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card bg-light text-dark" onclick="redirectToPage('Login and Security')">
+                            <div class="card bg-light text-dark" onclick="redirectToPage('Account information')">
                                 <div class="card-body" style="height: 150px;">
-                                    <h5 class="card-title">Login and Security</h5>
+                                    <h5 class="card-title">Account information</h5>
                                     <ul class="list-unstyled">
-                                        <li>Manage password</li>
-                                        <li>Email</li>
-                                        <li>Mobile number</li>
+                                        <li>View your account details</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card bg-light text-dark" onclick="redirectToPage('Your Address')">
+                            <div class="card bg-light text-dark" onclick="redirectToPage('Change Password')">
                                 <div class="card-body" style="height: 150px;">
-                                    <h5 class="card-title">Your Address</h5>
+                                    <h5 class="card-title">Change Your Password</h5>
                                     <ul class="list-unstyled">
-                                        <li>Edit</li>
-                                        <li>Set default</li>
-                                        <li>Remove</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card bg-light text-dark" onclick="redirectToPage('Your Payment Details')">
-                                <div class="card-body" style="height: 150px;">
-                                    <h5 class="card-title">Your Payment Details</h5>
-                                    <ul class="list-unstyled">
-                                        <li>Edit</li>
-                                        <li>Set default</li>
-                                        <li>Remove</li>
+                                        <li>Change your password</li>
                                     </ul>
                                 </div>
                             </div>
@@ -111,9 +95,8 @@ if (isset($_POST['add-to-cart'])) {
     <script>
         var pageUrls = {
             "Your Orders": "user-order.php",
-            "Login and Security": "user-login-details.php",
-            "Your Address": "user-address-details.php",
-            "Your Payment Details": "user-payment-details.php"
+            "Account information": "user-login-details.php",
+            "Change Password": "user-change-password.php",
 
         };
 
