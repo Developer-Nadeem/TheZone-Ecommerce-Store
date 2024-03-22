@@ -13,58 +13,69 @@ if (isset($_POST['submitted'])) {
     $confirm_password = isset($_POST['confirm_password']) ? trim($_POST['confirm_password']) : false;
 
     if (!($fname)) {
-        echo "Please enter your first name";
-        exit;
+        $_SESSION['fnameError'] = "Please enter your first name";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     if (!($lname)) {
-        echo "Please enter your last name";
-        exit;
+        $_SESSION['lnameError'] = "Please enter your last name";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     if (!($email)) {
-        echo "Please enter your email address";
-        exit;
+        $_SESSION['noEmailInput'] = "Please enter your email address";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     if (!($pass)) {
-        echo "Please enter a password";
-        exit;
+        $_SESSION['noPassInput'] = "Please enter your password";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     if (!($confirm_password)) {
-        echo "Please re-enter your password";
-        exit;
+        $_SESSION['noConfirmPassInput'] = "Please confirm your password";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Please enter a valid email address.";
-        exit;
+        $_SESSION['invalidEmail'] = "Please enter a valid email";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     if ($pass !== $confirm_password) {
-        echo "Password and confirm password do not match.";
-        exit;
+        $_SESSION['passNoMatch'] = "Password and Confirm Password do not match";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
-    if(strlen($pass) < 8){
-        echo "Your password must be at minimum 8 characters.";
-        exit;
+    if (strlen($pass) < 8) {
+        $_SESSION['lengthError'] = "Password should be at least 8 characters long";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     if (!preg_match('/[a-z]/', $pass) || !preg_match('/[A-Z]/', $pass)) {
-        echo "Your password must contain at least one lowercase and uppercase letter";
-        exit;
+        $_SESSION['caseError'] = "Your password must contain at least one lower case and upper case character";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     if (!preg_match('/[0-9]/', $pass)) {
-        echo "Your password must contain at least one number";
-        exit;
+        $_SESSION['numError'] = "Password must contain at least one number";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     if (preg_match('/[\s\0\'"`]/', $pass)) {
-        echo "Your password must not contain any whitespaces, control characters, \' , \" or \` characters ";
-        exit;
+        $_SESSION['specialChar'] = "Your password must not contain any empty spaces, single quotes, double quotes or backticks";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     $checkEmail = $db->prepare("SELECT COUNT(*) FROM useraccounts WHERE Email = :email");
@@ -73,8 +84,9 @@ if (isset($_POST['submitted'])) {
     $emailExists = $checkEmail->fetchColumn();
 
     if ($emailExists) {
-        echo "This email has already been registered. Please enter a different email address.";
-        exit;
+        $_SESSION['emailExists'] = "The email has already been registered";
+        header("Location: login-signup-page.php");
+        exit();
     }
 
     $passHash = password_hash($pass, PASSWORD_DEFAULT);
@@ -88,10 +100,9 @@ if (isset($_POST['submitted'])) {
         $stmt->bindParam(':password', $passHash);
 
         $stmt->execute();
-        echo "Registration successful!";
-        // This part redirects you to the homepage after 3 seconds which is index.php
-        echo '<script> setTimeout(function(){ window.location.href = "login-signup-page.php"; }, 3000);  </script>';
-        exit;
+        $_SESSION['signupSuccess'] = "Registration successful! You can now log in";
+        header("Location: login-signup-page.php");
+        exit();
     } catch (PDOException $e) {
         echo "Sorry, a database error occurred! <br>";
         echo "Error details: <em>" . $e->getMessage() . "</em>";

@@ -1,9 +1,12 @@
 <?php
+session_start();
 // If the form has been submitted
 if (isset($_POST['submitted'])) {
   // Checks if the fields have data inputted
-  if (!isset($_POST['email'], $_POST['password'])) {
-    exit('Please fill both the email and password fields!');
+  if (empty($_POST['email']) && empty($_POST['password'])) {
+    $_SESSION['noInputError'] = "Please fill out both Email and Password fields!";
+    header("Location: login-signup-page.php");
+    exit();
   }
 
   require("connectiondb.php");
@@ -18,15 +21,14 @@ if (isset($_POST['submitted'])) {
       $row = $stmt->fetch();
 
       if (password_verify($_POST['password'], $row['Pass'])) {
-        session_start();
         $_SESSION["email"] = $_POST['email'];
         $_SESSION["isAdmin"] = $row['isAdmin'];
 
         // Depending on the account level, it sets the access level to the session
         if ($row['isAdmin'] == 1) {
-          $_SESSION['isAdmin'] = 1; 
+          $_SESSION['isAdmin'] = 1;
         } else {
-          $_SESSION['isAdmin'] = 0; 
+          $_SESSION['isAdmin'] = 0;
         }
 
         if ($row['isAdmin'] == 1) {
@@ -36,11 +38,14 @@ if (isset($_POST['submitted'])) {
         }
         exit();
       } else {
-        echo "<p style='color:red'>Error logging in, password does not match </p>";
+        $_SESSION['passwordError'] = "Password is invalid";
+        header("Location: login-signup-page.php");
+        exit();
       }
     } else {
-      // Else display an error
-      echo "<p style='color:red'>Error logging in, Username not found </p>";
+      $_SESSION['emailError'] = "Email is invalid";
+      header("Location: login-signup-page.php");
+      exit();
     }
   } catch (PDOException $e) {
     echo ("Failed to connect to the database.<br>");

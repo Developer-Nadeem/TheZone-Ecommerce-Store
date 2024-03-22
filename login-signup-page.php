@@ -3,9 +3,30 @@ session_start();
 
 // If the user is already logged in, it redirects them to the home page
 if (isset($_SESSION['email'])) {
-    header("Location: index.php");
-    exit();
+  header("Location: index.php");
+  exit();
 }
+// Checks to see if the errors have been stored for the login form
+$emailError = isset($_SESSION['emailError']) ? $_SESSION['emailError'] : '';
+$passwordError = isset($_SESSION['passwordError']) ? $_SESSION['passwordError'] : '';
+$noInputError = isset($_SESSION['noInputError']) ? $_SESSION['noInputError'] : '';
+
+// Checks to see if the errors have been stored for the signup form
+
+$fnameError = isset($_SESSION['fnameError']) ? $_SESSION['fnameError'] : '';
+$lnameError = isset($_SESSION['lnameError']) ? $_SESSION['lnameError'] : '';
+$noEmailInput = isset($_SESSION['noEmailInput']) ? $_SESSION['noEmailInput'] : '';
+$noPassInput = isset($_SESSION['noPassInput']) ? $_SESSION['noPassInput'] : '';
+$noConfirmPassInput = isset($_SESSION['noConfirmPassInput']) ? $_SESSION['noConfirmPassInput'] : '';
+$invalidInput = isset($_SESSION['invalidEmail']) ? $_SESSION['invalidEmail'] : '';
+$passNoMatch = isset($_SESSION['passNoMatch']) ? $_SESSION['passNoMatch'] : '';
+$lengthError = isset($_SESSION['lengthError']) ? $_SESSION['lengthError'] : '';
+$caseError = isset($_SESSION['caseError']) ? $_SESSION['caseError'] : '';
+$numError = isset($_SESSION['numError']) ? $_SESSION['numError'] : '';
+$specialChar = isset($_SESSION['specialChar']) ? $_SESSION['specialChar'] : '';
+$emailExists = isset($_SESSION['emailExists']) ? $_SESSION['emailExists'] : '';
+$signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] : '';
+
 
 ?>
 
@@ -21,38 +42,6 @@ if (isset($_SESSION['email'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
-  <!-- Adds the popup CSS so this is what displays the popup on signup -->
-  <style>
-    .popup-container {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      width: 100%;
-      height: 100%;
-    }
-
-    .popup-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .close-popup {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 20px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 
 <body>
@@ -73,10 +62,16 @@ if (isset($_SESSION['email'])) {
         <div class="form-inner">
           <form method="post" action="login.php" class="login">
             <div class="field">
-              <input type="text" name="email" placeholder="Email Address" required>
+              <input type="text" name="email" placeholder="Email Address">
+              <?php if (!empty($emailError)) {
+                echo $emailError;
+              } ?>
             </div>
             <div class="field">
-              <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+              <input type="password" id="loginPassword" name="password" placeholder="Password">
+              <?php if (!empty($passwordError)) {
+                echo $passwordError;
+              } ?>
             </div>
             <span class="show-password-login" onclick="loginTogglePassword()">Show</span>
             <div class="pass-link"><a href="resetpass-page.php">Forgot password?</a></div>
@@ -86,23 +81,50 @@ if (isset($_SESSION['email'])) {
               <input type="hidden" name="submitted" value="true" />
             </div>
             <div class="signup-link">Dont have an account? <a href="">Signup now</a></div>
+            <?php
+            if (!empty($noInputError)) {
+              echo $noInputError;
+            }
+            if (!empty($signupSuccess)) {
+              echo $signupSuccess;
+            }
+            ?>
           </form>
 
           <form method="post" action="signup.php" class="signup">
             <div class="field">
-              <input type="text" name="fname" placeholder="First Name" required>
+              <input type="text" name="fname" placeholder="First Name">
+              <?php if (!empty($fnameError)) {
+                echo $fnameError;
+              } ?>
             </div>
             <div class="field">
-              <input type="text" name="lname" placeholder="Last Name" required>
+              <input type="text" name="lname" placeholder="Last Name">
+              <?php if (!empty($lnameError)) {
+                echo $lnameError;
+              } ?>
             </div>
             <div class="field">
-              <input type="text" name="email" placeholder="Email Address" required>
+              <input type="text" name="email" placeholder="Email Address">
+              <?php if (!empty($noEmailInput)) {
+                echo $noEmailInput;
+              }
+              if (!empty($invalidEmail)) {
+                echo $invalidEmail;
+              }
+              ?>
             </div>
             <div class="field">
-              <input type="password" id="password" name="password" placeholder="Password" required>
+              <input type="password" id="password" name="password" placeholder="Password">
+              <?php if (!empty($noPassInput)) {
+                echo $noPassInput;
+              } ?>
             </div>
             <div class="field">
-              <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm password" required>
+              <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm password">
+              <?php if (!empty($noConfirmPassInput)) {
+                echo $noConfirmPassInput;
+              } ?>
             </div>
             <div>
               <span class="show-password-signup" onclick="signupTogglePassword()">Show</span>
@@ -112,24 +134,54 @@ if (isset($_SESSION['email'])) {
               <input type="submit" value="Signup" name="signup">
               <input type="hidden" name="submitted" value="true" />
             </div>
+            <?php
+            if (!empty($passNoMatch)) {
+              echo $passNoMatch;
+            }
+            if (!empty($lengthError)) {
+              echo $lengthError;
+            }
+            if (!empty($caseError)) {
+              echo $caseError;
+            }
+            if (!empty($specialChar)) {
+              echo $specialChar;
+            }
+            if (!empty($numError)) {
+              echo $numError;
+            }
+            if (!empty($emailExists)) {
+              echo $emailExists;
+            }
+            ?>
           </form>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- This is the popup container for Signup -->
-  <div id="signup-success-popup" class="popup-container">
-    <div class="popup-content">
-      <span class="close-popup" onclick="closePopup()">&times;</span>
-      <!-- popup message -->
-      <p>Registration successful! Redirecting to the homepage...</p>
-    </div>
-  </div>
-
   <!-- Footer Start -->
   <?php include('footer.php') ?>
   <!-- Footer End -->
+
+  <?php
+  unset($_SESSION['emailError']);
+  unset($_SESSION['passwordError']);
+  unset($_SESSION['noInputError']);
+  unset($_SESSION['fnameError']);
+  unset($_SESSION['lnameError']);
+  unset($_SESSION['noEmailInput']);
+  unset($_SESSION['noPassInput']);
+  unset($_SESSION['nonConfirmPassInput']);
+  unset($_SESSION['invalidEmail']);
+  unset($_SESSION['passNoMatch']);
+  unset($_SESSION['lengthError']);
+  unset($_SESSION['caseError']);
+  unset($_SESSION['specialChar']);
+  unset($_SESSION['numError']);
+  unset($_SESSION['emailExists']);
+  unset($_SESSION['signupSuccess']);
+  ?>
 
   <!--bootstrap javascript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -169,30 +221,6 @@ if (isset($_SESSION['email'])) {
       showPasswordSpanSignup.classList.remove('visible');
     }
   }
-
-  
-  function showPopup(popupId) {
-    var popup = document.getElementById(popupId);
-    popup.style.display = 'block';
-
-    setTimeout(function() {
-      popup.style.display = 'none';
-    }, 3000); // 
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    <?php
-    if (isset($_SESSION['signup_success']) && $_SESSION['signup_success']) {
-      echo 'showPopup();';
-      unset($_SESSION['signup_success']);
-    }
-    ?>
-  });
-
-  function closePopup() {
-    var popup = document.getElementById('signup-success-popup');
-    popup.style.display = 'none';
-  };
 
   const loginForm = document.querySelector('form.login');
   const signupForm = document.querySelector('form.signup');
