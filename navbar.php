@@ -33,6 +33,13 @@
                             <li><a class="dropdown-item" href="products-trainer.php">Trainers</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <?php
+                        if (isset($_SESSION['email']) && $_SESSION['isAdmin'] == 1){
+                            echo '<a class="nav-link" href="adminhomepage.php">Go to Admin Home</a>';
+                        }
+                        ?>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search" action="search_products.php" method="get">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data" autocomplete="off">
