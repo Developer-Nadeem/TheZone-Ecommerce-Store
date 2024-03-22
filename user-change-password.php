@@ -39,6 +39,8 @@ if (isset($_POST['add-to-cart'])) {
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
 </head>
 
 <body>
@@ -46,27 +48,34 @@ if (isset($_POST['add-to-cart'])) {
   <?php include('navbar.php') ?>
   <!--Navbar End-->
 
-  <form action="change-password.php" method="POST">
-    <div class="field">
-      <input type="text" name="email" placeholder="Enter your Email">
+  <main class="login-signup-page" >
+    <h2 style="font-weight: bold; margin: 10px; margin-bottom: auto;">Change Password</h2>
+    <div class="form-wrapper" style="width: 30%; margin: 30px;">
+      <div class="form-container">
+        <div class="form-inner">
+          <form action="change-password.php" method="POST" class="login">
+            <div class="field">
+              <input type="text" name="email" placeholder="Enter your Email">
+            </div>
+            <div class="field">
+              <input type="password" name="current-password" placeholder="Enter your current password">
+            </div>
+            <div class="field">
+              <input type="password" name="new-password" placeholder="Enter a new password">
+            </div>
+            <div class="field">
+              <input type="password" name="confirm-password" placeholder="Confirm your new password">
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Change Password" name="change-pass">
+              <input type="hidden" name="submitted" value="true" />
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <input type="password" name="current-password" placeholder="Enter your current password">
-    </div>
-    <div class="field">
-      <input type="password" name="new-password" placeholder="Enter a new password">
-    </div>
-    <div class="field">
-      <input type="password" name="confirm-password" placeholder="Confirm your new password">
-    </div>
-    <div class="field btn">
-      <div class="btn-layer"></div>
-      <input type="submit" value="Change Password" name="change-pass">
-      <input type="hidden" name="submitted" value="true" />
-    </div>
-
-  </form>
-
+  </main>
 
 
   <!-- Footer Start -->
@@ -74,5 +83,9 @@ if (isset($_POST['add-to-cart'])) {
   <!-- Footer End -->
 
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 </html>
