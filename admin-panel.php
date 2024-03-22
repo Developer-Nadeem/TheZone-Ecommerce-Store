@@ -76,6 +76,57 @@ if ($_SESSION['isAdmin'] !== 1) {
     <!-- navbar end -->
 
     <main>
+         <!-- //pop up modal for editing item -->
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Inventory:</h5>
+                    <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="../TheZone/Inventory-update-code.php" method="post" class="custom-padding">
+                    <div class="modal-body">
+
+                        <input type="hidden" name="update_id" id="update_id">
+                        <div class="form-group">
+                            <label for="ProductID" class="col-form-label">Product ID</label>
+                            <input type="text" name="ProductID" class="form-control" id="ProductID" style="pointer-events:none;">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="ProductName" class="col-form-label">Product Name</label>
+                            <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
+                        </div>
+                        <div class="form-group">
+                            <label for="Description" class="col-form-label">Description</label><br>
+                            <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="Price" class="col-form-label">Price</label>
+                            <input required type="text" name="Price" class="form-control" id="Price">
+                        </div>
+                        <div class="form-group">
+                            <label for="Quantity" class="col-form-label">Quantity</label>
+                            <input required type="text" name="Quantity" class="form-control" id="Quantity"><br>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="hidden" name="submitted" id="submitted">
+                        <button type="submit" name="updatedata" class="btn btn-secondary">Update Inventory</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- modal end -->
         <div class="container">
 
             <div class="row">
@@ -173,14 +224,46 @@ if ($_SESSION['isAdmin'] !== 1) {
 
             <div class="section">
                 <h2>Stock Levels</h2>
-                <p>showing products and their stock levels</p>
+                <p>showing products with low stock levels</p>
 
-                <table class="table">
-                    <thead>
-                        <tr></tr>
-                    </thead>
-                </table>
+                <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                include('../TheZone/connectiondb.php');
 
+               
+
+                $inventory = $db->prepare("SELECT * FROM inventory INNER JOIN stock_table ON inventory.ProductID = stock_table.ProductID WHERE stock_table.Quantity < 20");
+                $inventory->execute();
+                $inventory = $inventory->fetchAll(PDO::FETCH_ASSOC);
+
+                
+                
+                foreach ($inventory as $product) {
+                    echo "<tr>";
+                    echo "<td >" . "<img style='width: 50px; height=50px' src=" . $product['ImageURL'] . " alt='product-img'>" .  "</td>";
+                    echo "<td style='width: 150px;'>" . $product['ProductName'] . "</td>";
+                    echo "<td>" . $product['ProductDescription'] . "</td>";
+                    echo "<td>£" . $product['Price'] . "</td>";
+                    if ($product['Quantity'] < 20) {
+                        echo "<td><p class=low-stock style='color:red; font-weight: Bold;'>" . $product['Quantity'] . "</p> </td>";
+                    } 
+                    echo "<td style='display:none;'>" . $product['ProductID'] . "</td>";
+                   
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
             </div>
 
         </div>
@@ -202,6 +285,8 @@ if ($_SESSION['isAdmin'] !== 1) {
 
         });
     });
+    
 </Script>
+
 
 </html>
