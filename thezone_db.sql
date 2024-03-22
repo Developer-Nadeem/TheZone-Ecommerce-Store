@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2024 at 02:16 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Mar 22, 2024 at 07:28 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -186,10 +186,7 @@ CREATE TABLE `orderitems` (
 
 INSERT INTO `orderitems` (`OrderItemID`, `OrderID`, `ProductID`, `Quantity`, `SubTotal`) VALUES
 (1, 11, 2, 1, NULL),
-(2, 12, 3, 1, NULL),
-(3, 12, 2, 1, NULL),
-(4, 12, 3, 1, NULL),
-(5, 13, 3, 1, NULL);
+(2, 12, 3, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -202,7 +199,7 @@ CREATE TABLE `orders` (
   `UserID` int(11) NOT NULL,
   `OrderTime` datetime NOT NULL,
   `OrderStatus` varchar(255) NOT NULL,
-  `TotalAmount` decimal(11,2) NOT NULL,
+  `TotalAmount` int(11) NOT NULL,
   `PaymentID` int(11) DEFAULT NULL,
   `AddressID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -212,9 +209,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`OrderID`, `UserID`, `OrderTime`, `OrderStatus`, `TotalAmount`, `PaymentID`, `AddressID`) VALUES
-(11, 0, '2024-03-08 15:22:18', 'Pending', 88.00, NULL, NULL),
-(12, 6, '2024-03-21 14:14:22', 'Pending', 184.00, NULL, NULL),
-(13, 6, '2024-03-21 14:14:57', 'Pending', 43.00, NULL, NULL);
+(11, 0, '2024-03-08 15:22:18', 'Shipped', 88, NULL, NULL),
+(12, 4, '2024-03-19 15:36:50', 'Pending', 48, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -247,6 +243,291 @@ CREATE TABLE `reviews` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sizes_table`
+--
+
+CREATE TABLE `sizes_table` (
+  `SizeID` int(11) NOT NULL,
+  `SizeName` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sizes_table`
+--
+
+INSERT INTO `sizes_table` (`SizeID`, `SizeName`) VALUES
+(1, 'XS'),
+(2, 'S'),
+(3, 'M'),
+(4, 'L'),
+(5, 'XL'),
+(6, '0'),
+(7, '0.5'),
+(8, '1'),
+(9, '1.5'),
+(10, '2'),
+(11, '2.5'),
+(12, '3'),
+(13, '3.5'),
+(14, '4'),
+(15, '4.5'),
+(16, '5'),
+(17, '5.5'),
+(18, '6'),
+(19, '6.5'),
+(20, '7'),
+(21, '7.5'),
+(22, '8'),
+(23, '8.5'),
+(24, '9'),
+(25, '9.5'),
+(26, '10'),
+(27, '11'),
+(28, '12'),
+(29, '13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stock_table`
+--
+
+CREATE TABLE `stock_table` (
+  `StockID` int(11) NOT NULL,
+  `ProductID` int(11) DEFAULT NULL,
+  `SizeID` int(11) DEFAULT NULL,
+  `Quantity` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `stock_table`
+--
+
+INSERT INTO `stock_table` (`StockID`, `ProductID`, `SizeID`, `Quantity`) VALUES
+(3, 1, 1, 50),
+(4, 1, 2, 100),
+(5, 1, 3, 100),
+(6, 1, 4, 50),
+(7, 1, 5, 10),
+(8, 2, 1, 50),
+(9, 2, 2, 100),
+(10, 2, 3, 100),
+(11, 2, 4, 50),
+(12, 2, 5, 10),
+(13, 3, 1, 50),
+(14, 3, 2, 100),
+(15, 3, 3, 100),
+(16, 3, 4, 50),
+(17, 3, 5, 10),
+(18, 4, 6, 50),
+(19, 4, 7, 100),
+(20, 4, 8, 100),
+(21, 4, 9, 50),
+(22, 4, 10, 10),
+(23, 4, 11, 150),
+(24, 4, 12, 200),
+(25, 4, 13, 75),
+(26, 4, 14, 25),
+(27, 4, 15, 88),
+(28, 4, 16, 120),
+(29, 4, 17, 60),
+(30, 4, 18, 80),
+(31, 4, 19, 110),
+(32, 4, 20, 40),
+(33, 4, 21, 95),
+(34, 4, 22, 150),
+(35, 4, 23, 200),
+(36, 4, 24, 60),
+(37, 4, 25, 80),
+(38, 4, 26, 110),
+(39, 4, 27, 40),
+(40, 4, 28, 90),
+(41, 4, 29, 130),
+(42, 6, 1, 50),
+(43, 6, 2, 100),
+(44, 6, 3, 100),
+(45, 6, 4, 50),
+(46, 6, 5, 10),
+(47, 7, 1, 50),
+(48, 7, 2, 100),
+(49, 7, 3, 100),
+(50, 7, 4, 50),
+(51, 7, 5, 10),
+(52, 8, 1, 50),
+(53, 8, 2, 100),
+(54, 8, 3, 100),
+(55, 8, 4, 50),
+(56, 8, 5, 10),
+(57, 9, 1, 50),
+(58, 9, 2, 100),
+(59, 9, 3, 100),
+(60, 9, 4, 50),
+(61, 9, 5, 10),
+(62, 10, 1, 50),
+(63, 10, 2, 100),
+(64, 10, 3, 100),
+(65, 10, 4, 50),
+(66, 10, 5, 10),
+(67, 11, 1, 50),
+(68, 11, 2, 100),
+(69, 11, 3, 100),
+(70, 11, 4, 50),
+(71, 11, 5, 10),
+(72, 12, 1, 50),
+(73, 12, 2, 100),
+(74, 12, 3, 100),
+(75, 12, 4, 50),
+(76, 12, 5, 10),
+(77, 14, 1, 50),
+(78, 14, 2, 100),
+(79, 14, 3, 100),
+(80, 14, 4, 50),
+(81, 14, 1, 50),
+(82, 14, 5, 10),
+(83, 14, 2, 100),
+(84, 14, 3, 100),
+(85, 14, 4, 50),
+(86, 14, 5, 10),
+(87, 15, 1, 50),
+(88, 15, 2, 100),
+(89, 15, 3, 100),
+(90, 15, 4, 50),
+(91, 15, 5, 10),
+(92, 16, 1, 50),
+(93, 16, 2, 100),
+(94, 16, 3, 100),
+(95, 16, 4, 50),
+(96, 16, 5, 10),
+(97, 17, 1, 50),
+(98, 17, 2, 100),
+(99, 17, 3, 100),
+(100, 17, 4, 50),
+(101, 17, 5, 10),
+(102, 18, 1, 50),
+(103, 18, 2, 100),
+(104, 18, 3, 100),
+(105, 18, 4, 50),
+(106, 18, 5, 10),
+(107, 19, 6, 50),
+(108, 19, 7, 100),
+(109, 19, 8, 100),
+(110, 19, 9, 50),
+(111, 19, 10, 10),
+(112, 19, 11, 150),
+(113, 19, 12, 200),
+(114, 19, 13, 75),
+(115, 19, 14, 25),
+(116, 19, 15, 88),
+(117, 19, 16, 120),
+(118, 19, 17, 60),
+(119, 19, 18, 80),
+(120, 19, 19, 110),
+(121, 19, 20, 40),
+(122, 19, 21, 95),
+(123, 19, 22, 150),
+(124, 19, 23, 200),
+(125, 19, 24, 60),
+(126, 19, 25, 80),
+(127, 19, 26, 110),
+(128, 19, 27, 40),
+(129, 19, 28, 90),
+(130, 19, 29, 130),
+(131, 20, 6, 50),
+(132, 20, 7, 100),
+(133, 20, 8, 100),
+(134, 20, 9, 50),
+(135, 20, 10, 10),
+(136, 20, 11, 150),
+(137, 20, 12, 200),
+(138, 20, 13, 75),
+(139, 20, 14, 25),
+(140, 20, 15, 88),
+(141, 20, 16, 120),
+(142, 20, 17, 60),
+(143, 20, 18, 80),
+(144, 20, 19, 110),
+(145, 20, 20, 40),
+(146, 20, 21, 95),
+(147, 20, 22, 150),
+(148, 20, 23, 200),
+(149, 20, 24, 60),
+(150, 20, 25, 80),
+(151, 20, 26, 110),
+(152, 20, 27, 40),
+(153, 20, 28, 90),
+(154, 20, 29, 130),
+(155, 21, 6, 50),
+(156, 21, 7, 100),
+(157, 21, 8, 100),
+(158, 21, 9, 50),
+(159, 21, 10, 10),
+(160, 21, 11, 150),
+(161, 21, 12, 200),
+(162, 21, 13, 75),
+(163, 21, 14, 25),
+(164, 21, 15, 88),
+(165, 21, 16, 120),
+(166, 21, 17, 60),
+(167, 21, 18, 80),
+(168, 21, 19, 110),
+(169, 21, 20, 40),
+(170, 21, 21, 95),
+(171, 21, 22, 150),
+(172, 21, 23, 200),
+(173, 21, 24, 60),
+(174, 21, 25, 80),
+(175, 21, 26, 110),
+(176, 21, 27, 40),
+(177, 21, 28, 90),
+(178, 21, 29, 130),
+(179, 22, 6, 50),
+(180, 22, 7, 100),
+(181, 22, 8, 100),
+(182, 22, 9, 50),
+(183, 22, 10, 10),
+(184, 22, 11, 150),
+(185, 22, 12, 200),
+(186, 22, 13, 75),
+(187, 22, 14, 25),
+(188, 22, 15, 88),
+(189, 22, 16, 120),
+(190, 22, 17, 60),
+(191, 22, 18, 80),
+(192, 22, 19, 110),
+(193, 22, 20, 40),
+(194, 22, 21, 95),
+(195, 22, 22, 150),
+(196, 22, 23, 200),
+(197, 22, 24, 60),
+(198, 22, 25, 80),
+(199, 22, 26, 110),
+(200, 22, 27, 40),
+(201, 22, 28, 90),
+(202, 22, 29, 130),
+(203, 23, 1, 50),
+(204, 23, 2, 100),
+(205, 23, 3, 100),
+(206, 23, 4, 50),
+(207, 23, 5, 10),
+(208, 24, 1, 50),
+(209, 24, 2, 100),
+(210, 24, 3, 100),
+(211, 24, 4, 50),
+(212, 24, 5, 10),
+(213, 25, 1, 50),
+(214, 25, 2, 100),
+(215, 25, 3, 100),
+(216, 25, 4, 50),
+(217, 25, 5, 10),
+(218, 26, 1, 50),
+(219, 26, 2, 100),
+(220, 26, 3, 100),
+(221, 26, 4, 50),
+(222, 26, 5, 10);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `useraccounts`
 --
 
@@ -269,7 +550,7 @@ INSERT INTO `useraccounts` (`UserID`, `Firstname`, `Lastname`, `Email`, `Pass`, 
 (3, 'b', 'b', 'B@gmail.com', '$2y$10$ZW5q9yZ5whGJuX92pZMhheTswphUQ0DNqWrN8pUGJ3uqtGSjMApa6', 1),
 (4, 'admin', 'Nadeem', 'adminNadeem@gmail.com', '$2y$10$7Ae4sVxX1esldw4RMG6KDuu2suw5lhI08rkObLOYuTh9/qAs43vpu', 1),
 (5, 'test', 'test-admin', 'test12@gmail.com', '$2y$10$GdmIwSj23YYKxwAA9y0m0O3u7zY3.h5UlTLrAX4m9uFlp7NwoyGsa', 1),
-(6, 'test', 'test', 'example@mail.com', '$2y$10$WB.hG./VUik.dQy5cl3aoenOACue.MSxtpWcjt7.wLgsmCQbsBTsW', 0);
+(6, 'test', 'plan', 'testplan@gmail.com', '$2y$10$dI67Yl5omOEV3UNyMd04B.XygRfX6sdkJvbdotBiuwwOVDIFB8TL2', 0);
 
 --
 -- Indexes for dumped tables
@@ -343,6 +624,20 @@ ALTER TABLE `reviews`
   ADD KEY `UserID` (`UserID`);
 
 --
+-- Indexes for table `sizes_table`
+--
+ALTER TABLE `sizes_table`
+  ADD PRIMARY KEY (`SizeID`);
+
+--
+-- Indexes for table `stock_table`
+--
+ALTER TABLE `stock_table`
+  ADD PRIMARY KEY (`StockID`),
+  ADD KEY `ProductID` (`ProductID`),
+  ADD KEY `SizeID` (`SizeID`);
+
+--
 -- Indexes for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
@@ -392,13 +687,13 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `orderitems`
 --
 ALTER TABLE `orderitems`
-  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `OrderItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `paymentdetails`
@@ -411,6 +706,18 @@ ALTER TABLE `paymentdetails`
 --
 ALTER TABLE `reviews`
   MODIFY `ReviewID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sizes_table`
+--
+ALTER TABLE `sizes_table`
+  MODIFY `SizeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `stock_table`
+--
+ALTER TABLE `stock_table`
+  MODIFY `StockID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 --
 -- AUTO_INCREMENT for table `useraccounts`
@@ -448,6 +755,13 @@ ALTER TABLE `orders`
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `inventory` (`ProductID`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `useraccounts` (`UserID`);
+
+--
+-- Constraints for table `stock_table`
+--
+ALTER TABLE `stock_table`
+  ADD CONSTRAINT `stock_table_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `inventory` (`ProductID`),
+  ADD CONSTRAINT `stock_table_ibfk_2` FOREIGN KEY (`SizeID`) REFERENCES `sizes_table` (`SizeID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

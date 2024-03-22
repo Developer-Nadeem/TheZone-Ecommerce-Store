@@ -30,7 +30,8 @@ if ($_SESSION['isAdmin'] !== 1) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
@@ -39,6 +40,7 @@ if ($_SESSION['isAdmin'] !== 1) {
         h2 {
             margin: 5px;
         }
+
         .container {
             display: flex;
             flex-direction: column;
@@ -47,17 +49,19 @@ if ($_SESSION['isAdmin'] !== 1) {
             margin-left: auto;
             margin-right: auto;
         }
+
         .row {
             display: flex;
             flex: 1;
         }
+
         .section {
             flex: 1;
             border: 5px solid black;
             padding: 20px;
             border-radius: 5px;
             margin: 10px;
-            overflow-y: auto; 
+            overflow-y: auto;
             height: calc(50% - 22px);
         }
     </style>
@@ -66,35 +70,138 @@ if ($_SESSION['isAdmin'] !== 1) {
 <body>
 
     <!-- navbar -->
-    <?php include('../TheZone/adminnavbar.php') ?>
+    <?php include('../TheZone/adminnavbar.php');
+    include('../TheZone/connectiondb.php');
+    ?>
     <!-- navbar end -->
 
     <main>
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
+            <div class="row">
 
-            <div class="section">
-                <h2>Recent Purchases</h2>
-                <p>To show recent purchases made, could show something else</p>
-                
+                <div class="section">
+                    <h3>Recent Orders</h3>
+                    <table id="RecentOrders" class="table tb">
+                        <thead>
+                            <tr>
+                                <th>OrderID</th>
+                                <th>Total Amount</th>
+                                <th>Order Date</th>
+                                <th>Order Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+                            $maxID =  $db->query("SELECT MAX(OrderID) FROM orders");
+                            $maxID = $maxID->fetch(PDO::FETCH_ASSOC);
+                            $maxID = $maxID['MAX(OrderID)'];
+                            $numRows = $db->query("SELECT COUNT(*) FROM orders");
+                            $numRows = $numRows->fetch(PDO::FETCH_ASSOC);
+                            $numRows = $numRows['COUNT(*)'];
+
+                            #only show the last 2 orders FIX THIS
+                            for ($i = $maxID; $i > $maxID - 2; $i--) {
+
+                                $order = $db->query("SELECT * FROM Orders WHERE OrderID = $i");
+                                $order = $order->fetch();
+                                echo "<tr>";
+                                echo "<td>" . $order['OrderID'] . "</td>";
+                                echo "<td>£" . $order['TotalAmount'] . "</td>";
+                                echo "<td>" . $order['OrderTime'] . "</td>";
+                                echo "<td>" . $order['OrderStatus'] . "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h2>Current Orders</h2>
+                    <p>To show the current orders that require processing</p>
+                    <table id="CurrentOrders" class="table">
+                        <thead>
+                            <tr>
+                                <th>OrderID</th>
+                                <th>Total Amount</th>
+                                <th>Order Date</th>
+                                <th>Order Status</th>
+                                <th>Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+
+                            $nonProcessedOrders = $db->query("SELECT * FROM orders WHERE OrderStatus = 'Processing'");
+                            $nonProcessedOrders = $nonProcessedOrders->fetchAll();
+
+                            foreach ($nonProcessedOrders as $order) {
+                                echo "<tr>";
+                                echo "<td>" . $order['OrderID'] . "</td>";
+                                echo "<td> £" . $order['TotalAmount'] . "</td>";
+                                echo "<td>" . $order['OrderTime'] . "</td>";
+                                echo "<td>" . $order['OrderStatus'] . "</td>";
+                                echo "<td>";
+                                echo "<form action='../TheZone/update-order-admin.php' method='post'>";
+                                echo "<input type='hidden' name='orderID' value='" . $order['OrderID'] . "'>";
+                                echo "<select class='form-select' name='orderStatus'>";
+                                echo "<option value='Processing'>Processing</option>";
+                                echo "<option value='Shipped'>Shipped</option>";
+                                echo "<option value='Delivered'>Delivered</option>";
+                                echo "</select>";
+                                echo "<input type='hidden' name='submitted' id='submitted'>";
+                                echo "<button type='submit' class='btn btn-primary'>Update</button>";
+                                echo "</form>";
+
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+
+
+
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
             <div class="section">
-                <h2>Current Orders</h2>
-                <p>To show the current orders that require processing</p>
+                <h2>Stock Levels</h2>
+                <p>showing products and their stock levels</p>
+
+                <table class="table">
+                    <thead>
+                        <tr></tr>
+                    </thead>
+                </table>
+
             </div>
 
         </div>
-
-        <div class="section">
-            <h2>Stock Levels</h2>
-            <p>showing products and their stock levels</p>
-        </div>
-
-    </div>
 
     </main>
 
 
 </body>
+
+<Script>
+    $document.ready(function() {
+        $('#RecentOrders').DataTable({
+            "paging": true,
+            "info": false,
+            "searching": true,
+            "ordering": true,
+            "autoWidth": true,
+            "responsive": true,
+
+        });
+    });
+</Script>
+
+</html>
