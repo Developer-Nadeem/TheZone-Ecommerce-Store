@@ -100,7 +100,7 @@ if (isset($_POST['add-to-cart'])) {
       $stmt->execute();
       $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
       foreach ($rows as $row) {
-        echo '<a class="dropdown-item" href="#">' . $row['SizeName'] . '</a>';
+        echo '<a class="dropdown-item" href="#">' . $row['SizeName'] . '</a>'; //TODO: Fix this
       };
       echo '</div>';
       echo '</div>';
