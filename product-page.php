@@ -91,7 +91,6 @@ if (isset($_POST['add-to-cart'])) {
             <input class="Quantity" type="number" name="" id="" placeholder="1">
             <div class="product-btns">
               <button type="submit" name="add-to-cart" class="btn btn-outline-dark add-toCart">Add to Cart</button>
-              <button type="button" class="btn btn-outline-dark Buy-Now">Buy Now</button>
             </div>
           </form>
         </div>

@@ -91,7 +91,7 @@
               echo '<div>';
               echo '<form method="post">';
               echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-              echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">Add To Cart</button>';
+              echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">View Product</button>';
               echo '</form>';
               echo '</div>';
               echo '</div>';
