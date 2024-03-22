@@ -1,26 +1,32 @@
 <?php
 session_start();
 
-  if (!isset($_COOKIE['shopping_cart'])) {
+// Checks if the user is logged in, if not it redirects you to the login/signup page
+if (!isset($_SESSION['email'])) {
+    header("Location: login-signup-page.php");
+    exit();
+}
+
+if (!isset($_COOKIE['shopping_cart'])) {
     setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
     setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
-  }
+}
 
-  if (isset($_POST['add-to-cart'])) {
+if (isset($_POST['add-to-cart'])) {
     $productId = $_POST['product-id'];
 
     $shopping_cart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
     $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
 
     if (array_key_exists($productId, $shopping_cart)) {
-      $shopping_cart[$productId] += $quantity;
+        $shopping_cart[$productId] += $quantity;
     } else {
         $shopping_cart[$productId] = $quantity;
     };
 
     setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
     setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-  }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -31,8 +37,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TheZone</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -104,25 +109,25 @@ session_start();
     </main>
     </main>
     <script>
-    var pageUrls = {
-        "Your Orders": "user-order.php",
-        "Login and Security": "user-login-details.php",
-        "Your Address": "user-address-details.php",
-        "Your Payment Details": "user-payment-details.php"
+        var pageUrls = {
+            "Your Orders": "user-order.php",
+            "Login and Security": "user-login-details.php",
+            "Your Address": "user-address-details.php",
+            "Your Payment Details": "user-payment-details.php"
 
-    };
+        };
 
 
-    function redirectToPage(title) {
+        function redirectToPage(title) {
 
-        var url = pageUrls[title];
-        if (url) {
+            var url = pageUrls[title];
+            if (url) {
 
-            window.location.href = url;
-        } else {
-            console.error("URL not found for title:", title);
+                window.location.href = url;
+            } else {
+                console.error("URL not found for title:", title);
+            }
         }
-    }
     </script>
 
     <!-- Footer Start -->
