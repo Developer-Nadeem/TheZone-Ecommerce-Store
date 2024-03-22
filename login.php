@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 // If the form has been submitted
@@ -38,12 +39,12 @@ if (isset($_POST['submitted'])) {
         }
         exit();
       } else {
-        $_SESSION['passwordError'] = "Password is invalid";
+        $_SESSION['passwordError'] = 'Password is invalid';
         header("Location: login-signup-page.php");
         exit();
       }
     } else {
-      $_SESSION['emailError'] = "Email is invalid";
+      $_SESSION['emailError'] = 'Email is invalid';
       header("Location: login-signup-page.php");
       exit();
     }
