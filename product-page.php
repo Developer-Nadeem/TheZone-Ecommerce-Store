@@ -92,7 +92,7 @@ if (isset($_POST['add-to-cart'])) {
       echo '<form method="post">
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown button
+              Choose Size
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
       $stmt = $db->prepare("SELECT s.* FROM sizes_table s JOIN stock_table st ON s.SizeID = st.SizeID WHERE st.ProductID = :productID");

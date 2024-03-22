@@ -162,13 +162,11 @@ if ($_SESSION['isAdmin'] !== 1) {
                                 echo "</td>";
                                 echo "</tr>";
                             }
-
-
-
                             ?>
 
                         </tbody>
                     </table>
+                    
                 </div>
 
             </div>
@@ -177,7 +175,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                 <h2>Stock Levels</h2>
                 <p>showing products with low stock levels</p>
 
-                <table id="example" class="table table-striped" style="width:100%">
+                <table id="lowStock" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>Image</th>
