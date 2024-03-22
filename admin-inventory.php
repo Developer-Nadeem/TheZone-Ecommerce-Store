@@ -371,7 +371,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                     $filterOption = "WHERE " . implode(" OR ", $filterBox);
                 }
 
-                $inventory = $db->prepare("SELECT * FROM Inventory $filterOption $orderBy");
+                $inventory = $db->prepare("SELECT * FROM inventory $filterOption $orderBy");
                 $inventory->execute();
 
                 foreach ($inventory as $product) {
