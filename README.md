@@ -40,20 +40,26 @@ Admin Side:
 
 ## Using the Website Locally
 
-1. Install the XAMPP Application
-
-[To Intall XAMPP, Click on the Link](https://www.apachefriends.org/download.html)
+1. Install the XAMPP Application - [Link to Install XAMPP](https://www.apachefriends.org/download.html)
 
 2. Clone the repository:
 ```bash
-git clone <repository_url>
+git clone <git@github.com:0fficialNadeem/TheZone-Ecommerce-Store.git>
 ```
 
-3. Install dependencies:
-```bash
-npm install
-```
+3. Once XAMPP Installation concludes, execute and open the application
 
+4. Start running {Apache} and {MySQL}
+
+5. Visit the following link: http://localhost/phpmyadmin
+
+6. Open a new database and name it {theZone_db}
+
+7. Import the [Database SQL File](thezone_db.sql) into the database you created
+
+8. Now the website is ready for local use
+
+9. Access to the database is via [PhpMyAdmin](http://localhost/phpmyadmin)
 
 
 ## Usage
