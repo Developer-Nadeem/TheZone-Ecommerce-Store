@@ -131,7 +131,7 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
             </div>
             <br>
             <br>
-            <div class="pass-link"><a href="resetpass-page.php">Forgot password?</a></div>
+            <div class="pass-link"><a href="forgot-password-page.php">Forgot password?</a></div>
             <div class="field btn">
               <div class="btn-layer"></div>
               <input type="submit" value="Login" name="login">
