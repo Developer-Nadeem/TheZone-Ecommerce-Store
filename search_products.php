@@ -58,6 +58,7 @@ session_start();
           echo '<p class="text-center">Double check for any spelling mistakes</p>';
         }
 
+        echo '<h2>Showing results for '.$search_data_value.'</h2>';
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3">';
           echo '<a id="main-link" href = "product-page.php?product_id='.$row['ProductID'].'"><div class="card" style="width: 18rem">';

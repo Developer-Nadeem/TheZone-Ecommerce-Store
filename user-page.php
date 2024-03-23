@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('connectiondb.php');
 
 // Checks if the user is logged in, if not it redirects you to the login/signup page
 if (!isset($_SESSION['email'])) {
@@ -27,6 +28,14 @@ if (isset($_POST['add-to-cart'])) {
     setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
     setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 }
+
+$email = $_SESSION['email'];
+$stmt = $db->prepare("SELECT Firstname, Lastname FROM useraccounts WHERE Email = :email");
+$stmt->bindParam(':email', $email);
+$stmt->execute();
+$getName = $stmt->fetch(PDO::FETCH_ASSOC);
+$fname = $getName['Firstname'];
+$lname = $getName['Lastname'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -54,7 +63,7 @@ if (isset($_POST['add-to-cart'])) {
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
 
-                    <h1>Your Account</h1>
+                    <h1>Hello, <?php echo $fname . ' ' . $lname ?></h1>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card bg-light text-dark" onclick="redirectToPage('Your Orders')">
