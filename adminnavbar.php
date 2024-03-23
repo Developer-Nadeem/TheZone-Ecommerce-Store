@@ -26,6 +26,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="admin-contacts.php">Contact Requests</a> 
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin-panel.php">Admin Panel</a>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav">
