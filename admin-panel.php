@@ -64,6 +64,11 @@ if ($_SESSION['isAdmin'] !== 1) {
             overflow-y: auto;
             height: calc(50% - 22px);
         }
+        .widget-box{
+            min-height: 25vw;
+        }
+
+        
     </style>
 </head>
 
@@ -81,7 +86,7 @@ if ($_SESSION['isAdmin'] !== 1) {
 
             <div class="row">
 
-                <div class="section">
+                <div class="section widget-box">
                     <h3>Recent Orders</h3>
                     <p>Showing Latest Orders</p>
                     <table id="RecentOrders" class="table tb">
@@ -96,34 +101,27 @@ if ($_SESSION['isAdmin'] !== 1) {
                         <tbody>
 
                             <?php
-                            $maxID =  $db->query("SELECT MAX(OrderID) FROM orders");
-                            $maxID = $maxID->fetch(PDO::FETCH_ASSOC);
-                            $maxID = $maxID['MAX(OrderID)'];
-                            $numRows = $db->query("SELECT COUNT(*) FROM orders");
-                            $numRows = $numRows->fetch(PDO::FETCH_ASSOC);
-                            $numRows = $numRows['COUNT(*)'];
+                                # gets last 5 requests in descending order based on time order was placed
+                                $order = $db->query("SELECT * FROM orders ORDER BY OrderTime DESC LIMIT 3");
+                                $order = $order->fetchAll(PDO::FETCH_ASSOC);
 
-                            #only show the last 2 orders FIX THIS
-                            for ($i = $maxID; $i > $maxID - 2; $i--) {
-
-                                $order = $db->query("SELECT * FROM Orders WHERE OrderID = $i");
-                                $order = $order->fetch();
+                                foreach ($order as $order) {
                                 echo "<tr>";
                                 echo "<td>" . $order['OrderID'] . "</td>";
                                 echo "<td>£" . $order['TotalAmount'] . "</td>";
                                 echo "<td>" . $order['OrderTime'] . "</td>";
                                 echo "<td>" . $order['OrderStatus'] . "</td>";
                                 echo "</tr>";
-                            }
+                                }
                             ?>
 
                         </tbody>
                     </table>
                 </div>
 
-                <div class="section">
+                <div class="section widget-box">
                     <h2>Current Orders</h2>
-                    <p>To show the current orders that require processing</p>
+                    <p>Shows the current orders that require processing</p>
                     <table id="CurrentOrders" class="table">
                         <thead>
                             <tr>
@@ -138,7 +136,7 @@ if ($_SESSION['isAdmin'] !== 1) {
 
                             <?php
 
-                            $nonProcessedOrders = $db->query("SELECT * FROM orders WHERE OrderStatus = 'Processing'");
+                            $nonProcessedOrders = $db->query("SELECT * FROM orders WHERE OrderStatus = 'Processing' LIMIT 3");
                             $nonProcessedOrders = $nonProcessedOrders->fetchAll();
 
                             foreach ($nonProcessedOrders as $order) {
@@ -172,8 +170,8 @@ if ($_SESSION['isAdmin'] !== 1) {
             </div>
 
             <div class="section">
-                <h2>Stock Levels</h2>
-                <p>showing products with low stock levels</p>
+                <h2>Low Stock Notifications</h2>
+                <p>Showing products with low stock levels</p>
 
                 <table id="lowStock" class="table table-striped" style="width:100%">
             <thead>
