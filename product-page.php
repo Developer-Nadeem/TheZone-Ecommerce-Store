@@ -18,15 +18,22 @@ if (!isset($_COOKIE['shopping_cart'])) {
 if (isset($_POST['add-to-cart'])) {
   $productId = $_POST['product-id'];
   
+  $size = $_POST['selected-size'];
+
+  if (!isset($size) || empty($size)) {
+    echo '<script>alert("Please select a size")</script>';
+  };
 
   $shopping_cart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
   $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
 
-  if (array_key_exists($productId, $shopping_cart)) {
-    $shopping_cart[$productId] += $quantity;
+  $productKey = $productId . '|' . $size;
+
+  if (array_key_exists($productKey, $shopping_cart)) {
+      $shopping_cart[$productKey]['quantity'] += $quantity;
   } else {
-    $shopping_cart[$productId] = $quantity;
-  };
+      $shopping_cart[$productKey] = array('quantity' => $quantity, 'size' => $size);
+  }
 
   setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
   setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
