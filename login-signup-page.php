@@ -6,27 +6,96 @@ if (isset($_SESSION['email'])) {
   header("Location: index.php");
   exit();
 }
-// Checks to see if the errors have been stored for the login form
-$emailError = isset($_SESSION['emailError']) ? $_SESSION['emailError'] : '';
-$passwordError = isset($_SESSION['passwordError']) ? $_SESSION['passwordError'] : '';
-$noInputError = isset($_SESSION['noInputError']) ? $_SESSION['noInputError'] : '';
 
-// Checks to see if the errors have been stored for the signup form
+$loginErrors = [];
+$signupErrors = [];
 
-$fnameError = isset($_SESSION['fnameError']) ? $_SESSION['fnameError'] : '';
-$lnameError = isset($_SESSION['lnameError']) ? $_SESSION['lnameError'] : '';
-$noEmailInput = isset($_SESSION['noEmailInput']) ? $_SESSION['noEmailInput'] : '';
-$noPassInput = isset($_SESSION['noPassInput']) ? $_SESSION['noPassInput'] : '';
-$noConfirmPassInput = isset($_SESSION['noConfirmPassInput']) ? $_SESSION['noConfirmPassInput'] : '';
-$invalidInput = isset($_SESSION['invalidEmail']) ? $_SESSION['invalidEmail'] : '';
-$passNoMatch = isset($_SESSION['passNoMatch']) ? $_SESSION['passNoMatch'] : '';
-$lengthError = isset($_SESSION['lengthError']) ? $_SESSION['lengthError'] : '';
-$caseError = isset($_SESSION['caseError']) ? $_SESSION['caseError'] : '';
-$numError = isset($_SESSION['numError']) ? $_SESSION['numError'] : '';
-$specialChar = isset($_SESSION['specialChar']) ? $_SESSION['specialChar'] : '';
-$emailExists = isset($_SESSION['emailExists']) ? $_SESSION['emailExists'] : '';
-$signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] : '';
+// Checks to see if the error sessions have been set then unset
+if (isset($_SESSION['emailError'])) {
+  $loginErrors[] = $_SESSION['emailError'];
+  unset($_SESSION['emailError']);
+}
 
+if (isset($_SESSION['passwordError'])) {
+  $loginErrors[] = $_SESSION['passwordError'];
+  unset($_SESSION['passwordError']);
+}
+
+if (isset($_SESSION['noInputError'])) {
+  $loginErrors[] = $_SESSION['noInputError'];
+  unset($_SESSION['noInputError']);
+}
+
+// signup errors
+if (isset($_SESSION['fnameError'])) {
+  $signupErrors[] = $_SESSION['fnameError'];
+  unset($_SESSION['fnameError']);
+}
+
+if (isset($_SESSION['lnameError'])) {
+  $signupErrors[] = $_SESSION['lnameError'];
+  unset($_SESSION['lnameError']);
+}
+
+if (isset($_SESSION['noEmailInput'])) {
+  $signupErrors[] = $_SESSION['noEmailInput'];
+  unset($_SESSION['noEmailInput']);
+}
+
+if (isset($_SESSION['noPassError'])) {
+  $signupErrors[] = $_SESSION['noPassError'];
+  unset($_SESSION['noPassError']);
+}
+
+if (isset($_SESSION['noInputError'])) {
+  $signupErrors[] = $_SESSION['noInputError'];
+  unset($_SESSION['noInputError']);
+}
+
+if (isset($_SESSION['noConfirmPassInput'])) {
+  $signupErrors[] = $_SESSION['noConfirmPassInput'];
+  unset($_SESSION['noConfirmPassInput']);
+}
+
+if (isset($_SESSION['invalidEmail'])) {
+  $signupErrors[] = $_SESSION['invalidEmail'];
+  unset($_SESSION['invalidEmail']);
+}
+
+if (isset($_SESSION['passNoMatch'])) {
+  $signupErrors[] = $_SESSION['passNoMatch'];
+  unset($_SESSION['passNoMatch']);
+}
+
+if (isset($_SESSION['lengthError'])) {
+  $signupErrors[] = $_SESSION['lengthError'];
+  unset($_SESSION['lengthError']);
+}
+
+if (isset($_SESSION['caseError'])) {
+  $signupErrors[] = $_SESSION['caseError'];
+  unset($_SESSION['caseError']);
+}
+
+if (isset($_SESSION['numError'])) {
+  $signupErrors[] = $_SESSION['numError'];
+  unset($_SESSION['numError']);
+}
+
+if (isset($_SESSION['specialChar'])) {
+  $signupErrors[] = $_SESSION['specialChar'];
+  unset($_SESSION['specialChar']);
+}
+
+if (isset($_SESSION['emailExists'])) {
+  $signupErrors[] = $_SESSION['emailExists'];
+  unset($_SESSION['emailExists']);
+}
+
+if (isset($_SESSION['signupSuccess'])) {
+  $signupSuccess = $_SESSION['signupSuccess'];
+  unset($_SESSION['signupSuccess']);
+}
 
 ?>
 
@@ -56,7 +125,8 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
       flex: 1;
     }
 
-    .show-password-login, .show-password-signup {
+    .show-password-login,
+    .show-password-signup {
       margin-left: 5px;
       cursor: pointer;
       background-color: #2c2c2c;
@@ -65,10 +135,11 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
       padding: 5px;
       font-weight: bold;
       transition: 0.2s ease;
-      
+
     }
 
-    .show-password-login:hover, .show-password-signup:hover {
+    .show-password-login:hover,
+    .show-password-signup:hover {
       background-color: white;
       color: #2c2c2c;
     }
@@ -111,15 +182,11 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
                 <span class="show-password-login" onclick="loginTogglePassword()">Show</span>
               </div>
               <div class="error-msg">
-                <?php if (!empty($passwordError)) {
-                  echo $passwordError;
+                <?php
+                foreach ($loginErrors as $loginError) {
+                  echo $loginError;
                 }
-                if (!empty($emailError)) {
-                  echo $emailError;
-                }
-                if (!empty($noInputError)) {
-                  echo $noInputError;
-                } ?>
+                ?>
               </div>
               <div class="green-msg">
                 <?php
@@ -143,37 +210,18 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
           <form method="post" action="signup.php" class="signup">
             <div class="field">
               <input type="text" name="fname" placeholder="First Name">
-              <?php if (!empty($fnameError)) {
-                echo $fnameError;
-              } ?>
             </div>
             <div class="field">
               <input type="text" name="lname" placeholder="Last Name">
-              <?php if (!empty($lnameError)) {
-                echo $lnameError;
-              } ?>
             </div>
             <div class="field">
               <input type="text" name="email" placeholder="Email Address">
-              <?php if (!empty($noEmailInput)) {
-                echo $noEmailInput;
-              }
-              if (!empty($invalidEmail)) {
-                echo $invalidEmail;
-              }
-              ?>
             </div>
             <div class="field">
               <input type="password" id="password" name="password" placeholder="Password">
-              <?php if (!empty($noPassInput)) {
-                echo $noPassInput;
-              } ?>
             </div>
             <div class="field">
               <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm password">
-              <?php if (!empty($noConfirmPassInput)) {
-                echo $noConfirmPassInput;
-              } ?>
             </div>
             <br>
             <div>
@@ -184,26 +232,13 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
               <input type="submit" value="Signup" name="signup">
               <input type="hidden" name="submitted" value="true" />
             </div>
-            <?php
-            if (!empty($passNoMatch)) {
-              echo $passNoMatch;
-            }
-            if (!empty($lengthError)) {
-              echo $lengthError;
-            }
-            if (!empty($caseError)) {
-              echo $caseError;
-            }
-            if (!empty($specialChar)) {
-              echo $specialChar;
-            }
-            if (!empty($numError)) {
-              echo $numError;
-            }
-            if (!empty($emailExists)) {
-              echo $emailExists;
-            }
-            ?>
+            <div class="err-msg">
+              <?php
+              foreach ($signupErrors as $signupError) {
+                echo $signupError;
+              }
+              ?>
+            </div>
           </form>
         </div>
       </div>
@@ -213,25 +248,6 @@ $signupSuccess = isset($_SESSION['signupSuccess']) ? $_SESSION['signupSuccess'] 
   <!-- Footer Start -->
   <?php include('footer.php') ?>
   <!-- Footer End -->
-
-  <?php
-  unset($_SESSION['emailError']);
-  unset($_SESSION['passwordError']);
-  unset($_SESSION['noInputError']);
-  unset($_SESSION['fnameError']);
-  unset($_SESSION['lnameError']);
-  unset($_SESSION['noEmailInput']);
-  unset($_SESSION['noPassInput']);
-  unset($_SESSION['nonConfirmPassInput']);
-  unset($_SESSION['invalidEmail']);
-  unset($_SESSION['passNoMatch']);
-  unset($_SESSION['lengthError']);
-  unset($_SESSION['caseError']);
-  unset($_SESSION['specialChar']);
-  unset($_SESSION['numError']);
-  unset($_SESSION['emailExists']);
-  unset($_SESSION['signupSuccess']);
-  ?>
 
   <!--bootstrap javascript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

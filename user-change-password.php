@@ -28,8 +28,8 @@ if (isset($_POST['add-to-cart'])) {
   setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 }
 
-$success = isset($_SESSION['success']) ? $_SESSION['success'] : '';
 
+// Used to store and display the error/success messages
 $errors = [];
 
 if (isset($_SESSION['noInput1'])) {
@@ -65,6 +65,11 @@ if (isset($_SESSION['passNumError'])) {
 if (isset($_SESSION['passSpecialCharError'])) {
   $errors[] = $_SESSION['passSpecialCharError'];
   unset($_SESSION['passSpecialCharError']);
+}
+
+if (isset($_SESSION['success'])) {
+  $errors[] = $_SESSION['success'];
+  unset($_SESSION['success']);
 }
 
 ?>
