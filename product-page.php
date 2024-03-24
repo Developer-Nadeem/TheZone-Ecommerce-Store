@@ -109,7 +109,7 @@ if (isset($_POST['add-to-cart'])) {
       echo '</div>
           <p >Quantity:</p>
             <input type="hidden" name="product-id" value="' . $productDetails['ProductID'] . '">
-            <input class="Quantity" type="number" name="" id="" placeholder="1">
+            <input class="Quantity" type="number" min=1 name="" id="" placeholder="1">
             <div class="product-btns">
               <button type="submit" name="add-to-cart" class="btn btn-outline-dark add-toCart">Add to Cart</button>
             </div>
