@@ -93,5 +93,16 @@ If you would like to contribute to the project, please follow these steps:
 
 The Zone website project uses the following external resources and libraries
 
-    - Bootstrap (HTML Framework)
-    - Freepik (For product photos)
+- Bootstrap (HTML Framework)
+- Freepik (For product photos)
+
+## Team Members
+
+- Team Member Names and IDs
+- Name: HAMZA ABDULLA,  ID: 220202983 (Backend Developer)
+- Name: FARES HASSAN, ID: 220203784 (Frontend Developer)
+- Name: KHIZZER HUSSAIN, ID: 210062922 (Backend Developer)
+- Name: MOHAMMED HUSSAIN, ID: 220038500 (Full Stack Developer)
+- Name: ZAIN HUSSAIN, ID: 210057951 (Frontend Developer)
+- Name: MUHAMMAD IBRAHIM, ID: 220118581 (Frontend Developer)
+- Name: AMAAN IKRAM, ID: 220183741 (Full Stack Developer)
