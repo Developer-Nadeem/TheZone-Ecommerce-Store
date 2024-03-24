@@ -135,119 +135,7 @@ if ($_SESSION['isAdmin'] !== 1) {
     include("../TheZone/adminnavbar.php");
 
     ?>
-    <!-- //pop up modal for editing item -->
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Inventory:</h5>
-                    <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
 
-                <form action="../TheZone/Inventory-update-code.php" method="post" class="custom-padding">
-                    <div class="modal-body">
-
-                        <input type="hidden" name="update_id" id="update_id">
-                        <div class="form-group">
-                            <label for="ProductID" class="col-form-label">Product ID</label>
-                            <input type="text" name="ProductID" class="form-control" id="ProductID" style="pointer-events:none;">
-
-                        </div>
-                        <div class="form-group">
-                            <label for="ProductName" class="col-form-label">Product Name</label>
-                            <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
-                        </div>
-                        <div class="form-group">
-                            <label for="Description" class="col-form-label">Description</label><br>
-                            <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="Price" class="col-form-label">Price</label>
-                            <input required type="text" name="Price" class="form-control" id="Price">
-                        </div>
-                        <div class="form-group">
-                            <label for="Quantity" class="col-form-label">Quantity</label>
-                            <input required type="text" name="Quantity" class="form-control" id="Quantity"><br>
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="hidden" name="submitted" id="submitted">
-                        <button type="submit" name="updatedata" class="btn btn-secondary">Update Inventory</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-    <!-- modal end -->
-
-    <!-- //pop up modal for adding item -->
-    <div class="modal fade" id="newItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Item:</h5>
-                    <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form action="../TheZone/admin-inventory-add-item.php" method="post" class="custom-padding">
-                    <div class="modal-body">
-
-                        <input type="hidden" name="update_id" id="update_id">
-
-                        <div class="form-group">
-                            <label for="ProductName" class="col-form-label">Product Name</label>
-                            <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
-                        </div>
-                        <div class="form-group">
-                            <label for="Description" class="col-form-label">Description</label><br>
-                            <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2" placeholder="Enter a product description"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="ImageURL" class="col-form-label">Image URL</label>
-                            <input required type="text" class="form-control" name="ImageURL" id="ImageURL" aria-describedby="ImageURL" placeholder="ImageURL">
-                        </div>
-                        <div class="form-group">
-                            <label for="Price" class="col-form-label">Price</label>
-                            <input required type="text" name="Price" class="form-control" id="Price" placeholder="£">
-                        </div>
-                        <div class="form-group">
-                            <label for="Quantity" class="col-form-label">Quantity</label>
-                            <input required type="text" name="Quantity" class="form-control" id="Quantity" placeholder="Enter stock quantity"><br>
-                        </div>
-                        <div class="form-group">
-                            <label for="CatID" class="col-form-label">CategoryID</label>
-                            <input required type="text" name="CatID" class="form-control" id="CatID" placeholder="Enter Category ID"><br>
-                        </div>
-                        <div class="form-group">
-                            <label for="GenderID" class="col-form-label">GenderID</label>
-                            <input required type="text" name="GenderID" class="form-control" id="GenderID" placeholder="Enter Gender ID"><br>
-                        </div>
-
-
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="hidden" name="submitted" id="submitted">
-                        <button type="submit" name="updatedata" class="btn btn-secondary">Save</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-    <!-- modal end -->
 
     <!-- Filter box -->
     <section class="inv-filter-container">
@@ -305,7 +193,9 @@ if ($_SESSION['isAdmin'] !== 1) {
                     <th>Description</th>
                     <th>Price</th>
                     <th>Quantity</th>
+                    <th style="display: hidden;">CategoryID</th>
                     <th>Operations</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -375,19 +265,33 @@ if ($_SESSION['isAdmin'] !== 1) {
                 $inventory->execute();
 
                 foreach ($inventory as $product) {
+
+                    $sizeQuantities = $db->query("SELECT * FROM stock_table INNER JOIN sizes_table on stock_table.SizeID = sizes_table.SizeID WHERE ProductID = " . $product['ProductID']);
+                    $sizeQuantities = $sizeQuantities->fetchAll(PDO::FETCH_ASSOC);
+
+
+
                     echo "<tr>";
                     echo "<td >" . "<img style='width: 50px; height=50px' src=" . $product['ImageURL'] . " alt='product-img'>" .  "</td>";
                     echo "<td style='width: 150px;'>" . $product['ProductName'] . "</td>";
                     echo "<td>" . $product['ProductDescription'] . "</td>";
                     echo "<td>£" . $product['Price'] . "</td>";
-                    if ($product['StockQuantity'] < 20) {
-                        echo "<td><p class=low-stock>" . $product['StockQuantity'] . "</p> </td>";
-                    } else {
-                        echo "<td>" . $product['StockQuantity'] . "</td>";
-                    }
-                    echo "<td style='display:none;'>" . $product['ProductID'] . "</td>";
-                    echo "<td><button type='button' class='btn btn-primary editbtn'>EDIT</button>";
 
+                    echo "<td><p class=low-stock>";
+                    foreach ($sizeQuantities as $sizeQuantity) {
+                        if ($product['CategoryID'] == 4) {
+                            echo "Size" . $sizeQuantity['SizeName'] . ": " . $sizeQuantity['Quantity'] . " <br>";
+                        } else {
+                            echo $sizeQuantity['SizeName'] . ": " . $sizeQuantity['Quantity'] . "<br>";
+                        }
+                    }
+
+
+                    "</p> </td>";
+
+                    echo "<td style='display:none;'>" . $product['ProductID'] . "</td>";
+                    echo "<td>" . $product['CategoryID'] . "</td>";
+                    echo "<td><button type='button' class='btn btn-primary editbtn'>EDIT</button>";
                     echo "<form class='binbtn' style='display: inline-block;' action='../TheZone/remove-product.php' method='post'>";
                     echo "<input type='hidden' name='removeProductID' value='" . $product['ProductID'] . "'>";
                     echo "<input type='hidden' name='productName' value='" . $product['ProductName'] . "'>";
@@ -403,6 +307,395 @@ if ($_SESSION['isAdmin'] !== 1) {
             </tbody>
         </table>
     </section>
+    <!-- //pop up modal for editing item -->
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Inventory:</h5>
+                    <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="../TheZone/Inventory-update-code.php" method="post" class="custom-padding">
+                    <div class="modal-body">
+
+                        <input type="hidden" name="update_id" id="update_id">
+                        <div class="form-group">
+                            <label for="ProductID" class="col-form-label">Product ID</label>
+                            <input type="text" name="ProductID" class="form-control" id="ProductID" style="pointer-events:none;">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="ProductName" class="col-form-label">Product Name</label>
+                            <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
+                        </div>
+                        <div class="form-group">
+                            <label for="Description" class="col-form-label">Description</label><br>
+                            <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="Price" class="col-form-label">Price</label>
+                            <input required type="text" name="Price" class="form-control" id="Price">
+                        </div>
+                        <!--size quantities-->
+                        <div class="clothingSizesEdit" style="display: none;">
+                            <div class="form-group">
+                                <label for="QuantityXS" class="col-form-label">QuantityXS</label>
+                                <input required type="text" name="QuantityXS" class="form-control" value="0" id="QuantityXS"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityS" class="col-form-label">QuantityS</label>
+                                <input required type="text" name="QuantityS" class="form-control" value="0" id="QuantityS"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityM" class="col-form-label">QuantityM</label>
+                                <input required type="text" name="QuantityM" class="form-control" value="0" id="QuantityM"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityL" class="col-form-label">QuantityL</label>
+                                <input required type="text" name="QuantityL" class="form-control" value="0" id="QuantityL"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityXL" class="col-form-label">QuantityXL</label>
+                                <input required type="text" name="QuantityXL" class="form-control" value="0" id="QuantityXL"><br>
+                            </div>
+
+                        </div>
+
+                        <div class="ShoeSizesEdit" style="display: none;">
+                            <div class="form-group">
+                                <label for="QuantityA" class="col-form-label">Size 0:</label>
+                                <input required type="text" name="QuantityA" class="form-control" value="0" id="QuantityA"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityB" class="col-form-label">Size 0.5: </label>
+                                <input required type="text" name="QuantityB" class="form-control" value="0" id="QuantityB"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityC" class="col-form-label">Size 1:</label>
+                                <input required type="text" name="QuantityC" class="form-control" value="0" id="QuantityC"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityD" class="col-form-label">Size 1.5:</label>
+                                <input required type="text" name="QuantityD" class="form-control" value="0" id="QuantityD"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityE" class="col-form-label">Size 2:</label>
+                                <input required type="text" name="QuantityE" class="form-control" value="0" id="QuantityE"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityF" class="col-form-label">Size 2.5:</label>
+                                <input required type="text" name="QuantityF" class="form-control" value="0" id="QuantityF"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityG" class="col-form-label">Size 3:</label>
+                                <input required type="text" name="QuantityG" class="form-control" value="0" id="QuantityG"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityH" class="col-form-label">Size 3.5:</label>
+                                <input required type="text" name="QuantityH" class="form-control" value="0" id="QuantityH"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityI" class="col-form-label">Size 4:</label>
+                                <input required type="text" name="QuantityI" class="form-control" value="0" id="QuantityI"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityJ" class="col-form-label">Size 4.5:</label>
+                                <input required type="text" name="QuantityJ" class="form-control" value="0" id="QuantityJ"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityK" class="col-form-label">Size 5:</label>
+                                <input required type="text" name="QuantityK" class="form-control" value="0" id="QuantityK"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityKK" class="col-form-label">Size 5:</label>
+                                <input required type="text" name="QuantityKK" class="form-control" value="0" id="QuantityKK"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityL-shoe" class="col-form-label">Size 6:</label>
+                                <input required type="text" name="QuantityL-shoe" class="form-control" value="0" id="QuantityL-shoe"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityM-shoe" class="col-form-label">Size 6.5:</label>
+                                <input required type="text" name="QuantityM-shoe" class="form-control" value="0" id="QuantityM-shoe"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityN" class="col-form-label">Size 7:</label>
+                                <input required type="text" name="QuantityN" class="form-control" value="0" id="QuantityN"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityO" class="col-form-label">Size 7.5:</label>
+                                <input required type="text" name="QuantityO" class="form-control" value="0" id="QuantityO"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityP" class="col-form-label">Size 8:</label>
+                                <input required type="text" name="QuantityP" class="form-control" value="0" id="QuantityP"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityQ" class="col-form-label">Size 8.5:</label>
+                                <input required type="text" name="QuantityQ" class="form-control" value="0" id="QuantityQ"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityR" class="col-form-label">Size 9:</label>
+                                <input required type="text" name="QuantityR" class="form-control" value="0" id="QuantityR"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityS-shoe" class="col-form-label">Size 9.5:</label>
+                                <input required type="text" name="QuantityS-shoe" class="form-control" value="0" id="QuantityS-shoe"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityT" class="col-form-label">Size 10:</label>
+                                <input required type="text" name="QuantityT" class="form-control" value="0" id="QuantityT"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityU" class="col-form-label">Size 10.5:</label>
+                                <input required type="text" name="QuantityU" class="form-control" value="0" id="QuantityU"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityV" class="col-form-label">Size 11:</label>
+                                <input required type="text" name="QuantityV" class="form-control" value="0" id="QuantityV"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityW" class="col-form-label">Size 11.5:</label>
+                                <input required type="text" name="QuantityW" class="form-control" value="0" id="QuantityW"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityX" class="col-form-label">Size 12:</label>
+                                <input required type="text" name="QuantityX" class="form-control" value="0" id="QuantityX"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityY" class="col-form-label">Size 12.5:</label>
+                                <input required type="text" name="QuantityY" class="form-control" value="0" id="QuantityY"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityZ" class="col-form-label">Size 13:</label>
+                                <input required type="text" name="QuantityZ" class="form-control" value="0" id="QuantityZ"><br>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+
+                            <input required type="hidden" name="EditCatID" class="form-control" id="EditCatID" placeholder="Enter Category ID"><br>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="hidden" name="submitted" id="submitted">
+                        <button type="submit" name="updatedata" class="btn btn-secondary">Update Inventory</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- modal end -->
+
+
+
+
+    <!-- //pop up modal for adding item -->
+    <div class="modal fade" id="newItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Item:</h5>
+                    <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="../TheZone/admin-inventory-add-item.php" method="post" class="custom-padding">
+                    <div class="modal-body">
+
+                        <input type="hidden" name="update_id" id="update_id">
+
+                        <div class="form-group">
+                            <label for="ProductName" class="col-form-label">Product Name</label>
+                            <input required type="text" class="form-control" name="ProductName" id="ProductName" aria-describedby="ProductName" placeholder="ProductName">
+                        </div>
+                        <div class="form-group">
+                            <label for="Description" class="col-form-label">Description</label><br>
+                            <textarea required name="Description" class="form-control" id="Description" cols="61" rows="2" placeholder="Enter a product description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ImageURL" class="col-form-label">Image URL</label>
+                            <input required type="text" class="form-control" name="ImageURL" id="ImageURL" aria-describedby="ImageURL" placeholder="ImageURL">
+                        </div>
+                        <div class="form-group">
+                            <label for="Price" class="col-form-label">Price</label>
+                            <input required type="text" name="Price" class="form-control" id="Price" placeholder="£">
+                        </div>
+                        <div class="form-group">
+                            <label for="CatID" class="col-form-label">CategoryID</label>
+                            <input required type="text" name="AddCatID" class="form-control" id="AddCatID" placeholder="Enter Category ID"><br>
+                        </div>
+
+                        <div class="clothingSizes" style="display: none;">
+                            <div class="form-group">
+                                <label for="QuantityXS" class="col-form-label">QuantityXS</label>
+                                <input required type="text" name="QuantityXS" class="form-control" value="0" id="QuantityXS"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityS" class="col-form-label">QuantityS</label>
+                                <input required type="text" name="QuantityS" class="form-control" value="0" id="QuantityS"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityM" class="col-form-label">QuantityM</label>
+                                <input required type="text" name="QuantityM" class="form-control" value="0" id="QuantityM"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityL" class="col-form-label">QuantityL</label>
+                                <input required type="text" name="QuantityL" class="form-control" value="0" id="QuantityL"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityXL" class="col-form-label">QuantityXL</label>
+                                <input required type="text" name="QuantityXL" class="form-control" value="0" id="QuantityXL"><br>
+                            </div>
+
+                        </div>
+
+                        <div class="ShoeSizes" style="display: none;">
+                            <div class="form-group">
+                                <label for="QuantityA" class="col-form-label">Size 0:</label>
+                                <input required type="text" name="QuantityA" class="form-control" value="0" id="QuantityA"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityB" class="col-form-label">Size 0.5: </label>
+                                <input required type="text" name="QuantityB" class="form-control" value="0" id="QuantityB"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityC" class="col-form-label">Size 1:</label>
+                                <input required type="text" name="QuantityC" class="form-control" value="0" id="QuantityC"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityD" class="col-form-label">Size 1.5:</label>
+                                <input required type="text" name="QuantityD" class="form-control" value="0" id="QuantityD"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityE" class="col-form-label">Size 2:</label>
+                                <input required type="text" name="QuantityE" class="form-control" value="0" id="QuantityE"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityF" class="col-form-label">Size 2.5:</label>
+                                <input required type="text" name="QuantityF" class="form-control" value="0" id="QuantityF"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityG" class="col-form-label">Size 3:</label>
+                                <input required type="text" name="QuantityG" class="form-control" value="0" id="QuantityG"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityH" class="col-form-label">Size 3.5:</label>
+                                <input required type="text" name="QuantityH" class="form-control" value="0" id="QuantityH"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityI" class="col-form-label">Size 4:</label>
+                                <input required type="text" name="QuantityI" class="form-control" value="0" id="QuantityI"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityJ" class="col-form-label">Size 4.5:</label>
+                                <input required type="text" name="QuantityJ" class="form-control" value="0" id="QuantityJ"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityK" class="col-form-label">Size 5:</label>
+                                <input required type="text" name="QuantityK" class="form-control" value="0" id="QuantityK"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityKK" class="col-form-label">Size 5:</label>
+                                <input required type="text" name="QuantityKK" class="form-control" value="0" id="QuantityKK"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityL-shoe" class="col-form-label">Size 6:</label>
+                                <input required type="text" name="QuantityL-shoe" class="form-control" value="0" id="QuantityL-shoe"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityM-shoe" class="col-form-label">Size 6.5:</label>
+                                <input required type="text" name="QuantityM-shoe" class="form-control" value="0" id="QuantityM-shoe"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityN" class="col-form-label">Size 7:</label>
+                                <input required type="text" name="QuantityN" class="form-control" value="0" id="QuantityN"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityO" class="col-form-label">Size 7.5:</label>
+                                <input required type="text" name="QuantityO" class="form-control" value="0" id="QuantityO"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityP" class="col-form-label">Size 8:</label>
+                                <input required type="text" name="QuantityP" class="form-control" value="0" id="QuantityP"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityQ" class="col-form-label">Size 8.5:</label>
+                                <input required type="text" name="QuantityQ" class="form-control" value="0" id="QuantityQ"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityR" class="col-form-label">Size 9:</label>
+                                <input required type="text" name="QuantityR" class="form-control" value="0" id="QuantityR"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityS-shoe" class="col-form-label">Size 9.5:</label>
+                                <input required type="text" name="QuantityS-shoe" class="form-control" value="0" id="QuantityS-shoe"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityT" class="col-form-label">Size 10:</label>
+                                <input required type="text" name="QuantityT" class="form-control" value="0" id="QuantityT"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityU" class="col-form-label">Size 10.5:</label>
+                                <input required type="text" name="QuantityU" class="form-control" value="0" id="QuantityU"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityV" class="col-form-label">Size 11:</label>
+                                <input required type="text" name="QuantityV" class="form-control" value="0" id="QuantityV"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityW" class="col-form-label">Size 11.5:</label>
+                                <input required type="text" name="QuantityW" class="form-control" value="0" id="QuantityW"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityX" class="col-form-label">Size 12:</label>
+                                <input required type="text" name="QuantityX" class="form-control" value="0" id="QuantityX"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityY" class="col-form-label">Size 12.5:</label>
+                                <input required type="text" name="QuantityY" class="form-control" value="0" id="QuantityY"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="QuantityZ" class="col-form-label">Size 13:</label>
+                                <input required type="text" name="QuantityZ" class="form-control" value="0" id="QuantityZ"><br>
+                            </div>
+
+
+
+                        </div>
+                      
+
+
+                        <div class="form-group">
+                            <label for="GenderID" class="col-form-label">GenderID</label>
+                            <input required type="text" name="GenderID" class="form-control" id="GenderID" placeholder="Enter Gender ID"><br>
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="csrftoken" value="<?php echo $CSRFToken ?>"><br>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="hidden" name="submitted" id="submitted">
+                        <button type="submit" name="updatedata" class="btn btn-secondary">Save</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- modal end -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -415,17 +708,92 @@ if ($_SESSION['isAdmin'] !== 1) {
 
                 $tr = $(this).closest('tr');
 
-                var data = $tr.children("td").map(function() {
+                let data = $tr.children("td").map(function() {
                     return $(this).text();
                 }).get();
 
                 console.log(data);
+                const pattern = /\d+/g;
+                const numbers = data[4].match(pattern);
+
+                if (data[6] == 4) {
+                    document.querySelector('.ShoeSizesEdit').style.display = 'block';
+                    document.querySelector('.clothingSizesEdit').style.display = 'none';
+
+                    const regex = /Size(\d+(\.\d+)?): (\d+)/g;
+                    const sizesArray = [];
+                    let match;
+
+                    while ((match = regex.exec(data[4])) !== null) {
+                        const size = parseFloat(match[1]);
+                        const value = parseInt(match[3]);
+                        sizesArray.push({
+                            size,
+                            value
+                        });
+                    };
+
+                    
+
+                    let ids = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'KK', 'L-shoe', 'M-shoe', 'N', 'O', 'P', 'Q', 'R', 'S-shoe', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+                    for (let i = 0; i < ids.length; i++) {
+                        if (i < sizesArray.length) {
+                            $('#Quantity' + ids[i]).val(sizesArray[i].value);
+                        }
+                    }
+
+
+
+                    /*                     $('#QuantityA').val(values[0]);
+                                        $('#QuantityB').val(values[1]);
+                                        $('#QuantityC').val(values[2]);
+                                        $('#QuantityD').val(values[3]);
+                                        $('#QuantityE').val(values[4]);
+                                        $('#QuantityF').val(values[5]);
+                                        $('#QuantityG').val(values[6]);
+                                        $('#QuantityH').val(values[7]);
+                                        $('#QuantityI').val(values[8]);
+                                        $('#QuantityJ').val(values[10]);
+                                        $('#QuantityK').val(values[11]);
+                                        $('#QuantityKK').val(values[12]);
+                                        $('#QuantityL-shoe').val(values[13]);
+                                        $('#QuantityM-shoe').val(values[14]);
+                                        $('#QuantityN').val(values[15]);
+                                        $('#QuantityO').val(values[16]);
+                                        $('#QuantityP').val(values[17]);
+                                        $('#QuantityQ').val(values[18]);
+                                        $('#QuantityR').val(values[19]);
+                                        $('#QuantityS-shoe').val(values[20]);
+                                        $('#QuantityT').val(values[21]);
+                                        $('#QuantityU').val(values[22]);
+                                        $('#QuantityV').val(values[23]);
+                                        $('#QuantityW').val(values[24]);
+                                        $('#QuantityX').val(values[25]);
+                                        $('#QuantityY').val(values[26]);
+                                        $('#QuantityZ').val(values[27]);
+                     */
+
+
+
+
+                } else {
+                    document.querySelector('.clothingSizesEdit').style.display = 'block';
+                    document.querySelector('.ShoeSizesEdit').style.display = 'none';
+                    $('#QuantityXS').val(numbers[0]);
+                    $('#QuantityS').val(numbers[1]);
+                    $('#QuantityM').val(numbers[2]);
+                    $('#QuantityL').val(numbers[3]);
+                    $('#QuantityXL').val(numbers[4]);
+
+                }
 
                 $('#ProductName').val(data[1]);
                 $('#Description').val(data[2]);
                 $('#Price').val(data[3]);
-                $('#Quantity').val(data[4]);
+
                 $('#ProductID').val(data[5]);
+                $('#EditCatID').val(data[6]);
 
             })
         });
@@ -437,19 +805,38 @@ if ($_SESSION['isAdmin'] !== 1) {
         })
     </script>
 
+    <script>
+        document.getElementById('AddCatID').addEventListener('input', function() {
+            let catID = this.value;
+            let clothingSizes = document.querySelector('.clothingSizes');
+            let ShoeSizes = document.querySelector('.ShoeSizes');
+
+            if (catID != 4) {
+                clothingSizes.style.display = 'block';
+                ShoeSizes.style.display = 'none';
+            } else {
+                clothingSizes.style.display = 'none';
+                ShoeSizes.style.display = 'block';
+            }
+
+
+            
+        });
+    </script>
+
 
     <script>
         window.onload = function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var sortValue = urlParams.get('inv-dropdown');
-            var filterValues = ['male', 'female', 'hoodie', 'jeans', 'jumper', 'trainer', 'tshirt'];
+            let urlParams = new URLSearchParams(window.location.search);
+            let sortValue = urlParams.get('inv-dropdown');
+            let filterValues = ['male', 'female', 'hoodie', 'jeans', 'jumper', 'trainer', 'tshirt'];
 
             if (sortValue) {
                 document.querySelector("select[name='inv-dropdown']").value = sortValue;
             }
 
             filterValues.forEach(function(filter) {
-                var filterValue = urlParams.get(filter);
+                let filterValue = urlParams.get(filter);
                 if (filterValue) {
                     document.querySelector("input[name='" + filter + "']").checked = true;
                 }
@@ -460,6 +847,8 @@ if ($_SESSION['isAdmin'] !== 1) {
             document.getElementById("filterForm").submit();
         }
     </script>
+
+
 
 
 </body>
