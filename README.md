@@ -3,7 +3,6 @@
 The Zone Ecommerce store is a clothing website targetted towards 18-25 year olds, 
 it sells a unique style of clothing that fits the taste of the aforementioned demographic.
 
-Pushed change from new laptop to make sure nthn fucks up
 
 ## Sections
 
