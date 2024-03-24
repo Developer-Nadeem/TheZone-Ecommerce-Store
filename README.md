@@ -11,6 +11,8 @@ it sells a unique style of clothing that fits the taste of the aforementioned de
 - [Running Website Locally](#running-website-locally)
 - [Database Sample Data](#database-sample-data)
 - [Contributing](#contributing)
+- [Credits](#credits)
+- [Team Members](#team-members)
 
 ## Project Description
 
@@ -65,9 +67,11 @@ git clone https://github.com/0fficialNadeem/TheZone-Ecommerce-Store
 
 7. Import the [Database SQL File](thezone_db.sql) into the database you created
 
-8. Now the website is ready for local use
+8. Move the cloned project files to the 'htdocs' directory in your XAMPP installation folder. (Path: 'C:\xampp\htdocs')
 
-9. While XAMPP is running visit the following link to access the website's homepage: http://localhost/TheZone/index.php
+9. Now the website is ready for local use
+
+10. While XAMPP is running visit the following link to access the website's homepage: http://localhost/TheZone/index.php
 
 
 
@@ -76,6 +80,8 @@ git clone https://github.com/0fficialNadeem/TheZone-Ecommerce-Store
 The database is fed with its own sample data, that being products along with their product images and other attributes.
 
 Once you import the SQL file into the new database you create on [PhpMyAdmin](http://localhost/phpmyadmin) the SQL file executes and the data is fed to the local website.
+
+The data includes products, product images, prices, stock and so no.
 
 
 ## Contributing
@@ -96,9 +102,21 @@ The Zone website project uses the following external resources and libraries
 - Bootstrap (HTML Framework)
 - Freepik (For product photos)
 
+Scripts Used:
+
+- https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js
+- https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js
+- https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js
+- https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js
+
+
+Links to External Stylesheets Used:
+
+- https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css
+- https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
+
 ## Team Members
 
-- Team Member Names and IDs
 - Name: HAMZA ABDULLA,  ID: 220202983 (Backend Developer)
 - Name: FARES HASSAN, ID: 220203784 (Frontend Developer)
 - Name: KHIZZER HUSSAIN, ID: 210062922 (Backend Developer)

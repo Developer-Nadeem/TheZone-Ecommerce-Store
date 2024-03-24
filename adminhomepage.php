@@ -136,7 +136,7 @@ if ($_SESSION['isAdmin'] !== 1) {
 
         <!-- Admin Panel Button -->
         <div class="panel">
-            <button style="margin-top: auto, margin-bottom: auto;" class="panel-button" onclick="redirectToPage('admin-panel.php')">ADMIN PANEL</button>
+            <button style="margin-top: auto; margin-bottom: auto;" class="panel-button" onclick="redirectToPage('admin-panel.php')">ADMIN PANEL</button>
         </div>
 
         <div style="display: flex;">
