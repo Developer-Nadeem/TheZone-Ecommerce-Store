@@ -51,6 +51,12 @@ if (isset($_POST['add-to-cart'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
+
+    h2 {
+      text-align: center;
+      margin: 10px;
+      font-weight: bold;
+    }
     .img-magnifier-container {
       position: relative;
     }
@@ -65,6 +71,72 @@ if (isset($_POST['add-to-cart'])) {
       height: 150px;
       display: none;
     }
+
+    /* Center the form */
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+form {
+  background-color: rgb(230, 230, 230);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 40%;
+}
+
+.stars-rating {
+  font-size: 24px;
+  color: #ffd700;
+}
+
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 3px solid #ccc;
+  border-radius: 6px;
+}
+
+input[type="submit"] {
+  background-color: #2c2c2c;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: white;
+  color: #2c2c2c;
+}
+
+.btn-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover .btn-layer {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.field {
+  margin-left: auto;
+  margin-right: auto;
+}
   </style>
 </head>
 
@@ -126,9 +198,8 @@ if (isset($_POST['add-to-cart'])) {
 
   </div>
 
-  <div>
-    <h2>Create a review</h2>
-    <p>Rate this product</p>
+  <h2>Write a Review</h2>
+  <div class="container">
     <form method="post" action="review.php">
       <div class="stars-rating">
         <span class="fa fa-star"></span>
@@ -141,15 +212,14 @@ if (isset($_POST['add-to-cart'])) {
         <textarea rows="4" col="50" placeholder="Review description" name="description"></textarea>
       </div>
       <div class="field btn">
-        <div class="btn-layer"></div>
-        <input type="submit" value="submit review" name="submit">
+        <input type="submit" value="Send Review" name="submit">
         <input type="hidden" name="submitted" value="true" />
       </div>
     </form>
   </div>
 
   <div class="container-fluid reviews">
-    <h2>Reviews:</h2>
+    <h2>Customer Reviews:</h2>
     <div class="row">
       <div class="col review">
         <p><Strong>Review 1:</Strong></p>
