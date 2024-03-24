@@ -17,6 +17,7 @@ if (!isset($_COOKIE['shopping_cart'])) {
 
 if (isset($_POST['add-to-cart'])) {
   $productId = $_POST['product-id'];
+  
 
   $shopping_cart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
   $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
@@ -101,12 +102,13 @@ if (isset($_POST['add-to-cart'])) {
       $stmt->execute();
       $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
       foreach ($rows as $row) {
-        echo '<a class="dropdown-item" href="#">' . $row['SizeName'] . '</a>'; //TODO: Fix this
+        echo '<a class="dropdown-item" name="sizeDropdownOption">' . $row['SizeName'] . '</a>';
       };
       echo '</div>';
       echo '</div>';
 
       echo '</div>
+      <input type="hidden" name="selected-size" id="selectedSize" value="">
           <p >Quantity:</p>
             <input type="hidden" name="product-id" value="' . $productDetails['ProductID'] . '">
             <input class="Quantity" type="number" min=1 name="" id="" placeholder="1">
@@ -240,6 +242,15 @@ if (isset($_POST['add-to-cart'])) {
 
     /* Execute magnify function: */
     magnify("product-image", 3); /* Strength of the magnifier glass */
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementsByName('sizeDropdownOption').forEach((option) => {
+        option.addEventListener('click', (e) => {
+          document.getElementById('selectedSize').value = e.target.innerText;
+        });
+      });
+    })
   </script>
 </body>
 
