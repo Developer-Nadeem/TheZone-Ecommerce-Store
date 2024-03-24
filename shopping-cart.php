@@ -99,17 +99,30 @@ if (isset($_POST['remove-from-cart'])) {
             position: relative;
             display: flex;
         }
-        .sample-product h3 {
-            margin: 15px; 
-            font-size: 20px;
+
+        .product-info {
+            display: flex;
+            align-items: center;
         }
+        .product-info img {
+            margin-right: 10px;
+        }
+
+        .sample-product h3 {
+            margin: 15px;
+            font-size: 20px;
+            width: 100%;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
         .sample-product img {
             width: 120px; 
-            height: auto; 
+            height: 120px; 
             border: 2.5px solid #000; 
             border-radius: 5px;
             margin: 15px;
-
         }
 
         .sample-product quantity-button {
@@ -200,26 +213,33 @@ if (isset($_POST['remove-from-cart'])) {
                         echo '</div>';
                     } else {
                         $cart_items = unserialize($shopping_cart);
-                        foreach($cart_items as $item => $quantity) {
-                            $stmt = $db->query("SELECT ProductName, Price, ImageUrl, ProductID FROM inventory WHERE ProductID = $item");
+                        foreach($cart_items as $item => $itemArray) {
+                            list($productId, $size) = explode('|', $item);
+                            $quantity = $itemArray['quantity'];
+
+                            $stmt = $db->query("SELECT ProductName, Price, ImageUrl, ProductID FROM inventory WHERE ProductID = $productId");
                             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                            echo '<div class="sample-product" product-id="' . $row['ProductID'] . '">';
+                            echo '<div class="sample-product" item-key="' . $item . '">';
+                            echo '<div class="product-info">';
                             echo '<img src="' . $row['ImageUrl'] . '" alt="Sample Product Image">';
-                            echo '<h3>' . $row['ProductName'];
-                            echo '<span class="item-price" data-product-price-id="' . $row['ProductID'] . '">£' . $row['Price'] . '</span>';
-
-                            echo '<h3> Quantity: ';
-                            echo '<div style="margin: 10px; padding: 10px; border: 1px solid #ccc; display: flex;">';
-
+                            echo '<div>';
+                            echo '<h3>' . $row['ProductName']. '</h3>';
+                            echo "<h3> Size: {$size}</h3>";
+                            echo "<h3> Price: £{$row['Price']} </h3>";
+                            echo '<div id="quantityContainer style="position: absolute; top:0; right: 0;"">';
+                            echo '<h3> Quantity: </h3>';
+                            echo '<div style="margin: 10px; padding: 10px; border: 1px solid #ccc;">';
                             // -- update product quantity form starts here --
                             echo '<div class="update-form">';
                             echo '<form method="post" class="update-form">';
                             echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(\'' . $row['ProductID'] . '\', 1);">+</quantity-button>';
-                            echo '<span class="item-count" data-product-id="' . $row['ProductID'] . '">' . $quantity . '</span>';
-                            echo '<quantity-button type="button" class="" onclick="updateQuantity(\'' . $row['ProductID'] . '\', -1);">-</quantity-button>';
-                            echo '</form>';
+                            echo "<quantity-button type='button' onclick='updateQuantity(\"{$row['ProductID']}\", \"{$size}\", 1);'> + </quantity-button>";
+                            echo '<span class="item-count" item-key="' . $item. '">' . $quantity . '</span>';
+                            echo "<quantity-button type='button' onclick='updateQuantity(\"{$row['ProductID']}\", \"{$size}\", -1);'> - </quantity-button>";                            echo '</form>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
                             echo '</div>';
                             // -- update product quantity form ends here --
                             echo '<div>';
@@ -291,28 +311,31 @@ if (isset($_POST['remove-from-cart'])) {
                         //
                     })
 
-                    function updateQuantity(productId, change) {
+                    function updateQuantity(productId, size, change) {
+                        console.log(productId);
+                        console.log(size);
+                        console.log(change);
                         fetch('update-product-quantity.php', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded'
                             },
-                            body: 'product_id=' + encodeURIComponent(productId) + '&quantity_change=' + encodeURIComponent(change)
+                            body: 'product_id=' + encodeURIComponent(productId) + '&size=' + encodeURIComponent(size) + '&quantity_change=' + encodeURIComponent(change)
                         }).then(res => res.json()).then(data => {
 
                             fetch('get-cart-total.php').then(res => res.json()).then(data => {
-                            document.getElementById('cart-total').innerHTML = data;
+                                document.getElementById('cart-total').innerHTML = data;
                             });
 
                             if (data == 0) {
-                                //Find a sample-product that has a matching product id and remove it
-                                const sampleProduct = document.querySelector('.sample-product[product-id="' + productId + '"]');
+                                //Find a sample-product that has a matching product id and size and remove it
+                                const sampleProduct = document.querySelector('.sample-product[product-id="' + productId + '"][product-size="' + size + '"]');
                                 sampleProduct.remove();
                                 console.log(getCookieValue('shopping_cart_json'));
                                 return;
                             }
 
-                            const itemCount = document.querySelector('.item-count[data-product-id="' + productId + '"]');
+                            const itemCount = document.querySelector(`.item-count[item-key="${productId}|${size}"]`);
                             itemCount.innerHTML = data;
                         })
                     }
@@ -337,16 +360,7 @@ if (isset($_POST['remove-from-cart'])) {
                 <div class="total-section">
                     <h4>TOTAL</h4>
                     <hr>
-                    <?php
-                        $total = 0;
-                        $cart_items = unserialize($shopping_cart);
-                        foreach($cart_items as $item => $quantity) {
-                            $stmt = $db->query("SELECT Price FROM inventory WHERE ProductID = $item");
-                            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                            $total += $row['Price'] * $quantity;
-                        }
-                        echo '<p class="text-center">Total Price: £<span id="cart-total">' . $total . '</span></p>';
-                    ?>
+                    '<p class="text-center">Total Price: £<span id="cart-total">''</span></p>';
                     <!-- <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p> -->
                     <div style="text-align: center; margin-bottom: 15px;">
                         <?php
