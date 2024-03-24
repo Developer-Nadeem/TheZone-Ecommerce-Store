@@ -27,6 +27,51 @@ if (isset($_POST['add-to-cart'])) {
   setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
   setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 }
+
+
+// Used to store and display the error/success messages
+$errors = [];
+
+if (isset($_SESSION['noInput1'])) {
+  $errors[] = $_SESSION['noInput1'];
+  unset($_SESSION['noInput1']);
+}
+
+if (isset($_SESSION['noInput2'])) {
+  $errors[] = $_SESSION['noInput2'];
+  unset($_SESSION['noInput2']);
+}
+
+if (isset($_SESSION['noMatch'])) {
+  $errors[] = $_SESSION['noMatch'];
+  unset($_SESSION['noMatch']);
+}
+
+if (isset($_SESSION['passLengthError'])) {
+  $errors[] = $_SESSION['passLengthError'];
+  unset($_SESSION['passLengthError']);
+}
+
+if (isset($_SESSION['passCaseError'])) {
+  $errors[] = $_SESSION['passCaseError'];
+  unset($_SESSION['passCaseError']);
+}
+
+if (isset($_SESSION['passNumError'])) {
+  $errors[] = $_SESSION['passNumError'];
+  unset($_SESSION['passNumError']);
+}
+
+if (isset($_SESSION['passSpecialCharError'])) {
+  $errors[] = $_SESSION['passSpecialCharError'];
+  unset($_SESSION['passSpecialCharError']);
+}
+
+if (isset($_SESSION['success'])) {
+  $errors[] = $_SESSION['success'];
+  unset($_SESSION['success']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +85,7 @@ if (isset($_POST['add-to-cart'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  
+
 </head>
 
 <body>
@@ -48,20 +93,14 @@ if (isset($_POST['add-to-cart'])) {
   <?php include('navbar.php') ?>
   <!--Navbar End-->
 
-  <main class="login-signup-page" >
+  <main class="login-signup-page">
     <h2 style="font-weight: bold; margin: 10px; margin-bottom: auto;">Change Password</h2>
     <div class="form-wrapper" style="width: 30%; margin: 30px;">
       <div class="form-container">
         <div class="form-inner">
           <form action="change-password.php" method="POST" class="login">
             <div class="field">
-              <input type="text" name="email" placeholder="Enter your Email">
-            </div>
-            <div class="field">
-              <input type="password" name="current-password" placeholder="Enter your current password">
-            </div>
-            <div class="field">
-              <input type="password" name="new-password" placeholder="Enter a new password">
+              <input type="password" name="password" placeholder="Enter a new password">
             </div>
             <div class="field">
               <input type="password" name="confirm-password" placeholder="Confirm your new password">
@@ -70,6 +109,20 @@ if (isset($_POST['add-to-cart'])) {
               <div class="btn-layer"></div>
               <input type="submit" value="Change Password" name="change-pass">
               <input type="hidden" name="submitted" value="true" />
+            </div>
+            <div style="color: red;font-weight:bold;">
+              <?php
+              foreach ($errors as $error) {
+                echo $error;
+              }
+              ?>
+            </div>
+            <div style="color:green; font-weight:bold;">
+              <?php
+              if (!empty($success)) {
+                echo $success;
+              }
+              ?>
             </div>
           </form>
         </div>
