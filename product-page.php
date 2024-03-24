@@ -17,7 +17,7 @@ if (!isset($_COOKIE['shopping_cart'])) {
 
 if (isset($_POST['add-to-cart'])) {
   $productId = $_POST['product-id'];
-  
+
   $size = $_POST['selected-size'];
 
   if (!isset($size) || empty($size)) {
@@ -30,9 +30,9 @@ if (isset($_POST['add-to-cart'])) {
   $productKey = $productId . '|' . $size;
 
   if (array_key_exists($productKey, $shopping_cart)) {
-      $shopping_cart[$productKey]['quantity'] += $quantity;
+    $shopping_cart[$productKey]['quantity'] += $quantity;
   } else {
-      $shopping_cart[$productKey] = array('quantity' => $quantity, 'size' => $size);
+    $shopping_cart[$productKey] = array('quantity' => $quantity, 'size' => $size);
   }
 
   setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
@@ -82,7 +82,7 @@ if (isset($_POST['add-to-cart'])) {
           <h3>' . $productDetails['ProductName'] . '</h3>
           <p class="stars">
             <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked">x</span>
+            <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span>
@@ -92,11 +92,7 @@ if (isset($_POST['add-to-cart'])) {
           <br>
           <p>Size:</p>
           <div class="sizes">';
-      /*             <Span><a href="#">XS</a></Span>
-            <Span><a href="#">S </a></Span>
-            <Span><a href="#">M </a></Span>
-            <Span><a href="#">L </a></Span>
-            <Span><a href="#">XL</a></Span> */
+
       echo '<form method="post">
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -130,6 +126,28 @@ if (isset($_POST['add-to-cart'])) {
 
   </div>
 
+  <div>
+    <h2>Create a review</h2>
+    <p>Rate this product</p>
+    <form method="post" action="review.php">
+      <div class="stars-rating">
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+      </div>
+      <div>
+        <textarea rows="4" col="50" placeholder="Review description" name="description"></textarea>
+      </div>
+      <div class="field btn">
+        <div class="btn-layer"></div>
+        <input type="submit" value="submit review" name="submit">
+        <input type="hidden" name="submitted" value="true" />
+      </div>
+    </form>
+  </div>
+
   <div class="container-fluid reviews">
     <h2>Reviews:</h2>
     <div class="row">
@@ -149,107 +167,9 @@ if (isset($_POST['add-to-cart'])) {
 
   </div>
 
+
   <?php include('footer.php')  ?>
-  <!-- Need for dropdown to work -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <!-- End of dropdown to work -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  <script>
-    function magnify(imgID, zoom) {
-      var img, glass, w, h, bw;
-      img = document.getElementById(imgID);
 
-      /* This creates the magnifier glass */
-      glass = document.createElement("DIV");
-      glass.setAttribute("class", "img-magnifier-glass");
-
-      /* This allows for the magnifier glass to show */
-      img.parentElement.insertBefore(glass, img);
-
-      glass.style.backgroundImage = "url('" + img.src + "')";
-      glass.style.backgroundRepeat = "no-repeat";
-      glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
-      bw = 3;
-      w = glass.offsetWidth / 2;
-      h = glass.offsetHeight / 2;
-
-      /* This is function when moving magnifier glass over image: */
-      glass.addEventListener("mousemove", moveMagnifier);
-      img.addEventListener("mousemove", moveMagnifier);
-
-      /* This allows the magnifer to work for touch screens */
-      glass.addEventListener("touchmove", moveMagnifier);
-      img.addEventListener("touchmove", moveMagnifier);
-
-      /* This is the function for moving the magnifier glass */
-      function moveMagnifier(e) {
-        var pos, x, y;
-
-        /* This stops other things from happening when hovering*/
-        e.preventDefault();
-
-        /* This gets your mouse cursors x and y position: */
-        pos = getCursorPos(e);
-        x = pos.x;
-        y = pos.y;
-
-        /* This checks if the cursor is on the image or outside */
-        if (x < 0 || x > img.width || y < 0 || y > img.height) {
-          /* Hide the magnifier if the cursor is outside the image */
-          glass.style.display = "none";
-          return;
-        } else {
-          /* This will show the magnifier if the cursor is on the image */
-          glass.style.display = "block";
-        }
-
-        /* This prevents the magnifier glass from being positioned outside the image: */
-        if (x > img.width - (w / zoom)) {
-          x = img.width - (w / zoom);
-        }
-        if (x < w / zoom) {
-          x = w / zoom;
-        }
-        if (y > img.height - (h / zoom)) {
-          y = img.height - (h / zoom);
-        }
-        if (y < h / zoom) {
-          y = h / zoom;
-        }
-
-        /* Sets the position of the magnifier glass: */
-        glass.style.left = (x - w) + "px";
-        glass.style.top = (y - h) + "px";
-
-        /* This displays what the magnifier glass sees */
-        glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
-      }
-
-      function getCursorPos(e) {
-        var a, x = 0,
-          y = 0;
-        e = e || window.event;
-        /* Get x and y positions of image: */
-        a = img.getBoundingClientRect();
-        x = e.pageX - a.left;
-        y = e.pageY - a.top;
-        x = x - window.pageXOffset;
-        y = y - window.pageYOffset;
-        return {
-          x: x,
-          y: y
-        };
-      }
-    }
-
-    /* Execute magnify function: */
-    magnify("product-image", 3); /* Strength of the magnifier glass */
-  </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementsByName('sizeDropdownOption').forEach((option) => {
@@ -259,6 +179,31 @@ if (isset($_POST['add-to-cart'])) {
       });
     })
   </script>
+
+  <script>
+    var starsRating = document.querySelectorAll(".stars-rating span");
+
+    starsRating.forEach((star, index1) => {
+      star.addEventListener("click", () => {
+        starsRating.forEach((star, index2) => {
+          index1 >= index2 ? star.classList.add("checked") : star.classList.remove("checked");
+        });
+      });
+    });
+  </script>
+
+
+
+  <!-- Need for dropdown to work -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- End of dropdown to work -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="magnify.js"> </script>
 </body>
 
 </html>
