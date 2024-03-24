@@ -121,6 +121,12 @@ if ($_SESSION['isAdmin'] !== 1) {
             font-weight: bold;
             padding: 0;
             margin: 0;
+        }  
+        .normal-stock {
+            color: black;
+            font-weight: bold;
+            padding: 0;
+            margin: 0;
         }
     </style>
 </head>
@@ -277,7 +283,7 @@ if ($_SESSION['isAdmin'] !== 1) {
                     echo "<td>" . $product['ProductDescription'] . "</td>";
                     echo "<td>£" . $product['Price'] . "</td>";
 
-                    echo "<td><p class=low-stock>";
+                    echo "<td><p class=normal-stock>";
                     foreach ($sizeQuantities as $sizeQuantity) {
                         if ($product['CategoryID'] == 4) {
                             echo "Size" . $sizeQuantity['SizeName'] . ": " . $sizeQuantity['Quantity'] . " <br>";

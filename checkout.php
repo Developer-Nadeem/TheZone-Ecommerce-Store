@@ -100,6 +100,15 @@ session_start();
         return true;
       }
 
+      document.getElementById('expiryDate').addEventListener('input', (inputElement) => {
+        let value = inputElement.target.value;
+        value = value.replace(/\D/g, "");
+        value = value.slice(0, 4);
+        value = value.replace(/(\d{2})/, "$1/");
+        value = value.replace(/\/$/, "");
+        inputElement.target.value = value;
+      });
+
       function validateCVV() {
         const cvv = document.getElementById('cvv').value;
         if (cvv.length !== 3) {
