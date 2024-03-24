@@ -5,23 +5,6 @@
     setcookie('shopping_cart', serialize(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
     setcookie('shopping_cart_json', json_encode(array()), time() + (86400), "/"); //Shopping cart cookie expires in a day
   }
-
-  if (isset($_POST['add-to-cart'])) {
-    $productId = $_POST['product-id'];
-
-    $shopping_cart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
-    $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
-
-    if (array_key_exists($productId, $shopping_cart)) {
-      $shopping_cart[$productId] += $quantity;
-    } else {
-        $shopping_cart[$productId] = $quantity;
-    };
-
-    setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-    setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-  }
-
   ?>
   <!doctype html>
   <html lang="en">
@@ -89,10 +72,8 @@
               echo '<p class="card-text">' . $row['ProductName'] . '</p>';
               echo '<p class="card-text"><strong>£' . $row['Price'] . '</strong></p>';
               echo '<div>';
-              echo '<form method="post">';
               echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
               echo '<button type="submit" name="add-to-cart" class="btn btn-dark add-to-cart">View Product</button>';
-              echo '</form>';
               echo '</div>';
               echo '</div>';
               echo '</div></a>';
