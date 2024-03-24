@@ -12,8 +12,11 @@
 
     $total_price = 0;
 
-    foreach($shopping_cart as $product_id => $quantity) {
-        $stmt = $db->query("SELECT Price FROM inventory WHERE ProductID = $product_id");
+    foreach($shopping_cart as $item => $itemArray) {
+        list($productId, $size) = explode('|', $item);
+        $quantity = $itemArray['quantity'];
+
+        $stmt = $db->query("SELECT Price FROM inventory WHERE ProductID = $productId");
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $total_price += $row['Price'] * $quantity;

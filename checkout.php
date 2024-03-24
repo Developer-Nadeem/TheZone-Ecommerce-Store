@@ -66,9 +66,25 @@ session_start();
         return true;
       }
 
+      function formatCardNumber(input) {
+        let value = input.value.replace(/\D/g, "");
+        value = value.slice(0, 16);
+        value = value.replace(/(\d{4})/g, "$1-");
+        value = value.replace(/-$/, "");
+        input.value = value;
+      }
+
+      document.getElementById('cardNumber').addEventListener('input', (inputElement) => {
+        formatCardNumber(inputElement.target);
+      });
+
       function validateCardNumber() {
         const number = document.getElementById('cardNumber').value;
-        if (number.length !== 19 || !number.includes('-')) {
+        if (number.length !== 19) {
+          alert('Invalid Card Number');
+          return false;
+        }
+        if (!number.match(/^\d{4}-\d{4}-\d{4}-\d{4}$/)) {
           alert('Invalid Card Number');
           return false;
         }
