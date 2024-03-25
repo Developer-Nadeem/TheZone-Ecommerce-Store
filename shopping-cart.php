@@ -36,152 +36,7 @@ if (isset($_POST['remove-from-cart'])) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <style>
-        .total-section {
-            border: 2.5px solid black;
-            border-radius: 5px;
-            margin-top: auto;
-            margin-bottom: auto;
-            background-color: rgb(230, 230, 230);
-        }
-        .checkout-right-section {
-            width: 30%;
-            margin-bottom: auto;
-            margin-top: auto;
-            width: 30%;
-            /* margin-right: 30px;    */
-        }
-
-        .discount-section {
-            border: 2.5px solid black;
-            border-radius: 5px;
-            margin-top: auto;
-            margin-bottom: 2vw;
-            background-color: rgb(230, 230, 230);
-        }
-        .discount-section h4 {
-            text-align: center;
-            margin-top: 5px;
-        }
-        .total-section h4 {
-            text-align: center;
-            margin-top: 5px;
-        }
-
-        .whole-cart {
-            display: flex;
-            justify-content: space-evenly;
-            width: 100%;
-        }
-
-        .cart-items {
-            border: 2.5px solid black;
-            border-radius: 5px;
-            width: 70%;
-            margin-top: 20px;
-            margin-bottom: 30px;
-            margin-right: auto;
-            background-color: rgb(230, 230, 230);
-        }
-        .cart-items h3 {
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-        .sample-product {
-            background-color: white;
-            border: 2.5px solid #000; 
-            border-radius: 5px;
-            padding: 10px; 
-            margin-top: 10px; 
-            text-align: left; 
-            width: 90%;
-            margin-right: auto; 
-            /* overflow: hidden; */
-            position: relative;
-            display: flex;
-        }
-
-        .product-info {
-            display: flex;
-            align-items: center;
-        }
-        .product-info img {
-            margin-right: 10px;
-        }
-
-        .sample-product h3 {
-            margin: 15px;
-            font-size: 20px;
-            width: 100%;
-            white-space: normal;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-        }
-
-        .sample-product img {
-            width: 120px; 
-            height: 120px; 
-            border: 2.5px solid #000; 
-            border-radius: 5px;
-            margin: 15px;
-        }
-
-        .sample-product quantity-button {
-            background-color: #ff0000; 
-            border-radius: 3px;
-            color: #fff; 
-            border: none; 
-            margin: 20px;
-            padding: 5px 10px; 
-            cursor: pointer; 
-            transition: background-color 0.2s ease, color 0.2s ease; 
-            bottom: 0; 
-            right: 0; 
-            display: inline-block;
-            width: 25%;
-            text-align: center;
-        }
-
-        .sample-product quantity-button:hover {
-            background-color: #fff; /* changing background color on hover */
-            color: #ff0000;
-            /* border: 2.5px solid #ff0000; */
-            font-weight: bold;
-        }
-
-        .sample-product button {
-            background-color: #ff0000; 
-            border-radius: 3px;
-            color: #fff; 
-            border: none; 
-            margin: 10px;
-            padding: 5px 10px; 
-            cursor: pointer; 
-            bottom: 0; 
-            right: 0; 
-            position: absolute;
-            transition: background-color 0.2s ease, color 0.2s ease; 
-        }
-
-        .sample-product button:hover {
-            background-color: #fff;
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        hr {
-            height: 4px; /* Set the height to make it thicker */
-            width: 55%; /* Set the width to make it shorter (adjust as needed) */
-            margin: 20px auto; /* Center the line by setting margin and using auto for left and right */
-            background-color: #000; /* Set the background color of the line */
-            border: none; /* Remove the default border */
-        }
-
-        .update-form {
-            width: 90%;
-            height: 5%;
-            display: flex;
-            justify-content: space-evenly;
-        }
+        
     </style>
 
 
@@ -347,7 +202,7 @@ if (isset($_POST['remove-from-cart'])) {
             <div class="checkout-right-section">
                 <div class="discount-section">
                     <h4>DISCOUNT</h4>
-                    <hr>
+                    <hr class="hr-for-shopping-cart">
                     <form style="margin-bottom: 15px; margin-left: 15px; margin-right: 15px">
                         <div class="form-group">
                             <input type="text" class="form-control" id="discount-code-box" placeholder="Enter discount code">
@@ -359,13 +214,13 @@ if (isset($_POST['remove-from-cart'])) {
                 </div>
                 <div class="total-section">
                     <h4>TOTAL</h4>
-                    <hr>
+                    <hr class="hr-for-shopping-cart">
                     '<p class="text-center">Total Price: £<span id="cart-total">''</span></p>';
                     <!-- <p class="text-center">Total Price: £<span id="cart-total">0.00</span></p> -->
                     <div style="text-align: center; margin-bottom: 15px;">
                         <?php
                             if (unserialize($shopping_cart) == null) {
-                                echo '<button class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</button>';
+                                echo '<a class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="index.php">Shop Now</a>';
                             } else {
                                 echo '<a href="checkout.php" class="shoppingcart-button" id= "checkout-button" name="checkout-button" href="checkout.php">Check Out</a>';
                             }

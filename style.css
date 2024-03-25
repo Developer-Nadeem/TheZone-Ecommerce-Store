@@ -827,3 +827,164 @@ p,
   color: grey;
   pointer-events: none;
 }
+
+/* For shopping cart */
+
+.total-section {
+  border: 2.5px solid black;
+  border-radius: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+  background-color: rgb(230, 230, 230);
+}
+
+.checkout-right-section {
+  width: 30%;
+  margin-bottom: auto;
+  margin-top: auto;
+  width: 30%;
+  /* margin-right: 30px;    */
+}
+
+.discount-section {
+  border: 2.5px solid black;
+  border-radius: 5px;
+  margin-top: auto;
+  margin-bottom: 2vw;
+  background-color: rgb(230, 230, 230);
+}
+
+.discount-section h4 {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.total-section h4 {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.whole-cart {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.cart-items {
+  border: 2.5px solid black;
+  border-radius: 5px;
+  width: 70%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  margin-right: auto;
+  background-color: rgb(230, 230, 230);
+}
+
+.cart-items h3 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.sample-product {
+  background-color: white;
+  border: 2.5px solid #000;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: left;
+  width: 90%;
+  margin-right: auto;
+  /* overflow: hidden; */
+  position: relative;
+  display: flex;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+}
+
+.product-info img {
+  margin-right: 10px;
+}
+
+.sample-product h3 {
+  margin: 15px;
+  font-size: 20px;
+  width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.sample-product img {
+  width: 120px;
+  height: 120px;
+  border: 2.5px solid #000;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+.sample-product quantity-button {
+  background-color: #ff0000;
+  border-radius: 3px;
+  color: #fff;
+  border: none;
+  margin: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+}
+
+.sample-product quantity-button:hover {
+  background-color: #fff;
+  /* changing background color on hover */
+  color: #ff0000;
+  /* border: 2.5px solid #ff0000; */
+  font-weight: bold;
+}
+
+.sample-product button {
+  background-color: #ff0000;
+  border-radius: 3px;
+  color: #fff;
+  border: none;
+  margin: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sample-product button:hover {
+  background-color: #fff;
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.hr-for-shopping-cart {
+  height: 4px;
+  /* Set the height to make it thicker */
+  width: 55%;
+  /* Set the width to make it shorter (adjust as needed) */
+  margin: 20px auto;
+  /* Center the line by setting margin and using auto for left and right */
+  background-color: #000;
+  /* Set the background color of the line */
+  border: none;
+  /* Remove the default border */
+}
+
+.update-form {
+  width: 90%;
+  height: 5%;
+  display: flex;
+  justify-content: space-evenly;
+}
