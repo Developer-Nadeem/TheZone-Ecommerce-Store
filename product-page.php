@@ -38,6 +38,29 @@ if (isset($_POST['add-to-cart'])) {
   setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
   setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 }
+
+// gets the rating of the product
+$stmt = $db->prepare("SELECT AVG(Rating) as avg_rating FROM reviews WHERE ProductID = :productID");
+$stmt->bindParam(':productID', $product);
+$stmt->execute();
+$rating = $stmt->fetchColumn();
+
+$reviewErrors = [];
+
+if (isset($_SESSION['noRating'])) {
+  $reviewErrors[] = $_SESSION['noRating'];
+  unset($_SESSION['noRating']);
+}
+
+if (isset($_SESSION['noDesc'])) {
+  $reviewErrors[] = $_SESSION['noDesc'];
+  unset($_SESSION['noDesc']);
+}
+
+if (isset($_SESSION['reviewSubmit'])) {
+  $reviewSuccess = $_SESSION['reviewSubmit'];
+  unset($_SESSION['reviewSubmit']);
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -51,12 +74,6 @@ if (isset($_POST['add-to-cart'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
-
-    h2 {
-      text-align: center;
-      margin: 10px;
-      font-weight: bold;
-    }
     .img-magnifier-container {
       position: relative;
     }
@@ -71,72 +88,6 @@ if (isset($_POST['add-to-cart'])) {
       height: 150px;
       display: none;
     }
-
-    /* Center the form */
-.container {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-}
-
-form {
-  background-color: rgb(230, 230, 230);
-  padding: 20px;
-  margin: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 40%;
-}
-
-.stars-rating {
-  font-size: 24px;
-  color: #ffd700;
-}
-
-
-textarea {
-  width: 100%;
-  padding: 10px;
-  border: 3px solid #ccc;
-  border-radius: 6px;
-}
-
-input[type="submit"] {
-  background-color: #2c2c2c;
-  color: white;
-  font-weight: bold;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-  background-color: white;
-  color: #2c2c2c;
-}
-
-.btn-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  transition: background-color 0.3s ease;
-}
-
-.btn:hover .btn-layer {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.field {
-  margin-left: auto;
-  margin-right: auto;
-}
   </style>
 </head>
 
@@ -145,97 +96,162 @@ input[type="submit"]:hover {
 
   <div class="container-fluid">
     <?php
-    if (isset($productDetails)) {
-      echo '<div class="row">
+    if (isset($productDetails)) { ?>
+      <div class="row">
         <div class="col-6 img-magnifier-container">
-          <img id="product-image" class="img-fluid product-img" src="' . $productDetails['ImageUrl'] . '" alt="' . $productDetails['ProductName'] . '">
+          <img id="product-image" class="img-fluid product-img" src="<?php echo $productDetails['ImageUrl'] ?>" alt="' <?php echo $productDetails['ProductName'] ?> '">
         </div>
         <div class="col-6 product-desc">
-          <h3>' . $productDetails['ProductName'] . '</h3>
-          <p class="stars">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+          <h3><?php echo $productDetails['ProductName'] ?></h3>
+          <?php
+          if ($rating === false) {
+            $rating = 0;
+          }
+          if ($rating !== false) {
+            echo '<p class="stars" style= padding-top:10px>';
+            for ($i = 1; $i <= 5; $i++) {
+              if ($i <= round($rating)) {
+                echo '<span class="fa fa-star fa-2x checked"></span>';
+              } else {
+                echo '<span class="fa fa-star fa-2x"></span>';
+              }
+            }
+          }
+          ?>
           </p>
-          <p class="price"><strong>£' . $productDetails['Price'] . '</strong></p>
-          <p class="desc">' . $productDetails['ProductDescription'] . '</p>
+          <p class="price" style="font-size: large;"><strong>£<?php echo $productDetails['Price'] ?></strong></p>
+          <p class="desc"><?php echo $productDetails['ProductDescription'] ?></p>
           <br>
           <p>Size:</p>
-          <div class="sizes">';
+          <div class="sizes">
+            <form method="post">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Choose Size
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <?php
+                  $stmt = $db->prepare("SELECT s.* FROM sizes_table s JOIN stock_table st ON s.SizeID = st.SizeID WHERE st.ProductID = :productID");
+                  $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                  $stmt->bindValue(':productID', $productDetails['ProductID']);
+                  $stmt->execute();
+                  $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                  foreach ($rows as $row) {
+                    echo '<a class="dropdown-item" name="sizeDropdownOption">' . $row['SizeName'] . '</a>';
+                  } ?>
+                </div>
+              </div>
 
-      echo '<form method="post">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Choose Size
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
-      $stmt = $db->prepare("SELECT s.* FROM sizes_table s JOIN stock_table st ON s.SizeID = st.SizeID WHERE st.ProductID = :productID");
-      $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      $stmt->bindValue(':productID', $productDetails['ProductID']);
-      $stmt->execute();
-      $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($rows as $row) {
-        echo '<a class="dropdown-item" name="sizeDropdownOption">' . $row['SizeName'] . '</a>';
-      };
-      echo '</div>';
-      echo '</div>';
-
-      echo '</div>
-      <input type="hidden" name="selected-size" id="selectedSize" value="">
-          <p >Quantity:</p>
-            <input type="hidden" name="product-id" value="' . $productDetails['ProductID'] . '">
-            <input class="Quantity" type="number" min=1 name="" id="" placeholder="1">
-            <div class="product-btns">
-              <button type="submit" name="add-to-cart" class="btn btn-outline-dark add-toCart">Add to Cart</button>
-            </div>
+          </div>
+          <input type="hidden" name="selected-size" id="selectedSize" value="">
+          <p>Quantity:</p>
+          <input type="hidden" name="product-id" value="<?php echo $productDetails['ProductID'] ?>">
+          <input class="Quantity" type="number" min=1 name="" id="" placeholder="1">
+          <div class="product-btns">
+            <button type="submit" name="add-to-cart" class="btn btn-outline-dark add-toCart">Add to Cart</button>
+          </div>
           </form>
         </div>
-      </div>';
-    }
+      </div>
+    <?php }
     ?>
 
   </div>
 
-  <h2>Write a Review</h2>
-  <div class="container">
-    <form method="post" action="review.php">
-      <div class="stars-rating">
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-      </div>
-      <div>
-        <textarea rows="4" col="50" placeholder="Review description" name="description"></textarea>
-      </div>
-      <div class="field btn">
-        <input type="submit" value="Send Review" name="submit">
-        <input type="hidden" name="submitted" value="true" />
-      </div>
-    </form>
-  </div>
 
-  <div class="container-fluid reviews">
-    <h2>Customer Reviews:</h2>
-    <div class="row">
-      <div class="col review">
-        <p><Strong>Review 1:</Strong></p>
-        <p>Spectacular Item</p>
+  <?php
+  if (isset($_SESSION['email'])) { ?>
+    <div class="reviews">
+      <div class="reviews-heading">
+        <h2>Write a Review</h2>
       </div>
-      <div class="col review">
-        <p><Strong>Review 2:</Strong></p>
-        <p>Spectacular Item</p>
-      </div>
-      <div class="col review">
-        <p><Strong>Review 3:</Strong></p>
-        <p>Spectacular Item</p>
+
+      <div class="reviews-container">
+        <div class="create-review">
+          <form method="post" action="review.php" class="review-form" name="create-review">
+            <div class="stars-rating">
+              <Strong>Rating:</strong>
+              <span class="fa fa-star fa-2x"></span>
+              <span class="fa fa-star fa-2x"></span>
+              <span class="fa fa-star fa-2x"></span>
+              <span class="fa fa-star fa-2x"></span>
+              <span class="fa fa-star fa-2x"></span>
+            </div>
+            <div>
+              <textarea rows="4" col="50" placeholder="Review description" class="textarea-description" name="description"></textarea>
+            </div>
+            <div class="review-button">
+              <input type="submit" value="Submit Review" name="submit">
+              <input type="hidden" name="submitted" value="true">
+              <input type="hidden" name="product-id" value="<?php echo $productDetails['ProductID'] ?>">
+            </div>
+            <div style="color: red;">
+              <?php foreach ($reviewErrors as $errors) {
+                echo $errors;
+              } ?>
+            </div>
+            <div style="color: green;">
+              <?php if(!empty($reviewSuccess)) {
+                echo $reviewSuccess;
+              } ?>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
+  <?php } ?>
 
+  <div class="reviews">
+    <div class="reviews-heading">
+      <h2>Customer Reviews</h2>
+    </div>
+    <?php
+    $stmt = $db->prepare("SELECT r.UserID, r.Rating, r.Description, u.Firstname, u.Lastname FROM reviews r INNER JOIN useraccounts u ON r.UserID = u.UserID WHERE r.ProductID = ?");
+    $stmt->execute([$product]);
+    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($reviews) > 0) {
+      foreach ($reviews as $review) {
+        $fname = $review['Firstname'];
+        $lname = $review['Lastname'];
+        $rating = $review['Rating'];
+        $description = $review['Description'];
+    ?>
+        <div class="reviews-container">
+          <div class="review">
+            <div class="review-top">
+              <div class="customer-name">
+                <strong>Author: <?php echo $fname . ' ' . $lname ?></strong>
+                <div class="customer-rating">
+                  <?php
+                  if ($rating === false) {
+                    $rating = 0;
+                  }
+                  if ($rating !== false) {
+                    for ($i = 1; $i <= 5; $i++) {
+                      if ($i <= $rating) {
+                        echo '<span class="fa fa-star checked"></span>';
+                      } else {
+                        echo '<span class="fa fa-star"></span>';
+                      }
+                    }
+                  }
+                  ?>
+                </div>
+              </div>
+            </div>
+            <div class="customer-description">
+              <p><?php echo $description ?> </p>
+            </div>
+          </div>
+        </div>
+    <?php }
+    } else {
+      echo '<p> Looks like there are no reviews for this product';
+    } ?>
   </div>
+  </div>
+
 
 
   <?php include('footer.php')  ?>
@@ -250,14 +266,21 @@ input[type="submit"]:hover {
     })
   </script>
 
+  <!-- Script for stars rating -->
   <script>
     var starsRating = document.querySelectorAll(".stars-rating span");
+    var starInput = document.createElement("input");
+    starInput.type = "hidden";
+    starInput.name = "rating";
+    document.querySelector('form[name ="create-review"]').appendChild(starInput);
 
-    starsRating.forEach((star, index1) => {
+
+    starsRating.forEach((star, index) => {
       star.addEventListener("click", () => {
         starsRating.forEach((star, index2) => {
-          index1 >= index2 ? star.classList.add("checked") : star.classList.remove("checked");
+          index >= index2 ? star.classList.add("checked") : star.classList.remove("checked");
         });
+        starInput.value = index + 1;
       });
     });
   </script>
