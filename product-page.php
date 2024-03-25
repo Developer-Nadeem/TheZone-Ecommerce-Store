@@ -263,6 +263,7 @@ if (isset($_SESSION['reviewSubmit'])) {
       document.getElementsByName('sizeDropdownOption').forEach((option) => {
         option.addEventListener('click', (e) => {
           document.getElementById('selectedSize').value = e.target.innerText;
+          document.getElementById('dropdownMenuButton').innerText = e.target.innerText;
         });
       });
     })
