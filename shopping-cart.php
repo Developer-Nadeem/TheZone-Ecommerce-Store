@@ -11,12 +11,10 @@ if (isset($_POST['remove-from-cart'])) {
 
     $shoppingCart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
 
-    foreach ($shoppingCart as $key => $value) {
-        if ($value == $productId) {
-            unset($shoppingCart[$key]);
-            break;
-        }
-    }
+    if (isset($_POST['item-key'])) {
+        $itemKey = $_POST['item-key'];
+        unset($shoppingCart[$itemKey]);
+    };
 
     setcookie('shopping_cart', serialize($shoppingCart), time() + (86400), "/"); //Shopping cart cookie expires in a day
 
@@ -255,12 +253,12 @@ if (isset($_POST['remove-from-cart'])) {
                                 echo '</div>';
                                 echo '</div>';
                                 // -- update product quantity form ends here --
-                                echo '<div>';
+/*                                 echo '<div>';
                                 echo '<form method="post" class="remove-form">';
-                                echo '<input type="hidden" name="product-id" value="' . $row['ProductID'] . '">';
+                                echo '<input type="hidden" name="item-key" value="' . $item . '">';
                                 echo '<button id="remove-button" type="submit" name="remove-from-cart" class="btn btn-dark remove-from-cart">Remove</button>';
                                 echo '</form>';
-                                echo '</div>';
+                                echo '</div>'; */
 
                                 echo '</div>';
                                 // -- remove product form ends here --
@@ -310,7 +308,7 @@ if (isset($_POST['remove-from-cart'])) {
                                             headers: {
                                                 'Content-Type': 'application/x-www-form-urlencoded'
                                             },
-                                            body: 'product-id=' + encodeURIComponent(productId) + '&remove-from-cart=' + encodeURIComponent(true)
+                                            body: 'item-key=' + encodeURIComponent()
                                         }).then((res) => {
                                             console.log(res);
                                             event.target.closest('.sample-product').remove();
