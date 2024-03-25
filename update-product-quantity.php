@@ -20,7 +20,7 @@
         $shopping_cart[$productKey]['quantity'] = max(0, $quantity_change);
     };
 
-    if ($shopping_cart[$productKey] == 0) {
+    if ($shopping_cart[$productKey]['quantity'] == 0) {
         unset($shopping_cart[$productKey]);
         header('Content-Type: application/json');
         echo json_encode(0);
