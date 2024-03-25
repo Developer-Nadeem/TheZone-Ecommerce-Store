@@ -232,7 +232,7 @@ if (isset($_SESSION['signupSuccess'])) {
               <input type="submit" value="Signup" name="signup">
               <input type="hidden" name="submitted" value="true" />
             </div>
-            <div class="err-msg">
+            <div class="error-msg">
               <?php
               foreach ($signupErrors as $signupError) {
                 echo $signupError;
@@ -284,24 +284,32 @@ if (isset($_SESSION['signupSuccess'])) {
     }
   }
 
-  const loginForm = document.querySelector('form.login');
-  const signupForm = document.querySelector('form.signup');
-  const loginBtn = document.querySelector('label.login');
-  const signupBtn = document.querySelector('label.signup');
-  const signupLink = document.querySelector('form .signup-link a');
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const loginForm = document.querySelector('form.login');
+    const signupForm = document.querySelector('form.signup');
+    const loginBtn = document.querySelector('label.login');
+    const signupBtn = document.querySelector('label.signup');
+    const signupLink = document.querySelector('form .signup-link a');
 
-  signupBtn.onclick = () => {
-    loginForm.style.marginLeft = '-50%';
-  };
+    signupBtn.onclick = () => {
+      loginForm.style.marginLeft = '-50%';
+    };
 
-  loginBtn.onclick = () => {
-    loginForm.style.marginLeft = '0%';
-  };
+    signupLink.onclick = () => {
+      signupBtn.click();
+      return false;
+    };
 
-  signupLink.onclick = () => {
-    signupBtn.click();
-    return false;
-  };
+    loginBtn.onclick = () => {
+      loginForm.style.marginLeft = '0%';
+    };
+
+    <?php if (!empty($signupErrors)) { ?>
+      signupBtn.click();
+
+    <?php } ?>
+
+  })
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
