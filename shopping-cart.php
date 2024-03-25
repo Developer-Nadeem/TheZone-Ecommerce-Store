@@ -343,7 +343,7 @@ if (isset($_POST['remove-from-cart'])) {
 
                                     if (data == 0) {
                                         //Find a sample-product that has a matching product id and size and remove it
-                                        const sampleProduct = document.querySelector('.sample-product[product-id="' + productId + '"][product-size="' + size + '"]');
+                                        const sampleProduct = document.querySelector(`.sample-product[item-key="${productId}|${size}"]`);
                                         sampleProduct.remove();
                                         console.log(getCookieValue('shopping_cart_json'));
                                         return;
