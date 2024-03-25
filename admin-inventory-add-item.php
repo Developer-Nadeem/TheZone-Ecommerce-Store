@@ -114,7 +114,7 @@ if (isset($_POST['submitted'])) {
         
         
 
-        //Get the highest Product ID in the table
+        
         $getProductID = $db->prepare("SELECT MAX(ProductID) FROM inventory");
         $getProductID->execute();
         $productID = $getProductID->fetchColumn();

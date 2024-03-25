@@ -84,9 +84,11 @@ $orders = $stmt->fetchAll();
                     <td><?php echo $order['TotalAmount']; ?></td>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary edit-order" data-bs-toggle="modal"
-                            data-bs-target="#editOrderModal"
-                            data-order-id="<?php echo $order['OrderID']; ?>">Edit</button>
+                        <form action="return-order.php" method="post">
+                        <input type="hidden" name="OrderID" id="OrderID" value='<?php echo $order['OrderID']; ?>'>
+                        <input type="hidden" name="submitted" id="submitted" value='submitted'>
+                        <button type="submit" class="btn btn-danger">Return Order</button>
+                        </form>
                     </td>
                 </tr>
                 <?php endforeach; ?>

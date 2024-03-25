@@ -126,7 +126,15 @@ if ($_SESSION['isAdmin'] !== 1) {
             color: black;
             font-weight: bold;
             padding: 0;
-            margin: 0;
+            margin: 0;   
+        }
+
+        #CategoryLabel{
+            display: inline-block;
+            margin-right: .53em;
+            padding-top: -3em;
+
+
         }
     </style>
 </head>
@@ -536,9 +544,10 @@ if ($_SESSION['isAdmin'] !== 1) {
                             <label for="Price" class="col-form-label">Price</label>
                             <input required type="text" name="Price" class="form-control" id="Price" placeholder="£">
                         </div>
-                        <div class="form-group">
-                            <label for="CatID" class="col-form-label">CategoryID</label>
+                        <div class="form-group category-wrapper">
+                            <label for="CatID" class="col-form-label">CategoryID (1: T-shirt, 2: Jumper, 3:Hoodie, 4: Trainers, 5: Jeans )</label>
                             <input required type="text" name="AddCatID" class="form-control" id="AddCatID" placeholder="Enter Category ID"><br>
+                           
                         </div>
 
                         <div class="clothingSizes" style="display: none;">
@@ -682,7 +691,7 @@ if ($_SESSION['isAdmin'] !== 1) {
 
 
                         <div class="form-group">
-                            <label for="GenderID" class="col-form-label">GenderID</label>
+                            <label for="GenderID" class="col-form-label">GenderID (1: Male, 2: Female)</label>
                             <input required type="text" name="GenderID" class="form-control" id="GenderID" placeholder="Enter Gender ID"><br>
                         </div>
 
