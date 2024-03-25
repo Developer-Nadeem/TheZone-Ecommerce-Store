@@ -22,21 +22,21 @@ if (isset($_POST['add-to-cart'])) {
 
   if (!isset($size) || empty($size)) {
     echo '<script>alert("Please select a size")</script>';
-  };
-
-  $shopping_cart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
-  $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
-
-  $productKey = $productId . '|' . $size;
-
-  if (array_key_exists($productKey, $shopping_cart)) {
-    $shopping_cart[$productKey]['quantity'] += $quantity;
   } else {
-    $shopping_cart[$productKey] = array('quantity' => $quantity, 'size' => $size);
-  }
+    $shopping_cart = isset($_COOKIE['shopping_cart']) ? unserialize($_COOKIE['shopping_cart']) : array();
+    $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
 
-  setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
-  setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+    $productKey = $productId . '|' . $size;
+
+    if (array_key_exists($productKey, $shopping_cart)) {
+      $shopping_cart[$productKey]['quantity'] += $quantity;
+    } else {
+      $shopping_cart[$productKey] = array('quantity' => $quantity, 'size' => $size);
+    }
+
+    setcookie('shopping_cart', serialize($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+    setcookie('shopping_cart_json', json_encode($shopping_cart), time() + (86400), "/"); //Shopping cart cookie expires in a day
+  }
 }
 
 // gets the rating of the product
@@ -131,13 +131,15 @@ if (isset($_SESSION['reviewSubmit'])) {
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <?php
-                  $stmt = $db->prepare("SELECT s.* FROM sizes_table s JOIN stock_table st ON s.SizeID = st.SizeID WHERE st.ProductID = :productID");
+                  $stmt = $db->prepare("SELECT s.SizeName, st.Quantity FROM sizes_table s JOIN stock_table st ON s.SizeID = st.SizeID WHERE st.ProductID = :productID");
                   $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   $stmt->bindValue(':productID', $productDetails['ProductID']);
                   $stmt->execute();
                   $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   foreach ($rows as $row) {
-                    echo '<a class="dropdown-item" name="sizeDropdownOption">' . $row['SizeName'] . '</a>';
+                    $outOfStock = ($row['Quantity'] <= 0) ? 'disabled' : '';
+                    $noStockTxt = ($row['Quantity'] <= 0) ? '(Out of Stock)' : '';
+                    echo '<a class="dropdown-item ' . $outOfStock . '" name="sizeDropdownOption">' . $row['SizeName'] . $noStockTxt . '</a>';
                   } ?>
                 </div>
               </div>
@@ -191,7 +193,7 @@ if (isset($_SESSION['reviewSubmit'])) {
               } ?>
             </div>
             <div style="color: green;">
-              <?php if(!empty($reviewSuccess)) {
+              <?php if (!empty($reviewSuccess)) {
                 echo $reviewSuccess;
               } ?>
             </div>
