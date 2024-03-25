@@ -821,3 +821,9 @@ p,
 .binbtn {
   margin-top: 10px;
 }
+
+/* To display no stock when selecting a size  */
+.dropdown-item.disabled {
+  color: grey;
+  pointer-events: none;
+}

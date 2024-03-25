@@ -131,13 +131,15 @@ if (isset($_SESSION['reviewSubmit'])) {
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <?php
-                  $stmt = $db->prepare("SELECT s.* FROM sizes_table s JOIN stock_table st ON s.SizeID = st.SizeID WHERE st.ProductID = :productID");
+                  $stmt = $db->prepare("SELECT s.SizeName, st.Quantity FROM sizes_table s JOIN stock_table st ON s.SizeID = st.SizeID WHERE st.ProductID = :productID");
                   $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   $stmt->bindValue(':productID', $productDetails['ProductID']);
                   $stmt->execute();
                   $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   foreach ($rows as $row) {
-                    echo '<a class="dropdown-item" name="sizeDropdownOption">' . $row['SizeName'] . '</a>';
+                    $outOfStock = ($row['Quantity'] <= 0) ? 'disabled' : '';
+                    $noStockTxt = ($row['Quantity'] <=0) ? '(Out of Stock)' : '';
+                    echo '<a class="dropdown-item ' . $outOfStock . '" name="sizeDropdownOption">' . $row['SizeName'] . $noStockTxt . '</a>';
                   } ?>
                 </div>
               </div>
@@ -191,7 +193,7 @@ if (isset($_SESSION['reviewSubmit'])) {
               } ?>
             </div>
             <div style="color: green;">
-              <?php if(!empty($reviewSuccess)) {
+              <?php if (!empty($reviewSuccess)) {
                 echo $reviewSuccess;
               } ?>
             </div>
